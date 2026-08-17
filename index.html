@@ -3,18 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eletricidade Estática | Roteiro de Aula Interativo</title>
-  <meta name="description" content="Aula interativa de Eletricidade Estática com simulações dinâmicas em p5.js, conceitos fundamentais e exercícios comentados de ENEM, FUVEST e UNICAMP.">
-  <meta name="keywords" content="eletrostática, física, ENEM, FUVEST, simulação, campo elétrico, Lei de Coulomb, eletrização">
-  <meta property="og:title" content="Eletricidade Estática — Aula Interativa">
-  <meta property="og:description" content="Aprenda eletrostática com simulações interativas e exercícios de vestibular.">
+  <title>Laboratório de Eletrostática — Laura de Faveri</title>
+  <meta name="description" content="Laboratório experimental interativo de Eletrostática. Resolução dinâmica de questões de vestibular com simulações físicas em tempo real.">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Fraunces, Karla, IBM Plex Mono (Estilo Laura de Faveri) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- p5.js -->
+  <!-- p5.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
 
   <!-- MathJax -->
@@ -31,481 +28,556 @@
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <span class="nav-icon">⚡</span>
-        <span class="nav-title">Eletrostática</span>
-      </div>
-      <div class="nav-links" id="navLinks">
-        <a href="#conceitos" class="nav-link">Conceitos</a>
-        <a href="#simulacoes" class="nav-link">Simulações</a>
-        <a href="#exercicios" class="nav-link">Exercícios</a>
-        <a href="#referencia" class="nav-link">Referência</a>
-      </div>
-      <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">☰</button>
-    </div>
-  </nav>
+  <!-- Ambient background curves (Estilo Laura de Faveri) -->
+  <div class="thread-field" aria-hidden="true">
+    <svg class="bg-orbit bg-orbit--1" viewBox="0 0 400 400"><circle cx="200" cy="200" r="170" /></svg>
+    <svg class="bg-orbit bg-orbit--2" viewBox="0 0 400 400"><circle cx="200" cy="200" r="170" /></svg>
+    <svg class="bg-arc bg-arc--1" viewBox="0 0 500 300"><path d="M -20 260 Q 250 -60 520 260" /></svg>
+  </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <canvas id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <div class="hero-badge">⚡ Física — Ensino Médio</div>
-      <h1 class="hero-title">
-        Eletricidade<br>
-        <span class="gradient-text">Estática</span>
-      </h1>
-      <p class="hero-subtitle">
-        Explore cargas elétricas, a Lei de Coulomb e campos elétricos através de
-        simulações interativas e exercícios de vestibular comentados.
-      </p>
-      <div class="hero-buttons">
-        <a href="#conceitos" class="btn btn-primary">Iniciar Aula</a>
-        <a href="#simulacoes" class="btn btn-secondary">Ver Simulações</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-number">6</span>
-          <span class="stat-label">Conceitos</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">3</span>
-          <span class="stat-label">Simulações</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">8</span>
-          <span class="stat-label">Exercícios</span>
-        </div>
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="https://lfaveri.github.io/" class="wordmark-group">
+        <span class="wordmark">Laura de Faveri</span>
+        <span class="wordmark-tag">Física Experimental</span>
+      </a>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#estacoes" class="nav-link">Bancadas Experimentais</a>
+          <a href="#guia-teorico" class="nav-link">Guia de Apoio</a>
+        </nav>
+        <a href="https://lfaveri.github.io/" class="back-portfolio-btn">
+          ← Início
+        </a>
       </div>
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <span>Role para explorar</span>
-      <div class="scroll-arrow">↓</div>
-    </div>
-  </section>
+  </header>
 
-  <!-- ===== CONCEITOS ===== -->
-  <section class="section" id="conceitos">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Teoria</div>
-        <h2 class="section-title">Conceitos Fundamentais</h2>
-        <p class="section-subtitle">Os pilares da eletricidade estática explicados de forma clara e visual</p>
-      </div>
-
-      <div class="concepts-grid">
-
-        <!-- 1. Carga Elétrica -->
-        <div class="concept-card">
-          <div class="concept-icon">🔵</div>
-          <h3 class="concept-title">Carga Elétrica</h3>
-          <p class="concept-text">
-            A carga elétrica é uma propriedade fundamental da matéria. Existem dois tipos:
-            <strong>positiva (+)</strong> e <strong>negativa (−)</strong>. Cargas de mesmo sinal se
-            <em>repelem</em>; cargas de sinais opostos se <em>atraem</em>.
+  <main>
+    <!-- ===== HERO / INTRODUÇÃO ===== -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-layout">
+          <p class="eyebrow">laboratório virtual · eletrostática & vestibulares</p>
+          <h1 class="hero-title">
+            Compreender a eletrostática<br>
+            <em>através do experimento.</em>
+          </h1>
+          <p class="hero-lede">
+            Neste laboratório interativo, cada questão de vestibular (FUVEST, ENEM, UNICAMP) é investigada diretamente na bancada experimental. Altere as variáveis físicas, observe os instrumentos em tempo real e comprove a teoria na prática.
           </p>
-          <div class="concept-formula">
-            <p>Unidade: <strong>Coulomb (C)</strong></p>
-            <p>Carga do elétron: $e = 1{,}6 \times 10^{-19}$ C</p>
-          </div>
-          <div class="charges-visual">
-            <div class="charge-demo">
-              <div class="charge-ball positive">+</div>
-              <div class="force-arrow repel">← →</div>
-              <div class="charge-ball positive">+</div>
+          <div class="lab-meta-strip">
+            <div class="lab-meta-item">
+              <span class="lab-meta-label">Estações Ativas</span>
+              <span class="lab-meta-val">04 Bancadas</span>
             </div>
-            <p class="visual-label">Cargas iguais → Repulsão</p>
-            <div class="charge-demo">
-              <div class="charge-ball positive">+</div>
-              <div class="force-arrow attract">→ ←</div>
-              <div class="charge-ball negative">−</div>
+            <div class="lab-meta-item">
+              <span class="lab-meta-label">Ambiente</span>
+              <span class="lab-meta-val">Simulação Dinâmica p5.js</span>
             </div>
-            <p class="visual-label">Cargas opostas → Atração</p>
-          </div>
-        </div>
-
-        <!-- 2. Eletrização -->
-        <div class="concept-card">
-          <div class="concept-icon">⚡</div>
-          <h3 class="concept-title">Processos de Eletrização</h3>
-          <p class="concept-text">
-            Um corpo neutro pode ser carregado eletricamente de três formas principais:
-          </p>
-          <div class="process-list">
-            <div class="process-item">
-              <span class="process-badge atrito">Atrito</span>
-              <p>Dois materiais são esfregados: elétrons passam de um para o outro. Ex.: caneta plástica no cabelo.</p>
-            </div>
-            <div class="process-item">
-              <span class="process-badge contato">Contato</span>
-              <p>Um corpo carregado toca um neutro, transferindo parte de sua carga diretamente.</p>
-            </div>
-            <div class="process-item">
-              <span class="process-badge inducao">Indução</span>
-              <p>Um corpo carregado aproxima-se (sem tocar) e separa as cargas internas do condutor.</p>
+            <div class="lab-meta-item">
+              <span class="lab-meta-label">Nível de Ensino</span>
+              <span class="lab-meta-val">Ensino Médio & Vestibulares</span>
             </div>
           </div>
-        </div>
-
-        <!-- 3. Lei de Coulomb -->
-        <div class="concept-card featured-card">
-          <div class="concept-icon">🧲</div>
-          <h3 class="concept-title">Lei de Coulomb</h3>
-          <p class="concept-text">
-            A força entre duas cargas pontuais é proporcional ao produto das cargas e
-            inversamente proporcional ao quadrado da distância.
-          </p>
-          <div class="concept-formula big-formula">
-            $$F = k \cdot \frac{|Q_1 \cdot Q_2|}{d^2}$$
-          </div>
-          <div class="formula-legend">
-            <div class="legend-item"><span class="var">F</span> — Força elétrica (N)</div>
-            <div class="legend-item"><span class="var">k</span> — $9 \times 10^9$ N·m²/C²</div>
-            <div class="legend-item"><span class="var">Q₁, Q₂</span> — Cargas (C)</div>
-            <div class="legend-item"><span class="var">d</span> — Distância entre as cargas (m)</div>
-          </div>
-        </div>
-
-        <!-- 4. Campo Elétrico -->
-        <div class="concept-card">
-          <div class="concept-icon">🌐</div>
-          <h3 class="concept-title">Campo Elétrico</h3>
-          <p class="concept-text">
-            É a região do espaço onde uma carga elétrica sofre ação de força. Representado
-            por <strong>linhas de campo</strong> — saem de cargas (+) e chegam às (−).
-          </p>
-          <div class="concept-formula">
-            $$\vec{E} = \frac{\vec{F}}{q} = k \cdot \frac{Q}{d^2}$$
-          </div>
-          <div class="formula-legend">
-            <div class="legend-item"><span class="var">E</span> — Intensidade do campo (N/C)</div>
-            <div class="legend-item"><span class="var">F</span> — Força sobre a carga de prova (N)</div>
-            <div class="legend-item"><span class="var">q</span> — Carga de prova (C)</div>
-          </div>
-        </div>
-
-        <!-- 5. Potencial Elétrico -->
-        <div class="concept-card">
-          <div class="concept-icon">📊</div>
-          <h3 class="concept-title">Potencial Elétrico</h3>
-          <p class="concept-text">
-            Trabalho por unidade de carga para mover uma carga do infinito até um ponto.
-            É uma grandeza <strong>escalar</strong> — a soma para várias cargas é algébrica.
-          </p>
-          <div class="concept-formula">
-            $$V = k \cdot \frac{Q}{d}$$
-          </div>
-          <div class="concept-note">
-            💡 <strong>Dica ENEM/FUVEST:</strong> Diferença de potencial (ddp) = tensão elétrica:
-            $U = V_A - V_B$
-          </div>
-        </div>
-
-        <!-- 6. Blindagem Eletrostática -->
-        <div class="concept-card">
-          <div class="concept-icon">🛡️</div>
-          <h3 class="concept-title">Blindagem Eletrostática</h3>
-          <p class="concept-text">
-            No interior de um condutor em equilíbrio eletrostático, o campo elétrico é
-            <strong>nulo</strong>. As cargas distribuem-se apenas na superfície externa.
-            Este é o princípio da <strong>Gaiola de Faraday</strong>.
-          </p>
-          <div class="concept-formula">
-            $$E_{\text{interno}} = 0$$
-          </div>
-          <div class="concept-note">
-            🛡️ <strong>Aplicações:</strong> Para-raios, aviões em tempestades, blindagem de cabos eletrônicos, micro-ondas.
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SIMULAÇÕES ===== -->
-  <section class="section section-dark" id="simulacoes">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Interativo</div>
-        <h2 class="section-title">Simulações Dinâmicas</h2>
-        <p class="section-subtitle">Experimente os conceitos na prática — arraste, clique e explore!</p>
-      </div>
-
-      <!-- Tabs -->
-      <div class="sim-tabs" role="tablist">
-        <button class="sim-tab active" data-tab="sim1" role="tab" aria-selected="true" id="tab-sim1">
-          <span class="tab-icon">⚡</span><span class="tab-label">Eletrização por Atrito</span>
-        </button>
-        <button class="sim-tab" data-tab="sim2" role="tab" aria-selected="false" id="tab-sim2">
-          <span class="tab-icon">🧲</span><span class="tab-label">Lei de Coulomb</span>
-        </button>
-        <button class="sim-tab" data-tab="sim3" role="tab" aria-selected="false" id="tab-sim3">
-          <span class="tab-icon">🌐</span><span class="tab-label">Campo Elétrico</span>
-        </button>
-      </div>
-
-      <!-- Panel 1: Eletrização -->
-      <div class="sim-panel active" id="sim1" role="tabpanel" aria-labelledby="tab-sim1">
-        <div class="sim-layout">
-          <div class="sim-info">
-            <h3>Eletrização por Atrito</h3>
-            <p>Arraste o balão sobre o cabelo para transferir cargas. Veja os elétrons migrando e os papéis sendo atraídos!</p>
-            <div class="sim-instructions">
-              <div class="instruction-step">
-                <span class="step-num">1</span>
-                <span>Clique e arraste o <strong>balão</strong> sobre o cabelo</span>
-              </div>
-              <div class="instruction-step">
-                <span class="step-num">2</span>
-                <span>Repita para acumular mais cargas (−)</span>
-              </div>
-              <div class="instruction-step">
-                <span class="step-num">3</span>
-                <span>Aproxime o balão dos papéis e veja a atração!</span>
-              </div>
-            </div>
-            <div class="charge-counter">
-              <div class="counter-item">
-                <span class="counter-label">Carga do Balão:</span>
-                <span class="counter-value" id="balloonCharge">0 e</span>
-              </div>
-              <div class="counter-item">
-                <span class="counter-label">Carga do Cabelo:</span>
-                <span class="counter-value" id="hairCharge">0 e</span>
-              </div>
-            </div>
-            <button class="btn btn-outline" id="resetSim1">↺ Reiniciar</button>
-          </div>
-          <div class="sim-canvas-container" id="canvas-sim1"></div>
         </div>
       </div>
+    </section>
 
-      <!-- Panel 2: Coulomb -->
-      <div class="sim-panel" id="sim2" role="tabpanel" aria-labelledby="tab-sim2">
-        <div class="sim-layout">
-          <div class="sim-info">
-            <h3>Lei de Coulomb</h3>
-            <p>Ajuste as cargas e a distância. As setas de força atualizam em tempo real com a fórmula calculada.</p>
-            <div class="sim-controls">
-              <div class="control-group">
-                <label>Carga Q₁: <span id="q1-value">+3 μC</span></label>
-                <input type="range" id="q1-slider" min="-5" max="5" value="3" step="0.5" aria-label="Carga Q1">
-              </div>
-              <div class="control-group">
-                <label>Carga Q₂: <span id="q2-value">+3 μC</span></label>
-                <input type="range" id="q2-slider" min="-5" max="5" value="3" step="0.5" aria-label="Carga Q2">
-              </div>
-              <div class="control-group">
-                <label>Distância: <span id="dist-value">1,0 m</span></label>
-                <input type="range" id="dist-slider" min="0.2" max="3" value="1" step="0.1" aria-label="Distância">
-              </div>
-            </div>
-            <div class="force-display">
-              <div class="force-label">Força Resultante</div>
-              <div class="force-value" id="force-value">0,081 N</div>
-              <div class="force-formula" id="force-formula"></div>
-            </div>
+    <!-- ===== BANCADAS DE LABORATÓRIO ===== -->
+    <section class="lab-section" id="estacoes">
+      <div class="container">
+        
+        <!-- Navegação entre Estações -->
+        <div class="station-nav-container">
+          <div class="station-nav" role="tablist">
+            <button class="station-tab is-active" data-station="station1" role="tab" aria-selected="true">
+              <span class="station-number">01</span>
+              <span>Lei de Coulomb & Distância (FUVEST)</span>
+            </button>
+            <button class="station-tab" data-station="station2" role="tab" aria-selected="false">
+              <span class="station-number">02</span>
+              <span>Atrito & Indução no Papel (ENEM)</span>
+            </button>
+            <button class="station-tab" data-station="station3" role="tab" aria-selected="false">
+              <span class="station-number">03</span>
+              <span>Blindagem & Gaiola de Faraday (ENEM)</span>
+            </button>
+            <button class="station-tab" data-station="station4" role="tab" aria-selected="false">
+              <span class="station-number">04</span>
+              <span>Deflexão de Feixe em Campo $\vec{E}$ (FUVEST)</span>
+            </button>
           </div>
-          <div class="sim-canvas-container" id="canvas-sim2"></div>
         </div>
-      </div>
 
-      <!-- Panel 3: Campo -->
-      <div class="sim-panel" id="sim3" role="tabpanel" aria-labelledby="tab-sim3">
-        <div class="sim-layout">
-          <div class="sim-info">
-            <h3>Linhas de Campo Elétrico</h3>
-            <p>Posicione cargas positivas e negativas. As linhas de campo são calculadas em tempo real!</p>
-            <div class="sim-controls">
-              <div class="charge-selector">
-                <button class="charge-btn active" id="addPositive" data-type="positive">
-                  <span>+</span> Positiva
+        <!-- ============================================================
+             ESTAÇÃO 1: LEI DE COULOMB & RAZÃO DO QUADRADO (FUVEST)
+             ============================================================ -->
+        <div class="station-panel is-active" id="station1" role="tabpanel">
+          <div class="workbench-grid">
+            
+            <!-- Caderno de Laboratório -->
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
+              </div>
+              <h2 class="question-title">Desafio Experimental: A Razão da Distância</h2>
+              <div class="question-context">
+                "Duas pequenas esferas condutoras idênticas no vácuo, separadas por uma distância $d$, possuem cargas $+Q$ e $-Q$. Nessa configuração, o módulo da força de atração entre elas é $F_0$. Se a distância for reduzida para $d/3$, qual será a nova força?"
+              </div>
+              <div class="question-body">
+                <strong>Pergunta:</strong> Selecione a alternativa que representa o novo valor da força e comprove na bancada ao lado:
+              </div>
+              
+              <div class="options-group" id="opts-station1">
+                <button class="option-choice" data-correct="false" data-opt="A">
+                  <span class="opt-letter">A</span>
+                  <span>$F = \dfrac{F_0}{9}$ (A força diminui 9 vezes)</span>
                 </button>
-                <button class="charge-btn" id="addNegative" data-type="negative">
-                  <span>−</span> Negativa
+                <button class="option-choice" data-correct="false" data-opt="B">
+                  <span class="opt-letter">B</span>
+                  <span>$F = 3 F_0$ (A força triplica com a aproximação)</span>
+                </button>
+                <button class="option-choice" data-correct="true" data-opt="C">
+                  <span class="opt-letter">C</span>
+                  <span>$F = 9 F_0$ (A força multiplica por 9)</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="D">
+                  <span class="opt-letter">D</span>
+                  <span>$F = 27 F_0$ (A força multiplica por 27)</span>
                 </button>
               </div>
-              <div class="control-group">
-                <label>Intensidade: <span id="charge-magnitude">3 μC</span></label>
-                <input type="range" id="charge-magnitude-slider" min="1" max="5" value="3" step="1" aria-label="Intensidade da carga">
+
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">
+                  ⚡ Demonstrar $d/3$ na Simulação
+                </button>
+                <button class="btn-lab btn-lab-secondary" id="btn-explain-s1">
+                  📖 Ver Dedução Teórica
+                </button>
+              </div>
+
+              <div class="resolution-box" id="res-station1">
+                <h4>📐 Resolução Experimental e Algébrica</h4>
+                <div class="resolution-text">
+                  Pela <strong>Lei de Coulomb</strong>:
+                  $$F_0 = k \cdot \frac{|+Q \cdot (-Q)|}{d^2} = k \frac{Q^2}{d^2}$$
+                  Ao reduzir a distância para $d' = \dfrac{d}{3}$:
+                  $$F' = k \frac{Q^2}{(d/3)^2} = k \frac{Q^2}{\frac{d^2}{9}} = 9 \cdot \left(k \frac{Q^2}{d^2}\right) = 9 F_0$$
+                  O dinamômetro da bancada experimental confirma que a força salta de $1{,}00\,F_0$ para exatamente <strong>$9{,}00\,F_0$</strong>.
+                </div>
               </div>
             </div>
-            <div class="sim-instructions">
-              <div class="instruction-step">
-                <span class="step-num">1</span>
-                <span>Selecione o tipo de carga acima</span>
+
+            <!-- Aparato Experimental -->
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Aparato 01: Trilho de Coulomb & Dinamômetro</span>
+                <span class="apparatus-status"><span class="status-dot"></span> Calibrado</span>
               </div>
-              <div class="instruction-step">
-                <span class="step-num">2</span>
-                <span><strong>Clique</strong> no canvas para adicionar</span>
-              </div>
-              <div class="instruction-step">
-                <span class="step-num">3</span>
-                <span><strong>Arraste</strong> cargas para reposicioná-las</span>
-              </div>
-              <div class="instruction-step">
-                <span class="step-num">4</span>
-                <span><strong>Clique direito</strong> em uma carga para removê-la</span>
+              <div class="apparatus-canvas-wrap" id="canvas-coulomb"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header">
+                      <span class="dial-label">Distância ($d$)</span>
+                      <span class="dial-value" id="s1-d-val">3,00 m</span>
+                    </div>
+                    <input type="range" class="lab-slider" id="s1-d-slider" min="0.6" max="3.0" step="0.1" value="3.0">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header">
+                      <span class="dial-label">Carga $Q_1$</span>
+                      <span class="dial-value" id="s1-q1-val">+2,0 μC</span>
+                    </div>
+                    <input type="range" class="lab-slider" id="s1-q1-slider" min="-4" max="4" step="0.5" value="2">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header">
+                      <span class="dial-label">Carga $Q_2$</span>
+                      <span class="dial-value" id="s1-q2-val">-2,0 μC</span>
+                    </div>
+                    <input type="range" class="lab-slider" id="s1-q2-slider" min="-4" max="4" step="0.5" value="-2">
+                  </div>
+                </div>
+
+                <div class="digital-readout-bar">
+                  <div class="readout-item">
+                    <div class="readout-name">Razão $F / F_0$</div>
+                    <div class="readout-num" id="s1-ratio-num" style="color: var(--lilac-dark);">1,00 × F₀</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Força Medida ($F$)</div>
+                    <div class="readout-num" id="s1-force-num">0,004 N</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Regime de Interação</div>
+                    <div class="readout-num" id="s1-type-text" style="font-size: 0.85rem; color: #2d559c;">Atração Mútua</div>
+                  </div>
+                </div>
+                <div class="apparatus-hint">
+                  💡 Arraste as esferas ou use os botões para comprovar a lei do inverso do quadrado.
+                </div>
               </div>
             </div>
-            <button class="btn btn-outline" id="clearCharges">🗑 Limpar Tudo</button>
-          </div>
-          <div class="sim-canvas-container" id="canvas-sim3"></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== EXERCÍCIOS ===== -->
-  <section class="section" id="exercicios">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Vestibular</div>
-        <h2 class="section-title">Exercícios Comentados</h2>
-        <p class="section-subtitle">Questões estilo ENEM, FUVEST e UNICAMP — com gabarito explicado</p>
-      </div>
-
-      <div class="quiz-progress">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width:12.5%"></div>
-        </div>
-        <div class="progress-text">
-          <span id="progressText">Questão 1 de 8</span>
-          <span id="scoreText">Acertos: 0</span>
-        </div>
-      </div>
-
-      <div id="quiz-container" aria-live="polite"></div>
-
-      <div class="quiz-navigation">
-        <button class="btn btn-outline" id="prevBtn" disabled>← Anterior</button>
-        <div class="question-dots" id="questionDots" role="tablist"></div>
-        <button class="btn btn-primary" id="nextBtn">Próxima →</button>
-      </div>
-
-      <div class="quiz-results hidden" id="quizResults" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- ===== REFERÊNCIA ===== -->
-  <section class="section section-dark" id="referencia">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Referência</div>
-        <h2 class="section-title">Tabela de Constantes</h2>
-        <p class="section-subtitle">Valores fundamentais da eletrostática para seus cálculos</p>
-      </div>
-
-      <div class="reference-grid">
-        <div class="ref-card">
-          <div class="ref-symbol">k</div>
-          <div class="ref-info">
-            <div class="ref-name">Constante Eletrostática</div>
-            <div class="ref-value">$k = 9 \times 10^9$ N·m²/C²</div>
-            <div class="ref-context">Usada na Lei de Coulomb e Campo Elétrico</div>
           </div>
         </div>
-        <div class="ref-card">
-          <div class="ref-symbol">e</div>
-          <div class="ref-info">
-            <div class="ref-name">Carga Elementar</div>
-            <div class="ref-value">$e = 1{,}6 \times 10^{-19}$ C</div>
-            <div class="ref-context">Carga do elétron (módulo) e do próton</div>
-          </div>
-        </div>
-        <div class="ref-card">
-          <div class="ref-symbol">ε₀</div>
-          <div class="ref-info">
-            <div class="ref-name">Permissividade do Vácuo</div>
-            <div class="ref-value">$\varepsilon_0 = 8{,}85 \times 10^{-12}$ C²/(N·m²)</div>
-            <div class="ref-context">$k = \dfrac{1}{4\pi\varepsilon_0}$</div>
-          </div>
-        </div>
-        <div class="ref-card">
-          <div class="ref-symbol">mₑ</div>
-          <div class="ref-info">
-            <div class="ref-name">Massa do Elétron</div>
-            <div class="ref-value">$m_e = 9{,}11 \times 10^{-31}$ kg</div>
-            <div class="ref-context">Dinâmica de partículas carregadas</div>
-          </div>
-        </div>
-        <div class="ref-card">
-          <div class="ref-symbol">mp</div>
-          <div class="ref-info">
-            <div class="ref-name">Massa do Próton</div>
-            <div class="ref-value">$m_p = 1{,}67 \times 10^{-27}$ kg</div>
-            <div class="ref-context">$m_p \approx 1836 \cdot m_e$</div>
-          </div>
-        </div>
-        <div class="ref-card featured-ref">
-          <div class="ref-symbol">📋</div>
-          <div class="ref-info">
-            <div class="ref-name">Fórmulas Essenciais</div>
-            <div class="ref-value">
-              $F = k\dfrac{|Q_1 Q_2|}{d^2}$ &ensp;|&ensp;
-              $E = k\dfrac{|Q|}{d^2}$ &ensp;|&ensp;
-              $V = k\dfrac{Q}{d}$
+
+        <!-- ============================================================
+             ESTAÇÃO 2: ATRITO & INDUÇÃO NO PAPEL (ENEM)
+             ============================================================ -->
+        <div class="station-panel" id="station2" role="tabpanel">
+          <div class="workbench-grid">
+            
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Eletrização por Atrito & Indução</span>
+              </div>
+              <h2 class="question-title">Desafio Experimental: A Atração dos Papéis Neutros</h2>
+              <div class="question-context">
+                "Ao atritar um bastão de plástico seco com um tecido de lã, o bastão adquire carga elétrica e passa a atrair pequenos pedaços de papel picado repousados sobre a mesa, embora os papéis sejam corpos isolantes e eletricamente neutros."
+              </div>
+              <div class="question-body">
+                <strong>Pergunta:</strong> Por que ocorre a atração dos papéis se eles não possuem carga líquida ($Q_{\text{total}} = 0$)?
+              </div>
+
+              <div class="options-group" id="opts-station2">
+                <button class="option-choice" data-correct="false" data-opt="A">
+                  <span class="opt-letter">A</span>
+                  <span>O ar ao redor é aquecido pelo atrito, criando vácuo que suga o papel.</span>
+                </button>
+                <button class="option-choice" data-correct="true" data-opt="B">
+                  <span class="opt-letter">B</span>
+                  <span>O bastão polariza os dipolos do papel neutro; como as cargas opostas ficam mais próximas, a atração supera a repulsão.</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="C">
+                  <span class="opt-letter">C</span>
+                  <span>Prótons do núcleo do papel são arrancados e transferidos instantaneamente para o bastão.</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="D">
+                  <span class="opt-letter">D</span>
+                  <span>A gravidade sobre os papéis é anulada pela carga estática do ambiente.</span>
+                </button>
+              </div>
+
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-rub-balloon">
+                  ⚡ 1. Atritar Bastão / Balão
+                </button>
+                <button class="btn-lab btn-lab-primary" id="btn-attract-paper">
+                  🧲 2. Aproximar e Polarizar Papéis
+                </button>
+                <button class="btn-lab btn-lab-secondary" id="btn-explain-s2">
+                  📖 Ver Resolução
+                </button>
+              </div>
+
+              <div class="resolution-box" id="res-station2">
+                <h4>🔬 Resolução Comentada ENEM</h4>
+                <div class="resolution-text">
+                  1. Ao atritar com o tecido de lã, o bastão recebe elétrons (eletrização por atrito) e fica <strong>negativo (−)</strong>.<br>
+                  2. Quando o bastão aproxima-se dos pedaços de papel, ocorre a <strong>polarização dielétrica</strong>: os elétrons do papel são repelidos para o fundo, deixando a face superior positiva (+).<br>
+                  3. Como a força varia com o inverso do quadrado ($F \propto 1/d^2$), a atração sobre a face próxima supera a repulsão sobre a face distante ($F_{\text{atração}} > F_{\text{repulsão}}$), resultando em um salto imediato do papel.
+                </div>
+              </div>
             </div>
-            <div class="ref-context">Lei de Coulomb &nbsp;·&nbsp; Campo Elétrico &nbsp;·&nbsp; Potencial Elétrico</div>
-          </div>
-        </div>
-      </div>
 
-      <div class="study-tips">
-        <h3>💡 Dicas de Estudo</h3>
-        <div class="tips-grid">
-          <div class="tip-card">
-            <div class="tip-icon">📐</div>
-            <h4>Atenção ao quadrado</h4>
-            <p>Se a distância dobra, a força cai <strong>4 vezes</strong>. Se triplicar, cai <strong>9 vezes</strong>. É a lei do inverso do quadrado!</p>
+            <!-- Aparato Eletrização -->
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Aparato 02: Bancada de Eletrização & Microscopia de Dipolos</span>
+                <span class="apparatus-status"><span class="status-dot"></span> Ativo</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletrizacao"></div>
+              <div class="apparatus-controls">
+                <div class="digital-readout-bar">
+                  <div class="readout-item">
+                    <div class="readout-name">Carga do Bastão / Balão</div>
+                    <div class="readout-num" id="s2-charge-balloon" style="color: #c8435d;">0 e</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Carga da Lã</div>
+                    <div class="readout-num" id="s2-charge-wool" style="color: #3b6cb5;">0 e</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Estado dos Papéis</div>
+                    <div class="readout-num" id="s2-paper-status" style="font-size: 0.85rem;">Neutros (Sem polarização)</div>
+                  </div>
+                </div>
+                <div class="apparatus-hint">
+                  💡 Arraste o balão com o cursor sobre o tecido de lã para atritar manualmente e depois leve-o até a bancada de papéis.
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="tip-card">
-            <div class="tip-icon">🧭</div>
-            <h4>Campo é vetorial</h4>
-            <p>O campo elétrico tem direção e sentido. Parte de cargas positivas e chega às negativas.</p>
+        </div>
+
+        <!-- ============================================================
+             ESTAÇÃO 3: BLINDAGEM & GAIOLA DE FARADAY (ENEM)
+             ============================================================ -->
+        <div class="station-panel" id="station3" role="tabpanel">
+          <div class="workbench-grid">
+            
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Blindagem Eletrostática · Gaiola de Faraday</span>
+              </div>
+              <h2 class="question-title">Desafio Experimental: A Segurança Dentro do Carro</h2>
+              <div class="question-context">
+                "Durante uma tempestade com intensa incidência de raios, um motorista é instruído a permanecer dentro de seu veículo metálico fechado em vez de sair e abrigar-se sob árvores."
+              </div>
+              <div class="question-body">
+                <strong>Pergunta:</strong> A blindagem eletrostática protege o motorista porque, no interior de um condutor em equilíbrio:
+              </div>
+
+              <div class="options-group" id="opts-station3">
+                <button class="option-choice" data-correct="false" data-opt="A">
+                  <span class="opt-letter">A</span>
+                  <span>Os pneus de borracha isolam completamente o veículo do solo.</span>
+                </button>
+                <button class="option-choice" data-correct="true" data-opt="B">
+                  <span class="opt-letter">B</span>
+                  <span>As cargas elétricas distribuem-se na superfície externa, tornando o campo elétrico interno nulo ($E=0$).</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="C">
+                  <span class="opt-letter">C</span>
+                  <span>A lataria do carro dissipa o raio na forma de ondas de rádio e calor no motor.</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="D">
+                  <span class="opt-letter">D</span>
+                  <span>O campo elétrico interno dobra de intensidade mas inverte de sentido rapidamente.</span>
+                </button>
+              </div>
+
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-strike-lightning">
+                  ⚡ Disparar Descarga no Condutor
+                </button>
+                <button class="btn-lab btn-lab-secondary" id="btn-explain-s3">
+                  📖 Ver Resolução
+                </button>
+              </div>
+
+              <div class="resolution-box" id="res-station3">
+                <h4>🛡️ Resolução Comentada</h4>
+                <div class="resolution-text">
+                  Em qualquer condutor eletrizado em equilíbrio eletrostático, o excesso de cargas repele-se mutualmente e aloja-se <strong>exclusivamente na superfície externa</strong>.<br><br>
+                  Pela Lei de Gauss, o fluxo elétrico resultante no interior é nulo, garantindo que o <strong>campo elétrico seja rigorosamente zero ($E_{\text{interno}} = 0$)</strong> em qualquer ponto da cavidade interna. Mova a sonda voltimétrica pelo aparato e comprove a leitura zero dentro da gaiola.
+                </div>
+              </div>
+            </div>
+
+            <!-- Aparato Gaiola de Faraday -->
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Aparato 03: Gaiola Condutora & Sonda de Campo Eletrostático</span>
+                <span class="apparatus-status"><span class="status-dot"></span> Pronta para descarga</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-faraday"></div>
+              <div class="apparatus-controls">
+                <div class="digital-readout-bar">
+                  <div class="readout-item">
+                    <div class="readout-name">Campo na Sonda ($\vec{E}$)</div>
+                    <div class="readout-num" id="s3-probe-e" style="color: var(--lab-green);">0,00 N/C</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Posição da Sonda</div>
+                    <div class="readout-num" id="s3-probe-pos" style="font-size: 0.88rem;">Interior da Gaiola</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Carga Externa Acumulada</div>
+                    <div class="readout-num" id="s3-ext-charge">0 μC</div>
+                  </div>
+                </div>
+                <div class="apparatus-hint">
+                  💡 Clique e arraste a <strong>sonda de medição (círculo amarelo)</strong> para dentro e fora da blindagem metálica para medir o campo.
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="tip-card">
-            <div class="tip-icon">🔋</div>
-            <h4>Potencial é escalar</h4>
-            <p>Para várias cargas, o potencial total é a <strong>soma algébrica</strong> — sem vetores!</p>
+        </div>
+
+        <!-- ============================================================
+             ESTAÇÃO 4: DEFLEXÃO EM CAMPO UNIFORME (FUVEST)
+             ============================================================ -->
+        <div class="station-panel" id="station4" role="tabpanel">
+          <div class="workbench-grid">
+            
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Campo Elétrico Uniforme · Dinâmica de Partículas</span>
+              </div>
+              <h2 class="question-title">Desafio Experimental: Trajetória no Campo Uniforme</h2>
+              <div class="question-context">
+                "Um elétron de carga $-e$ e massa $m$ é injetado horizontalmente com velocidade $v_0$ em uma região entre placas condutoras paralelas, onde existe um campo elétrico uniforme $\vec{E}$ vertical orientado para cima."
+              </div>
+              <div class="question-body">
+                <strong>Pergunta:</strong> Qual é o formato da trajetória do elétron e o sentido da aceleração sofrida por ele entre as placas?
+              </div>
+
+              <div class="options-group" id="opts-station4">
+                <button class="option-choice" data-correct="false" data-opt="A">
+                  <span class="opt-letter">A</span>
+                  <span>Trajetória retilínea com velocidade constante, pois a massa do elétron é desprezível.</span>
+                </button>
+                <button class="option-choice" data-correct="true" data-opt="B">
+                  <span class="opt-letter">B</span>
+                  <span>Trajetória parabólica com aceleração orientada para baixo ($a = \frac{eE}{m}$), em sentido oposto ao campo.</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="C">
+                  <span class="opt-letter">C</span>
+                  <span>Trajetória circular completa com raio $R = \frac{mv_0}{qE}$.</span>
+                </button>
+                <button class="option-choice" data-correct="false" data-opt="D">
+                  <span class="opt-letter">D</span>
+                  <span>Trajetória helicoidal espiralando em direção à placa positiva.</span>
+                </button>
+              </div>
+
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-fire-electron">
+                  🎯 Disparar Feixe de Elétrons
+                </button>
+                <button class="btn-lab btn-lab-secondary" id="btn-explain-s4">
+                  📖 Ver Resolução
+                </button>
+              </div>
+
+              <div class="resolution-box" id="res-station4">
+                <h4>📐 Resolução FUVEST</h4>
+                <div class="resolution-text">
+                  1. A força elétrica atuando sobre uma carga negativa é $\vec{F} = q \vec{E} = -e \vec{E}$. Portanto, se o campo $\vec{E}$ aponta para cima, a força elétrica puxa o elétron <strong>para baixo</strong>.<br>
+                  2. Pela 2ª Lei de Newton: $F = m \cdot a \implies a_y = \dfrac{e E}{m}$ (constante).<br>
+                  3. No eixo horizontal $x$: $v_x = v_0$ (constante). No eixo vertical $y$: $y = \frac{1}{2} a_y t^2 = \frac{1}{2} \left(\frac{eE}{m}\right) \left(\frac{x}{v_0}\right)^2$.<br>
+                  Como $y \propto x^2$, a trajetória é rigorosamente uma <strong>parábola</strong>!
+                </div>
+              </div>
+            </div>
+
+            <!-- Aparato Canhão de Elétrons -->
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Aparato 04: Tubo de Deflexão Eletrostática</span>
+                <span class="apparatus-status"><span class="status-dot"></span> Feixe sincronizado</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-deflexao"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header">
+                      <span class="dial-label">Intensidade do Campo ($E$)</span>
+                      <span class="dial-value" id="s4-e-val">300 V/m</span>
+                    </div>
+                    <input type="range" class="lab-slider" id="s4-e-slider" min="50" max="600" step="25" value="300">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header">
+                      <span class="dial-label">Velocidade Inicial ($v_0$)</span>
+                      <span class="dial-value" id="s4-v-val">4,0 × 10⁶ m/s</span>
+                    </div>
+                    <input type="range" class="lab-slider" id="s4-v-slider" min="1" max="8" step="0.5" value="4">
+                  </div>
+                </div>
+
+                <div class="digital-readout-bar">
+                  <div class="readout-item">
+                    <div class="readout-name">Aceleração Vertical ($a_y$)</div>
+                    <div class="readout-num" id="s4-accel-num">5,27 × 10¹³ m/s²</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Deflexão Vertical ($\Delta y$)</div>
+                    <div class="readout-num" id="s4-deflection-num" style="color: var(--lilac-dark);">-18,4 mm</div>
+                  </div>
+                  <div class="readout-item">
+                    <div class="readout-name">Equação da Curva</div>
+                    <div class="readout-num" style="font-size: 0.85rem;">$y = -k \cdot x^2$ (Parábola)</div>
+                  </div>
+                </div>
+                <div class="apparatus-hint">
+                  💡 Ajuste a intensidade do campo e velocidade para observar o raio de curvatura da trajetória parabólica.
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="tip-card">
-            <div class="tip-icon">⚡</div>
-            <h4>ENEM ama contexto</h4>
-            <p>Gaiola de Faraday, para-raios, touchscreen — associe sempre os conceitos ao cotidiano.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GUIA DE APOIO / TEORIA RÁPIDA ===== -->
+    <section class="theory-guide-section" id="guia-teorico">
+      <div class="container">
+        <div class="section-title-wrap">
+          <p class="eyebrow">referência rápida de bancada</p>
+          <h2 class="guide-title">Princípios & Fórmulas Fundamentais</h2>
+          <p class="guide-subtitle">Síntese teórica para consulta durante a realização dos experimentos</p>
+        </div>
+
+        <div class="cards-3col">
+          <div class="theory-card">
+            <div class="theory-card-header">
+              <div class="theory-icon">🧲</div>
+              <h3>Lei de Coulomb</h3>
+            </div>
+            <p>A força eletrostática entre duas cargas pontuais é diretamente proporcional ao produto dos módulos das cargas e inversamente proporcional ao quadrado da distância entre elas.</p>
+            <div class="formula-box">
+              $$F = k \cdot \frac{|Q_1 \cdot Q_2|}{d^2}$$
+            </div>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-card-header">
+              <div class="theory-icon">⚡</div>
+              <h3>Vetor Campo Elétrico</h3>
+            </div>
+            <p>O campo elétrico em um ponto expressa a força que atua sobre uma carga de prova positiva colocada nessa posição. Cargas positivas criam campos divergentes; cargas negativas criam campos convergentes.</p>
+            <div class="formula-box">
+              $$\vec{E} = \frac{\vec{F}}{q} = k \cdot \frac{Q}{d^2} \hat{r}$$
+            </div>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-card-header">
+              <div class="theory-icon">🛡️</div>
+              <h3>Equilíbrio Eletrostático</h3>
+            </div>
+            <p>Em condutores em equilíbrio, o campo elétrico interno é rigorosamente nulo ($E=0$) e o potencial eletrostático é constante em todo o condutor. As cargas livres distribuem-se apenas na superfície externa.</p>
+            <div class="formula-box">
+              $$E_{\text{int}} = 0 \quad \text{e} \quad V_{\text{int}} = \text{constante}$$
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-brand">
-          <span class="footer-icon">⚡</span>
-          <span>Eletrostática Interativa</span>
-        </div>
-        <p class="footer-text">
-          Simulações educacionais de física com p5.js e MathJax.
-          Acesso gratuito, sem login — para todos.
+        <div class="footer-wordmark">Laura de Faveri</div>
+        <p class="footer-note">
+          Laboratório Virtual de Física Experimental · Ensino, Simulações e Vestibulares
         </p>
         <div class="footer-links">
-          <a href="https://github.com/lfaveri/simulations" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="#hero">Voltar ao Topo ↑</a>
+          <a href="https://lfaveri.github.io/" class="footer-link">← Voltar para lfaveri.github.io</a>
+          <a href="#estacoes" class="footer-link">Bancadas Experimentais ↑</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts (order matters) -->
-  <script src="js/exercicios.js"></script>
-  <script src="js/sim_eletrizacao.js"></script>
-  <script src="js/sim_coulomb.js"></script>
-  <script src="js/sim_campo.js"></script>
+  <!-- Scripts -->
+  <script src="js/sim_estacoes.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
