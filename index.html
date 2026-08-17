@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório de Eletrostática — Laura de Faveri</title>
-  <meta name="description" content="Laboratório experimental interativo de Eletrostática. Resolução dinâmica de questões de vestibular com simulações físicas em tempo real.">
+  <title>Laboratório de Física — Laura de Faveri</title>
+  <meta name="description" content="Portal completo de Laboratórios Experimentais de Física para Ensino Médio e Vestibulares (FUVEST, ENEM, UNICAMP).">
 
-  <!-- Google Fonts: Fraunces, Karla, IBM Plex Mono (Estilo Laura de Faveri) -->
+  <!-- Google Fonts: Fraunces, Karla, IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
 </head>
 <body>
 
-  <!-- Ambient background curves (Estilo Laura de Faveri) -->
+  <!-- Ambient background orbits (Estilo Laura de Faveri) -->
   <div class="thread-field" aria-hidden="true">
     <svg class="bg-orbit bg-orbit--1" viewBox="0 0 400 400"><circle cx="200" cy="200" r="170" /></svg>
     <svg class="bg-orbit bg-orbit--2" viewBox="0 0 400 400"><circle cx="200" cy="200" r="170" /></svg>
@@ -40,11 +40,11 @@
     <div class="header-container">
       <a href="https://lfaveri.github.io/" class="wordmark-group">
         <span class="wordmark">Laura de Faveri</span>
-        <span class="wordmark-tag">Física Experimental</span>
+        <span class="wordmark-tag">Laboratório de Física</span>
       </a>
       <div class="nav-right">
         <nav class="nav-links">
-          <a href="#estacoes" class="nav-link">Bancadas Experimentais</a>
+          <a href="#hub-areas" class="nav-link">Áreas da Física</a>
           <a href="#guia-teorico" class="nav-link">Guia de Apoio</a>
         </nav>
         <a href="https://lfaveri.github.io/" class="back-portfolio-btn">
@@ -59,454 +59,710 @@
     <section class="hero-section">
       <div class="container">
         <div class="hero-layout">
-          <p class="eyebrow">laboratório virtual · eletrostática & vestibulares</p>
+          <p class="eyebrow">laboratório virtual · física experimental & vestibulares</p>
           <h1 class="hero-title">
-            Compreender a eletrostática<br>
-            <em>através do experimento.</em>
+            Investigar a física<br>
+            <em>pela bancada de laboratório.</em>
           </h1>
           <p class="hero-lede">
-            Neste laboratório interativo, cada questão de vestibular (FUVEST, ENEM, UNICAMP) é investigada diretamente na bancada experimental. Altere as variáveis físicas, observe os instrumentos em tempo real e comprove a teoria na prática.
+            Explore as 6 grandes áreas da Física através de experimentos interativos que resolvem e demonstram questões do <strong>ENEM</strong>, <strong>FUVEST</strong> e <strong>UNICAMP</strong> passo a passo.
           </p>
-          <div class="lab-meta-strip">
-            <div class="lab-meta-item">
-              <span class="lab-meta-label">Estações Ativas</span>
-              <span class="lab-meta-val">04 Bancadas</span>
-            </div>
-            <div class="lab-meta-item">
-              <span class="lab-meta-label">Ambiente</span>
-              <span class="lab-meta-val">Simulação Dinâmica p5.js</span>
-            </div>
-            <div class="lab-meta-item">
-              <span class="lab-meta-label">Nível de Ensino</span>
-              <span class="lab-meta-val">Ensino Médio & Vestibulares</span>
-            </div>
+        </div>
+
+        <!-- HUB DAS 6 GRANDES ÁREAS -->
+        <div class="areas-hub-container" id="hub-areas">
+          <div class="areas-hub-grid">
+            <button class="area-card-btn is-active" data-area="area-eletro">
+              <span class="area-icon">⚡</span>
+              <span class="area-name">Eletromagnetismo</span>
+              <span class="area-desc">Coulomb, circuitos & indução</span>
+            </button>
+            <button class="area-card-btn" data-area="area-mecanica">
+              <span class="area-icon">⚙️</span>
+              <span class="area-name">Mecânica Clássica</span>
+              <span class="area-desc">Cinemática, atrito & empuxo</span>
+            </button>
+            <button class="area-card-btn" data-area="area-termologia">
+              <span class="area-icon">🌡️</span>
+              <span class="area-name">Termologia</span>
+              <span class="area-desc">Gases ideais & ciclo de Carnot</span>
+            </button>
+            <button class="area-card-btn" data-area="area-optica">
+              <span class="area-icon">🔦</span>
+              <span class="area-name">Óptica Geométrica</span>
+              <span class="area-desc">Snell, refração & lentes</span>
+            </button>
+            <button class="area-card-btn" data-area="area-ondulatoria">
+              <span class="area-icon">🌊</span>
+              <span class="area-name">Ondulatória</span>
+              <span class="area-desc">Doppler & fenda dupla</span>
+            </button>
+            <button class="area-card-btn" data-area="area-moderna">
+              <span class="area-icon">🌌</span>
+              <span class="area-name">Física Moderna</span>
+              <span class="area-desc">Fotoelétrico & relatividade</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== BANCADAS DE LABORATÓRIO ===== -->
-    <section class="lab-section" id="estacoes">
+    <section class="lab-section">
       <div class="container">
-        
-        <!-- Navegação entre Estações -->
-        <div class="station-nav-container">
-          <div class="station-nav" role="tablist">
-            <button class="station-tab is-active" data-station="station1" role="tab" aria-selected="true">
-              <span class="station-number">01</span>
-              <span>Lei de Coulomb & Distância (FUVEST)</span>
-            </button>
-            <button class="station-tab" data-station="station2" role="tab" aria-selected="false">
-              <span class="station-number">02</span>
-              <span>Atrito & Indução no Papel (ENEM)</span>
-            </button>
-            <button class="station-tab" data-station="station3" role="tab" aria-selected="false">
-              <span class="station-number">03</span>
-              <span>Blindagem & Gaiola de Faraday (ENEM)</span>
-            </button>
-            <button class="station-tab" data-station="station4" role="tab" aria-selected="false">
-              <span class="station-number">04</span>
-              <span>Deflexão de Feixe em Campo $\vec{E}$ (FUVEST)</span>
-            </button>
+
+        <!-- ============================================================
+             MÓDULO 1: ELETROMAGNETISMO
+             ============================================================ -->
+        <div class="area-module-panel is-active" id="area-eletro">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-eletro-1">
+                <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST)</span>
+              </button>
+              <button class="station-tab" data-station="st-eletro-2">
+                <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM)</span>
+              </button>
+              <button class="station-tab" data-station="st-eletro-3">
+                <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bancada E1: Coulomb -->
+          <div class="station-panel is-active" id="st-eletro-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                  <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
+                </div>
+                <h2 class="question-title">Desafio: A Razão da Distância</h2>
+                <div class="question-context">
+                  "Duas cargas pontuais $+Q$ e $-Q$ separadas por $d$ sentem força $F_0$. Ao reduzir a distância para $d/3$, qual será a nova força de atração?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$F = F_0 / 9$</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 3 F_0$</span></button>
+                  <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>$F = 9 F_0$ (Multiplica por 9)</span></button>
+                </div>
+                <div class="notebook-actions">
+                  <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">⚡ Demonstrar $d/3$ na Simulação</button>
+                  <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+                </div>
+                <div class="resolution-box">
+                  <h4>📐 Resolução</h4>
+                  <div class="resolution-text">
+                    Como $F \propto 1/d^2$, ao substituir $d' = d/3$: $F' = \frac{k Q^2}{(d/3)^2} = 9 \left(\frac{k Q^2}{d^2}\right) = 9 F_0$.
+                  </div>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Aparato: Trilho de Coulomb</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-coulomb"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Distância ($d$)</span><span class="dial-value" id="s1-d-val">3,00 m</span></div>
+                      <input type="range" class="lab-slider" id="s1-d-slider" min="0.6" max="3.0" step="0.1" value="3.0">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Razão Força</div><div class="readout-num" id="s1-ratio-num">1,00 × F₀</div></div>
+                    <div class="readout-item"><div class="readout-name">Força ($F$)</div><div class="readout-num" id="s1-force-num">0,004 N</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bancada E2: Circuito & Ohm -->
+          <div class="station-panel" id="st-eletro-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Eletrodinâmica · Primeira Lei de Ohm</span>
+                </div>
+                <h2 class="question-title">Desafio: Corrente & Efeito Joule</h2>
+                <div class="question-context">
+                  "Um circuito simples contém uma fonte de $12\,\text{V}$ conectada a um resistor de $6\,\Omega$. Qual a corrente e a potência dissipada?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$I = 2\,\text{A}$ e Potência $P = 24\,\text{W}$</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$I = 0{,}5\,\text{A}$ e Potência $P = 6\,\text{W}$</span></button>
+                </div>
+                <div class="notebook-actions">
+                  <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+                </div>
+                <div class="resolution-box">
+                  <h4>📐 Resolução</h4>
+                  <div class="resolution-text">
+                    $I = U/R = 12/6 = 2\,\text{A}$. Potência $P = U \cdot I = 12 \cdot 2 = 24\,\text{W}$.
+                  </div>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Bancada de Circuitos & Reostato</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-eletro-circuito"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Tensão ($U$)</span><span class="dial-value" id="e1-u-val">12 V</span></div>
+                      <input type="range" class="lab-slider" id="e1-u-slider" min="2" max="24" step="1" value="12">
+                    </div>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Resistência ($R$)</span><span class="dial-value" id="e1-r-val">6 Ω</span></div>
+                      <input type="range" class="lab-slider" id="e1-r-slider" min="1" max="15" step="1" value="6">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Corrente ($I$)</div><div class="readout-num" id="e1-i-num">2,00 A</div></div>
+                    <div class="readout-item"><div class="readout-name">Potência ($P$)</div><div class="readout-num" id="e1-p-num">24,0 W</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bancada E3: Indução Faraday -->
+          <div class="station-panel" id="st-eletro-3">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                  <span class="topic-tag">Eletromagnetismo · Lei de Faraday-Lenz</span>
+                </div>
+                <h2 class="question-title">Desafio: Indução Eletromagnética</h2>
+                <div class="question-context">
+                  "Ao aproximar o polo norte de um ímã em uma bobina condutora, surge uma corrente induzida que:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Cria um polo norte na face da bobina, opondo-se à aproximação (Lei de Lenz).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Atrai o ímã acelerando seu movimento indefinidamente.</span></button>
+                </div>
+                <div class="notebook-actions">
+                  <button class="btn-lab btn-lab-primary" id="btn-magnet-in">⚡ Injetar Ímã na Bobina</button>
+                  <button class="btn-lab btn-lab-secondary" id="btn-magnet-out">⚡ Afastar Ímã</button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Solenoide & Galvanômetro</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-eletro-inducao"></div>
+                <div class="apparatus-controls">
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">FEM Induzida ($\mathcal{E}$)</div><div class="readout-num" id="e2-emf-num">0,00 V</div></div>
+                    <div class="readout-item"><div class="readout-name">Efeito Lenz</div><div class="readout-num" id="e2-lenz-text" style="font-size: 0.85rem;">Ímã parado</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- ============================================================
-             ESTAÇÃO 1: LEI DE COULOMB & RAZÃO DO QUADRADO (FUVEST)
+             MÓDULO 2: MECÂNICA CLÁSSICA
              ============================================================ -->
-        <div class="station-panel is-active" id="station1" role="tabpanel">
-          <div class="workbench-grid">
-            
-            <!-- Caderno de Laboratório -->
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
-                <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
-              </div>
-              <h2 class="question-title">Desafio Experimental: A Razão da Distância</h2>
-              <div class="question-context">
-                "Duas pequenas esferas condutoras idênticas no vácuo, separadas por uma distância $d$, possuem cargas $+Q$ e $-Q$. Nessa configuração, o módulo da força de atração entre elas é $F_0$. Se a distância for reduzida para $d/3$, qual será a nova força?"
-              </div>
-              <div class="question-body">
-                <strong>Pergunta:</strong> Selecione a alternativa que representa o novo valor da força e comprove na bancada ao lado:
-              </div>
-              
-              <div class="options-group" id="opts-station1">
-                <button class="option-choice" data-correct="false" data-opt="A">
-                  <span class="opt-letter">A</span>
-                  <span>$F = \dfrac{F_0}{9}$ (A força diminui 9 vezes)</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="B">
-                  <span class="opt-letter">B</span>
-                  <span>$F = 3 F_0$ (A força triplica com a aproximação)</span>
-                </button>
-                <button class="option-choice" data-correct="true" data-opt="C">
-                  <span class="opt-letter">C</span>
-                  <span>$F = 9 F_0$ (A força multiplica por 9)</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="D">
-                  <span class="opt-letter">D</span>
-                  <span>$F = 27 F_0$ (A força multiplica por 27)</span>
-                </button>
-              </div>
+        <div class="area-module-panel" id="area-mecanica">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-mec-1">
+                <span class="station-number">01</span><span>Lançamento Oblíquo & Alcance (FUVEST)</span>
+              </button>
+              <button class="station-tab" data-station="st-mec-2">
+                <span class="station-number">02</span><span>Plano Inclinado com Atrito (UNICAMP)</span>
+              </button>
+              <button class="station-tab" data-station="st-mec-3">
+                <span class="station-number">03</span><span>Hidrostática & Empuxo (ENEM)</span>
+              </button>
+            </div>
+          </div>
 
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">
-                  ⚡ Demonstrar $d/3$ na Simulação
-                </button>
-                <button class="btn-lab btn-lab-secondary" id="btn-explain-s1">
-                  📖 Ver Dedução Teórica
-                </button>
+          <!-- Bancada M1: Lançamento -->
+          <div class="station-panel is-active" id="st-mec-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                  <span class="topic-tag">Cinemática Vetorial · Lançamento Oblíquo</span>
+                </div>
+                <h2 class="question-title">Desafio: O Ângulo de Alcance Máximo</h2>
+                <div class="question-context">
+                  "No vácuo, para uma mesma velocidade inicial $v_0$, qual é o ângulo de lançamento $\theta$ que produz o maior alcance horizontal?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$\theta = 30^\circ$</span></button>
+                  <button class="option-choice" data-correct="true" data-opt="B"><span class="opt-letter">B</span><span>$\theta = 45^\circ$ (Pois $\sin(2\theta) = \sin(90^\circ) = 1$)</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\theta = 60^\circ$</span></button>
+                </div>
+                <div class="notebook-actions">
+                  <button class="btn-lab btn-lab-primary" id="btn-demo-maxrange">🎯 Ajustar 45° & Disparar</button>
+                  <button class="btn-lab btn-lab-primary" id="btn-fire-cannon">🚀 Disparar</button>
+                </div>
               </div>
-
-              <div class="resolution-box" id="res-station1">
-                <h4>📐 Resolução Experimental e Algébrica</h4>
-                <div class="resolution-text">
-                  Pela <strong>Lei de Coulomb</strong>:
-                  $$F_0 = k \cdot \frac{|+Q \cdot (-Q)|}{d^2} = k \frac{Q^2}{d^2}$$
-                  Ao reduzir a distância para $d' = \dfrac{d}{3}$:
-                  $$F' = k \frac{Q^2}{(d/3)^2} = k \frac{Q^2}{\frac{d^2}{9}} = 9 \cdot \left(k \frac{Q^2}{d^2}\right) = 9 F_0$$
-                  O dinamômetro da bancada experimental confirma que a força salta de $1{,}00\,F_0$ para exatamente <strong>$9{,}00\,F_0$</strong>.
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Canhão Balístico & Trajetória</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-mec-lancamento"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m1-angle-val">45°</span></div>
+                      <input type="range" class="lab-slider" id="m1-angle-slider" min="15" max="75" step="5" value="45">
+                    </div>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Velocidade ($v_0$)</span><span class="dial-value" id="m1-v0-val">20 m/s</span></div>
+                      <input type="range" class="lab-slider" id="m1-v0-slider" min="10" max="30" step="2" value="20">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Alcance ($A$)</div><div class="readout-num" id="m1-range-num">40,0 m</div></div>
+                    <div class="readout-item"><div class="readout-name">Altura Máx ($H$)</div><div class="readout-num" id="m1-hmax-num">10,0 m</div></div>
+                    <div class="readout-item"><div class="readout-name">Tempo de Voo</div><div class="readout-num" id="m1-time-num">2,83 s</div></div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Aparato Experimental -->
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Aparato 01: Trilho de Coulomb & Dinamômetro</span>
-                <span class="apparatus-status"><span class="status-dot"></span> Calibrado</span>
+          <!-- Bancada M2: Plano Inclinado -->
+          <div class="station-panel" id="st-mec-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                  <span class="topic-tag">Dinâmica · Plano Inclinado & Atrito</span>
+                </div>
+                <h2 class="question-title">Desafio: Condição de Deslizamento</h2>
+                <div class="question-context">
+                  "Um bloco repousa sobre uma rampa com atrito $\mu = 0{,}40$. A partir de qual ângulo $\theta$ de inclinação o bloco começa a deslizar?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Quando $\tan\theta > \mu \implies \theta \approx 21{,}8^\circ$</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre em $\theta = 45^\circ$, independente do atrito.</span></button>
+                </div>
+                <div class="notebook-actions">
+                  <button class="btn-lab btn-lab-primary" id="btn-release-block">▶ Soltar Bloco</button>
+                </div>
               </div>
-              <div class="apparatus-canvas-wrap" id="canvas-coulomb"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header">
-                      <span class="dial-label">Distância ($d$)</span>
-                      <span class="dial-value" id="s1-d-val">3,00 m</span>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Rampa de Inclinação Variável</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-mec-plano"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m2-theta-val">30°</span></div>
+                      <input type="range" class="lab-slider" id="m2-theta-slider" min="10" max="60" step="2" value="30">
                     </div>
-                    <input type="range" class="lab-slider" id="s1-d-slider" min="0.6" max="3.0" step="0.1" value="3.0">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header">
-                      <span class="dial-label">Carga $Q_1$</span>
-                      <span class="dial-value" id="s1-q1-val">+2,0 μC</span>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Atrito ($\mu$)</span><span class="dial-value" id="m2-mu-val">0,40</span></div>
+                      <input type="range" class="lab-slider" id="m2-mu-slider" min="0.1" max="0.9" step="0.05" value="0.4">
                     </div>
-                    <input type="range" class="lab-slider" id="s1-q1-slider" min="-4" max="4" step="0.5" value="2">
                   </div>
-                  <div class="control-dial">
-                    <div class="dial-header">
-                      <span class="dial-label">Carga $Q_2$</span>
-                      <span class="dial-value" id="s1-q2-val">-2,0 μC</span>
-                    </div>
-                    <input type="range" class="lab-slider" id="s1-q2-slider" min="-4" max="4" step="0.5" value="-2">
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Força Tangencial ($P_x$)</div><div class="readout-num" id="m2-px-num">10,0 N</div></div>
+                    <div class="readout-item"><div class="readout-name">Atrito Máx ($f_{at}$)</div><div class="readout-num" id="m2-fat-num">6,9 N</div></div>
+                    <div class="readout-item"><div class="readout-name">Estado</div><div class="readout-num" id="m2-status-text" style="font-size:0.85rem;">Deslizando</div></div>
                   </div>
-                </div>
-
-                <div class="digital-readout-bar">
-                  <div class="readout-item">
-                    <div class="readout-name">Razão $F / F_0$</div>
-                    <div class="readout-num" id="s1-ratio-num" style="color: var(--lilac-dark);">1,00 × F₀</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Força Medida ($F$)</div>
-                    <div class="readout-num" id="s1-force-num">0,004 N</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Regime de Interação</div>
-                    <div class="readout-num" id="s1-type-text" style="font-size: 0.85rem; color: #2d559c;">Atração Mútua</div>
-                  </div>
-                </div>
-                <div class="apparatus-hint">
-                  💡 Arraste as esferas ou use os botões para comprovar a lei do inverso do quadrado.
                 </div>
               </div>
             </div>
+          </div>
 
+          <!-- Bancada M3: Hidrostática -->
+          <div class="station-panel" id="st-mec-3">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Hidrostática · Princípio de Arquimedes</span>
+                </div>
+                <h2 class="question-title">Desafio: O Peso Aparente</h2>
+                <div class="question-context">
+                  "Um corpo com peso real de $13{,}5\,\text{N}$ é totalmente imerso na água ($\rho = 1{,}0\,\text{g/cm}^3$), sofrendo empuxo de $5{,}0\,\text{N}$. Qual será a leitura no dinamômetro?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{aparente}} = P - E = 8{,}5\,\text{N}$</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{aparente}} = 18{,}5\,\text{N}$</span></button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Balança Hidrostática de Arquimedes</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-mec-hidrostatica"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Densidade do Líquido</span><span class="dial-value" id="m3-fluid-val">1,00 g/cm³</span></div>
+                      <input type="range" class="lab-slider" id="m3-fluid-slider" min="0.7" max="1.5" step="0.05" value="1.0">
+                    </div>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Imersão do Bloco</span><span class="dial-value" id="m3-depth-val">50%</span></div>
+                      <input type="range" class="lab-slider" id="m3-depth-slider" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Peso Real</div><div class="readout-num" id="m3-preal-num">13,50 N</div></div>
+                    <div class="readout-item"><div class="readout-name">Empuxo ($E$)</div><div class="readout-num" id="m3-empuxo-num">2,50 N</div></div>
+                    <div class="readout-item"><div class="readout-name">Peso Aparente</div><div class="readout-num" id="m3-pap-num" style="color:var(--lilac-dark);">11,00 N</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- ============================================================
-             ESTAÇÃO 2: ATRITO & INDUÇÃO NO PAPEL (ENEM)
+             MÓDULO 3: TERMOLOGIA & TERMODINÂMICA
              ============================================================ -->
-        <div class="station-panel" id="station2" role="tabpanel">
-          <div class="workbench-grid">
-            
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
-                <span class="topic-tag">Eletrização por Atrito & Indução</span>
-              </div>
-              <h2 class="question-title">Desafio Experimental: A Atração dos Papéis Neutros</h2>
-              <div class="question-context">
-                "Ao atritar um bastão de plástico seco com um tecido de lã, o bastão adquire carga elétrica e passa a atrair pequenos pedaços de papel picado repousados sobre a mesa, embora os papéis sejam corpos isolantes e eletricamente neutros."
-              </div>
-              <div class="question-body">
-                <strong>Pergunta:</strong> Por que ocorre a atração dos papéis se eles não possuem carga líquida ($Q_{\text{total}} = 0$)?
-              </div>
+        <div class="area-module-panel" id="area-termologia">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-termo-1">
+                <span class="station-number">01</span><span>Gases Ideais & Diagrama PxV (ENEM)</span>
+              </button>
+              <button class="station-tab" data-station="st-termo-2">
+                <span class="station-number">02</span><span>Ciclo de Carnot & Rendimento (UNICAMP)</span>
+              </button>
+            </div>
+          </div>
 
-              <div class="options-group" id="opts-station2">
-                <button class="option-choice" data-correct="false" data-opt="A">
-                  <span class="opt-letter">A</span>
-                  <span>O ar ao redor é aquecido pelo atrito, criando vácuo que suga o papel.</span>
-                </button>
-                <button class="option-choice" data-correct="true" data-opt="B">
-                  <span class="opt-letter">B</span>
-                  <span>O bastão polariza os dipolos do papel neutro; como as cargas opostas ficam mais próximas, a atração supera a repulsão.</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="C">
-                  <span class="opt-letter">C</span>
-                  <span>Prótons do núcleo do papel são arrancados e transferidos instantaneamente para o bastão.</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="D">
-                  <span class="opt-letter">D</span>
-                  <span>A gravidade sobre os papéis é anulada pela carga estática do ambiente.</span>
-                </button>
+          <!-- Bancada T1: Gases -->
+          <div class="station-panel is-active" id="st-termo-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Gases Ideais · Equação de Clapeyron</span>
+                </div>
+                <h2 class="question-title">Desafio: Transformação Isotérmica</h2>
+                <div class="question-context">
+                  "Mantendo a temperatura constante ($T = \text{cte}$), se o volume de um gás for reduzido pela metade, o que acontece com a pressão?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A pressão dobra de valor ($P_1 V_1 = P_2 V_2$).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A pressão cai pela metade.</span></button>
+                </div>
               </div>
-
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-rub-balloon">
-                  ⚡ 1. Atritar Bastão / Balão
-                </button>
-                <button class="btn-lab btn-lab-primary" id="btn-attract-paper">
-                  🧲 2. Aproximar e Polarizar Papéis
-                </button>
-                <button class="btn-lab btn-lab-secondary" id="btn-explain-s2">
-                  📖 Ver Resolução
-                </button>
-              </div>
-
-              <div class="resolution-box" id="res-station2">
-                <h4>🔬 Resolução Comentada ENEM</h4>
-                <div class="resolution-text">
-                  1. Ao atritar com o tecido de lã, o bastão recebe elétrons (eletrização por atrito) e fica <strong>negativo (−)</strong>.<br>
-                  2. Quando o bastão aproxima-se dos pedaços de papel, ocorre a <strong>polarização dielétrica</strong>: os elétrons do papel são repelidos para o fundo, deixando a face superior positiva (+).<br>
-                  3. Como a força varia com o inverso do quadrado ($F \propto 1/d^2$), a atração sobre a face próxima supera a repulsão sobre a face distante ($F_{\text{atração}} > F_{\text{repulsão}}$), resultando em um salto imediato do papel.
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Êmbolo de Gás & Traçador P x V</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-termo-gases"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Temperatura ($T$)</span><span class="dial-value" id="t1-temp-val">300 K</span></div>
+                      <input type="range" class="lab-slider" id="t1-temp-slider" min="150" max="600" step="25" value="300">
+                    </div>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Volume ($V$)</span><span class="dial-value" id="t1-vol-val">10,0 L</span></div>
+                      <input type="range" class="lab-slider" id="t1-vol-slider" min="3" max="20" step="1" value="10">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Pressão Calculada</div><div class="readout-num" id="t1-press-num">2,46 atm</div></div>
+                    <div class="readout-item"><div class="readout-name">Volume ($V$)</div><div class="readout-num" id="t1-vol-num">10,0 L</div></div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Aparato Eletrização -->
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Aparato 02: Bancada de Eletrização & Microscopia de Dipolos</span>
-                <span class="apparatus-status"><span class="status-dot"></span> Ativo</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletrizacao"></div>
-              <div class="apparatus-controls">
-                <div class="digital-readout-bar">
-                  <div class="readout-item">
-                    <div class="readout-name">Carga do Bastão / Balão</div>
-                    <div class="readout-num" id="s2-charge-balloon" style="color: #c8435d;">0 e</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Carga da Lã</div>
-                    <div class="readout-num" id="s2-charge-wool" style="color: #3b6cb5;">0 e</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Estado dos Papéis</div>
-                    <div class="readout-num" id="s2-paper-status" style="font-size: 0.85rem;">Neutros (Sem polarização)</div>
-                  </div>
+          <!-- Bancada T2: Carnot -->
+          <div class="station-panel" id="st-termo-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                  <span class="topic-tag">Termodinâmica · Rendimento de Carnot</span>
                 </div>
-                <div class="apparatus-hint">
-                  💡 Arraste o balão com o cursor sobre o tecido de lã para atritar manualmente e depois leve-o até a bancada de papéis.
+                <h2 class="question-title">Desafio: Eficiência Máxima</h2>
+                <div class="question-context">
+                  "Uma máquina de Carnot opera entre $T_q = 600\,\text{K}$ e $T_f = 300\,\text{K}$. Qual o seu rendimento teórico máximo?"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\eta = 1 - \frac{300}{600} = 50\%$</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\eta = 100\%$</span></button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Fluxo Térmico de Carnot</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-termo-carnot"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Fonte Quente ($T_q$)</span><span class="dial-value" id="t2-tq-val">600 K</span></div>
+                      <input type="range" class="lab-slider" id="t2-tq-slider" min="400" max="900" step="50" value="600">
+                    </div>
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Fonte Fria ($T_f$)</span><span class="dial-value" id="t2-tf-val">300 K</span></div>
+                      <input type="range" class="lab-slider" id="t2-tf-slider" min="200" max="400" step="25" value="300">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Rendimento ($\eta$)</div><div class="readout-num" id="t2-eta-num">50,0%</div></div>
+                    <div class="readout-item"><div class="readout-name">Trabalho Útil ($W$)</div><div class="readout-num" id="t2-work-num">500 J</div></div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
         <!-- ============================================================
-             ESTAÇÃO 3: BLINDAGEM & GAIOLA DE FARADAY (ENEM)
+             MÓDULO 4: ÓPTICA GEOMÉTRICA
              ============================================================ -->
-        <div class="station-panel" id="station3" role="tabpanel">
-          <div class="workbench-grid">
-            
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
-                <span class="topic-tag">Blindagem Eletrostática · Gaiola de Faraday</span>
-              </div>
-              <h2 class="question-title">Desafio Experimental: A Segurança Dentro do Carro</h2>
-              <div class="question-context">
-                "Durante uma tempestade com intensa incidência de raios, um motorista é instruído a permanecer dentro de seu veículo metálico fechado em vez de sair e abrigar-se sob árvores."
-              </div>
-              <div class="question-body">
-                <strong>Pergunta:</strong> A blindagem eletrostática protege o motorista porque, no interior de um condutor em equilíbrio:
-              </div>
+        <div class="area-module-panel" id="area-optica">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-opt-1">
+                <span class="station-number">01</span><span>Refração & Reflexão Total (ENEM)</span>
+              </button>
+              <button class="station-tab" data-station="st-opt-2">
+                <span class="station-number">02</span><span>Lentes Delgadas & Gauss (FUVEST)</span>
+              </button>
+            </div>
+          </div>
 
-              <div class="options-group" id="opts-station3">
-                <button class="option-choice" data-correct="false" data-opt="A">
-                  <span class="opt-letter">A</span>
-                  <span>Os pneus de borracha isolam completamente o veículo do solo.</span>
-                </button>
-                <button class="option-choice" data-correct="true" data-opt="B">
-                  <span class="opt-letter">B</span>
-                  <span>As cargas elétricas distribuem-se na superfície externa, tornando o campo elétrico interno nulo ($E=0$).</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="C">
-                  <span class="opt-letter">C</span>
-                  <span>A lataria do carro dissipa o raio na forma de ondas de rádio e calor no motor.</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="D">
-                  <span class="opt-letter">D</span>
-                  <span>O campo elétrico interno dobra de intensidade mas inverte de sentido rapidamente.</span>
-                </button>
+          <!-- Bancada O1: Snell -->
+          <div class="station-panel is-active" id="st-opt-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Óptica · Refração & Fibra Óptica</span>
+                </div>
+                <h2 class="question-title">Desafio: Reflexão Total</h2>
+                <div class="question-context">
+                  "Para que ocorra a reflexão total em uma interface de dois meios, a luz deve incidir:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Do meio mais refringente para o menos refringente com ângulo $\theta_1 > \theta_L$.</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Do ar para a água com qualquer ângulo.</span></button>
+                </div>
               </div>
-
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-strike-lightning">
-                  ⚡ Disparar Descarga no Condutor
-                </button>
-                <button class="btn-lab btn-lab-secondary" id="btn-explain-s3">
-                  📖 Ver Resolução
-                </button>
-              </div>
-
-              <div class="resolution-box" id="res-station3">
-                <h4>🛡️ Resolução Comentada</h4>
-                <div class="resolution-text">
-                  Em qualquer condutor eletrizado em equilíbrio eletrostático, o excesso de cargas repele-se mutualmente e aloja-se <strong>exclusivamente na superfície externa</strong>.<br><br>
-                  Pela Lei de Gauss, o fluxo elétrico resultante no interior é nulo, garantindo que o <strong>campo elétrico seja rigorosamente zero ($E_{\text{interno}} = 0$)</strong> em qualquer ponto da cavidade interna. Mova a sonda voltimétrica pelo aparato e comprove a leitura zero dentro da gaiola.
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco de Refração Laser</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-optica-snell"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Ângulo de Incidência</span><span class="dial-value" id="o1-theta-val">45°</span></div>
+                      <input type="range" class="lab-slider" id="o1-theta-slider" min="0" max="85" step="5" value="45">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Ângulo Refratado</div><div class="readout-num" id="o1-theta2-num">28,1°</div></div>
+                    <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="o1-mode-text" style="font-size:0.85rem;">Refração</div></div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Aparato Gaiola de Faraday -->
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Aparato 03: Gaiola Condutora & Sonda de Campo Eletrostático</span>
-                <span class="apparatus-status"><span class="status-dot"></span> Pronta para descarga</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-faraday"></div>
-              <div class="apparatus-controls">
-                <div class="digital-readout-bar">
-                  <div class="readout-item">
-                    <div class="readout-name">Campo na Sonda ($\vec{E}$)</div>
-                    <div class="readout-num" id="s3-probe-e" style="color: var(--lab-green);">0,00 N/C</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Posição da Sonda</div>
-                    <div class="readout-num" id="s3-probe-pos" style="font-size: 0.88rem;">Interior da Gaiola</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Carga Externa Acumulada</div>
-                    <div class="readout-num" id="s3-ext-charge">0 μC</div>
-                  </div>
+          <!-- Bancada O2: Lentes -->
+          <div class="station-panel" id="st-opt-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                  <span class="topic-tag">Óptica · Lentes Convergentes</span>
                 </div>
-                <div class="apparatus-hint">
-                  💡 Clique e arraste a <strong>sonda de medição (círculo amarelo)</strong> para dentro e fora da blindagem metálica para medir o campo.
+                <h2 class="question-title">Desafio: Aumento Linear</h2>
+                <div class="question-context">
+                  "Um objeto está posicionado no dobro da distância focal ($p = 2f$) de uma lente delgada. A imagem formada será:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho ($p' = 2f$).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Virtual e ampliada.</span></button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco Óptico & Raios Notáveis</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-optica-lente"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Posição do Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
+                      <input type="range" class="lab-slider" id="o2-p-slider" min="30" max="200" step="5" value="120">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">120,0 cm</div></div>
+                    <div class="readout-item"><div class="readout-name">Classificação</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real e Invertida</div></div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
         <!-- ============================================================
-             ESTAÇÃO 4: DEFLEXÃO EM CAMPO UNIFORME (FUVEST)
+             MÓDULO 5: ONDULATÓRIA & ACÚSTICA
              ============================================================ -->
-        <div class="station-panel" id="station4" role="tabpanel">
-          <div class="workbench-grid">
-            
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
-                <span class="topic-tag">Campo Elétrico Uniforme · Dinâmica de Partículas</span>
-              </div>
-              <h2 class="question-title">Desafio Experimental: Trajetória no Campo Uniforme</h2>
-              <div class="question-context">
-                "Um elétron de carga $-e$ e massa $m$ é injetado horizontalmente com velocidade $v_0$ em uma região entre placas condutoras paralelas, onde existe um campo elétrico uniforme $\vec{E}$ vertical orientado para cima."
-              </div>
-              <div class="question-body">
-                <strong>Pergunta:</strong> Qual é o formato da trajetória do elétron e o sentido da aceleração sofrida por ele entre as placas?
-              </div>
+        <div class="area-module-panel" id="area-ondulatoria">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-ond-1">
+                <span class="station-number">01</span><span>Efeito Doppler Acústico (ENEM)</span>
+              </button>
+              <button class="station-tab" data-station="st-ond-2">
+                <span class="station-number">02</span><span>Fenda Dupla & Interferência (UNICAMP)</span>
+              </button>
+            </div>
+          </div>
 
-              <div class="options-group" id="opts-station4">
-                <button class="option-choice" data-correct="false" data-opt="A">
-                  <span class="opt-letter">A</span>
-                  <span>Trajetória retilínea com velocidade constante, pois a massa do elétron é desprezível.</span>
-                </button>
-                <button class="option-choice" data-correct="true" data-opt="B">
-                  <span class="opt-letter">B</span>
-                  <span>Trajetória parabólica com aceleração orientada para baixo ($a = \frac{eE}{m}$), em sentido oposto ao campo.</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="C">
-                  <span class="opt-letter">C</span>
-                  <span>Trajetória circular completa com raio $R = \frac{mv_0}{qE}$.</span>
-                </button>
-                <button class="option-choice" data-correct="false" data-opt="D">
-                  <span class="opt-letter">D</span>
-                  <span>Trajetória helicoidal espiralando em direção à placa positiva.</span>
-                </button>
+          <!-- Bancada W1: Doppler -->
+          <div class="station-panel is-active" id="st-ond-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Acústica · Efeito Doppler</span>
+                </div>
+                <h2 class="question-title">Desafio: O Som da Ambulância</h2>
+                <div class="question-context">
+                  "Quando uma viatura com sirene ligada aproxima-se rapidamente de um pedestre parado na calçada, a frequência percebida por ele:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>É maior que a frequência original (som mais agudo).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>É menor que a original (som mais grave).</span></button>
+                </div>
               </div>
-
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-fire-electron">
-                  🎯 Disparar Feixe de Elétrons
-                </button>
-                <button class="btn-lab btn-lab-secondary" id="btn-explain-s4">
-                  📖 Ver Resolução
-                </button>
-              </div>
-
-              <div class="resolution-box" id="res-station4">
-                <h4>📐 Resolução FUVEST</h4>
-                <div class="resolution-text">
-                  1. A força elétrica atuando sobre uma carga negativa é $\vec{F} = q \vec{E} = -e \vec{E}$. Portanto, se o campo $\vec{E}$ aponta para cima, a força elétrica puxa o elétron <strong>para baixo</strong>.<br>
-                  2. Pela 2ª Lei de Newton: $F = m \cdot a \implies a_y = \dfrac{e E}{m}$ (constante).<br>
-                  3. No eixo horizontal $x$: $v_x = v_0$ (constante). No eixo vertical $y$: $y = \frac{1}{2} a_y t^2 = \frac{1}{2} \left(\frac{eE}{m}\right) \left(\frac{x}{v_0}\right)^2$.<br>
-                  Como $y \propto x^2$, a trajetória é rigorosamente uma <strong>parábola</strong>!
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Frentes de Onda em Movimento</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-ondas-doppler"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Velocidade da Fonte</span><span class="dial-value" id="w1-speed-val">170 m/s (0.50 Mach)</span></div>
+                      <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Frequência à Frente</div><div class="readout-num" id="w1-fahead-num">880 Hz</div></div>
+                    <div class="readout-item"><div class="readout-name">Frequência Atrás</div><div class="readout-num" id="w1-fbehind-num">293 Hz</div></div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Aparato Canhão de Elétrons -->
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Aparato 04: Tubo de Deflexão Eletrostática</span>
-                <span class="apparatus-status"><span class="status-dot"></span> Feixe sincronizado</span>
+          <!-- Bancada W2: Fenda Dupla -->
+          <div class="station-panel" id="st-ond-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                  <span class="topic-tag">Ondas · Interferência de Young</span>
+                </div>
+                <h2 class="question-title">Desafio: Natureza Ondulatória</h2>
+                <div class="question-context">
+                  "O surgimento de franjas claras e escuras na tela do experimento de Young comprova:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A interferência e a natureza ondulatória da luz.</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A gravidade sobre os fótons.</span></button>
+                </div>
               </div>
-              <div class="apparatus-canvas-wrap" id="canvas-deflexao"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header">
-                      <span class="dial-label">Intensidade do Campo ($E$)</span>
-                      <span class="dial-value" id="s4-e-val">300 V/m</span>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Cuba de Fenda Dupla</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-ondas-young"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="w2-wave-val">550 nm</span></div>
+                      <input type="range" class="lab-slider" id="w2-wave-slider" min="400" max="700" step="25" value="550">
                     </div>
-                    <input type="range" class="lab-slider" id="s4-e-slider" min="50" max="600" step="25" value="300">
                   </div>
-                  <div class="control-dial">
-                    <div class="dial-header">
-                      <span class="dial-label">Velocidade Inicial ($v_0$)</span>
-                      <span class="dial-value" id="s4-v-val">4,0 × 10⁶ m/s</span>
-                    </div>
-                    <input type="range" class="lab-slider" id="s4-v-slider" min="1" max="8" step="0.5" value="4">
-                  </div>
-                </div>
-
-                <div class="digital-readout-bar">
-                  <div class="readout-item">
-                    <div class="readout-name">Aceleração Vertical ($a_y$)</div>
-                    <div class="readout-num" id="s4-accel-num">5,27 × 10¹³ m/s²</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Deflexão Vertical ($\Delta y$)</div>
-                    <div class="readout-num" id="s4-deflection-num" style="color: var(--lilac-dark);">-18,4 mm</div>
-                  </div>
-                  <div class="readout-item">
-                    <div class="readout-name">Equação da Curva</div>
-                    <div class="readout-num" style="font-size: 0.85rem;">$y = -k \cdot x^2$ (Parábola)</div>
-                  </div>
-                </div>
-                <div class="apparatus-hint">
-                  💡 Ajuste a intensidade do campo e velocidade para observar o raio de curvatura da trajetória parabólica.
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
+        <!-- ============================================================
+             MÓDULO 6: FÍSICA MODERNA
+             ============================================================ -->
+        <div class="area-module-panel" id="area-moderna">
+          <div class="station-nav-container">
+            <div class="station-nav" role="tablist">
+              <button class="station-tab is-active" data-station="st-mod-1">
+                <span class="station-number">01</span><span>Efeito Fotoelétrico de Einstein (ENEM)</span>
+              </button>
+              <button class="station-tab" data-station="st-mod-2">
+                <span class="station-number">02</span><span>Relatividade & Dilatação do Tempo (FUVEST)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bancada Q1: Fotoelétrico -->
+          <div class="station-panel is-active" id="st-mod-1">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-enem">ENEM</span>
+                  <span class="topic-tag">Física Quântica · Efeito Fotoelétrico</span>
+                </div>
+                <h2 class="question-title">Desafio: A Frequência de Corte</h2>
+                <div class="question-context">
+                  "Para ejetar fotoelétrons de uma placa metálica, é necessário que a luz incidente tenha:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Frequência superior à frequência de corte ($hf \ge W$).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas intensidade muito alta de luz vermelha.</span></button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Tubo Fotoelétrico & Feixe Quântico</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-moderna-foto"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="mod1-lambda-val">350 nm (UV)</span></div>
+                      <input type="range" class="lab-slider" id="mod1-lambda-slider" min="200" max="750" step="25" value="350">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Energia Fóton</div><div class="readout-num" id="mod1-ephot-num">3,54 eV</div></div>
+                    <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,24 eV</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bancada Q2: Relatividade -->
+          <div class="station-panel" id="st-mod-2">
+            <div class="workbench-grid">
+              <div class="notebook-card">
+                <div class="notebook-header">
+                  <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                  <span class="topic-tag">Relatividade Restrita · Fator $\gamma$</span>
+                </div>
+                <h2 class="question-title">Desafio: Dilatação Temporal</h2>
+                <div class="question-context">
+                  "Para um observador na Terra, o tempo medido no interior de uma nave que viaja a $v = 0{,}8\,c$ parecerá:"
+                </div>
+                <div class="options-group">
+                  <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Mais lento (dilatado pelo fator de Lorentz $\gamma = 1{,}67$).</span></button>
+                  <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Mais rápido.</span></button>
+                </div>
+              </div>
+              <div class="apparatus-card">
+                <div class="apparatus-topbar"><span class="apparatus-title">🔬 Relógio de Luz Relativístico</span></div>
+                <div class="apparatus-canvas-wrap" id="canvas-moderna-relatividade"></div>
+                <div class="apparatus-controls">
+                  <div class="controls-grid">
+                    <div class="control-dial">
+                      <div class="dial-header"><span class="dial-label">Velocidade ($v/c$)</span><span class="dial-value" id="mod2-beta-val">0.60 c</span></div>
+                      <input type="range" class="lab-slider" id="mod2-beta-slider" min="0.1" max="0.95" step="0.05" value="0.6">
+                    </div>
+                  </div>
+                  <div class="digital-readout-bar">
+                    <div class="readout-item"><div class="readout-name">Fator de Lorentz ($\gamma$)</div><div class="readout-num" id="mod2-gamma-num">1,25</div></div>
+                    <div class="readout-item"><div class="readout-name">Tempo Dilatado ($\Delta t$)</div><div class="readout-num" id="mod2-dt-num">1,25 s</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -524,36 +780,19 @@
 
         <div class="cards-3col">
           <div class="theory-card">
-            <div class="theory-card-header">
-              <div class="theory-icon">🧲</div>
-              <h3>Lei de Coulomb</h3>
-            </div>
-            <p>A força eletrostática entre duas cargas pontuais é diretamente proporcional ao produto dos módulos das cargas e inversamente proporcional ao quadrado da distância entre elas.</p>
-            <div class="formula-box">
-              $$F = k \cdot \frac{|Q_1 \cdot Q_2|}{d^2}$$
-            </div>
+            <div class="theory-card-header"><div class="theory-icon">⚙️</div><h3>Cinemática & Balística</h3></div>
+            <p>Alcance máximo em lançamentos oblíquos no vácuo ocorre a $45^\circ$.</p>
+            <div class="formula-box">$$A = \frac{v_0^2 \sin(2\theta)}{g}$$</div>
           </div>
-
           <div class="theory-card">
-            <div class="theory-card-header">
-              <div class="theory-icon">⚡</div>
-              <h3>Vetor Campo Elétrico</h3>
-            </div>
-            <p>O campo elétrico em um ponto expressa a força que atua sobre uma carga de prova positiva colocada nessa posição. Cargas positivas criam campos divergentes; cargas negativas criam campos convergentes.</p>
-            <div class="formula-box">
-              $$\vec{E} = \frac{\vec{F}}{q} = k \cdot \frac{Q}{d^2} \hat{r}$$
-            </div>
+            <div class="theory-card-header"><div class="theory-icon">🌡️</div><h3>Gases Ideais & Carnot</h3></div>
+            <p>A eficiência máxima entre duas temperaturas depende do limite termodinâmico.</p>
+            <div class="formula-box">$$\eta_{\text{Carnot}} = 1 - \frac{T_f}{T_q}$$</div>
           </div>
-
           <div class="theory-card">
-            <div class="theory-card-header">
-              <div class="theory-icon">🛡️</div>
-              <h3>Equilíbrio Eletrostático</h3>
-            </div>
-            <p>Em condutores em equilíbrio, o campo elétrico interno é rigorosamente nulo ($E=0$) e o potencial eletrostático é constante em todo o condutor. As cargas livres distribuem-se apenas na superfície externa.</p>
-            <div class="formula-box">
-              $$E_{\text{int}} = 0 \quad \text{e} \quad V_{\text{int}} = \text{constante}$$
-            </div>
+            <div class="theory-card-header"><div class="theory-icon">🌌</div><h3>Efeito Fotoelétrico</h3></div>
+            <p>A energia do fóton é quantizada e converte-se em trabalho e energia cinética.</p>
+            <div class="formula-box">$$E_{\text{fóton}} = hf = W + E_{\text{cin}}$$</div>
           </div>
         </div>
       </div>
@@ -570,14 +809,20 @@
         </p>
         <div class="footer-links">
           <a href="https://lfaveri.github.io/" class="footer-link">← Voltar para lfaveri.github.io</a>
-          <a href="#estacoes" class="footer-link">Bancadas Experimentais ↑</a>
+          <a href="#hub-areas" class="footer-link">Áreas da Física ↑</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Scripts dos Módulos Experimentais -->
   <script src="js/sim_estacoes.js"></script>
+  <script src="js/mod_mecanica.js"></script>
+  <script src="js/mod_termologia.js"></script>
+  <script src="js/mod_optica.js"></script>
+  <script src="js/mod_ondulatoria.js"></script>
+  <script src="js/mod_eletromagnetismo.js"></script>
+  <script src="js/mod_moderna.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

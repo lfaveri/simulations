@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LABORATÓRIO DE ELETROSTÁTICA — Laura de Faveri
+   LABORATÓRIO MULTIDISCIPLINAR DE FÍSICA — Laura de Faveri
    Estética: Caderno de Laboratório de Física, Instrumentação e Elegância
    Tipografia: Fraunces (títulos) + Karla (texto) + IBM Plex Mono (dados/instrumentos)
    ========================================================================== */
@@ -62,7 +62,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient Thread Field & Background Orbits (Estilo Laura de Faveri) */
+/* Ambient Thread Field & Background Orbits */
 .thread-field {
   position: fixed;
   inset: 0;
@@ -215,7 +215,7 @@ body {
 .hero-section {
   position: relative;
   z-index: 1;
-  padding: 60px 0 40px;
+  padding: 50px 0 30px;
 }
 
 .container {
@@ -225,7 +225,7 @@ body {
 }
 
 .hero-layout {
-  max-width: 860px;
+  max-width: 880px;
 }
 
 .eyebrow {
@@ -249,7 +249,7 @@ body {
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-size: clamp(2.3rem, 4.2vw, 3.5rem);
   font-weight: 400;
   color: var(--ink);
   line-height: 1.12;
@@ -264,41 +264,70 @@ body {
 }
 
 .hero-lede {
-  font-size: 1.12rem;
+  font-size: 1.1rem;
   color: var(--ink-soft);
   line-height: 1.7;
-  max-width: 760px;
-  margin-bottom: 30px;
+  max-width: 780px;
+  margin-bottom: 26px;
 }
 
-/* Lab stats strip */
-.lab-meta-strip {
-  display: flex;
-  gap: 32px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  flex-wrap: wrap;
+/* ==========================================================================
+   HUB PRINCIPAL DAS 6 GRANDES ÁREAS DA FÍSICA
+   ========================================================================== */
+.areas-hub-container {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 36px;
 }
 
-.lab-meta-item {
+.areas-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.area-card-btn {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px 14px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
-.lab-meta-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-muted);
+.area-card-btn:hover {
+  border-color: var(--lilac-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.lab-meta-val {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 500;
+.area-card-btn.is-active {
+  background: #ffffff;
+  border-color: var(--lilac-dark);
+  box-shadow: 0 0 0 2px var(--lilac), var(--shadow-md);
+}
+
+.area-icon {
+  font-size: 1.4rem;
+}
+
+.area-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--ink);
+}
+
+.area-desc {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  line-height: 1.35;
 }
 
 /* ==========================================================================
@@ -307,11 +336,18 @@ body {
 .lab-section {
   position: relative;
   z-index: 1;
-  padding: 40px 0 80px;
+  padding: 20px 0 80px;
 }
 
+/* Sub-navegação das bancadas dentro de cada área */
+.area-module-panel {
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+.area-module-panel.is-active { display: block; }
+
 .station-nav-container {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .station-nav {
@@ -630,7 +666,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 400px;
+  min-height: 380px;
 }
 .apparatus-canvas-wrap canvas { display: block; max-width: 100%; }
 
@@ -643,7 +679,7 @@ body {
 
 .controls-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 16px;
   margin-bottom: 18px;
 }
@@ -723,12 +759,11 @@ body {
 
 .readout-num {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--ink);
 }
 
-/* Quick instructions below canvas */
 .apparatus-hint {
   font-size: 0.82rem;
   color: var(--ink-soft);
@@ -736,93 +771,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-/* ==========================================================================
-   TEORIA & GUIA EXPERIMENTAL RÁPIDO
-   ========================================================================== */
-.theory-guide-section {
-  position: relative;
-  z-index: 1;
-  padding: 60px 0;
-  border-top: 1px solid var(--line);
-}
-
-.section-title-wrap {
-  margin-bottom: 36px;
-}
-
-.guide-title {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-
-.guide-subtitle {
-  color: var(--ink-soft);
-  font-size: 1rem;
-}
-
-.cards-3col {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 24px;
-}
-
-.theory-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 26px;
-  transition: all var(--transition);
-}
-.theory-card:hover {
-  border-color: var(--lilac-deep);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
-}
-
-.theory-card-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.theory-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--bg-panel-soft);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.theory-card h3 {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--ink);
-}
-
-.theory-card p {
-  font-size: 0.91rem;
-  color: var(--ink-soft);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-
-.formula-box {
-  background: var(--bg-panel-soft);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-size: 0.88rem;
-  color: var(--ink);
-  text-align: center;
 }
 
 /* ==========================================================================
@@ -853,7 +801,7 @@ body {
 .footer-note {
   font-size: 0.85rem;
   color: var(--ink-soft);
-  max-width: 550px;
+  max-width: 580px;
 }
 
 .footer-links {
@@ -880,14 +828,15 @@ body {
 
 @media (max-width: 980px) {
   .workbench-grid { grid-template-columns: 1fr; }
+  .areas-hub-grid { grid-template-columns: repeat(3, 1fr); }
   .station-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 @media (max-width: 640px) {
-  .hero-section { padding: 40px 0 20px; }
+  .hero-section { padding: 35px 0 15px; }
+  .areas-hub-grid { grid-template-columns: repeat(2, 1fr); }
   .notebook-card { padding: 22px 18px; }
   .apparatus-controls { padding: 18px 16px; }
   .controls-grid { grid-template-columns: 1fr; }
-  .lab-meta-strip { gap: 16px; }
   .nav-links { display: none; }
 }

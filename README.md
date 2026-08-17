@@ -1,41 +1,43 @@
-# ⚡ Laboratório de Eletrostática — Laura de Faveri
+# 🔬 Laboratório Virtual de Física Experimental — Laura de Faveri
 
-Ambiente experimental interativo de **Física Eletrostática** voltado para o Ensino Médio e preparação para vestibulares (FUVEST, ENEM, UNICAMP).
+Portal educacional completo de **Laboratórios Virtuais de Física** para o Ensino Médio e preparação para vestibulares (**FUVEST**, **ENEM**, **UNICAMP**).
 
 🔗 **Acesso Online:** [https://lfaveri.github.io/simulations/](https://lfaveri.github.io/simulations/)
 
 ---
 
-## 🎨 Estética & Filosofia
+## 🏛️ As 6 Grandes Áreas da Física
 
-Inspirado na identidade visual acadêmica de **Laura de Faveri** (*Física, Ensino e Foguetes*), este laboratório utiliza uma estética equilibrada de caderno de laboratório com instrumentos de precisão:
-- **Tipografia:** *Fraunces* (títulos clássicos), *Karla* (legibilidade do texto) e *IBM Plex Mono* (leituras e mostradores de instrumentos).
-- **Paleta Suave e Acadêmica:** Tons de papel quente (`#fbf5f7`), lilás profundo (`#8c67a8`), rosa antigo (`#e8a9bc`) e traços orbitais delicados.
+### 1. ⚡ Eletromagnetismo
+- **Bancada 01 (FUVEST):** Lei de Coulomb & A Razão da Distância ($F \propto 1/d^2$).
+- **Bancada 02 (ENEM):** Circuitos Elétricos, Primeira Lei de Ohm ($I = U/R$) e Efeito Joule ($P = U \cdot I$).
+- **Bancada 03 (FUVEST):** Indução Eletromagnética de Faraday-Lenz com ímã móvel e galvanômetro.
+
+### 2. ⚙️ Mecânica Clássica
+- **Bancada 01 (FUVEST):** Cinemática Vetorial & Lançamento de Projéteis (Alcance Máximo a $45^\circ$).
+- **Bancada 02 (UNICAMP):** Dinâmica no Plano Inclinado com Decomposição de Forças e Atrito ($\tan\theta = \mu$).
+- **Bancada 03 (ENEM):** Hidrostática e Empuxo de Arquimedes ($P_{\text{aparente}} = P - E$).
+
+### 3. 🌡️ Termologia & Termodinâmica
+- **Bancada 01 (ENEM):** Comportamento dos Gases Ideais, Cilindro com Êmbolo Móvel e Diagrama $P \times V$.
+- **Bancada 02 (UNICAMP):** Ciclo de Carnot, Rendimento Máximo de Máquinas Térmicas ($\eta = 1 - T_f/T_q$).
+
+### 4. 🔦 Óptica Geométrica
+- **Bancada 01 (ENEM):** Refração, Lei de Snell-Descartes e Ângulo Limite com Reflexão Total (Fibra Óptica).
+- **Bancada 02 (FUVEST):** Banco Óptico com Lentes Delgadas Convergentes, Equação de Gauss e Raios Notáveis.
+
+### 5. 🌊 Ondulatória & Acústica
+- **Bancada 01 (ENEM):** Efeito Doppler Acústico com Fonte Sonora Móvel e Deslocamento de Frequência.
+- **Bancada 02 (UNICAMP):** Cuba de Ondas, Difração e Experimento de Fenda Dupla de Young.
+
+### 6. 🌌 Física Moderna
+- **Bancada 01 (ENEM):** Efeito Fotoelétrico de Einstein, Frequência de Corte e Emissão Quântica de Fotoelétrons.
+- **Bancada 02 (FUVEST):** Relatividade Restrita, Relógio de Luz e Dilatação do Tempo com Fator de Lorentz ($\gamma$).
 
 ---
 
-## 🔬 4 Bancadas de Laboratório Integradas com Vestibulares
+## 🎨 Identidade Visual
 
-Cada bancada une diretamente a **questão do vestibular** ao seu **aparato físico experimental**:
-
-1. **Bancada 01: Lei de Coulomb & Razão do Quadrado (FUVEST)**
-   - **Desafio:** Calcular a nova força de interação quando a distância entre cargas cai para $d/3$.
-   - **Simulação:** O aluno clica no botão *"⚡ Demonstrar $d/3$ na Simulação"* e o dinamômetro comprova graficamente o salto de $1{,}00\,F_0$ para $9{,}00\,F_0$.
-
-2. **Bancada 02: Atrito & Polarização no Papel (ENEM)**
-   - **Desafio:** Explicar a atração de papéis neutros por um bastão eletrizado.
-   - **Simulação:** O aluno atrita o bastão com a lã (transferindo elétrons) e o aproxima dos papéis; a simulação revela os dipolos moleculares se alinhando e o salto físico dos papéis.
-
-3. **Bancada 03: Gaiola de Faraday & Blindagem Eletrostática (ENEM)**
-   - **Desafio:** Por que é seguro permanecer dentro de um carro durante tempestades?
-   - **Simulação:** O aluno dispara uma descarga elétrica atmosférica e move uma sonda voltimétrica pelo espaço, comprovando que $E_{\text{interno}} = 0{,}00\,\text{N/C}$.
-
-4. **Bancada 04: Deflexão em Campo Elétrico Uniforme (FUVEST)**
-   - **Desafio:** Determinar o formato da trajetória de um elétron disparado entre placas paralelas com campo $\vec{E}$.
-   - **Simulação:** O canhão dispara elétrons e projeta a trajetória parabólica calculada a partir de $a = \frac{eE}{m}$.
-
----
-
-## 🚀 Como Visualizar
-
-Abra o arquivo `index.html` em qualquer navegador ou acesse a versão publicada no GitHub Pages em `https://lfaveri.github.io/simulations/`.
+- **Estilo:** Caderno de laboratório limpo e elegante, compatível com a identidade de [Laura de Faveri](https://lfaveri.github.io/).
+- **Tipografia:** *Fraunces* (títulos), *Karla* (texto) e *IBM Plex Mono* (instrumentos e mostradores de medição).
+- **Zero Dependências:** 100% estático em JavaScript puro e **p5.js**, compatível com GitHub Pages sem tempo de espera.

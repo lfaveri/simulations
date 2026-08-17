@@ -1,42 +1,39 @@
 /**
- * LABORATÓRIO DE ELETROSTÁTICA — Laura de Faveri
- * Lógica principal da interface, alternância de bancadas e interatividade dos cadernos
+ * LABORATÓRIO MULTIDISCIPLINAR DE FÍSICA — Laura de Faveri
+ * Controlador Central: Hub das 6 Áreas, Bancadas, Questionários e MathJax
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initAreaHub();
   initStationTabs();
   initNotebookQuizzes();
   initResolutionToggles();
 });
 
 /* ==========================================================================
-   1. ALTERNÂNCIA ENTRE BANCADAS DE LABORATÓRIO (TABS)
+   1. HUB DAS 6 GRANDES ÁREAS DA FÍSICA
    ========================================================================== */
-function initStationTabs() {
-  const tabs = document.querySelectorAll(".station-tab");
-  const panels = document.querySelectorAll(".station-panel");
+function initAreaHub() {
+  const areaButtons = document.querySelectorAll(".area-card-btn");
+  const areaPanels = document.querySelectorAll(".area-module-panel");
 
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      const targetStationId = tab.getAttribute("data-station");
+  areaButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetAreaId = btn.getAttribute("data-area");
 
-      // Atualiza tabs
-      tabs.forEach(t => {
-        t.classList.remove("is-active");
-        t.setAttribute("aria-selected", "false");
-      });
-      tab.classList.add("is-active");
-      tab.setAttribute("aria-selected", "true");
+      // Atualiza botões do Hub
+      areaButtons.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
 
-      // Atualiza painéis
-      panels.forEach(panel => {
+      // Alterna painel da Área Temática
+      areaPanels.forEach(panel => {
         panel.classList.remove("is-active");
-        if (panel.id === targetStationId) {
+        if (panel.id === targetAreaId) {
           panel.classList.add("is-active");
         }
       });
 
-      // Dispara resize para o p5 recalcular dimensões no container visível
+      // Dispara resize para os canvases p5 recalcula dimensões
       setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
       }, 50);
@@ -45,7 +42,44 @@ function initStationTabs() {
 }
 
 /* ==========================================================================
-   2. INTERAÇÃO DAS QUESTÕES NO CADERNO DE LABORATÓRIO
+   2. ALTERNÂNCIA DE BANCADAS (TABS) DENTRO DE CADA ÁREA
+   ========================================================================== */
+function initStationTabs() {
+  const allStationNavs = document.querySelectorAll(".station-nav");
+
+  allStationNavs.forEach(nav => {
+    const tabs = nav.querySelectorAll(".station-tab");
+    const parentArea = nav.closest(".area-module-panel");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const targetStationId = tab.getAttribute("data-station");
+
+        // Atualiza tabs do mesmo grupo
+        tabs.forEach(t => t.classList.remove("is-active"));
+        tab.classList.add("is-active");
+
+        // Atualiza painéis dentro da mesma área
+        if (parentArea) {
+          const panels = parentArea.querySelectorAll(".station-panel");
+          panels.forEach(p => {
+            p.classList.remove("is-active");
+            if (p.id === targetStationId) {
+              p.classList.add("is-active");
+            }
+          });
+        }
+
+        setTimeout(() => {
+          window.dispatchEvent(new Event("resize"));
+        }, 50);
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   3. RESPOSTAS E FEEDBACK DAS QUESTÕES DE VESTIBULAR
    ========================================================================== */
 function initNotebookQuizzes() {
   const optionGroups = document.querySelectorAll(".options-group");
@@ -55,7 +89,6 @@ function initNotebookQuizzes() {
 
     choices.forEach(choice => {
       choice.addEventListener("click", () => {
-        // Desativa outras opções do mesmo grupo
         choices.forEach(c => {
           c.classList.remove("is-correct", "is-wrong");
           c.classList.add("is-disabled");
@@ -67,7 +100,6 @@ function initNotebookQuizzes() {
           choice.classList.add("is-correct");
         } else {
           choice.classList.add("is-wrong");
-          // Destaca a correta suavemente
           const correctOne = group.querySelector('[data-correct="true"]');
           if (correctOne) correctOne.classList.add("is-correct");
         }
@@ -77,30 +109,25 @@ function initNotebookQuizzes() {
 }
 
 /* ==========================================================================
-   3. BOTÕES PARA EXIBIR A DEDUÇÃO / RESOLUÇÃO COMENTADA
+   4. BOTÕES PARA EXIBIR A DEDUÇÃO / RESOLUÇÃO COMENTADA
    ========================================================================== */
 function initResolutionToggles() {
-  const toggleConfigs = [
-    { btnId: "btn-explain-s1", resId: "res-station1" },
-    { btnId: "btn-explain-s2", resId: "res-station2" },
-    { btnId: "btn-explain-s3", resId: "res-station3" },
-    { btnId: "btn-explain-s4", resId: "res-station4" }
-  ];
+  const toggleButtons = document.querySelectorAll(".toggle-res-btn");
 
-  toggleConfigs.forEach(cfg => {
-    const btn = document.getElementById(cfg.btnId);
-    const resBox = document.getElementById(cfg.resId);
+  toggleButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".notebook-card");
+      if (!card) return;
+      const resBox = card.querySelector(".resolution-box");
 
-    if (btn && resBox) {
-      btn.addEventListener("click", () => {
+      if (resBox) {
         const isVisible = resBox.classList.toggle("is-visible");
-        btn.textContent = isVisible ? "📖 Ocultar Dedução" : "📖 Ver Dedução Teórica";
+        btn.textContent = isVisible ? "📖 Ocultar Dedução" : "📖 Ver Dedução";
 
-        // Renderiza MathJax se necessário
         if (isVisible && window.MathJax && window.MathJax.typesetPromise) {
           window.MathJax.typesetPromise([resBox]).catch(err => console.error(err));
         }
-      });
-    }
+      }
+    });
   });
 }
