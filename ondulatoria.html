@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Ondulatória</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,24 +41,29 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 05 · ondulatória & acústica</span>
-            <h1 class="subpage-title">Bancadas de Ondas & Fenômenos Acústicos</h1>
+            <h1 class="subpage-title">Laboratório de Ondas, Efeito Doppler & Acústica</h1>
           </div>
           <p class="subpage-desc">
-            Deslocamento Doppler de frequência em fontes móveis e o experimento de fenda dupla de Young com franjas de interferência.
+            Frentes de onda em movimento, interferência de Young, acústica fisiológica e banco completo de exercícios comentados.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-ond-1">
-            <span class="station-number">01</span><span>Efeito Doppler Acústico (ENEM)</span>
+            <span class="station-number">01</span><span>Efeito Doppler Acústico (ENEM / FUVEST)</span>
           </button>
           <button class="station-tab" data-station="st-ond-2">
-            <span class="station-number">02</span><span>Fenda Dupla & Interferência (UNICAMP)</span>
+            <span class="station-number">02</span><span>Fenda Dupla & Interferência (UNICAMP / ITA)</span>
           </button>
         </div>
 
@@ -95,6 +101,10 @@
                   <div class="control-dial">
                     <div class="dial-header"><span class="dial-label">Velocidade da Fonte</span><span class="dial-value" id="w1-speed-val">170 m/s (0.50 Mach)</span></div>
                     <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Frequência Emitida ($f_0$)</span><span class="dial-value" id="w1-freq-val">440 Hz</span></div>
+                    <input type="range" class="lab-slider" id="w1-freq-slider" min="200" max="800" step="20" value="440">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
@@ -147,6 +157,78 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Ondulatória & Acústica</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFMT, IFMT</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+          <button class="bank-filter-btn" data-filter="acustica">Acústica & Timbre</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: ENEM -->
+          <div class="bank-question-card" data-board="enem" data-topic="acustica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-enem">ENEM 2019</span>
+              <span class="topic-tag">Acústica · Qualidades Fisiológicas do Som</span>
+            </div>
+            <p class="bank-question-text">
+              Uma mesma nota musical (ex.: Lá de $440\,\text{Hz}$) tocada com a mesma intensidade por um violino e por um piano soa distintamente diferente para o ouvido humano. Essa distinção é possível graças à propriedade física do:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Timbre, associado ao formato complexo da onda e à composição de harmônicos.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Altura, que mede a velocidade do som no ar.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Intensidade, que altera a frequência fundamental da nota.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                O <strong>timbre</strong> é a qualidade fisiológica que nos permite diferenciar dois sons de mesma frequência fundamental (mesma altura) e mesma intensidade emitidos por instrumentos distintos, pois cada instrumento possui uma assinatura única de ondas e harmônicos superiores.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: FUVEST -->
+          <div class="bank-question-card" data-board="paulistas fuvest" data-topic="ondas">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-fuvest">FUVEST 2021</span>
+              <span class="topic-tag">Ondulatória · Equação Fundamental da Onda</span>
+            </div>
+            <p class="bank-question-text">
+              Uma onda luminosa monocromática de frequência $f = 6{,}0 \times 10^{14}\,\text{Hz}$ propaga-se no vácuo ($c = 3{,}0 \times 10^8\,\text{m/s}$) e penetra em um bloco de vidro de índice de refração $n = 1{,}50$. A frequência $f'$ e o comprimento de onda $\lambda'$ da luz dentro do vidro valem:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ (constante) e $\lambda' = 333\,\text{nm}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 4{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 500\,\text{nm}$.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                A frequência da onda depende apenas da fonte emissora e <strong>nunca se altera na refração</strong> ($f' = f = 6{,}0 \times 10^{14}\,\text{Hz}$).<br>
+                A velocidade no vidro é $v = c/n = \frac{3 \times 10^8}{1{,}5} = 2{,}0 \times 10^8\,\text{m/s}$.<br>
+                Logo, $\lambda' = \frac{v}{f} = \frac{2{,}0 \times 10^8}{6{,}0 \times 10^{14}} = 3{,}33 \times 10^{-7}\,\text{m} = 333\,\text{nm}$.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

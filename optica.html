@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Óptica Geométrica</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,24 +41,29 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 04 · óptica geométrica</span>
-            <h1 class="subpage-title">Bancadas de Refração & Lentes Delgadas</h1>
+            <h1 class="subpage-title">Laboratório de Refração, Lentes & Visão</h1>
           </div>
           <p class="subpage-desc">
-            Lei de Snell-Descartes, ângulo limite e reflexão total em fibras ópticas, e banco óptico para formação de imagens em lentes delgadas.
+            Simulações ópticas com laser, reflexão total em fibras ópticas, banco de lentes delgadas e questões resolvidas de vestibulares.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-opt-1">
-            <span class="station-number">01</span><span>Refração & Reflexão Total (ENEM)</span>
+            <span class="station-number">01</span><span>Refração & Reflexão Total (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-opt-2">
-            <span class="station-number">02</span><span>Lentes Delgadas & Gauss (FUVEST)</span>
+            <span class="station-number">02</span><span>Lentes Delgadas & Gauss (FUVEST / UNESP)</span>
           </button>
         </div>
 
@@ -96,9 +102,18 @@
                     <div class="dial-header"><span class="dial-label">Ângulo de Incidência</span><span class="dial-value" id="o1-theta-val">45°</span></div>
                     <input type="range" class="lab-slider" id="o1-theta-slider" min="0" max="85" step="5" value="45">
                   </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Índice $n_1$</span><span class="dial-value" id="o1-n1-val">1.00</span></div>
+                    <input type="range" class="lab-slider" id="o1-n1-slider" min="1.0" max="2.0" step="0.1" value="1.0">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Índice $n_2$</span><span class="dial-value" id="o1-n2-val">1.50</span></div>
+                    <input type="range" class="lab-slider" id="o1-n2-slider" min="1.0" max="2.0" step="0.1" value="1.5">
+                  </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Ângulo Refratado</div><div class="readout-num" id="o1-theta2-num">28,1°</div></div>
+                  <div class="readout-item"><div class="readout-name">Ângulo Limite ($\theta_L$)</div><div class="readout-num" id="o1-crit-num">N/A</div></div>
                   <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="o1-mode-text" style="font-size:0.85rem;">Refração</div></div>
                 </div>
               </div>
@@ -128,7 +143,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{f} - \frac{1}{2f} = \frac{1}{2f} \implies p' = 2f$. Aumento $A = -\frac{p'}{p} = -1$ (Real, invertida e de tamanho idêntico).
+                  Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{f} - \frac{1}{2f} = \frac{1}{2f} \implies p' = 2f$. Aumento $A = -\frac{p'}{p} = -1$.
                 </div>
               </div>
             </div>
@@ -138,19 +153,93 @@
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Posição do Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
+                    <div class="dial-header"><span class="dial-label">Posição Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
                     <input type="range" class="lab-slider" id="o2-p-slider" min="30" max="200" step="5" value="120">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Distância Focal ($f$)</span><span class="dial-value" id="o2-f-val">60 cm</span></div>
+                    <input type="range" class="lab-slider" id="o2-f-slider" min="30" max="100" step="5" value="60">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">120,0 cm</div></div>
-                  <div class="readout-item"><div class="readout-name">Classificação</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real e Invertida</div></div>
+                  <div class="readout-item"><div class="readout-name">Aumento ($A$)</div><div class="readout-num" id="o2-a-num">-1,00×</div></div>
+                  <div class="readout-item"><div class="readout-name">Natureza</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real e Invertida</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Óptica</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, UNIFESP, ENEM, ITA, UFG, PUC</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+          <button class="bank-filter-btn" data-filter="visao">Defeitos da Visão</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: UNIFESP -->
+          <div class="bank-question-card" data-board="paulistas unifesp" data-topic="visao">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unifesp">UNIFESP 2021</span>
+              <span class="topic-tag">Óptica da Visão · Miopia & Lentes Corretivas</span>
+            </div>
+            <p class="bank-question-text">
+              Uma pessoa com miopia tem dificuldade para enxergar objetos distantes porque a imagem se forma antes da retina. O tipo de lente e a vergência adequada para a correção são:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Lente divergente (vergência negativa), divergindo os raios até a retina.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Lente convergente (vergência positiva), convergindo mais rápido os raios.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Na miopia, o globo ocular é mais longo que o normal, fazendo com que o feixe convirja antes da retina. Para empurrar o foco para trás até a retina, é necessária uma lente divergente (foco $f < 0 \implies$ vergência negativa).
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: UNESP -->
+          <div class="bank-question-card" data-board="paulistas unesp" data-topic="espelhos">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unesp">UNESP 2020</span>
+              <span class="topic-tag">Espelhos Esféricos · Espelho Convexo de Segurança</span>
+            </div>
+            <p class="bank-question-text">
+              Os espelhos retrovisores externos convexos utilizados em garagens e ônibus formam de qualquer objeto real colocado à sua frente uma imagem:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Sempre virtual, direita e menor que o objeto, ampliando o campo visual.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre real, invertida e maior que o objeto.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                O espelho esférico convexo ($f < 0$) possui a propriedade fundamental de formar, para qualquer posição de objeto real, uma imagem <strong>virtual, direita e reduzida</strong>, permitindo abarcar um campo de visão muito mais amplo.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

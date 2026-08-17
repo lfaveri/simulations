@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Mecânica Clássica</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,27 +41,35 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 02 · mecânica clássica</span>
-            <h1 class="subpage-title">Bancadas de Cinemática, Dinâmica & Fluídos</h1>
+            <h1 class="subpage-title">Laboratório de Cinemática, Dinâmica & Fluídos</h1>
           </div>
           <p class="subpage-desc">
-            Balística e lançamentos oblíquos, dinâmica de corpos com atrito no plano inclinado e empuxo hidrostático de Arquimedes.
+            Simulações experimentais multifatoriais com variáveis ajustáveis e banco completo de exercícios comentados de grandes vestibulares.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-mec-1">
-            <span class="station-number">01</span><span>Lançamento Oblíquo & Alcance (FUVEST)</span>
+            <span class="station-number">01</span><span>Lançamento Oblíquo & Balística (FUVEST / ITA)</span>
           </button>
           <button class="station-tab" data-station="st-mec-2">
-            <span class="station-number">02</span><span>Plano Inclinado com Atrito (UNICAMP)</span>
+            <span class="station-number">02</span><span>Plano Inclinado & Força de Atrito (UNICAMP / UNESP)</span>
           </button>
           <button class="station-tab" data-station="st-mec-3">
-            <span class="station-number">03</span><span>Hidrostática & Empuxo (ENEM)</span>
+            <span class="station-number">03</span><span>Hidrostática & Empuxo de Arquimedes (ENEM / UFMT)</span>
+          </button>
+          <button class="station-tab" data-station="st-mec-4">
+            <span class="station-number">04</span><span>Colisões & Quantidade de Movimento (IME / FEI)</span>
           </button>
         </div>
 
@@ -72,7 +81,7 @@
                 <span class="vestibular-badge badge-fuvest">FUVEST</span>
                 <span class="topic-tag">Cinemática Vetorial · Lançamento Oblíquo</span>
               </div>
-              <h2 class="question-title">Desafio: O Ângulo de Alcance Máximo</h2>
+              <h2 class="question-title">Desafio Experimental: Alcance Máximo</h2>
               <div class="question-context">
                 "No vácuo, para uma mesma velocidade inicial $v_0$, qual é o ângulo de lançamento $\theta$ que produz o maior alcance horizontal?"
               </div>
@@ -89,7 +98,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  O alcance é dado por $A = \frac{v_0^2 \sin(2\theta)}{g}$. O valor máximo ocorre quando o seno é máximo ($\sin(2\theta) = 1 \implies 2\theta = 90^\circ \implies \theta = 45^\circ$).
+                  O alcance é dado por $A = \frac{v_0^2 \sin(2\theta)}{g}$. O valor máximo ocorre quando $\sin(2\theta) = 1 \implies 2\theta = 90^\circ \implies \theta = 45^\circ$.
                 </div>
               </div>
             </div>
@@ -105,6 +114,10 @@
                   <div class="control-dial">
                     <div class="dial-header"><span class="dial-label">Velocidade ($v_0$)</span><span class="dial-value" id="m1-v0-val">20 m/s</span></div>
                     <input type="range" class="lab-slider" id="m1-v0-slider" min="10" max="30" step="2" value="20">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Gravidade ($g$)</span><span class="dial-value" id="m1-g-val">10,0 m/s²</span></div>
+                    <input type="range" class="lab-slider" id="m1-g-slider" min="1.6" max="25" step="0.5" value="10">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
@@ -125,7 +138,7 @@
                 <span class="vestibular-badge badge-unicamp">UNICAMP</span>
                 <span class="topic-tag">Dinâmica · Plano Inclinado & Atrito</span>
               </div>
-              <h2 class="question-title">Desafio: Condição de Deslizamento</h2>
+              <h2 class="question-title">Desafio Experimental: Condição de Deslizamento</h2>
               <div class="question-context">
                 "Um bloco repousa sobre uma rampa com atrito $\mu = 0{,}40$. A partir de qual ângulo $\theta$ de inclinação o bloco começa a deslizar?"
               </div>
@@ -171,7 +184,7 @@
               </div>
               <h2 class="question-title">Desafio: O Peso Aparente</h2>
               <div class="question-context">
-                "Um corpo com peso real de $13{,}5\,\text{N}$ é totalmente imerso na água ($\rho = 1{,}0\,\text{g/cm}^3$), sofrendo empuxo de $5{,}0\,\text{N}$. Qual será a leitura no dinamômetro?"
+                "Um corpo com peso real de $13{,}5\,\text{N}$ é totalmente imerso na água ($\rho = 1{,}0\,\text{g/cm}^3$), sofrendo empuxo de $5{,}0\,\text{N}$. Qual a leitura no dinamômetro?"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{aparente}} = P - E = 8{,}5\,\text{N}$</span></button>
@@ -184,24 +197,194 @@
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Densidade do Líquido</span><span class="dial-value" id="m3-fluid-val">1,00 g/cm³</span></div>
+                    <div class="dial-header"><span class="dial-label">Densidade Líquido</span><span class="dial-value" id="m3-fluid-val">1,00 g/cm³</span></div>
                     <input type="range" class="lab-slider" id="m3-fluid-slider" min="0.7" max="1.5" step="0.05" value="1.0">
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Imersão do Bloco</span><span class="dial-value" id="m3-depth-val">50%</span></div>
+                    <div class="dial-header"><span class="dial-label">Imersão</span><span class="dial-value" id="m3-depth-val">50%</span></div>
                     <input type="range" class="lab-slider" id="m3-depth-slider" min="0" max="1" step="0.1" value="0.5">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Peso Real</div><div class="readout-num" id="m3-preal-num">13,50 N</div></div>
                   <div class="readout-item"><div class="readout-name">Empuxo ($E$)</div><div class="readout-num" id="m3-empuxo-num">2,50 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Peso Aparente</div><div class="readout-num" id="m3-pap-num" style="color:var(--lilac-dark);">11,00 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Peso Aparente</div><div class="readout-num" id="m3-pap-num">11,00 N</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Bancada M4 -->
+        <div class="station-panel" id="st-mec-4">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
+                <span class="topic-tag">Impulso · Colisões Elásticas</span>
+              </div>
+              <h2 class="question-title">Desafio: Colisão 1D Perfeita</h2>
+              <div class="question-context">
+                "Dois corpos de massas idênticas $m_1 = m_2 = 2\,\text{kg}$ colidem frontalmente de modo perfeitamente elástico ($e = 1$). O que ocorre com as velocidades?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Eles trocam de velocidade integralmente ($v_1' = v_2$ e $v_2' = v_1$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Ambos param imediatamente no ponto de impacto.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-start-collision">▶ Iniciar Colisão</button>
+                <button class="btn-lab btn-lab-secondary" id="btn-reset-collision">↺ Reiniciar</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Trilho de Ar & Carrinhos</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-colisoes"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Massa 1 ($m_1$)</span><span class="dial-value">2,0 kg</span></div>
+                    <input type="range" class="lab-slider" id="m4-m1-slider" min="1" max="5" step="0.5" value="2">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Massa 2 ($m_2$)</span><span class="dial-value">2,0 kg</span></div>
+                    <input type="range" class="lab-slider" id="m4-m2-slider" min="1" max="5" step="0.5" value="2">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Coef. Restituição ($e$)</span><span class="dial-value">1,0 (Elástica)</span></div>
+                    <input type="range" class="lab-slider" id="m4-e-slider" min="0" max="1" step="0.2" value="1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Mecânica</h2>
+          <span class="section-head-tag">ENEM, FUVEST, UNICAMP, UNESP, ITA, IME, UFMG, UFMT, IFMT, FEI</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
+          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFMG/UFMT/IFMT)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: UNESP -->
+          <div class="bank-question-card" data-board="paulistas unesp" data-topic="cinematica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unesp">UNESP 2022</span>
+              <span class="topic-tag">Cinemática · Lançamento Oblíquo</span>
+            </div>
+            <p class="bank-question-text">
+              Um projétil é lançado com velocidade inicial $v_0 = 30\,\text{m/s}$ sob um ângulo de $30^\circ$ com a horizontal ($g = 10\,\text{m/s}^2$). Considerando $\sin 30^\circ = 0{,}50$ e $\cos 30^\circ = 0{,}87$, a altura máxima atingida pelo projétil é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$H_{\text{máx}} = 11{,}25\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$H_{\text{máx}} = 22{,}50\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$H_{\text{máx}} = 45{,}00\,\text{m}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-mec-1" data-params='{"m1-angle-slider": 30, "m1-v0-slider": 30}'>
+                ⚡ Simular estes valores no Canhão
+              </button>
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                $v_{0y} = v_0 \sin 30^\circ = 30 \cdot 0{,}5 = 15\,\text{m/s}$.<br>
+                Pela equação de Torricelli no vértice ($v_y = 0$): $0 = v_{0y}^2 - 2g H \implies H = \frac{15^2}{2 \cdot 10} = \frac{225}{20} = 11{,}25\,\text{m}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: ITA -->
+          <div class="bank-question-card" data-board="militares ita" data-topic="dinamica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-ita">ITA 2021</span>
+              <span class="topic-tag">Dinâmica · Força Centrípeta em Curva com Atrito</span>
+            </div>
+            <p class="bank-question-text">
+              Um veículo faz uma curva horizontal plana de raio $R = 100\,\text{m}$ em uma pista com coeficiente de atrito estático $\mu_e = 0{,}40$. Adotando $g = 10\,\text{m/s}^2$, a máxima velocidade com que o veículo pode fazer a curva sem derrapar é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$v_{\text{máx}} = 20\,\text{m/s} = 72\,\text{km/h}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$v_{\text{máx}} = 40\,\text{m/s}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                A força centrípeta é fornecida exclusivamente pelo atrito estático: $F_{\text{cp}} = F_{\text{at}} \implies \frac{m v^2}{R} \le \mu_e m g \implies v \le \sqrt{\mu_e g R} = \sqrt{0{,}4 \cdot 10 \cdot 100} = \sqrt{400} = 20\,\text{m/s}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 3: UFMT / IFMT -->
+          <div class="bank-question-card" data-board="federais ufmt ifmt" data-topic="hidrostatica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-ufmt">UFMT / IFMT</span>
+              <span class="topic-tag">Hidrostática · Teorema de Stevin</span>
+            </div>
+            <p class="bank-question-text">
+              Em um lago de águas calmas ($\rho = 1000\,\text{kg/m}^3$), um mergulhador atinge a profundidade de $h = 20\,\text{m}$. Sendo a pressão atmosférica $P_{\text{atm}} = 1{,}0 \times 10^5\,\text{Pa}$ e $g = 10\,\text{m/s}^2$, a pressão total (absoluta) sentida pelo mergulhador é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{total}} = 3{,}0 \times 10^5\,\text{Pa} = 3\,\text{atm}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{total}} = 2{,}0 \times 10^5\,\text{Pa}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pelo Teorema de Stevin: $P = P_{\text{atm}} + \rho g h = 10^5 + (1000 \cdot 10 \cdot 20) = 10^5 + 2 \times 10^5 = 3{,}0 \times 10^5\,\text{Pa}$ (3 atmosferas).
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 4: FEI / PUC -->
+          <div class="bank-question-card" data-board="paulistas fei puc" data-topic="colisoes">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-fei">FEI / PUC</span>
+              <span class="topic-tag">Quantidade de Movimento · Colisão Inelástica</span>
+            </div>
+            <p class="bank-question-text">
+              Um bloco A de massa $m_A = 3\,\text{kg}$ move-se a $v_A = 6\,\text{m/s}$ e colide com um bloco B de massa $m_B = 3\,\text{kg}$ inicialmente em repouso. Se os dois blocos permanecem grudados após a colisão (colisão perfeitamente inelástica), a velocidade final do conjunto é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$V_{\text{final}} = 3{,}0\,\text{m/s}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$V_{\text{final}} = 6{,}0\,\text{m/s}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-mec-4" data-params='{"m4-m1-slider": 3, "m4-m2-slider": 3, "m4-e-slider": 0}'>
+                ⚡ Simular no Trilho de Colisões
+              </button>
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pela Conservação da Quantidade de Movimento: $m_A v_A + m_B v_B = (m_A + m_B) V_f \implies 3 \cdot 6 + 0 = 6 \cdot V_f \implies V_f = 18/6 = 3{,}0\,\text{m/s}$.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Física Moderna</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,24 +41,32 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 06 · física moderna</span>
-            <h1 class="subpage-title">Bancadas Quântica & Relativística</h1>
+            <h1 class="subpage-title">Laboratório Quântico, Relativístico & Nuclear</h1>
           </div>
           <p class="subpage-desc">
-            Quantização da luz no efeito fotoelétrico de Einstein e os postulados da relatividade restrita com dilatação do tempo.
+            Efeito fotoelétrico de Einstein, dilatação e contração na Relatividade Restrita, modelo atômico de Bohr e exercícios comentados.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-mod-1">
-            <span class="station-number">01</span><span>Efeito Fotoelétrico de Einstein (ENEM)</span>
+            <span class="station-number">01</span><span>Efeito Fotoelétrico de Einstein (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-mod-2">
-            <span class="station-number">02</span><span>Relatividade & Dilatação do Tempo (FUVEST)</span>
+            <span class="station-number">02</span><span>Relatividade & Dilatação do Tempo (FUVEST / ITA)</span>
+          </button>
+          <button class="station-tab" data-station="st-mod-3">
+            <span class="station-number">03</span><span>Modelo de Bohr & Níveis de Energia (UNESP / IME)</span>
           </button>
         </div>
 
@@ -133,7 +142,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = \frac{1}{0{,}8} = 1{,}25$.
+                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = 1{,}25$.
                 </div>
               </div>
             </div>
@@ -148,14 +157,120 @@
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Fator de Lorentz ($\gamma$)</div><div class="readout-num" id="mod2-gamma-num">1,25</div></div>
-                  <div class="readout-item"><div class="readout-name">Tempo Dilatado ($\Delta t$)</div><div class="readout-num" id="mod2-dt-num">1,25 s</div></div>
+                  <div class="readout-item"><div class="readout-name">Fator Lorentz ($\gamma$)</div><div class="readout-num" id="mod2-gamma-num">1,25</div></div>
+                  <div class="readout-item"><div class="readout-name">Tempo Dilatado</div><div class="readout-num" id="mod2-dt-num">1,25 s</div></div>
+                  <div class="readout-item"><div class="readout-name">Comprimento</div><div class="readout-num" id="mod2-len-num">80,0 m</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Bancada Q3 -->
+        <div class="station-panel" id="st-mod-3">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
+                <span class="topic-tag">Física Atômica · Modelo de Bohr</span>
+              </div>
+              <h2 class="question-title">Desafio: Emissão de Fótons</h2>
+              <div class="question-context">
+                "Quando um elétron no átomo de hidrogênio salta de um nível de maior energia para um nível de menor energia, ocorre:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A emissão de um fóton de energia $hf = E_{\text{inicial}} - E_{\text{final}}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A aniquilação do elétron.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-bohr-absorb">⚡ Absorver Fóton (Subir nível)</button>
+                <button class="btn-lab btn-lab-secondary" id="btn-bohr-emit">⚡ Emitir Fóton (Descer nível)</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Órbitas Quantizadas de Bohr</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-bohr"></div>
+              <div class="apparatus-controls">
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Nível Quântico</div><div class="readout-num" id="mod3-n-num">n = 2</div></div>
+                  <div class="readout-item"><div class="readout-name">Energia do Nível</div><div class="readout-num" id="mod3-energy-num">-3,40 eV</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Física Moderna</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFG, UFMT, PUC</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+          <button class="bank-filter-btn" data-filter="nuclear">Nuclear & Decaimento</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: UNICAMP -->
+          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="relatividade">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unicamp">UNICAMP 2020</span>
+              <span class="topic-tag">Relatividade · Equivalência Massa-Energia ($E = mc^2$)</span>
+            </div>
+            <p class="bank-question-text">
+              Em uma reação nuclear de fusão no interior do Sol, uma massa $\Delta m = 1{,}0 \times 10^{-6}\,\text{kg}$ (1 miligrama) é convertida diretamente em energia. Considerando $c = 3{,}0 \times 10^8\,\text{m/s}$, a quantidade de energia liberada nessa reação é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 9{,}0 \times 10^{10}\,\text{J} = 90\,\text{GJ}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 3{,}0 \times 10^2\,\text{J}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pela famosa equação de Einstein: $E = \Delta m \cdot c^2 = (1{,}0 \times 10^{-6}) \cdot (3{,}0 \times 10^8)^2 = 10^{-6} \cdot 9 \times 10^{16} = 9{,}0 \times 10^{10}\,\text{J}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: ENEM -->
+          <div class="bank-question-card" data-board="enem" data-topic="nuclear">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-enem">ENEM 2021</span>
+              <span class="topic-tag">Física Nuclear · Meia-Vida & Decaimento Radioativo</span>
+            </div>
+            <p class="bank-question-text">
+              O iodo-131, utilizado no tratamento médico de doenças da tireoide, possui meia-vida de $T_{1/2} = 8\,\text{dias}$. Partindo de uma amostra inicial de $80\,\text{mg}$, qual será a massa restante de iodo-131 após $24\,\text{dias}$?
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$m = 10\,\text{mg}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$m = 20\,\text{mg}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                O número de meias-vidas transcorridas é $n = 24 / 8 = 3$.<br>
+                A massa final é dada por: $m = \frac{m_0}{2^n} = \frac{80}{2^3} = \frac{80}{8} = 10\,\text{mg}$.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

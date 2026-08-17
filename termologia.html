@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Termologia</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,24 +41,32 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 03 · termologia & termodinâmica</span>
-            <h1 class="subpage-title">Bancadas de Gases & Máquinas Térmicas</h1>
+            <h1 class="subpage-title">Laboratório de Gases, Carnot & Calorimetria</h1>
           </div>
           <p class="subpage-desc">
-            Comportamento cinético dos gases ideais, diagramas $P \times V$ e rendimento teórico máximo no Ciclo de Carnot.
+            Equação de Clapeyron, diagramas de transformações gasosas, ciclo de Carnot e dilatação térmica com questões de vestibulares.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-termo-1">
-            <span class="station-number">01</span><span>Gases Ideais & Diagrama PxV (ENEM)</span>
+            <span class="station-number">01</span><span>Gases Ideais & Diagrama PxV (ENEM / FUVEST)</span>
           </button>
           <button class="station-tab" data-station="st-termo-2">
-            <span class="station-number">02</span><span>Ciclo de Carnot & Rendimento (UNICAMP)</span>
+            <span class="station-number">02</span><span>Ciclo de Carnot & Rendimento (UNICAMP / ITA)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-3">
+            <span class="station-number">03</span><span>Dilatação Térmica Linear (UNESP / UFMG)</span>
           </button>
         </div>
 
@@ -159,6 +168,111 @@
           </div>
         </div>
 
+        <!-- Bancada T3 -->
+        <div class="station-panel" id="st-termo-3">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unesp">UNESP</span>
+                <span class="topic-tag">Termologia · Dilatação Térmica Linear</span>
+              </div>
+              <h2 class="question-title">Desafio: Expansão de Trilhos</h2>
+              <div class="question-context">
+                "Uma barra de alumínio de comprimento inicial $L_0 = 1{,}0\,\text{m}$ ($\alpha = 2{,}4 \times 10^{-5}\,^\circ\text{C}^{-1}$) sofre variação térmica de $\Delta T = 50\,^\circ\text{C}$. A dilatação linear sofrida é:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta L = 1{,}2\,\text{mm}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\Delta L = 12\,\text{mm}$</span></button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Dilatômetro de Precisão</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-dilatacao"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Variação $\Delta T$</span><span class="dial-value">50 °C</span></div>
+                    <input type="range" class="lab-slider" id="t3-dt-slider" min="10" max="100" step="5" value="50">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Dilatação ($\Delta L$)</div><div class="readout-num" id="t3-dl-num">+1,20 mm</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Termologia</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, ENEM, UFG, UFMT, PUC, FEI</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="militares">Militares (ITA)</button>
+          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFG/UFMT)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: FUVEST -->
+          <div class="bank-question-card" data-board="paulistas fuvest" data-topic="calorimetria">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-fuvest">FUVEST 2020</span>
+              <span class="topic-tag">Calorimetria · Trocas de Calor & Equilíbrio</span>
+            </div>
+            <p class="bank-question-text">
+              Em um calorímetro ideal misturam-se $m_1 = 200\,\text{g}$ de água a $80\,^\circ\text{C}$ com $m_2 = 100\,\text{g}$ de água a $20\,^\circ\text{C}$. Desprezando perdas para o ambiente, a temperatura final de equilíbrio térmico é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$T_{\text{eq}} = 60\,^\circ\text{C}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$T_{\text{eq}} = 50\,^\circ\text{C}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                $\sum Q = 0 \implies m_1 c (T - 80) + m_2 c (T - 20) = 0 \implies 200(T - 80) + 100(T - 20) = 0 \implies 2(T - 80) + (T - 20) = 0 \implies 3T = 180 \implies T = 60\,^\circ\text{C}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: ITA -->
+          <div class="bank-question-card" data-board="militares ita" data-topic="termodinamica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-ita">ITA 2021</span>
+              <span class="topic-tag">Termodinâmica · Primeira Lei & Transformação Adiabática</span>
+            </div>
+            <p class="bank-question-text">
+              Em uma expansão adiabática rápida de um gás ideal ($Q = 0$), o trabalho realizado pelo gás sobre a vizinhança é $\mathcal{W} = +300\,\text{J}$. A variação da energia interna $\Delta U$ do gás e o comportamento de sua temperatura são:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta U = -300\,\text{J}$ e o gás esfria ($\Delta T < 0$).</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\Delta U = +300\,\text{J}$ e o gás esquenta.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pela 1ª Lei da Termodinâmica: $\Delta U = Q - \mathcal{W}$. Sendo $Q = 0$ (adiabática): $\Delta U = 0 - 300 = -300\,\text{J}$. Como a energia interna é proporcional à temperatura ($\Delta U = \frac{3}{2} n R \Delta T$), o gás necessariamente se resfria.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

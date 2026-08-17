@@ -28,9 +28,10 @@
         <span class="wordmark">Laura de Faveri</span>
         <span class="wordmark-tag">Eletromagnetismo</span>
       </a>
-      <a href="index.html" class="back-btn">
-        ← Voltar ao Início
-      </a>
+      <div class="header-nav-right">
+        <a href="#banco-questoes" class="nav-anchor">Banco de Questões ↓</a>
+        <a href="index.html" class="back-btn">← Início</a>
+      </div>
     </div>
   </header>
 
@@ -40,27 +41,35 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 01 · eletromagnetismo</span>
-            <h1 class="subpage-title">Bancadas de Eletrostática & Eletrodinâmica</h1>
+            <h1 class="subpage-title">Laboratório de Eletrostática, Circuitos & Indução</h1>
           </div>
           <p class="subpage-desc">
-            Interações eletrostáticas de Coulomb, circuitos elétricos com efeito Joule e indução magnética de Faraday-Lenz.
+            Simulações interativas de Coulomb, leis de circuitos elétricos, capacitores e leis de Faraday-Lenz com banco completo de questões.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- SEÇÃO 1: LABORATÓRIO DE BANCADAS -->
     <section class="lab-section">
       <div class="container">
-        
+        <div class="section-head">
+          <h2 class="section-head-title">🔬 Bancadas de Simulação Interativa</h2>
+          <span class="section-head-tag">Ajuste os parâmetros ou carregue das questões abaixo</span>
+        </div>
+
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-eletro-1">
             <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-2">
-            <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM)</span>
+            <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-3">
-            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST)</span>
+            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST / ITA)</span>
+          </button>
+          <button class="station-tab" data-station="st-eletro-4">
+            <span class="station-number">04</span><span>Capacitores & Campo Elétrico (UNESP / IME)</span>
           </button>
         </div>
 
@@ -194,6 +203,172 @@
           </div>
         </div>
 
+        <!-- Bancada E4 -->
+        <div class="station-panel" id="st-eletro-4">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
+                <span class="topic-tag">Eletrostática · Capacitores Planos</span>
+              </div>
+              <h2 class="question-title">Desafio: Capacitância e Distância</h2>
+              <div class="question-context">
+                "Um capacitor de placas paralelas no vácuo possui capacitância $C_0$. Se a distância $d$ entre as placas for reduzida pela metade ($d/2$), a nova capacitância será:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$C = 2 C_0$ (A capacitância dobra).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$C = C_0 / 2$ (A capacitância cai pela metade).</span></button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Placas Paralelas & Dielétrico</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-capacitor"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Área ($A$)</span><span class="dial-value">200 cm²</span></div>
+                    <input type="range" class="lab-slider" id="e3-a-slider" min="100" max="400" step="50" value="200">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Distância ($d$)</span><span class="dial-value">4 mm</span></div>
+                    <input type="range" class="lab-slider" id="e3-d-slider" min="2" max="10" step="1" value="4">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Tensão ($V$)</span><span class="dial-value">100 V</span></div>
+                    <input type="range" class="lab-slider" id="e3-v-slider" min="50" max="300" step="25" value="100">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Capacitância</div><div class="readout-num" id="e3-cap-num">44,3 pF</div></div>
+                  <div class="readout-item"><div class="readout-name">Carga ($Q$)</div><div class="readout-num" id="e3-q-num">4,43 nC</div></div>
+                  <div class="readout-item"><div class="readout-name">Campo ($\vec{E}$)</div><div class="readout-num" id="e3-field-num">25,0 kV/m</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <section class="question-bank-section" id="banco-questoes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Eletromagnetismo</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFG, UFMT, IFMT, FEI, PUC</span>
+        </div>
+
+        <div class="bank-filters">
+          <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
+          <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
+          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
+          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFMG/UFG/UFMT/IFMT)</button>
+          <button class="bank-filter-btn" data-filter="enem">ENEM</button>
+        </div>
+
+        <div class="questions-grid">
+
+          <!-- Questão 1: UNICAMP -->
+          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="circuitos">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unicamp">UNICAMP 2021</span>
+              <span class="topic-tag">Eletrodinâmica · Associação de Resistores & Potência</span>
+            </div>
+            <p class="bank-question-text">
+              Dois resistores ôhmicos idênticos de resistência $R = 10\,\Omega$ são ligados a uma tomada de $120\,\text{V}$. Em qual configuração (série ou paralelo) a potência total dissipada é maior e qual o seu valor?
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Em paralelo ($R_{\text{eq}} = 5\,\Omega$), dissipando $P = 2880\,\text{W}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Em série ($R_{\text{eq}} = 20\,\Omega$), dissipando $P = 720\,\text{W}$.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-eletro-2" data-params='{"e1-u-slider": 24, "e1-r-slider": 5}'>
+                ⚡ Simular Parâmetros no Circuito
+              </button>
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pela fórmula $P = U^2 / R_{\text{eq}}$: em paralelo, $R_{\text{eq}} = 10/2 = 5\,\Omega \implies P = 120^2 / 5 = 14400 / 5 = 2880\,\text{W}$. Em série, $R_{\text{eq}} = 20\,\Omega \implies P = 120^2 / 20 = 720\,\text{W}$. Portanto, a potência é 4 vezes maior em paralelo!
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 2: ITA -->
+          <div class="bank-question-card" data-board="militares ita" data-topic="magnetismo">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-ita">ITA 2022</span>
+              <span class="topic-tag">Magnetismo · Força Magnética de Lorentz</span>
+            </div>
+            <p class="bank-question-text">
+              Uma partícula de carga $q = +2\,\mu\text{C}$ entra perpendicularmente com velocidade $v = 10^5\,\text{m/s}$ em uma região de campo magnético uniforme $B = 0{,}5\,\text{T}$. A intensidade da força magnética que atua sobre ela é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$F = 0{,}10\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 1{,}00\,\text{N}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                $F = |q| \cdot v \cdot B \cdot \sin 90^\circ = (2 \times 10^{-6}) \cdot (10^5) \cdot 0{,}5 \cdot 1 = 0{,}10\,\text{N}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 3: UFMG / UFG -->
+          <div class="bank-question-card" data-board="federais ufmg ufg" data-topic="capacitores">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-ufmg">UFMG / UFG</span>
+              <span class="topic-tag">Eletrostática · Energia em Capacitores</span>
+            </div>
+            <p class="bank-question-text">
+              Um capacitor de placas paralelas de $C = 100\,\mu\text{F}$ é carregado por uma fonte de tensão até atingir $U = 20\,\text{V}$. A energia eletrostática armazenada no capacitor é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 0{,}02\,\text{J} = 20\,\text{mJ}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 2{,}00\,\text{J}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                $E = \frac{1}{2} C U^2 = \frac{1}{2} (100 \times 10^{-6}) \cdot (20)^2 = 50 \times 10^{-6} \cdot 400 = 0{,}02\,\text{J} = 20\,\text{mJ}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 4: ENEM -->
+          <div class="bank-question-card" data-board="enem" data-topic="circuitos">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-enem">ENEM 2020</span>
+              <span class="topic-tag">Eletrodinâmica · Chuveiro Elétrico & Chave Inverno/Verão</span>
+            </div>
+            <p class="bank-question-text">
+              Para transformar um chuveiro elétrico da posição "Verão" (água morna) para a posição "Inverno" (água mais quente), a resistência elétrica do resistor interno deve ser:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Diminuída, para aumentar a corrente e a potência dissipada ($P = U^2/R$).</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aumentada, para resistir mais à corrente.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Como a tensão da rede $U$ é fixa (ex.: $220\,\text{V}$), pela fórmula $P = U^2 / R$, para aumentar a potência $P$ (aquecer mais a água no inverno), é necessário diminuir a resistência $R$ ativa do circuito.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>

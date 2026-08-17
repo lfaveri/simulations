@@ -60,7 +60,7 @@ body {
 }
 
 .container {
-  max-width: 1140px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 24px;
   width: 100%;
@@ -80,7 +80,7 @@ main { flex: 1; }
 }
 
 .header-container {
-  max-width: 1140px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -114,6 +114,20 @@ main { flex: 1; }
   border: 1px solid var(--line);
 }
 
+.header-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-anchor {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.nav-anchor:hover { color: var(--lilac-dark); text-decoration: underline; }
+
 .back-btn {
   display: inline-flex;
   align-items: center;
@@ -137,7 +151,7 @@ main { flex: 1; }
 }
 
 /* ==========================================================================
-   LANDING PAGE (INDEX) — LIMPO & DIRETO
+   LANDING PAGE (INDEX)
    ========================================================================== */
 .hero-hub {
   padding: 60px 0 40px;
@@ -176,7 +190,6 @@ main { flex: 1; }
   line-height: 1.6;
 }
 
-/* Grid de Cards dos Módulos */
 .modules-section {
   padding: 20px 0 70px;
 }
@@ -199,7 +212,6 @@ main { flex: 1; }
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition);
-  position: relative;
 }
 
 .module-card:hover {
@@ -279,12 +291,12 @@ main { flex: 1; }
 }
 
 /* ==========================================================================
-   SUBPÁGINAS DE MÓDULOS EXPERIMENTAIS (BANCADAS)
+   SUBPÁGINAS DE MÓDULOS (BANCADAS & BANCO DE QUESTÕES)
    ========================================================================== */
 .subpage-hero {
   padding: 36px 0 24px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .subpage-hero-row {
@@ -308,7 +320,31 @@ main { flex: 1; }
   max-width: 620px;
 }
 
-/* Seletor de Bancadas (Tabs) */
+/* Seção do Laboratório de Bancadas */
+.lab-section {
+  padding-bottom: 40px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-head-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-head-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
 .station-nav {
   display: flex;
   gap: 8px;
@@ -316,7 +352,7 @@ main { flex: 1; }
   border: 1px solid var(--line);
   padding: 6px;
   border-radius: var(--radius-md);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   overflow-x: auto;
 }
 
@@ -364,14 +400,8 @@ main { flex: 1; }
   border-color: var(--lilac-dark);
 }
 
-/* Painel da Bancada */
-.station-panel {
-  display: none;
-}
-.station-panel.is-active {
-  display: block;
-  animation: fadeIn 0.25s ease;
-}
+.station-panel { display: none; }
+.station-panel.is-active { display: block; animation: fadeIn 0.25s ease; }
 
 .workbench-grid {
   display: grid;
@@ -380,7 +410,7 @@ main { flex: 1; }
   align-items: start;
 }
 
-/* Left: Caderno de Questão */
+/* Notebook Card */
 .notebook-card {
   background: var(--bg-panel);
   border: 1px solid var(--line);
@@ -393,22 +423,35 @@ main { flex: 1; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
   border-bottom: 1px dashed var(--line);
 }
 
+/* Badges de Vestibulares Multibancas */
 .vestibular-badge {
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  font-weight: 500;
-  padding: 2px 8px;
+  font-weight: 600;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
+
 .badge-fuvest  { background: #eef2fa; color: #2d559c; border: 1px solid #c8d8f4; }
 .badge-enem    { background: #fdf0f2; color: #a43248; border: 1px solid #f5ccd3; }
 .badge-unicamp { background: #f3eff9; color: #5f368c; border: 1px solid #d9c8eb; }
+.badge-unesp   { background: #eafaf1; color: #1e7e44; border: 1px solid #c3edd3; }
+.badge-unifesp { background: #fcf4e8; color: #a05c10; border: 1px solid #f2dbb8; }
+.badge-ita     { background: #e6f7ff; color: #0050b3; border: 1px solid #91d5ff; }
+.badge-ime     { background: #fff1f0; color: #cf1322; border: 1px solid #ffa39e; }
+.badge-ufmg    { background: #f9f0ff; color: #531dab; border: 1px solid #d3adf7; }
+.badge-ufg     { background: #f6ffed; color: #389e0d; border: 1px solid #b7eb8f; }
+.badge-ufmt    { background: #fcffe6; color: #7cb305; border: 1px solid #eaff8f; }
+.badge-ifmt    { background: #e6fffb; color: #08979c; border: 1px solid #87e8de; }
+.badge-puc     { background: #fffbe6; color: #d48806; border: 1px solid #ffe58f; }
+.badge-fei     { background: #f0f5ff; color: #1d39c4; border: 1px solid #adc6ff; }
 
 .topic-tag {
   font-family: var(--font-mono);
@@ -418,7 +461,7 @@ main { flex: 1; }
 
 .question-title {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 12px;
@@ -442,12 +485,11 @@ main { flex: 1; }
   margin-bottom: 18px;
 }
 
-/* Opções de Múltipla Escolha */
 .options-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .option-choice {
@@ -571,7 +613,7 @@ main { flex: 1; }
   line-height: 1.65;
 }
 
-/* Right: Aparato Experimental */
+/* Aparato Card */
 .apparatus-card {
   background: var(--bg-panel);
   border: 1px solid var(--line);
@@ -691,12 +733,82 @@ main { flex: 1; }
   color: var(--ink);
 }
 
+/* ==========================================================================
+   SEÇÃO DEDICADA: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS
+   ========================================================================== */
+.question-bank-section {
+  padding: 40px 0 60px;
+  border-top: 1px solid var(--line);
+}
+
+.bank-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.bank-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.bank-filter-btn:hover {
+  border-color: var(--lilac-deep);
+  color: var(--ink);
+}
+
+.bank-filter-btn.is-active {
+  background: var(--lilac-dark);
+  color: #ffffff;
+  border-color: var(--lilac-dark);
+}
+
+.questions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bank-question-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bank-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bank-question-text {
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
 /* Footer */
 .site-footer {
   background: #ffffff;
   border-top: 1px solid var(--line);
   padding: 30px 0;
-  margin-top: 50px;
+  margin-top: 40px;
   text-align: center;
 }
 
