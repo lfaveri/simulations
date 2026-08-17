@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eletromagnetismo — Laboratório de Física | Laura de Faveri</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="wordmark-group">
+        <span class="wordmark">Laura de Faveri</span>
+        <span class="wordmark-tag">Eletromagnetismo</span>
+      </a>
+      <a href="index.html" class="back-btn">
+        ← Voltar ao Início
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="subpage-hero-row">
+          <div>
+            <span class="eyebrow">módulo 01 · eletromagnetismo</span>
+            <h1 class="subpage-title">Bancadas de Eletrostática & Eletrodinâmica</h1>
+          </div>
+          <p class="subpage-desc">
+            Interações eletrostáticas de Coulomb, circuitos elétricos com efeito Joule e indução magnética de Faraday-Lenz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="container">
+        
+        <div class="station-nav" role="tablist">
+          <button class="station-tab is-active" data-station="st-eletro-1">
+            <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST)</span>
+          </button>
+          <button class="station-tab" data-station="st-eletro-2">
+            <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM)</span>
+          </button>
+          <button class="station-tab" data-station="st-eletro-3">
+            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST)</span>
+          </button>
+        </div>
+
+        <!-- Bancada E1 -->
+        <div class="station-panel is-active" id="st-eletro-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
+              </div>
+              <h2 class="question-title">Desafio: A Razão da Distância</h2>
+              <div class="question-context">
+                "Duas cargas pontuais $+Q$ e $-Q$ separadas por $d$ sentem força $F_0$. Ao reduzir a distância para $d/3$, qual será a nova força de atração?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$F = F_0 / 9$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 3 F_0$</span></button>
+                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>$F = 9 F_0$ (Multiplica por 9)</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">⚡ Demonstrar $d/3$ na Simulação</button>
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Como $F \propto 1/d^2$, ao substituir $d' = d/3$: $F' = \frac{k Q^2}{(d/3)^2} = 9 \left(\frac{k Q^2}{d^2}\right) = 9 F_0$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Aparato: Trilho de Coulomb</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-coulomb"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Distância ($d$)</span><span class="dial-value" id="s1-d-val">3,00 m</span></div>
+                    <input type="range" class="lab-slider" id="s1-d-slider" min="0.6" max="3.0" step="0.1" value="3.0">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Razão Força</div><div class="readout-num" id="s1-ratio-num">1,00 × F₀</div></div>
+                  <div class="readout-item"><div class="readout-name">Força ($F$)</div><div class="readout-num" id="s1-force-num">0,004 N</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada E2 -->
+        <div class="station-panel" id="st-eletro-2">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Eletrodinâmica · Primeira Lei de Ohm</span>
+              </div>
+              <h2 class="question-title">Desafio: Corrente & Efeito Joule</h2>
+              <div class="question-context">
+                "Um circuito simples contém uma fonte de $12\,\text{V}$ conectada a um resistor de $6\,\Omega$. Qual a corrente e a potência dissipada?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$I = 2\,\text{A}$ e Potência $P = 24\,\text{W}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$I = 0{,}5\,\text{A}$ e Potência $P = 6\,\text{W}$</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  $I = U/R = 12/6 = 2\,\text{A}$. Potência $P = U \cdot I = 12 \cdot 2 = 24\,\text{W}$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Bancada de Circuitos & Reostato</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-circuito"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Tensão ($U$)</span><span class="dial-value" id="e1-u-val">12 V</span></div>
+                    <input type="range" class="lab-slider" id="e1-u-slider" min="2" max="24" step="1" value="12">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Resistência ($R$)</span><span class="dial-value" id="e1-r-val">6 Ω</span></div>
+                    <input type="range" class="lab-slider" id="e1-r-slider" min="1" max="15" step="1" value="6">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Corrente ($I$)</div><div class="readout-num" id="e1-i-num">2,00 A</div></div>
+                  <div class="readout-item"><div class="readout-name">Potência ($P$)</div><div class="readout-num" id="e1-p-num">24,0 W</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada E3 -->
+        <div class="station-panel" id="st-eletro-3">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Eletromagnetismo · Lei de Faraday-Lenz</span>
+              </div>
+              <h2 class="question-title">Desafio: Indução Eletromagnética</h2>
+              <div class="question-context">
+                "Ao aproximar o polo norte de um ímã em uma bobina condutora, surge uma corrente induzida que:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Cria um polo norte na face da bobina, opondo-se à aproximação (Lei de Lenz).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Atrai o ímã acelerando seu movimento indefinidamente.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-magnet-in">⚡ Injetar Ímã na Bobina</button>
+                <button class="btn-lab btn-lab-secondary" id="btn-magnet-out">⚡ Afastar Ímã</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Solenoide & Galvanômetro</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-inducao"></div>
+              <div class="apparatus-controls">
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">FEM Induzida ($\mathcal{E}$)</div><div class="readout-num" id="e2-emf-num">0,00 V</div></div>
+                  <div class="readout-item"><div class="readout-name">Efeito Lenz</div><div class="readout-num" id="e2-lenz-text" style="font-size: 0.85rem;">Ímã parado</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wordmark">Laura de Faveri</div>
+      <p class="footer-note">Laboratório Virtual de Física Experimental</p>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">← Menu de Módulos</a>
+        <a href="https://lfaveri.github.io/" class="footer-link">lfaveri.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/sim_estacoes.js"></script>
+  <script src="js/mod_eletromagnetismo.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

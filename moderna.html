@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física Moderna — Laboratório de Física | Laura de Faveri</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="wordmark-group">
+        <span class="wordmark">Laura de Faveri</span>
+        <span class="wordmark-tag">Física Moderna</span>
+      </a>
+      <a href="index.html" class="back-btn">
+        ← Voltar ao Início
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="subpage-hero-row">
+          <div>
+            <span class="eyebrow">módulo 06 · física moderna</span>
+            <h1 class="subpage-title">Bancadas Quântica & Relativística</h1>
+          </div>
+          <p class="subpage-desc">
+            Quantização da luz no efeito fotoelétrico de Einstein e os postulados da relatividade restrita com dilatação do tempo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="container">
+        
+        <div class="station-nav" role="tablist">
+          <button class="station-tab is-active" data-station="st-mod-1">
+            <span class="station-number">01</span><span>Efeito Fotoelétrico de Einstein (ENEM)</span>
+          </button>
+          <button class="station-tab" data-station="st-mod-2">
+            <span class="station-number">02</span><span>Relatividade & Dilatação do Tempo (FUVEST)</span>
+          </button>
+        </div>
+
+        <!-- Bancada Q1 -->
+        <div class="station-panel is-active" id="st-mod-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Física Quântica · Efeito Fotoelétrico</span>
+              </div>
+              <h2 class="question-title">Desafio: A Frequência de Corte</h2>
+              <div class="question-context">
+                "Para ejetar fotoelétrons de uma placa metálica, é necessário que a luz incidente tenha:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Frequência superior à frequência de corte ($hf \ge W$), independentemente da intensidade.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas intensidade muito alta de luz de qualquer cor.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Einstein propôs que a luz é formada por fótons com energia $E = hf$. Cada fotoelétron absorve um único fóton; logo, se $hf < W$ (função trabalho do metal), nenhum elétron é liberado. A equação de Einstein é: $E_{\text{cin}} = hf - W$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Tubo Fotoelétrico & Feixe Quântico</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-foto"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="mod1-lambda-val">350 nm (UV)</span></div>
+                    <input type="range" class="lab-slider" id="mod1-lambda-slider" min="200" max="750" step="25" value="350">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Função Trabalho ($W$)</span><span class="dial-value" id="mod1-work-val">2.3 eV</span></div>
+                    <input type="range" class="lab-slider" id="mod1-work-slider" min="1.5" max="4.5" step="0.2" value="2.3">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Energia Fóton</div><div class="readout-num" id="mod1-ephot-num">3,54 eV</div></div>
+                  <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,24 eV</div></div>
+                  <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="mod1-status-text" style="font-size:0.85rem;">Emissão Ativa</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada Q2 -->
+        <div class="station-panel" id="st-mod-2">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Relatividade Restrita · Fator $\gamma$</span>
+              </div>
+              <h2 class="question-title">Desafio: Dilatação Temporal</h2>
+              <div class="question-context">
+                "Para um observador na Terra, o tempo medido no interior de uma nave que viaja a $v = 0{,}6\,c$ parecerá:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Mais lento (dilatado pelo fator de Lorentz $\gamma = 1{,}25$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Mais rápido.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = \frac{1}{0{,}8} = 1{,}25$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Relógio de Luz Relativístico</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-relatividade"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Velocidade ($v/c$)</span><span class="dial-value" id="mod2-beta-val">0.60 c</span></div>
+                    <input type="range" class="lab-slider" id="mod2-beta-slider" min="0.1" max="0.95" step="0.05" value="0.6">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Fator de Lorentz ($\gamma$)</div><div class="readout-num" id="mod2-gamma-num">1,25</div></div>
+                  <div class="readout-item"><div class="readout-name">Tempo Dilatado ($\Delta t$)</div><div class="readout-num" id="mod2-dt-num">1,25 s</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wordmark">Laura de Faveri</div>
+      <p class="footer-note">Laboratório Virtual de Física Experimental</p>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">← Menu de Módulos</a>
+        <a href="https://lfaveri.github.io/" class="footer-link">lfaveri.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/mod_moderna.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

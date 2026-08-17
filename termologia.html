@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termologia & Termodinâmica — Laboratório de Física | Laura de Faveri</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="wordmark-group">
+        <span class="wordmark">Laura de Faveri</span>
+        <span class="wordmark-tag">Termologia</span>
+      </a>
+      <a href="index.html" class="back-btn">
+        ← Voltar ao Início
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="subpage-hero-row">
+          <div>
+            <span class="eyebrow">módulo 03 · termologia & termodinâmica</span>
+            <h1 class="subpage-title">Bancadas de Gases & Máquinas Térmicas</h1>
+          </div>
+          <p class="subpage-desc">
+            Comportamento cinético dos gases ideais, diagramas $P \times V$ e rendimento teórico máximo no Ciclo de Carnot.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="container">
+        
+        <div class="station-nav" role="tablist">
+          <button class="station-tab is-active" data-station="st-termo-1">
+            <span class="station-number">01</span><span>Gases Ideais & Diagrama PxV (ENEM)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-2">
+            <span class="station-number">02</span><span>Ciclo de Carnot & Rendimento (UNICAMP)</span>
+          </button>
+        </div>
+
+        <!-- Bancada T1 -->
+        <div class="station-panel is-active" id="st-termo-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Gases Ideais · Equação de Clapeyron</span>
+              </div>
+              <h2 class="question-title">Desafio: Transformação Isotérmica</h2>
+              <div class="question-context">
+                "Mantendo a temperatura constante ($T = \text{cte}$), se o volume de um gás for reduzido pela metade, o que acontece com a pressão?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A pressão dobra de valor ($P_1 V_1 = P_2 V_2$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A pressão cai pela metade.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Pela Lei de Boyle-Mariotte: $P \cdot V = n R T = \text{constante}$. Ao diminuir o volume $V \to V/2$, a pressão obrigatoriamente dobra ($P \to 2P$).
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Êmbolo de Gás & Traçador P x V</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-gases"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Temperatura ($T$)</span><span class="dial-value" id="t1-temp-val">300 K</span></div>
+                    <input type="range" class="lab-slider" id="t1-temp-slider" min="150" max="600" step="25" value="300">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Volume ($V$)</span><span class="dial-value" id="t1-vol-val">10,0 L</span></div>
+                    <input type="range" class="lab-slider" id="t1-vol-slider" min="3" max="20" step="1" value="10">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Pressão Calculada</div><div class="readout-num" id="t1-press-num">2,46 atm</div></div>
+                  <div class="readout-item"><div class="readout-name">Volume ($V$)</div><div class="readout-num" id="t1-vol-num">10,0 L</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada T2 -->
+        <div class="station-panel" id="st-termo-2">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                <span class="topic-tag">Termodinâmica · Rendimento de Carnot</span>
+              </div>
+              <h2 class="question-title">Desafio: Eficiência Máxima</h2>
+              <div class="question-context">
+                "Uma máquina térmica de Carnot opera entre uma fonte quente a $T_q = 600\,\text{K}$ e uma fonte fria a $T_f = 300\,\text{K}$. Qual o rendimento teórico máximo dessa máquina?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\eta = 1 - \frac{300}{600} = 50\%$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\eta = 100\%$</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O rendimento de Carnot é o limite máximo permitido pela 2ª Lei da Termodinâmica: $\eta = 1 - \frac{T_f}{T_q} = 1 - \frac{300}{600} = 0{,}50 = 50\%$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Fluxo Térmico de Carnot</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-carnot"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Fonte Quente ($T_q$)</span><span class="dial-value" id="t2-tq-val">600 K</span></div>
+                    <input type="range" class="lab-slider" id="t2-tq-slider" min="400" max="900" step="50" value="600">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Fonte Fria ($T_f$)</span><span class="dial-value" id="t2-tf-val">300 K</span></div>
+                    <input type="range" class="lab-slider" id="t2-tf-slider" min="200" max="400" step="25" value="300">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Rendimento ($\eta$)</div><div class="readout-num" id="t2-eta-num">50,0%</div></div>
+                  <div class="readout-item"><div class="readout-name">Trabalho Útil ($W$)</div><div class="readout-num" id="t2-work-num">500 J</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wordmark">Laura de Faveri</div>
+      <p class="footer-note">Laboratório Virtual de Física Experimental</p>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">← Menu de Módulos</a>
+        <a href="https://lfaveri.github.io/" class="footer-link">lfaveri.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/mod_termologia.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

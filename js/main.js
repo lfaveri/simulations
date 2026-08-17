@@ -1,75 +1,40 @@
 /**
- * LABORATÓRIO MULTIDISCIPLINAR DE FÍSICA — Laura de Faveri
- * Controlador Central: Hub das 6 Áreas, Bancadas, Questionários e MathJax
+ * LABORATÓRIO DE FÍSICA — Laura de Faveri
+ * Controlador Geral de Bancadas, Questionários e Resoluções
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initAreaHub();
   initStationTabs();
   initNotebookQuizzes();
   initResolutionToggles();
 });
 
 /* ==========================================================================
-   1. HUB DAS 6 GRANDES ÁREAS DA FÍSICA
-   ========================================================================== */
-function initAreaHub() {
-  const areaButtons = document.querySelectorAll(".area-card-btn");
-  const areaPanels = document.querySelectorAll(".area-module-panel");
-
-  areaButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const targetAreaId = btn.getAttribute("data-area");
-
-      // Atualiza botões do Hub
-      areaButtons.forEach(b => b.classList.remove("is-active"));
-      btn.classList.add("is-active");
-
-      // Alterna painel da Área Temática
-      areaPanels.forEach(panel => {
-        panel.classList.remove("is-active");
-        if (panel.id === targetAreaId) {
-          panel.classList.add("is-active");
-        }
-      });
-
-      // Dispara resize para os canvases p5 recalcula dimensões
-      setTimeout(() => {
-        window.dispatchEvent(new Event("resize"));
-      }, 50);
-    });
-  });
-}
-
-/* ==========================================================================
-   2. ALTERNÂNCIA DE BANCADAS (TABS) DENTRO DE CADA ÁREA
+   1. SELETOR DE BANCADAS (TABS) NAS SUBPÁGINAS
    ========================================================================== */
 function initStationTabs() {
-  const allStationNavs = document.querySelectorAll(".station-nav");
+  const stationNavs = document.querySelectorAll(".station-nav");
 
-  allStationNavs.forEach(nav => {
+  stationNavs.forEach(nav => {
     const tabs = nav.querySelectorAll(".station-tab");
-    const parentArea = nav.closest(".area-module-panel");
+    const container = nav.closest(".lab-section") || document;
+    const panels = container.querySelectorAll(".station-panel");
 
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
-        const targetStationId = tab.getAttribute("data-station");
+        const targetId = tab.getAttribute("data-station");
 
-        // Atualiza tabs do mesmo grupo
         tabs.forEach(t => t.classList.remove("is-active"));
         tab.classList.add("is-active");
 
-        // Atualiza painéis dentro da mesma área
-        if (parentArea) {
-          const panels = parentArea.querySelectorAll(".station-panel");
-          panels.forEach(p => {
-            p.classList.remove("is-active");
-            if (p.id === targetStationId) {
-              p.classList.add("is-active");
-            }
-          });
-        }
+        panels.forEach(p => {
+          p.classList.remove("is-active");
+          if (p.id === targetId) {
+            p.classList.add("is-active");
+          }
+        });
 
+        // Dispara resize para recalibrar o canvas p5
         setTimeout(() => {
           window.dispatchEvent(new Event("resize"));
         }, 50);
@@ -79,7 +44,7 @@ function initStationTabs() {
 }
 
 /* ==========================================================================
-   3. RESPOSTAS E FEEDBACK DAS QUESTÕES DE VESTIBULAR
+   2. QUESTIONÁRIOS DE VESTIBULAR
    ========================================================================== */
 function initNotebookQuizzes() {
   const optionGroups = document.querySelectorAll(".options-group");
@@ -100,8 +65,8 @@ function initNotebookQuizzes() {
           choice.classList.add("is-correct");
         } else {
           choice.classList.add("is-wrong");
-          const correctOne = group.querySelector('[data-correct="true"]');
-          if (correctOne) correctOne.classList.add("is-correct");
+          const correctChoice = group.querySelector('[data-correct="true"]');
+          if (correctChoice) correctChoice.classList.add("is-correct");
         }
       });
     });
@@ -109,7 +74,7 @@ function initNotebookQuizzes() {
 }
 
 /* ==========================================================================
-   4. BOTÕES PARA EXIBIR A DEDUÇÃO / RESOLUÇÃO COMENTADA
+   3. BOTÕES DE DEDUÇÃO E RESOLUÇÃO COMENTADA
    ========================================================================== */
 function initResolutionToggles() {
   const toggleButtons = document.querySelectorAll(".toggle-res-btn");

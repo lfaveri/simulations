@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mecânica Clássica — Laboratório de Física | Laura de Faveri</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="wordmark-group">
+        <span class="wordmark">Laura de Faveri</span>
+        <span class="wordmark-tag">Mecânica Clássica</span>
+      </a>
+      <a href="index.html" class="back-btn">
+        ← Voltar ao Início
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="subpage-hero-row">
+          <div>
+            <span class="eyebrow">módulo 02 · mecânica clássica</span>
+            <h1 class="subpage-title">Bancadas de Cinemática, Dinâmica & Fluídos</h1>
+          </div>
+          <p class="subpage-desc">
+            Balística e lançamentos oblíquos, dinâmica de corpos com atrito no plano inclinado e empuxo hidrostático de Arquimedes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="container">
+        
+        <div class="station-nav" role="tablist">
+          <button class="station-tab is-active" data-station="st-mec-1">
+            <span class="station-number">01</span><span>Lançamento Oblíquo & Alcance (FUVEST)</span>
+          </button>
+          <button class="station-tab" data-station="st-mec-2">
+            <span class="station-number">02</span><span>Plano Inclinado com Atrito (UNICAMP)</span>
+          </button>
+          <button class="station-tab" data-station="st-mec-3">
+            <span class="station-number">03</span><span>Hidrostática & Empuxo (ENEM)</span>
+          </button>
+        </div>
+
+        <!-- Bancada M1 -->
+        <div class="station-panel is-active" id="st-mec-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="topic-tag">Cinemática Vetorial · Lançamento Oblíquo</span>
+              </div>
+              <h2 class="question-title">Desafio: O Ângulo de Alcance Máximo</h2>
+              <div class="question-context">
+                "No vácuo, para uma mesma velocidade inicial $v_0$, qual é o ângulo de lançamento $\theta$ que produz o maior alcance horizontal?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$\theta = 30^\circ$</span></button>
+                <button class="option-choice" data-correct="true" data-opt="B"><span class="opt-letter">B</span><span>$\theta = 45^\circ$ (Pois $\sin(2\theta) = \sin(90^\circ) = 1$)</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\theta = 60^\circ$</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-demo-maxrange">🎯 Ajustar 45° & Disparar</button>
+                <button class="btn-lab btn-lab-primary" id="btn-fire-cannon">🚀 Disparar</button>
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O alcance é dado por $A = \frac{v_0^2 \sin(2\theta)}{g}$. O valor máximo ocorre quando o seno é máximo ($\sin(2\theta) = 1 \implies 2\theta = 90^\circ \implies \theta = 45^\circ$).
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Canhão Balístico & Trajetória</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-lancamento"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m1-angle-val">45°</span></div>
+                    <input type="range" class="lab-slider" id="m1-angle-slider" min="15" max="75" step="5" value="45">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Velocidade ($v_0$)</span><span class="dial-value" id="m1-v0-val">20 m/s</span></div>
+                    <input type="range" class="lab-slider" id="m1-v0-slider" min="10" max="30" step="2" value="20">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Alcance ($A$)</div><div class="readout-num" id="m1-range-num">40,0 m</div></div>
+                  <div class="readout-item"><div class="readout-name">Altura Máx ($H$)</div><div class="readout-num" id="m1-hmax-num">10,0 m</div></div>
+                  <div class="readout-item"><div class="readout-name">Tempo de Voo</div><div class="readout-num" id="m1-time-num">2,83 s</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada M2 -->
+        <div class="station-panel" id="st-mec-2">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                <span class="topic-tag">Dinâmica · Plano Inclinado & Atrito</span>
+              </div>
+              <h2 class="question-title">Desafio: Condição de Deslizamento</h2>
+              <div class="question-context">
+                "Um bloco repousa sobre uma rampa com atrito $\mu = 0{,}40$. A partir de qual ângulo $\theta$ de inclinação o bloco começa a deslizar?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Quando $\tan\theta > \mu \implies \theta \approx 21{,}8^\circ$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre em $\theta = 45^\circ$, independente do atrito.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-release-block">▶ Soltar Bloco</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Rampa de Inclinação Variável</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-plano"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m2-theta-val">30°</span></div>
+                    <input type="range" class="lab-slider" id="m2-theta-slider" min="10" max="60" step="2" value="30">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Atrito ($\mu$)</span><span class="dial-value" id="m2-mu-val">0,40</span></div>
+                    <input type="range" class="lab-slider" id="m2-mu-slider" min="0.1" max="0.9" step="0.05" value="0.4">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Força Tangencial ($P_x$)</div><div class="readout-num" id="m2-px-num">10,0 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Atrito Máx ($f_{at}$)</div><div class="readout-num" id="m2-fat-num">6,9 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Estado</div><div class="readout-num" id="m2-status-text" style="font-size:0.85rem;">Deslizando</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada M3 -->
+        <div class="station-panel" id="st-mec-3">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="topic-tag">Hidrostática · Princípio de Arquimedes</span>
+              </div>
+              <h2 class="question-title">Desafio: O Peso Aparente</h2>
+              <div class="question-context">
+                "Um corpo com peso real de $13{,}5\,\text{N}$ é totalmente imerso na água ($\rho = 1{,}0\,\text{g/cm}^3$), sofrendo empuxo de $5{,}0\,\text{N}$. Qual será a leitura no dinamômetro?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{aparente}} = P - E = 8{,}5\,\text{N}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{aparente}} = 18{,}5\,\text{N}$</span></button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Balança Hidrostática de Arquimedes</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-hidrostatica"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Densidade do Líquido</span><span class="dial-value" id="m3-fluid-val">1,00 g/cm³</span></div>
+                    <input type="range" class="lab-slider" id="m3-fluid-slider" min="0.7" max="1.5" step="0.05" value="1.0">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Imersão do Bloco</span><span class="dial-value" id="m3-depth-val">50%</span></div>
+                    <input type="range" class="lab-slider" id="m3-depth-slider" min="0" max="1" step="0.1" value="0.5">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Peso Real</div><div class="readout-num" id="m3-preal-num">13,50 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Empuxo ($E$)</div><div class="readout-num" id="m3-empuxo-num">2,50 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Peso Aparente</div><div class="readout-num" id="m3-pap-num" style="color:var(--lilac-dark);">11,00 N</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wordmark">Laura de Faveri</div>
+      <p class="footer-note">Laboratório Virtual de Física Experimental</p>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">← Menu de Módulos</a>
+        <a href="https://lfaveri.github.io/" class="footer-link">lfaveri.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/mod_mecanica.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
