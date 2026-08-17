@@ -1,14 +1,18 @@
 /**
- * MÓDULO 6: FÍSICA MODERNA — LABORATÓRIO VIRTUAL EXPANDIDO
- * 1. Efeito Fotoelétrico de Einstein (ENEM / UNICAMP)
- * 2. Relatividade Restrita & Fator de Lorentz (FUVEST / ITA)
- * 3. Modelo Atômico de Bohr & Transições Quânticas (UNESP / IME)
+ * MÓDULO: FÍSICA MODERNA — LABORATÓRIO VIRTUAL COMPLETO
+ * 1. Efeito Fotoelétrico de Einstein & Metais Fotossensíveis (ENEM / UNICAMP)
+ * 2. Relatividade Restrita & Dilatação Temporal de Lorentz (FUVEST / ITA)
+ * 3. Modelo Atômico de Bohr & Transições Espectrais (UNESP / IME)
+ * 4. Decaimento Radioativo & Meia-Vida Nuclear (ENEM / UFG)
  */
 
-/* --- 1. Efeito Fotoelétrico --- */
+/* ==========================================================================
+   1. EFEITO FOTOELÉTRICO DE EINSTEIN
+   ========================================================================== */
 const simModernaFotoeletrico = (p) => {
   let wavelengthNm = 350;
-  let workFunctionEV = 2.3;
+  let workFunctionEV = 2.14; // Césio = 2.14, Potássio = 2.30, Alumínio = 4.10, Platina = 6.35
+  let metalName = "Césio";
   let emittedElectrons = [];
   const hc = 1240;
 
@@ -25,7 +29,7 @@ const simModernaFotoeletrico = (p) => {
 
   function initControls() {
     const lambdaSlider = document.getElementById("mod1-lambda-slider");
-    const workSlider = document.getElementById("mod1-work-slider");
+    const metalSelect = document.getElementById("mod1-metal-select");
 
     if (lambdaSlider) {
       lambdaSlider.addEventListener("input", (e) => {
@@ -35,10 +39,10 @@ const simModernaFotoeletrico = (p) => {
       });
     }
 
-    if (workSlider) {
-      workSlider.addEventListener("input", (e) => {
+    if (metalSelect) {
+      metalSelect.addEventListener("change", (e) => {
         workFunctionEV = parseFloat(e.target.value);
-        document.getElementById("mod1-work-val").textContent = `${workFunctionEV.toFixed(1)} eV`;
+        metalName = e.target.options[e.target.selectedIndex].text;
         calculatePhysics();
       });
     }
@@ -48,6 +52,7 @@ const simModernaFotoeletrico = (p) => {
     const photonEnergyEV = hc / Math.max(wavelengthNm, 100);
     const eKineticEV = Math.max(0, photonEnergyEV - workFunctionEV);
     const isEmitting = photonEnergyEV >= workFunctionEV;
+    const cutoffLambda = hc / workFunctionEV;
 
     const ePhotElem = document.getElementById("mod1-ephot-num");
     const eKinElem = document.getElementById("mod1-ekin-num");
@@ -56,8 +61,13 @@ const simModernaFotoeletrico = (p) => {
     if (ePhotElem) ePhotElem.textContent = `${photonEnergyEV.toFixed(2).replace(".", ",")} eV`;
     if (eKinElem) eKinElem.textContent = `${eKineticEV.toFixed(2).replace(".", ",")} eV`;
     if (statusElem) {
-      statusElem.textContent = isEmitting ? "Emissão Quântica Ativa (hf > W)" : "Sem emissão (hf < W)";
-      statusElem.style.color = isEmitting ? "#2e8b57" : "#c8435d";
+      if (isEmitting) {
+        statusElem.textContent = `Emissão Ativa (E_cin = ${eKineticEV.toFixed(2)} eV)`;
+        statusElem.style.color = "#2e8b57";
+      } else {
+        statusElem.textContent = `Sem emissão (hf < W = ${workFunctionEV.toFixed(2)} eV, λ_corte = ${cutoffLambda.toFixed(0)} nm)`;
+        statusElem.style.color = "#c8435d";
+      }
     }
   }
 
@@ -67,20 +77,30 @@ const simModernaFotoeletrico = (p) => {
     const photonEnergyEV = hc / wavelengthNm;
     const isEmitting = photonEnergyEV >= workFunctionEV;
 
+    // Placa Fotossensível (Catodo)
     p.fill(80, 70, 95);
     p.stroke(140, 103, 168);
     p.strokeWeight(3);
     p.rect(plateX, plateY, 20, plateH, 3);
+    p.noStroke();
+    p.fill(255);
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text(`${metalName}\nW=${workFunctionEV}eV`, plateX + 10, plateY - 18);
 
+    // Placa Coletora (Anodo)
     const anodeX = p.width - 120;
+    p.fill(60, 52, 75);
+    p.stroke(140, 103, 168);
     p.rect(anodeX, plateY, 20, plateH, 3);
 
+    // Feixe de Fótons Incidentes
     const beamColor = getSpectrumColor(wavelengthNm);
     p.stroke(beamColor[0], beamColor[1], beamColor[2], 180);
     p.strokeWeight(3);
     for (let i = 0; i < 4; i++) {
       let sy = plateY + 30 + i * 40;
-      let waveT = p.frameCount * 0.1;
+      let waveT = p.frameCount * 0.12;
       p.noFill();
       p.beginShape();
       for (let x = 20; x < plateX; x += 5) {
@@ -90,6 +110,7 @@ const simModernaFotoeletrico = (p) => {
       p.endShape();
     }
 
+    // Ejeção Quântica de Fotoelétrons
     if (isEmitting && p.frameCount % 8 === 0) {
       const eKinetic = photonEnergyEV - workFunctionEV;
       const speed = Math.sqrt(eKinetic) * 3.5;
@@ -100,6 +121,7 @@ const simModernaFotoeletrico = (p) => {
       });
     }
 
+    // Movimento dos Fotoelétrons
     p.noStroke();
     p.fill(59, 108, 181);
     for (let i = emittedElectrons.length - 1; i >= 0; i--) {
@@ -114,12 +136,12 @@ const simModernaFotoeletrico = (p) => {
   };
 
   function getSpectrumColor(nm) {
-    if (nm < 380) return [180, 100, 255];
-    if (nm < 450) return [100, 100, 255];
-    if (nm < 520) return [80, 220, 120];
-    if (nm < 590) return [255, 220, 60];
-    if (nm < 700) return [255, 80, 80];
-    return [160, 40, 40];
+    if (nm < 380) return [180, 100, 255]; // UV
+    if (nm < 450) return [100, 100, 255]; // Azul
+    if (nm < 520) return [80, 220, 120];  // Verde
+    if (nm < 590) return [255, 220, 60];  // Amarelo
+    if (nm < 700) return [255, 80, 80];   // Vermelho
+    return [160, 40, 40]; // Infravermelho
   }
 
   p.windowResized = () => {
@@ -131,9 +153,11 @@ const simModernaFotoeletrico = (p) => {
   };
 };
 
-/* --- 2. Relatividade Restrita & Lorentz --- */
+/* ==========================================================================
+   2. RELATIVIDADE RESTRITA & LORENTZ
+   ========================================================================== */
 const simModernaRelatividade = (p) => {
-  let beta = 0.6;
+  let beta = 0.60;
   let photonY = 160;
   let photonDir = 1;
 
@@ -176,20 +200,23 @@ const simModernaRelatividade = (p) => {
   p.draw = () => {
     p.background(18, 16, 28);
     const gamma = 1 / Math.sqrt(Math.max(0.001, 1 - beta * beta));
-    const wagonW = 200 / gamma; // Contração espacial visível
+    const wagonW = 200 / gamma;
     const wagonH = 160;
     const wagonX = p.width * 0.5 - wagonW / 2;
     const wagonY = 100;
 
+    // Vagão em Movimento Relativístico
     p.fill(32, 28, 44);
     p.stroke(140, 103, 168);
     p.strokeWeight(3);
     p.rect(wagonX, wagonY, wagonW, wagonH, 8);
 
+    // Espelhos Superior e Inferior
     p.fill(201, 174, 222);
     p.rect(wagonX + 10, wagonY + 6, wagonW - 20, 8);
     p.rect(wagonX + 10, wagonY + wagonH - 14, wagonW - 20, 8);
 
+    // Fóton do Relógio de Luz
     photonY += photonDir * 4;
     if (photonY > wagonY + wagonH - 20) photonDir = -1;
     if (photonY < wagonY + 20) photonDir = 1;
@@ -208,7 +235,9 @@ const simModernaRelatividade = (p) => {
   };
 };
 
-/* --- 3. Modelo Atômico de Bohr --- */
+/* ==========================================================================
+   3. MODELO ATÔMICO DE BOHR
+   ========================================================================== */
 const simModernaBohr = (p) => {
   let currentLevel = 2; // n = 1, 2, 3, 4
   let photonPulse = null;
@@ -241,7 +270,6 @@ const simModernaBohr = (p) => {
         if (currentLevel > 1) {
           currentLevel--;
           updateBohrEnergy();
-          // Dispara fóton emitido
           photonPulse = { x: p.width * 0.5, y: p.height * 0.5, r: 0 };
         }
       });
@@ -272,7 +300,7 @@ const simModernaBohr = (p) => {
     p.textAlign(p.CENTER, p.CENTER);
     p.text("+Ze", cx, cy);
 
-    // Órbitas quantizadas n=1,2,3,4
+    // Órbitas de Bohr
     p.noFill();
     p.stroke(140, 103, 168, 80);
     p.strokeWeight(1.5);
@@ -281,7 +309,7 @@ const simModernaBohr = (p) => {
       p.ellipse(cx, cy, r * 2, r * 2);
     }
 
-    // Elétron girando no nível atual
+    // Elétron
     const orbitR = currentLevel * 35;
     const ang = p.frameCount * 0.04;
     const ex = cx + Math.cos(ang) * orbitR;

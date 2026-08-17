@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 03 · termologia & termodinâmica</span>
-            <h1 class="subpage-title">Laboratório de Gases, Carnot & Calorimetria</h1>
+            <h1 class="subpage-title">Laboratório Térmico, Calorimetria & Gases</h1>
           </div>
           <p class="subpage-desc">
-            Equação de Clapeyron, diagramas de transformações gasosas, ciclo de Carnot e dilatação térmica com questões de vestibulares.
+            Propagação de calor (condução, convecção e radiação), calorimetria e mudanças de fase, transformações gasosas e Ciclo de Carnot.
           </p>
         </div>
       </div>
@@ -59,23 +59,151 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-termo-1">
-            <span class="station-number">01</span><span>Gases Ideais & Diagrama PxV (ENEM / FUVEST)</span>
+          <button class="station-tab is-active" data-station="st-termo-0">
+            <span class="station-number">01</span><span>Propagação de Calor (Condução / Convecção / Radiação)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-cal">
+            <span class="station-number">02</span><span>Calorimetria & Mudança de Fase (ENEM / FUVEST)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-1">
+            <span class="station-number">03</span><span>Gases Ideais & Diagrama PxV (UNICAMP / UNESP)</span>
           </button>
           <button class="station-tab" data-station="st-termo-2">
-            <span class="station-number">02</span><span>Ciclo de Carnot & Rendimento (UNICAMP / ITA)</span>
-          </button>
-          <button class="station-tab" data-station="st-termo-3">
-            <span class="station-number">03</span><span>Dilatação Térmica Linear (UNESP / UFMG)</span>
+            <span class="station-number">04</span><span>Ciclo de Carnot & Rendimento (ITA / IME)</span>
           </button>
         </div>
 
-        <!-- Bancada T1 -->
-        <div class="station-panel is-active" id="st-termo-1">
+        <!-- Bancada T0: Propagação de Calor -->
+        <div class="station-panel is-active" id="st-termo-0">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
+                <span class="topic-tag">Termofísica · Processos de Transmissão de Calor</span>
+              </div>
+              <h2 class="question-title">Desafio: Formas de Propagação do Calor</h2>
+              <div class="question-context">
+                "No vácuo espacial entre o Sol e a Terra, o calor propaga-se exclusivamente por qual mecanismo físico?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>Condução térmica através do éter luminoso.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Convecção de partículas de ar cósmico.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>Radiação (ou irradiação) por ondas eletromagnéticas (infravermelho/luz).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional entre planetas.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Advecção térmica de fluidos interestelares.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  A <strong>condução</strong> e a <strong>convecção</strong> exigem matéria (meio material) para ocorrer. No vácuo cósmico, apenas a <strong>radiação eletromagnética</strong> (Lei de Stefan-Boltzmann) consegue propagar energia térmica.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Aparato: Transmissão Térmica</span>
+                <div style="display:flex; gap:6px;">
+                  <button class="btn-lab btn-lab-primary is-active" id="btn-prop-conducao" style="font-size:0.7rem; padding:3px 8px;">Condução</button>
+                  <button class="btn-lab btn-lab-secondary" id="btn-prop-conveccao" style="font-size:0.7rem; padding:3px 8px;">Convecção</button>
+                  <button class="btn-lab btn-lab-secondary" id="btn-prop-radiacao" style="font-size:0.7rem; padding:3px 8px;">Radiação</button>
+                </div>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-propagacao"></div>
+              <div class="apparatus-controls">
+                
+                <!-- Controles para Condução -->
+                <div class="controls-grid" id="controls-conducao">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Material da Barra</span></div>
+                    <select id="t-prop-mat-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
+                      <option value="390">Cobre (k = 390 W/m·K)</option>
+                      <option value="205">Alumínio (k = 205 W/m·K)</option>
+                      <option value="80">Ferro (k = 80 W/m·K)</option>
+                      <option value="0.8">Vidro (k = 0,8 W/m·K)</option>
+                    </select>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Temp. Fonte Quente</span><span class="dial-value" id="t-prop-thot-val">100 °C</span></div>
+                    <input type="range" class="lab-slider" id="t-prop-thot-slider" min="40" max="200" step="10" value="100">
+                  </div>
+                </div>
+
+                <!-- Controles para Convecção -->
+                <div class="controls-grid" id="controls-conveccao" style="display:none;">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Potência da Chama</span><span class="dial-value" id="t-prop-flame-val">50 %</span></div>
+                    <input type="range" class="lab-slider" id="t-prop-flame-slider" min="10" max="100" step="5" value="50">
+                  </div>
+                </div>
+
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Fluxo Térmico (Φ)</div><div class="readout-num" id="t-prop-readout-1">312,0 W</div></div>
+                  <div class="readout-item"><div class="readout-name">Condutibilidade (k)</div><div class="readout-num" id="t-prop-readout-2">390 W/m·K</div></div>
+                  <div class="readout-item"><div class="readout-name">Gradiente Térmico</div><div class="readout-num" id="t-prop-readout-3">ΔT = 80 °C</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada T_CAL: Calorimetria & Mudança de Fase -->
+        <div class="station-panel" id="st-termo-cal">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST / UNICAMP</span>
+                <span class="topic-tag">Calorimetria · Calor Latente de Fusão</span>
+              </div>
+              <h2 class="question-title">Desafio: Fusão Completa de Gelo</h2>
+              <div class="question-context">
+                "Para fundir totalmente $100\,\text{g}$ de gelo a $0\,^\circ\text{C}$ ($L_f = 80\,\text{cal/g}$), quanto calor deve ser fornecido e o que ocorre com a temperatura durante a transição?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$Q = 8000\,\text{cal}$ e a temperatura permanece constante em $0\,^\circ\text{C}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$Q = 800\,\text{cal}$ e a temperatura sobe para $10\,^\circ\text{C}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$Q = 80000\,\text{cal}$ e a água vaporiza instantaneamente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$Q = 5400\,\text{cal}$ e a temperatura cai para $-10\,^\circ\text{C}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$Q = 0\,\text{cal}$ pois o gelo funde espontaneamente sem absorver calor.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Pela equação do calor latente: $Q = m \cdot L_f = 100 \cdot 80 = 8000\,\text{cal}$. Durante qualquer mudança de estado físico em substâncias puras à pressão constante, toda a energia térmica é gasta no rompimento de ligações intermoleculares, mantendo a temperatura perfeitamente constante no patamar.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Curva de Aquecimento da Água (Gelo → Água → Vapor)</span>
+                <div style="display:flex; gap:6px;">
+                  <button class="btn-lab btn-lab-primary" id="btn-calor-toggle" style="font-size:0.7rem; padding:3px 8px;">🔥 Iniciar Aquecimento</button>
+                  <button class="btn-lab btn-lab-secondary" id="btn-calor-reset" style="font-size:0.7rem; padding:3px 8px;">↺ Reiniciar</button>
+                </div>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-calorimetria"></div>
+              <div class="apparatus-controls">
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Temperatura ($T$)</div><div class="readout-num" id="t-cal-temp-num">-20,0 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Calor Fornecido ($Q$)</div><div class="readout-num" id="t-cal-q-num">0 cal</div></div>
+                  <div class="readout-item"><div class="readout-name">Fase Atual</div><div class="readout-num" id="t-cal-phase-text" style="font-size:0.85rem;">Gelo Sólido</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada T1: Gases Ideais -->
+        <div class="station-panel" id="st-termo-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP / UNESP</span>
                 <span class="topic-tag">Gases Ideais · Equação de Clapeyron</span>
               </div>
               <h2 class="question-title">Desafio: Transformação Isotérmica</h2>
@@ -85,6 +213,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A pressão dobra de valor ($P_1 V_1 = P_2 V_2$).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A pressão cai pela metade.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A pressão permanece inalterada.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A pressão quadruplica ($4\times$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>O gás condensa instantaneamente em líquido.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -97,7 +228,13 @@
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Êmbolo de Gás & Traçador P x V</span></div>
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Êmbolo de Gás & Traçador P x V</span>
+                <div style="display:flex; gap:6px;">
+                  <button class="btn-lab btn-lab-secondary" id="btn-gas-iso-t" style="font-size:0.7rem; padding:3px 6px;">Isotérmica</button>
+                  <button class="btn-lab btn-lab-secondary" id="btn-gas-iso-p" style="font-size:0.7rem; padding:3px 6px;">Isobárica</button>
+                </div>
+              </div>
               <div class="apparatus-canvas-wrap" id="canvas-termo-gases"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
@@ -119,12 +256,12 @@
           </div>
         </div>
 
-        <!-- Bancada T2 -->
+        <!-- Bancada T2: Ciclo de Carnot -->
         <div class="station-panel" id="st-termo-2">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
                 <span class="topic-tag">Termodinâmica · Rendimento de Carnot</span>
               </div>
               <h2 class="question-title">Desafio: Eficiência Máxima</h2>
@@ -134,6 +271,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\eta = 1 - \frac{300}{600} = 50\%$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\eta = 100\%$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\eta = 25\%$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$\eta = 75\%$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$\eta = 0\%$ pois é proibido transformar calor em trabalho.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -168,56 +308,21 @@
           </div>
         </div>
 
-        <!-- Bancada T3 -->
-        <div class="station-panel" id="st-termo-3">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unesp">UNESP</span>
-                <span class="topic-tag">Termologia · Dilatação Térmica Linear</span>
-              </div>
-              <h2 class="question-title">Desafio: Expansão de Trilhos</h2>
-              <div class="question-context">
-                "Uma barra de alumínio de comprimento inicial $L_0 = 1{,}0\,\text{m}$ ($\alpha = 2{,}4 \times 10^{-5}\,^\circ\text{C}^{-1}$) sofre variação térmica de $\Delta T = 50\,^\circ\text{C}$. A dilatação linear sofrida é:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta L = 1{,}2\,\text{mm}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\Delta L = 12\,\text{mm}$</span></button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Dilatômetro de Precisão</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-termo-dilatacao"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Variação $\Delta T$</span><span class="dial-value">50 °C</span></div>
-                    <input type="range" class="lab-slider" id="t3-dt-slider" min="10" max="100" step="5" value="50">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Dilatação ($\Delta L$)</div><div class="readout-num" id="t3-dl-num">+1,20 mm</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Termologia</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, ENEM, UFG, UFMT, PUC, FEI</span>
+          <span class="section-head-tag">ENEM, FUVEST, UNICAMP, UNESP, ITA, UFG, UFMT, PUC, FEI</span>
         </div>
 
         <div class="bank-filters">
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
-          <button class="bank-filter-btn" data-filter="militares">Militares (ITA)</button>
+          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
           <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFG/UFMT)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
         </div>
@@ -227,15 +332,18 @@
           <!-- Questão 1: FUVEST -->
           <div class="bank-question-card" data-board="paulistas fuvest" data-topic="calorimetria">
             <div class="bank-card-header">
-              <span class="vestibular-badge badge-fuvest">FUVEST 2020</span>
-              <span class="topic-tag">Calorimetria · Trocas de Calor & Equilíbrio</span>
+              <span class="vestibular-badge badge-fuvest">FUVEST 2021</span>
+              <span class="topic-tag">Calorimetria · Trocas de Calor & Equilíbrio Térmico</span>
             </div>
             <p class="bank-question-text">
-              Em um calorímetro ideal misturam-se $m_1 = 200\,\text{g}$ de água a $80\,^\circ\text{C}$ com $m_2 = 100\,\text{g}$ de água a $20\,^\circ\text{C}$. Desprezando perdas para o ambiente, a temperatura final de equilíbrio térmico é:
+              Em um calorímetro ideal misturam-se $m_1 = 200\,\text{g}$ de água a $80\,^\circ\text{C}$ com $m_2 = 100\,\text{g}$ de água a $20\,^\circ\text{C}$. Desprezando perdas para o ambiente e capacidade térmica do recipiente, a temperatura final de equilíbrio térmico é:
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$T_{\text{eq}} = 60\,^\circ\text{C}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$T_{\text{eq}} = 50\,^\circ\text{C}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$T_{\text{eq}} = 40\,^\circ\text{C}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$T_{\text{eq}} = 70\,^\circ\text{C}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$T_{\text{eq}} = 30\,^\circ\text{C}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -243,7 +351,9 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                $\sum Q = 0 \implies m_1 c (T - 80) + m_2 c (T - 20) = 0 \implies 200(T - 80) + 100(T - 20) = 0 \implies 2(T - 80) + (T - 20) = 0 \implies 3T = 180 \implies T = 60\,^\circ\text{C}$.
+                $\sum Q = 0 \implies m_1 c (T - 80) + m_2 c (T - 20) = 0$<br>
+                $200(T - 80) + 100(T - 20) = 0 \implies 2(T - 80) + (T - 20) = 0$<br>
+                $2T - 160 + T - 20 = 0 \implies 3T = 180 \implies T = 60\,^\circ\text{C}$.
               </div>
             </div>
           </div>
@@ -258,8 +368,11 @@
               Em uma expansão adiabática rápida de um gás ideal ($Q = 0$), o trabalho realizado pelo gás sobre a vizinhança é $\mathcal{W} = +300\,\text{J}$. A variação da energia interna $\Delta U$ do gás e o comportamento de sua temperatura são:
             </p>
             <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta U = -300\,\text{J}$ e o gás esfria ($\Delta T < 0$).</span></button>
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta U = -300\,\text{J}$ e o gás resfria ($\Delta T < 0$).</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\Delta U = +300\,\text{J}$ e o gás esquenta.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\Delta U = 0\,\text{J}$ e a temperatura é constante.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$\Delta U = -600\,\text{J}$ e o gás condensa.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$\Delta U = +150\,\text{J}$ e a pressão dobra.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -267,7 +380,64 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                Pela 1ª Lei da Termodinâmica: $\Delta U = Q - \mathcal{W}$. Sendo $Q = 0$ (adiabática): $\Delta U = 0 - 300 = -300\,\text{J}$. Como a energia interna é proporcional à temperatura ($\Delta U = \frac{3}{2} n R \Delta T$), o gás necessariamente se resfria.
+                Pela 1ª Lei da Termodinâmica: $\Delta U = Q - \mathcal{W}$. Sendo $Q = 0$ (processo adiabático): $\Delta U = 0 - 300 = -300\,\text{J}$. Como a energia interna depende exclusivamente da temperatura ($\Delta U = \frac{3}{2} n R \Delta T$), a temperatura do gás necessariamente diminui.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 3: ENEM -->
+          <div class="bank-question-card" data-board="enem" data-topic="propagacao">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-enem">ENEM 2020</span>
+              <span class="topic-tag">Termofísica · Garrafa Térmica (Vaso de Dewar)</span>
+            </div>
+            <p class="bank-question-text">
+              Uma garrafa térmica eficiente possui paredes duplas de vidro espelhadas com vácuo entre elas e tampa de plástico isolante. As superfícies espelhadas e o vácuo têm como objetivo principal evitar, respectivamente, as perdas de calor por:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Radiação térmica (por reflexão) e Condução/Convecção (pela ausência de matéria).</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Condução e Radiação.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Convecção e Condensação.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Evaporação e Ebulição.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Radiação e Fusão nuclear.</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                - As <strong>paredes espelhadas</strong> refletem as ondas de radiação infravermelha de volta para o interior (evitando perdas por <em>radiação</em>).<br>
+                - O <strong>vácuo</strong> entre as paredes impede que haja moléculas para transmitir calor por contato direto (<em>condução</em>) ou por fluxo de matéria (<em>convecção</em>).
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 4: UNESP -->
+          <div class="bank-question-card" data-board="paulistas unesp" data-topic="dilatacao">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unesp">UNESP 2022</span>
+              <span class="topic-tag">Termologia · Dilatação Térmica Volumétrica</span>
+            </div>
+            <p class="bank-question-text">
+              Um tanque de combustível de aço ($V_0 = 50\,\text{L}$, coeficiente de dilatação volumétrica $\gamma_{\text{aço}} = 3{,}6 \times 10^{-5}\,^\circ\text{C}^{-1}$) está completamente cheio de gasolina ($\gamma_{\text{gas}} = 9{,}6 \times 10^{-4}\,^\circ\text{C}^{-1}$) a $10\,^\circ\text{C}$. Ao ser deixado ao sol atingindo $30\,^\circ\text{C}$ ($\Delta T = 20\,^\circ\text{C}$), o volume de gasolina transbordado é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\Delta V_{\text{aparente}} = 0{,}924\,\text{L} = 924\,\text{mL}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\Delta V_{\text{aparente}} = 1{,}848\,\text{L}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\Delta V_{\text{aparente}} = 0{,}036\,\text{L}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$\Delta V_{\text{aparente}} = 5{,}000\,\text{L}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$\Delta V_{\text{aparente}} = 0{,}120\,\text{L}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                O volume que transborda corresponde à dilatação aparente: $\Delta V_{\text{ap}} = V_0 \cdot \gamma_{\text{aparente}} \cdot \Delta T$<br>
+                $\gamma_{\text{ap}} = \gamma_{\text{gasolina}} - \gamma_{\text{aço}} = 96 \times 10^{-5} - 3{,}6 \times 10^{-5} = 92{,}4 \times 10^{-5}\,^\circ\text{C}^{-1}$<br>
+                $\Delta V_{\text{ap}} = 50 \cdot (92{,}4 \times 10^{-5}) \cdot 20 = 1000 \cdot 92{,}4 \times 10^{-5} = 0{,}924\,\text{L} = 924\,\text{mL}$.
               </div>
             </div>
           </div>

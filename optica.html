@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 04 · óptica geométrica</span>
-            <h1 class="subpage-title">Laboratório de Refração, Lentes & Visão</h1>
+            <h1 class="subpage-title">Laboratório de Lentes, Espelhos & Refração</h1>
           </div>
           <p class="subpage-desc">
-            Simulações ópticas com laser, reflexão total em fibras ópticas, banco de lentes delgadas e questões resolvidas de vestibulares.
+            Banco óptico interativo com lentes convergentes e divergentes, espelhos esféricos, traçado de raios notáveis e Lei de Snell-Descartes.
           </p>
         </div>
       </div>
@@ -59,29 +59,32 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-opt-1">
-            <span class="station-number">01</span><span>Refração & Reflexão Total (ENEM / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-opt-2">
+            <span class="station-number">01</span><span>Banco Óptico: Lentes Convergentes & Divergentes (FUVEST / UNESP)</span>
           </button>
-          <button class="station-tab" data-station="st-opt-2">
-            <span class="station-number">02</span><span>Lentes Delgadas & Gauss (FUVEST / UNESP)</span>
+          <button class="station-tab" data-station="st-opt-1">
+            <span class="station-number">02</span><span>Refração Laser & Reflexão Total (ENEM / UNICAMP)</span>
           </button>
         </div>
 
-        <!-- Bancada O1 -->
-        <div class="station-panel is-active" id="st-opt-1">
+        <!-- Bancada O2: Banco Óptico de Lentes e Espelhos -->
+        <div class="station-panel is-active" id="st-opt-2">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
-                <span class="topic-tag">Óptica · Refração & Fibra Óptica</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / UNESP</span>
+                <span class="topic-tag">Óptica Geométrica · Lentes Esféricas & Equação de Gauss</span>
               </div>
-              <h2 class="question-title">Desafio: Reflexão Total</h2>
+              <h2 class="question-title">Desafio: Formação de Imagem em Lente Convergente</h2>
               <div class="question-context">
-                "Para que ocorra a reflexão total em uma interface de dois meios ópticos, a luz deve incidir:"
+                "Um objeto real de altura $h = 4\,\text{cm}$ está posicionado a $p = 100\,\text{cm}$ de uma lente convergente de distância focal $f = 50\,\text{cm}$ ($p = 2f$). A imagem conjugada será:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Do meio mais refringente para o menos refringente com ângulo $\theta_1 > \theta_L$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Do ar para a água com qualquer ângulo.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho que o objeto ($p' = 100\,\text{cm}$, $A = -1$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Virtual, direita e maior que o objeto.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Real, direita e menor que o objeto.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Virtual, invertida e com o dobro do tamanho.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Imprópria, localizada no infinito.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -89,17 +92,82 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Pela Lei de Snell: $n_1 \sin\theta_1 = n_2 \sin\theta_2$. Quando $n_1 > n_2$, para ângulos superiores ao ângulo limite $\theta_L = \arcsin(n_2/n_1)$, não há raio refratado ($\sin\theta_2 > 1$), ocorrendo 100% de reflexão interna.
+                  Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{50} - \frac{1}{100} = \frac{1}{100} \implies p' = 100\,\text{cm}$.<br>
+                  Aumento linear: $A = -\frac{p'}{p} = -\frac{100}{100} = -1$ (Sinal negativo indica imagem <strong>invertida</strong>, e magnitude 1 indica tamanho <strong>idêntico</strong>).
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco de Refração Laser</span></div>
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Banco Óptico & Traçado de Raios Notáveis</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-optica-lente"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Elemento Óptico</span></div>
+                    <select id="o2-type-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
+                      <option value="lente_conv">Lente Convergente (Biconvexa)</option>
+                      <option value="lente_div">Lente Divergente (Bicôncava)</option>
+                      <option value="espelho_conc">Espelho Esférico Côncavo</option>
+                      <option value="espelho_conv">Espelho Esférico Convexo</option>
+                    </select>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Posição do Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
+                    <input type="range" class="lab-slider" id="o2-p-slider" min="30" max="220" step="5" value="120">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Distância Focal ($f$)</span><span class="dial-value" id="o2-f-val">50 cm</span></div>
+                    <input type="range" class="lab-slider" id="o2-f-slider" min="30" max="100" step="5" value="50">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">85,7 cm</div></div>
+                  <div class="readout-item"><div class="readout-name">Aumento & Vergência</div><div class="readout-num" id="o2-a-num">-0,71× (+2,0 di)</div></div>
+                  <div class="readout-item"><div class="readout-name">Classificação</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real, Invertida e Menor</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada O1: Refração & Snell -->
+        <div class="station-panel" id="st-opt-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="topic-tag">Óptica · Refração Luminosa & Fibra Óptica</span>
+              </div>
+              <h2 class="question-title">Desafio: Condições para Reflexão Total</h2>
+              <div class="question-context">
+                "Nas fibras ópticas de telecomunicações, os pulsos de luz propagam-se por reflexão total sucessiva. Para que isso ocorra, o núcleo da fibra deve ter:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Índice de refração maior que o da casca ($n_{\text{núcleo}} > n_{\text{casca}}$) e ângulo $\theta > \theta_L$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Índice de refração menor que o da casca.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Mesmo índice de refração que o ar externo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Superfície fosca para absorver o feixe.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ângulo de incidência rigorosamente igual a $0^\circ$.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  A reflexão interna total só é fisicamente possível quando a luz se propaga do meio <strong>mais refringente para o menos refringente</strong> com ângulo de incidência superior ao ângulo limite $\theta_L = \arcsin(n_2/n_1)$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco de Refração Laser & Interface</span></div>
               <div class="apparatus-canvas-wrap" id="canvas-optica-snell"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Ângulo de Incidência</span><span class="dial-value" id="o1-theta-val">45°</span></div>
+                    <div class="dial-header"><span class="dial-label">Ângulo Incidência</span><span class="dial-value" id="o1-theta-val">45°</span></div>
                     <input type="range" class="lab-slider" id="o1-theta-slider" min="0" max="85" step="5" value="45">
                   </div>
                   <div class="control-dial">
@@ -121,65 +189,15 @@
           </div>
         </div>
 
-        <!-- Bancada O2 -->
-        <div class="station-panel" id="st-opt-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
-                <span class="topic-tag">Óptica · Lentes Convergentes</span>
-              </div>
-              <h2 class="question-title">Desafio: Aumento Linear</h2>
-              <div class="question-context">
-                "Um objeto está posicionado no dobro da distância focal ($p = 2f$) de uma lente delgada. A imagem formada será:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho ($p' = 2f$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Virtual e ampliada.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{f} - \frac{1}{2f} = \frac{1}{2f} \implies p' = 2f$. Aumento $A = -\frac{p'}{p} = -1$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco Óptico & Raios Notáveis</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-optica-lente"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Posição Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
-                    <input type="range" class="lab-slider" id="o2-p-slider" min="30" max="200" step="5" value="120">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Distância Focal ($f$)</span><span class="dial-value" id="o2-f-val">60 cm</span></div>
-                    <input type="range" class="lab-slider" id="o2-f-slider" min="30" max="100" step="5" value="60">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">120,0 cm</div></div>
-                  <div class="readout-item"><div class="readout-name">Aumento ($A$)</div><div class="readout-num" id="o2-a-num">-1,00×</div></div>
-                  <div class="readout-item"><div class="readout-name">Natureza</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real e Invertida</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Óptica</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, UNIFESP, ENEM, ITA, UFG, PUC</span>
+          <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Óptica Geométrica</h2>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, UNIFESP, ENEM, ITA, PUC, FEI</span>
         </div>
 
         <div class="bank-filters">
@@ -201,8 +219,11 @@
               Uma pessoa com miopia tem dificuldade para enxergar objetos distantes porque a imagem se forma antes da retina. O tipo de lente e a vergência adequada para a correção são:
             </p>
             <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Lente divergente (vergência negativa), divergindo os raios até a retina.</span></button>
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Lente divergente (vergência negativa), divergindo os raios até que o foco coincida com a retina.</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Lente convergente (vergência positiva), convergindo mais rápido os raios.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Lente cilíndrica de vergência nula.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Lente prismática plana.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Espelho esférico côncavo.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -210,7 +231,7 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                Na miopia, o globo ocular é mais longo que o normal, fazendo com que o feixe convirja antes da retina. Para empurrar o foco para trás até a retina, é necessária uma lente divergente (foco $f < 0 \implies$ vergência negativa).
+                Na miopia, o olho é excessivamente convergente ou alongado anteroposteriormente, formando o foco antes da retina. Para compensar o excesso de convergência, receita-se uma <strong>lente divergente</strong> (distância focal negativa $f < 0 \implies C = 1/f < 0$).
               </div>
             </div>
           </div>
@@ -218,7 +239,7 @@
           <!-- Questão 2: UNESP -->
           <div class="bank-question-card" data-board="paulistas unesp" data-topic="espelhos">
             <div class="bank-card-header">
-              <span class="vestibular-badge badge-unesp">UNESP 2020</span>
+              <span class="vestibular-badge badge-unesp">UNESP 2021</span>
               <span class="topic-tag">Espelhos Esféricos · Espelho Convexo de Segurança</span>
             </div>
             <p class="bank-question-text">
@@ -227,6 +248,9 @@
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Sempre virtual, direita e menor que o objeto, ampliando o campo visual.</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre real, invertida e maior que o objeto.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Sempre real, direita e de mesmo tamanho.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Virtual, invertida e ampliada.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Real ou virtual, dependendo da distância do objeto ao vértice.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -235,6 +259,33 @@
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
                 O espelho esférico convexo ($f < 0$) possui a propriedade fundamental de formar, para qualquer posição de objeto real, uma imagem <strong>virtual, direita e reduzida</strong>, permitindo abarcar um campo de visão muito mais amplo.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 3: FUVEST -->
+          <div class="bank-question-card" data-board="paulistas fuvest" data-topic="refraçao">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-fuvest">FUVEST 2020</span>
+              <span class="topic-tag">Refração · Dioptro Plano & Profundidade Aparente</span>
+            </div>
+            <p class="bank-question-text">
+              Um observador na borda de uma piscina cheia de água ($n_{\text{água}} = 4/3$) olha quase perpendicularmente para uma moeda depositada no fundo a uma profundidade real de $h = 2{,}0\,\text{m}$. A profundidade aparente $h'$ em que a moeda aparenta estar para o observador no ar ($n_{\text{ar}} = 1{,}0$) é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$h' = 1{,}5\,\text{m}$ (A moeda parece estar mais próxima da superfície).</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$h' = 2{,}67\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$h' = 2{,}0\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$h' = 0{,}75\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$h' = 3{,}0\,\text{m}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Pela equação do dioptro plano para pequenos ângulos: $\frac{h'}{h} = \frac{n_{\text{observador}}}{n_{\text{objeto}}} \implies \frac{h'}{2{,}0} = \frac{1{,}0}{4/3} = \frac{3}{4} \implies h' = 2{,}0 \cdot \frac{3}{4} = 1{,}5\,\text{m}$.
               </div>
             </div>
           </div>

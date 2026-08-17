@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Eletrostática, Circuitos & Indução</h1>
           </div>
           <p class="subpage-desc">
-            Simulações interativas de Coulomb, leis de circuitos elétricos, capacitores e leis de Faraday-Lenz com banco completo de questões.
+            Simulações interativas de Coulomb, leis de circuitos elétricos, capacitores e leis de Faraday-Lenz com banco de questões de 5 alternativas.
           </p>
         </div>
       </div>
@@ -60,16 +60,16 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-eletro-1">
-            <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST)</span>
+            <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST / ITA)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-2">
             <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-3">
-            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST / ITA)</span>
+            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST / UNESP)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-4">
-            <span class="station-number">04</span><span>Capacitores & Campo Elétrico (UNESP / IME)</span>
+            <span class="station-number">04</span><span>Capacitores & Campo Elétrico (IME / FEI)</span>
           </button>
         </div>
 
@@ -78,17 +78,19 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
                 <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
               </div>
               <h2 class="question-title">Desafio: A Razão da Distância</h2>
               <div class="question-context">
-                "Duas cargas pontuais $+Q$ e $-Q$ separadas por $d$ sentem força $F_0$. Ao reduzir a distância para $d/3$, qual será a nova força de atração?"
+                "Duas cargas pontuais $+Q$ e $-Q$ separadas por $d$ sentem força de atração $F_0$. Ao reduzir a distância para $d/3$, qual será a nova força?"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$F = F_0 / 9$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 3 F_0$</span></button>
                 <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>$F = 9 F_0$ (Multiplica por 9)</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$F = F_0 / 3$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$F = F_0$ (Inalterada)</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">⚡ Demonstrar $d/3$ na Simulação</button>
@@ -125,7 +127,7 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
                 <span class="topic-tag">Eletrodinâmica · Primeira Lei de Ohm</span>
               </div>
               <h2 class="question-title">Desafio: Corrente & Efeito Joule</h2>
@@ -135,6 +137,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$I = 2\,\text{A}$ e Potência $P = 24\,\text{W}$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$I = 0{,}5\,\text{A}$ e Potência $P = 6\,\text{W}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$I = 72\,\text{A}$ e Potência $P = 144\,\text{W}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$I = 2\,\text{A}$ e Potência $P = 12\,\text{W}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$I = 6\,\text{A}$ e Potência $P = 72\,\text{W}$</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -174,7 +179,7 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / UNESP</span>
                 <span class="topic-tag">Eletromagnetismo · Lei de Faraday-Lenz</span>
               </div>
               <h2 class="question-title">Desafio: Indução Eletromagnética</h2>
@@ -184,6 +189,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Cria um polo norte na face da bobina, opondo-se à aproximação (Lei de Lenz).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Atrai o ímã acelerando seu movimento indefinidamente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Anula o campo magnético em todo o universo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Cria apenas calor sem gerar qualquer força magnética.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Depende da massa do ímã, mas não de sua velocidade.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-primary" id="btn-magnet-in">⚡ Injetar Ímã na Bobina</button>
@@ -208,7 +216,7 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
+                <span class="vestibular-badge badge-ime">IME / FEI</span>
                 <span class="topic-tag">Eletrostática · Capacitores Planos</span>
               </div>
               <h2 class="question-title">Desafio: Capacitância e Distância</h2>
@@ -218,6 +226,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$C = 2 C_0$ (A capacitância dobra).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$C = C_0 / 2$ (A capacitância cai pela metade).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$C = 4 C_0$ (Quadruplica).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$C = C_0 / 4$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$C = C_0$ (Inalterada).</span></button>
               </div>
             </div>
             <div class="apparatus-card">
@@ -251,19 +262,19 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Eletromagnetismo</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFG, UFMT, IFMT, FEI, PUC</span>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, UNIFESP, ITA, IME, ENEM, UFMG, UFG, FEI, PUC</span>
         </div>
 
         <div class="bank-filters">
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
           <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
-          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFMG/UFG/UFMT/IFMT)</button>
+          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFMG/UFG)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
         </div>
 
@@ -281,17 +292,23 @@
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Em paralelo ($R_{\text{eq}} = 5\,\Omega$), dissipando $P = 2880\,\text{W}$.</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Em série ($R_{\text{eq}} = 20\,\Omega$), dissipando $P = 720\,\text{W}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Em paralelo, dissipando $P = 720\,\text{W}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Em série, dissipando $P = 2880\,\text{W}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ambas as configurações dissipam rigorosamente a mesma potência de $1440\,\text{W}$.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-eletro-2" data-params='{"e1-u-slider": 24, "e1-r-slider": 5}'>
-                ⚡ Simular Parâmetros no Circuito
+                ⚡ Simular no Circuito
               </button>
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                Pela fórmula $P = U^2 / R_{\text{eq}}$: em paralelo, $R_{\text{eq}} = 10/2 = 5\,\Omega \implies P = 120^2 / 5 = 14400 / 5 = 2880\,\text{W}$. Em série, $R_{\text{eq}} = 20\,\Omega \implies P = 120^2 / 20 = 720\,\text{W}$. Portanto, a potência é 4 vezes maior em paralelo!
+                Pela fórmula $P = U^2 / R_{\text{eq}}$:<br>
+                - Em paralelo: $R_{\text{eq}} = 10/2 = 5\,\Omega \implies P = \frac{120^2}{5} = \frac{14400}{5} = 2880\,\text{W}$.<br>
+                - Em série: $R_{\text{eq}} = 20\,\Omega \implies P = \frac{120^2}{20} = 720\,\text{W}$.<br>
+                Portanto, a potência é 4 vezes maior em paralelo!
               </div>
             </div>
           </div>
@@ -308,6 +325,9 @@
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$F = 0{,}10\,\text{N}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 1{,}00\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$F = 0{,}01\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$F = 5{,}00\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$F = 0\,\text{N}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -320,31 +340,7 @@
             </div>
           </div>
 
-          <!-- Questão 3: UFMG / UFG -->
-          <div class="bank-question-card" data-board="federais ufmg ufg" data-topic="capacitores">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-ufmg">UFMG / UFG</span>
-              <span class="topic-tag">Eletrostática · Energia em Capacitores</span>
-            </div>
-            <p class="bank-question-text">
-              Um capacitor de placas paralelas de $C = 100\,\mu\text{F}$ é carregado por uma fonte de tensão até atingir $U = 20\,\text{V}$. A energia eletrostática armazenada no capacitor é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 0{,}02\,\text{J} = 20\,\text{mJ}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 2{,}00\,\text{J}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                $E = \frac{1}{2} C U^2 = \frac{1}{2} (100 \times 10^{-6}) \cdot (20)^2 = 50 \times 10^{-6} \cdot 400 = 0{,}02\,\text{J} = 20\,\text{mJ}$.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 4: ENEM -->
+          <!-- Questão 3: ENEM -->
           <div class="bank-question-card" data-board="enem" data-topic="circuitos">
             <div class="bank-card-header">
               <span class="vestibular-badge badge-enem">ENEM 2020</span>
@@ -355,7 +351,10 @@
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Diminuída, para aumentar a corrente e a potência dissipada ($P = U^2/R$).</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aumentada, para resistir mais à corrente.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aumentada, para resistir mais à passagem de corrente.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Mantida inalterada, variando apenas a vazão de elétrons na tomada.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Invertida de polaridade magnética.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Desconectada para operar por indução capacitiva.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -363,7 +362,7 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                Como a tensão da rede $U$ é fixa (ex.: $220\,\text{V}$), pela fórmula $P = U^2 / R$, para aumentar a potência $P$ (aquecer mais a água no inverno), é necessário diminuir a resistência $R$ ativa do circuito.
+                Como a tensão $U$ da rede elétrica residencial é constante (ex.: $220\,\text{V}$), pela relação $P = \frac{U^2}{R}$, para aumentar a potência dissipada $P$ (aquecer mais a água no inverno), é obrigatório <strong>reduzir o comprimento / valor da resistência $R$</strong>.
               </div>
             </div>
           </div>

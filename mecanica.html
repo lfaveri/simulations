@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Cinemática, Dinâmica & Fluídos</h1>
           </div>
           <p class="subpage-desc">
-            Simulações experimentais multifatoriais com variáveis ajustáveis e banco completo de exercícios comentados de grandes vestibulares.
+            Simulações experimentais com decomposição vetorial, atrito no plano inclinado, lançamentos balísticos e banco de questões de vestibulares.
           </p>
         </div>
       </div>
@@ -59,29 +59,89 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-mec-1">
-            <span class="station-number">01</span><span>Lançamento Oblíquo & Balística (FUVEST / ITA)</span>
+          <button class="station-tab is-active" data-station="st-mec-2">
+            <span class="station-number">01</span><span>Plano Inclinado & Decomposição de Forças (UNICAMP / UNESP)</span>
           </button>
-          <button class="station-tab" data-station="st-mec-2">
-            <span class="station-number">02</span><span>Plano Inclinado & Força de Atrito (UNICAMP / UNESP)</span>
+          <button class="station-tab" data-station="st-mec-1">
+            <span class="station-number">02</span><span>Lançamento Oblíquo & Balística (FUVEST / ITA)</span>
           </button>
           <button class="station-tab" data-station="st-mec-3">
             <span class="station-number">03</span><span>Hidrostática & Empuxo de Arquimedes (ENEM / UFMT)</span>
           </button>
           <button class="station-tab" data-station="st-mec-4">
-            <span class="station-number">04</span><span>Colisões & Quantidade de Movimento (IME / FEI)</span>
+            <span class="station-number">04</span><span>Colisões 1D & Conservação de Energia (IME / FEI)</span>
           </button>
         </div>
 
-        <!-- Bancada M1 -->
-        <div class="station-panel is-active" id="st-mec-1">
+        <!-- Bancada M2: Plano Inclinado com Decomposição Vetorial -->
+        <div class="station-panel is-active" id="st-mec-2">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
+                <span class="vestibular-badge badge-unicamp">UNICAMP / UNESP</span>
+                <span class="topic-tag">Dinâmica · Plano Inclinado com Atrito</span>
+              </div>
+              <h2 class="question-title">Desafio: Condição de Deslizamento</h2>
+              <div class="question-context">
+                "Um bloco repousa sobre uma rampa com coeficiente de atrito $\mu = 0{,}40$. A partir de qual ângulo de inclinação $\theta$ o bloco começa a deslizar?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Quando $\tan\theta > \mu \implies \theta \approx 21{,}8^\circ$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre em $\theta = 45^\circ$, independente do atrito.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Quando $\sin\theta = 0{,}40 \implies \theta \approx 23{,}6^\circ$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Quando $\theta = 90^\circ$ apenas em queda livre.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>O bloco nunca desliza se a massa for maior que $5\,\text{kg}$.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-primary" id="btn-release-block">▶ Soltar Bloco</button>
+                <button class="btn-lab btn-lab-secondary" id="btn-reset-block">↺ Reiniciar Bloco</button>
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Na iminência de movimento: $P_x = F_{\text{at,máx}} \implies m g \sin\theta = \mu m g \cos\theta \implies \frac{\sin\theta}{\cos\theta} = \mu \implies \tan\theta = \mu$. Para $\mu = 0{,}40$, $\theta = \arctan(0{,}40) \approx 21{,}8^\circ$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Rampa de Atrito & Vetores ($\vec{N}, \vec{P}_x, \vec{f}_{at}$)</span></div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-plano"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m2-theta-val">30°</span></div>
+                    <input type="range" class="lab-slider" id="m2-theta-slider" min="10" max="60" step="2" value="30">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Coef. Atrito ($\mu$)</span><span class="dial-value" id="m2-mu-val">0,40</span></div>
+                    <input type="range" class="lab-slider" id="m2-mu-slider" min="0.1" max="0.9" step="0.05" value="0.4">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Massa ($m$)</span><span class="dial-value" id="m2-mass-val">2,0 kg</span></div>
+                    <input type="range" class="lab-slider" id="m2-mass-slider" min="1" max="5" step="0.5" value="2">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Força Tangencial ($P_x$)</div><div class="readout-num" id="m2-px-num">10,0 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Atrito Máx ($f_{at}$)</div><div class="readout-num" id="m2-fat-num">6,9 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Aceleração ($a$)</div><div class="readout-num" id="m2-accel-num">1,54 m/s²</div></div>
+                  <div class="readout-item"><div class="readout-name">Estado</div><div class="readout-num" id="m2-status-text" style="font-size:0.85rem;">Deslizando</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada M1: Lançamento de Projéteis -->
+        <div class="station-panel" id="st-mec-1">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
                 <span class="topic-tag">Cinemática Vetorial · Lançamento Oblíquo</span>
               </div>
-              <h2 class="question-title">Desafio Experimental: Alcance Máximo</h2>
+              <h2 class="question-title">Desafio: Alcance Máximo</h2>
               <div class="question-context">
                 "No vácuo, para uma mesma velocidade inicial $v_0$, qual é o ângulo de lançamento $\theta$ que produz o maior alcance horizontal?"
               </div>
@@ -89,6 +149,8 @@
                 <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$\theta = 30^\circ$</span></button>
                 <button class="option-choice" data-correct="true" data-opt="B"><span class="opt-letter">B</span><span>$\theta = 45^\circ$ (Pois $\sin(2\theta) = \sin(90^\circ) = 1$)</span></button>
                 <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\theta = 60^\circ$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$\theta = 90^\circ$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$\theta = 15^\circ$</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-primary" id="btn-demo-maxrange">🎯 Ajustar 45° & Disparar</button>
@@ -98,7 +160,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  O alcance é dado por $A = \frac{v_0^2 \sin(2\theta)}{g}$. O valor máximo ocorre quando $\sin(2\theta) = 1 \implies 2\theta = 90^\circ \implies \theta = 45^\circ$.
+                  O alcance horizontal é dado por $A = \frac{v_0^2 \sin(2\theta)}{g}$. O valor máximo ocorre quando o seno é máximo ($\sin(2\theta) = 1 \implies 2\theta = 90^\circ \implies \theta = 45^\circ$).
                 </div>
               </div>
             </div>
@@ -130,65 +192,24 @@
           </div>
         </div>
 
-        <!-- Bancada M2 -->
-        <div class="station-panel" id="st-mec-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP</span>
-                <span class="topic-tag">Dinâmica · Plano Inclinado & Atrito</span>
-              </div>
-              <h2 class="question-title">Desafio Experimental: Condição de Deslizamento</h2>
-              <div class="question-context">
-                "Um bloco repousa sobre uma rampa com atrito $\mu = 0{,}40$. A partir de qual ângulo $\theta$ de inclinação o bloco começa a deslizar?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Quando $\tan\theta > \mu \implies \theta \approx 21{,}8^\circ$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre em $\theta = 45^\circ$, independente do atrito.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-release-block">▶ Soltar Bloco</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Rampa de Inclinação Variável</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-mec-plano"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m2-theta-val">30°</span></div>
-                    <input type="range" class="lab-slider" id="m2-theta-slider" min="10" max="60" step="2" value="30">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Atrito ($\mu$)</span><span class="dial-value" id="m2-mu-val">0,40</span></div>
-                    <input type="range" class="lab-slider" id="m2-mu-slider" min="0.1" max="0.9" step="0.05" value="0.4">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Força Tangencial ($P_x$)</div><div class="readout-num" id="m2-px-num">10,0 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Atrito Máx ($f_{at}$)</div><div class="readout-num" id="m2-fat-num">6,9 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Estado</div><div class="readout-num" id="m2-status-text" style="font-size:0.85rem;">Deslizando</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada M3 -->
+        <!-- Bancada M3: Hidrostática & Empuxo -->
         <div class="station-panel" id="st-mec-3">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="vestibular-badge badge-enem">ENEM / UFMT</span>
                 <span class="topic-tag">Hidrostática · Princípio de Arquimedes</span>
               </div>
-              <h2 class="question-title">Desafio: O Peso Aparente</h2>
+              <h2 class="question-title">Desafio: O Peso Aparente no Dinamômetro</h2>
               <div class="question-context">
                 "Um corpo com peso real de $13{,}5\,\text{N}$ é totalmente imerso na água ($\rho = 1{,}0\,\text{g/cm}^3$), sofrendo empuxo de $5{,}0\,\text{N}$. Qual a leitura no dinamômetro?"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{aparente}} = P - E = 8{,}5\,\text{N}$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{aparente}} = 18{,}5\,\text{N}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$P_{\text{aparente}} = 5{,}0\,\text{N}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$P_{\text{aparente}} = 0\,\text{N}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$P_{\text{aparente}} = 2{,}7\,\text{N}$</span></button>
               </div>
             </div>
             <div class="apparatus-card">
@@ -215,21 +236,24 @@
           </div>
         </div>
 
-        <!-- Bancada M4 -->
+        <!-- Bancada M4: Colisões 1D -->
         <div class="station-panel" id="st-mec-4">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
                 <span class="vestibular-badge badge-ita">ITA / IME</span>
-                <span class="topic-tag">Impulso · Colisões Elásticas</span>
+                <span class="topic-tag">Impulso · Colisões Perfeitamente Elásticas</span>
               </div>
-              <h2 class="question-title">Desafio: Colisão 1D Perfeita</h2>
+              <h2 class="question-title">Desafio: Troca de Velocidades</h2>
               <div class="question-context">
                 "Dois corpos de massas idênticas $m_1 = m_2 = 2\,\text{kg}$ colidem frontalmente de modo perfeitamente elástico ($e = 1$). O que ocorre com as velocidades?"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Eles trocam de velocidade integralmente ($v_1' = v_2$ e $v_2' = v_1$).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Ambos param imediatamente no ponto de impacto.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O conjunto segue junto com metade da velocidade inicial.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A energia cinética total é convertida integralmente em calor.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ambos aceleram espontaneamente com o dobro da velocidade.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-primary" id="btn-start-collision">▶ Iniciar Colisão</button>
@@ -262,7 +286,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
@@ -293,10 +317,12 @@
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$H_{\text{máx}} = 11{,}25\,\text{m}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$H_{\text{máx}} = 22{,}50\,\text{m}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$H_{\text{máx}} = 45{,}00\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$H_{\text{máx}} = 5{,}62\,\text{m}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$H_{\text{máx}} = 90{,}00\,\text{m}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-mec-1" data-params='{"m1-angle-slider": 30, "m1-v0-slider": 30}'>
-                ⚡ Simular estes valores no Canhão
+                ⚡ Simular no Canhão Balístico
               </button>
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
@@ -304,7 +330,8 @@
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
                 $v_{0y} = v_0 \sin 30^\circ = 30 \cdot 0{,}5 = 15\,\text{m/s}$.<br>
-                Pela equação de Torricelli no vértice ($v_y = 0$): $0 = v_{0y}^2 - 2g H \implies H = \frac{15^2}{2 \cdot 10} = \frac{225}{20} = 11{,}25\,\text{m}$.
+                Pela equação de Torricelli vertical no vértice ($v_y = 0$):<br>
+                $0 = v_{0y}^2 - 2g H_{\text{máx}} \implies H_{\text{máx}} = \frac{15^2}{2 \cdot 10} = \frac{225}{20} = 11{,}25\,\text{m}$.
               </div>
             </div>
           </div>
@@ -320,7 +347,10 @@
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$v_{\text{máx}} = 20\,\text{m/s} = 72\,\text{km/h}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$v_{\text{máx}} = 40\,\text{m/s}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$v_{\text{máx}} = 40\,\text{m/s} = 144\,\text{km/h}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$v_{\text{máx}} = 10\,\text{m/s} = 36\,\text{km/h}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$v_{\text{máx}} = 25\,\text{m/s} = 90\,\text{km/h}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$v_{\text{máx}} = 50\,\text{m/s} = 180\,\text{km/h}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -328,7 +358,8 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                A força centrípeta é fornecida exclusivamente pelo atrito estático: $F_{\text{cp}} = F_{\text{at}} \implies \frac{m v^2}{R} \le \mu_e m g \implies v \le \sqrt{\mu_e g R} = \sqrt{0{,}4 \cdot 10 \cdot 100} = \sqrt{400} = 20\,\text{m/s}$.
+                A força centrípeta é fornecida exclusivamente pelo atrito estático:<br>
+                $F_{\text{cp}} = F_{\text{at,máx}} \implies \frac{m v^2}{R} \le \mu_e m g \implies v \le \sqrt{\mu_e g R} = \sqrt{0{,}4 \cdot 10 \cdot 100} = \sqrt{400} = 20\,\text{m/s} = 72\,\text{km/h}$.
               </div>
             </div>
           </div>
@@ -345,6 +376,9 @@
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{total}} = 3{,}0 \times 10^5\,\text{Pa} = 3\,\text{atm}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{total}} = 2{,}0 \times 10^5\,\text{Pa}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$P_{\text{total}} = 1{,}0 \times 10^5\,\text{Pa}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$P_{\text{total}} = 4{,}0 \times 10^5\,\text{Pa}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$P_{\text{total}} = 20 \times 10^5\,\text{Pa}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -361,14 +395,17 @@
           <div class="bank-question-card" data-board="paulistas fei puc" data-topic="colisoes">
             <div class="bank-card-header">
               <span class="vestibular-badge badge-fei">FEI / PUC</span>
-              <span class="topic-tag">Quantidade de Movimento · Colisão Inelástica</span>
+              <span class="topic-tag">Quantidade de Movimento · Colisão Perfeitamente Inelástica</span>
             </div>
             <p class="bank-question-text">
-              Um bloco A de massa $m_A = 3\,\text{kg}$ move-se a $v_A = 6\,\text{m/s}$ e colide com um bloco B de massa $m_B = 3\,\text{kg}$ inicialmente em repouso. Se os dois blocos permanecem grudados após a colisão (colisão perfeitamente inelástica), a velocidade final do conjunto é:
+              Um bloco A de massa $m_A = 3\,\text{kg}$ move-se a $v_A = 6\,\text{m/s}$ e colide com um bloco B de massa $m_B = 3\,\text{kg}$ inicialmente em repouso. Se os dois blocos permanecem grudados após a colisão, a velocidade final do conjunto é:
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$V_{\text{final}} = 3{,}0\,\text{m/s}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$V_{\text{final}} = 6{,}0\,\text{m/s}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$V_{\text{final}} = 1{,}5\,\text{m/s}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$V_{\text{final}} = 0{,}0\,\text{m/s}$ (param)</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$V_{\text{final}} = 12{,}0\,\text{m/s}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-mec-4" data-params='{"m4-m1-slider": 3, "m4-m2-slider": 3, "m4-e-slider": 0}'>

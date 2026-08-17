@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório Quântico, Relativístico & Nuclear</h1>
           </div>
           <p class="subpage-desc">
-            Efeito fotoelétrico de Einstein, dilatação e contração na Relatividade Restrita, modelo atômico de Bohr e exercícios comentados.
+            Efeito fotoelétrico de Einstein, dilatação e contração na Relatividade Restrita, modelo atômico de Bohr e exercícios com 5 alternativas.
           </p>
         </div>
       </div>
@@ -70,21 +70,24 @@
           </button>
         </div>
 
-        <!-- Bancada Q1 -->
+        <!-- Bancada Q1: Fotoelétrico -->
         <div class="station-panel is-active" id="st-mod-1">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
                 <span class="topic-tag">Física Quântica · Efeito Fotoelétrico</span>
               </div>
               <h2 class="question-title">Desafio: A Frequência de Corte</h2>
               <div class="question-context">
-                "Para ejetar fotoelétrons de uma placa metálica, é necessário que a luz incidente tenha:"
+                "Para ejetar fotoelétrons de uma placa metálica com função trabalho $W$, é estritamente necessário que a luz incidente possua:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Frequência superior à frequência de corte ($hf \ge W$), independentemente da intensidade.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas intensidade muito alta de luz de qualquer cor.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Frequência superior à frequência de corte ($hf \ge W$), independentemente da intensidade luminosa.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas intensidade muito alta de luz vermelha de qualquer frequência.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Comprimento de onda infinito.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Polarização circular exclusiva.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Tempo de exposição de pelo menos várias horas sob a luz.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -92,7 +95,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Einstein propôs que a luz é formada por fótons com energia $E = hf$. Cada fotoelétron absorve um único fóton; logo, se $hf < W$ (função trabalho do metal), nenhum elétron é liberado. A equação de Einstein é: $E_{\text{cin}} = hf - W$.
+                  Einstein propôs que a luz é quantizada em pacotes de energia (fótons) de energia $E = hf$. Cada fotoelétron absorve um único fóton; logo, se $hf < W$ (função trabalho do metal), nenhum elétron é ejetado. A equação de Einstein é: $E_{\text{cin}} = hf - W$.
                 </div>
               </div>
             </div>
@@ -102,17 +105,22 @@
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="mod1-lambda-val">350 nm (UV)</span></div>
-                    <input type="range" class="lab-slider" id="mod1-lambda-slider" min="200" max="750" step="25" value="350">
+                    <div class="dial-header"><span class="dial-label">Metal Fotossensível</span></div>
+                    <select id="mod1-metal-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
+                      <option value="2.14">Césio (W = 2,14 eV)</option>
+                      <option value="2.30">Potássio (W = 2,30 eV)</option>
+                      <option value="4.10">Alumínio (W = 4,10 eV)</option>
+                      <option value="6.35">Platina (W = 6,35 eV)</option>
+                    </select>
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Função Trabalho ($W$)</span><span class="dial-value" id="mod1-work-val">2.3 eV</span></div>
-                    <input type="range" class="lab-slider" id="mod1-work-slider" min="1.5" max="4.5" step="0.2" value="2.3">
+                    <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="mod1-lambda-val">350 nm</span></div>
+                    <input type="range" class="lab-slider" id="mod1-lambda-slider" min="200" max="750" step="25" value="350">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Energia Fóton</div><div class="readout-num" id="mod1-ephot-num">3,54 eV</div></div>
-                  <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,24 eV</div></div>
+                  <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,40 eV</div></div>
                   <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="mod1-status-text" style="font-size:0.85rem;">Emissão Ativa</div></div>
                 </div>
               </div>
@@ -120,13 +128,13 @@
           </div>
         </div>
 
-        <!-- Bancada Q2 -->
+        <!-- Bancada Q2: Relatividade Restrita -->
         <div class="station-panel" id="st-mod-2">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST</span>
-                <span class="topic-tag">Relatividade Restrita · Fator $\gamma$</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
+                <span class="topic-tag">Relatividade Restrita · Fator $\gamma$ & Lorentz</span>
               </div>
               <h2 class="question-title">Desafio: Dilatação Temporal</h2>
               <div class="question-context">
@@ -135,6 +143,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Mais lento (dilatado pelo fator de Lorentz $\gamma = 1{,}25$).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Mais rápido.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Inalterado, pois o tempo é absoluto segundo Einstein.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Fluindo para trás em direção ao passado.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Congelado a zero para qualquer velocidade.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -142,7 +153,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = 1{,}25$.
+                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = \frac{1}{0{,}8} = 1{,}25$.
                 </div>
               </div>
             </div>
@@ -166,7 +177,7 @@
           </div>
         </div>
 
-        <!-- Bancada Q3 -->
+        <!-- Bancada Q3: Bohr -->
         <div class="station-panel" id="st-mod-3">
           <div class="workbench-grid">
             <div class="notebook-card">
@@ -174,17 +185,20 @@
                 <span class="vestibular-badge badge-unesp">UNESP / IME</span>
                 <span class="topic-tag">Física Atômica · Modelo de Bohr</span>
               </div>
-              <h2 class="question-title">Desafio: Emissão de Fótons</h2>
+              <h2 class="question-title">Desafio: Emissão Quântica de Fótons</h2>
               <div class="question-context">
-                "Quando um elétron no átomo de hidrogênio salta de um nível de maior energia para um nível de menor energia, ocorre:"
+                "Quando um elétron no átomo de hidrogênio realiza uma transição de um nível de maior energia para um nível de menor energia, ocorre:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A emissão de um fóton de energia $hf = E_{\text{inicial}} - E_{\text{final}}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A aniquilação do elétron.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A emissão de um único fóton de energia $hf = E_{\text{inicial}} - E_{\text{final}}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A absorção contínua de ondas de rádio.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A destruição da carga elétrica do elétron.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A fissão nuclear do próton central.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>A conversão do elétron em um nêutron térmico.</span></button>
               </div>
               <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-bohr-absorb">⚡ Absorver Fóton (Subir nível)</button>
-                <button class="btn-lab btn-lab-secondary" id="btn-bohr-emit">⚡ Emitir Fóton (Descer nível)</button>
+                <button class="btn-lab btn-lab-primary" id="btn-bohr-absorb">⚡ Absorver Fóton (Subir)</button>
+                <button class="btn-lab btn-lab-secondary" id="btn-bohr-emit">⚡ Emitir Fóton (Descer)</button>
               </div>
             </div>
             <div class="apparatus-card">
@@ -203,7 +217,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
@@ -228,11 +242,14 @@
               <span class="topic-tag">Relatividade · Equivalência Massa-Energia ($E = mc^2$)</span>
             </div>
             <p class="bank-question-text">
-              Em uma reação nuclear de fusão no interior do Sol, uma massa $\Delta m = 1{,}0 \times 10^{-6}\,\text{kg}$ (1 miligrama) é convertida diretamente em energia. Considerando $c = 3{,}0 \times 10^8\,\text{m/s}$, a quantidade de energia liberada nessa reação é:
+              Em uma reação nuclear de fusão estelar, uma massa $\Delta m = 1{,}0 \times 10^{-6}\,\text{kg}$ ($1\,\text{mg}$) é convertida diretamente em energia pura. Considerando $c = 3{,}0 \times 10^8\,\text{m/s}$, a quantidade de energia liberada nessa reação é:
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 9{,}0 \times 10^{10}\,\text{J} = 90\,\text{GJ}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 3{,}0 \times 10^2\,\text{J}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$E = 9{,}0 \times 10^4\,\text{J}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$E = 3{,}0 \times 10^8\,\text{J}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$E = 1{,}0 \times 10^{-6}\,\text{J}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -240,7 +257,8 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                Pela famosa equação de Einstein: $E = \Delta m \cdot c^2 = (1{,}0 \times 10^{-6}) \cdot (3{,}0 \times 10^8)^2 = 10^{-6} \cdot 9 \times 10^{16} = 9{,}0 \times 10^{10}\,\text{J}$.
+                Pela famosa equação de equivalência de Einstein:<br>
+                $E = \Delta m \cdot c^2 = (1{,}0 \times 10^{-6}) \cdot (3{,}0 \times 10^8)^2 = 10^{-6} \cdot (9 \times 10^{16}) = 9{,}0 \times 10^{10}\,\text{J}$ ($90\,\text{GigaJoules}$).
               </div>
             </div>
           </div>
@@ -252,11 +270,14 @@
               <span class="topic-tag">Física Nuclear · Meia-Vida & Decaimento Radioativo</span>
             </div>
             <p class="bank-question-text">
-              O iodo-131, utilizado no tratamento médico de doenças da tireoide, possui meia-vida de $T_{1/2} = 8\,\text{dias}$. Partindo de uma amostra inicial de $80\,\text{mg}$, qual será a massa restante de iodo-131 após $24\,\text{dias}$?
+              O iodo-131, utilizado no tratamento médico da glândula tireoide, possui meia-vida de $T_{1/2} = 8\,\text{dias}$. Partindo de uma amostra inicial de $80\,\text{mg}$, qual será a massa restante desse isótopo após transcorridos $24\,\text{dias}$?
             </p>
             <div class="options-group">
               <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$m = 10\,\text{mg}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$m = 20\,\text{mg}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$m = 40\,\text{mg}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$m = 5\,\text{mg}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$m = 0\,\text{mg}$ (desintegração total)</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -264,8 +285,8 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                O número de meias-vidas transcorridas é $n = 24 / 8 = 3$.<br>
-                A massa final é dada por: $m = \frac{m_0}{2^n} = \frac{80}{2^3} = \frac{80}{8} = 10\,\text{mg}$.
+                O número de meias-vidas transcorridas é $n = \frac{t}{T_{1/2}} = \frac{24}{8} = 3$.<br>
+                A massa restante é dada por: $m = \frac{m_0}{2^n} = \frac{80}{2^3} = \frac{80}{8} = 10\,\text{mg}$.
               </div>
             </div>
           </div>

@@ -1,17 +1,19 @@
 /**
- * MÓDULO 1: MECÂNICA CLÁSSICA — LABORATÓRIO VIRTUAL EXPANDIDO
- * 1. Lançamento de Projéteis (FUVEST / ITA)
- * 2. Plano Inclinado & Atrito (UNICAMP / UNESP)
- * 3. Hidrostática & Empuxo (ENEM / UFMT / IFMT)
- * 4. Colisões & Quantidade de Movimento (IME / FEI)
+ * MÓDULO: MECÂNICA CLÁSSICA — LABORATÓRIO VIRTUAL COMPLETO
+ * 1. Lançamento de Projéteis & Balística (FUVEST / ITA)
+ * 2. Plano Inclinado com Decomposição Vetorial Completa & Atrito (UNICAMP / UNESP)
+ * 3. Hidrostática & Empuxo de Arquimedes (ENEM / UFMT)
+ * 4. Colisões 1D & Conservação de Energia (IME / FEI)
  */
 
-/* --- 1. Lançamento de Projéteis --- */
+/* ==========================================================================
+   1. LANÇAMENTO DE PROJÉTEIS & BALÍSTICA
+   ========================================================================== */
 const simMecLancamento = (p) => {
   let angleDeg = 45;
   let v0 = 20; // m/s
   let g = 10;  // m/s^2
-  let cannonPos = { x: 50, y: 0 };
+  let cannonPos = { x: 60, y: 0 };
   let projectile = null;
   let trajectoryPath = [];
 
@@ -22,7 +24,7 @@ const simMecLancamento = (p) => {
     const canvas = p.createCanvas(w, 360);
     canvas.parent("canvas-mec-lancamento");
 
-    cannonPos.y = p.height - 40;
+    cannonPos.y = p.height - 45;
     initControls();
     calculatePhysics();
   };
@@ -63,7 +65,7 @@ const simMecLancamento = (p) => {
       btn45.addEventListener("click", () => {
         angleDeg = 45;
         if (angleSlider) angleSlider.value = 45;
-        document.getElementById("m1-angle-val").textContent = "45° (Alcance Máx)";
+        document.getElementById("m1-angle-val").textContent = "45° (Alcance Máximo)";
         calculatePhysics();
         fireCannon();
       });
@@ -99,14 +101,16 @@ const simMecLancamento = (p) => {
   p.draw = () => {
     p.background(18, 16, 28);
 
+    // Solo do Laboratório
     p.noStroke();
     p.fill(32, 28, 44);
-    p.rect(0, p.height - 35, p.width, 35);
+    p.rect(0, p.height - 40, p.width, 40);
     p.stroke(80, 70, 95);
-    p.line(0, p.height - 35, p.width, p.height - 35);
+    p.line(0, p.height - 40, p.width, p.height - 40);
 
     drawTheoreticalTrajectory();
 
+    // Rastro da trajetória
     p.stroke(201, 174, 222, 180);
     p.strokeWeight(2);
     p.noFill();
@@ -114,6 +118,7 @@ const simMecLancamento = (p) => {
     trajectoryPath.forEach(pt => p.vertex(pt.x, pt.y));
     p.endShape();
 
+    // Projétil
     if (projectile) {
       projectile.x += projectile.vx;
       projectile.y += projectile.vy;
@@ -138,7 +143,7 @@ const simMecLancamento = (p) => {
     const range = (v0 * v0 * Math.sin(2 * rad)) / g;
     const pxScale = (p.width - 120) / 45;
 
-    p.stroke(46, 139, 87, 100);
+    p.stroke(46, 139, 87, 120);
     p.strokeWeight(1.5);
     p.drawingContext.setLineDash([4, 4]);
     p.noFill();
@@ -171,18 +176,23 @@ const simMecLancamento = (p) => {
     if (wrap) {
       const w = Math.min(wrap.clientWidth || 550, 650);
       p.resizeCanvas(w, 360);
-      cannonPos.y = p.height - 40;
+      cannonPos.y = p.height - 45;
     }
   };
 };
 
-/* --- 2. Plano Inclinado com Atrito --- */
+/* ==========================================================================
+   2. PLANO INCLINADO COM DECOMPOSIÇÃO VETORIAL & ATRITO
+   ========================================================================== */
 const simMecPlanoInclinado = (p) => {
   let thetaDeg = 30;
-  let mu = 0.4;
-  let mass = 2.0;
+  let mu = 0.40;
+  let mass = 2.0; // kg
+  const g = 10;   // m/s^2
+
   let isSliding = false;
-  let blockX = 80;
+  let blockDist = 0; // distância percorrida ao longo da rampa (pixels)
+  let blockSpeed = 0;
 
   p.setup = () => {
     const wrap = document.getElementById("canvas-mec-plano");
@@ -198,15 +208,15 @@ const simMecPlanoInclinado = (p) => {
   function initControls() {
     const thetaSlider = document.getElementById("m2-theta-slider");
     const muSlider = document.getElementById("m2-mu-slider");
+    const massSlider = document.getElementById("m2-mass-slider");
     const btnRelease = document.getElementById("btn-release-block");
+    const btnReset = document.getElementById("btn-reset-block");
 
     if (thetaSlider) {
       thetaSlider.addEventListener("input", (e) => {
         thetaDeg = parseFloat(e.target.value);
         document.getElementById("m2-theta-val").textContent = `${thetaDeg}°`;
-        blockX = 80;
-        isSliding = false;
-        calculatePhysics();
+        resetBlock();
       });
     }
 
@@ -214,25 +224,44 @@ const simMecPlanoInclinado = (p) => {
       muSlider.addEventListener("input", (e) => {
         mu = parseFloat(e.target.value);
         document.getElementById("m2-mu-val").textContent = mu.toFixed(2);
-        blockX = 80;
-        isSliding = false;
-        calculatePhysics();
+        resetBlock();
+      });
+    }
+
+    if (massSlider) {
+      massSlider.addEventListener("input", (e) => {
+        mass = parseFloat(e.target.value);
+        document.getElementById("m2-mass-val").textContent = `${mass.toFixed(1)} kg`;
+        resetBlock();
       });
     }
 
     if (btnRelease) {
       btnRelease.addEventListener("click", () => {
-        blockX = 80;
-        isSliding = true;
+        const rad = p.radians(thetaDeg);
+        const Px = mass * g * Math.sin(rad);
+        const FatMax = mu * mass * g * Math.cos(rad);
+        if (Px > FatMax) {
+          isSliding = true;
+        }
       });
     }
+
+    if (btnReset) btnReset.addEventListener("click", resetBlock);
+  }
+
+  function resetBlock() {
+    isSliding = false;
+    blockDist = 0;
+    blockSpeed = 0;
+    calculatePhysics();
   }
 
   function calculatePhysics() {
     const rad = p.radians(thetaDeg);
-    const g = 10;
-    const Px = mass * g * Math.sin(rad);
-    const Py = mass * g * Math.cos(rad);
+    const P = mass * g;
+    const Px = P * Math.sin(rad);
+    const Py = P * Math.cos(rad);
     const N = Py;
     const FatMax = mu * N;
     const netForce = Math.max(0, Px - FatMax);
@@ -247,60 +276,143 @@ const simMecPlanoInclinado = (p) => {
     if (fatElem) fatElem.textContent = `${FatMax.toFixed(1).replace(".", ",")} N`;
     if (accelElem) accelElem.textContent = `${accel.toFixed(2).replace(".", ",")} m/s²`;
     if (statusElem) {
-      statusElem.textContent = Px <= FatMax ? "Repouso (Estático)" : "Deslizando";
-      statusElem.style.color = Px <= FatMax ? "#2e8b57" : "#c8435d";
+      if (Px <= FatMax) {
+        statusElem.textContent = "Equilíbrio Estático (Px ≤ Fat)";
+        statusElem.style.color = "#2e8b57";
+      } else {
+        statusElem.textContent = `Deslizando com a = ${accel.toFixed(2)} m/s²`;
+        statusElem.style.color = "#c8435d";
+      }
     }
   }
 
   p.draw = () => {
     p.background(18, 16, 28);
-    const rampOrigin = { x: 50, y: p.height - 50 };
-    const rampLen = p.width - 120;
+
+    // Geometria da Rampa
     const rad = p.radians(thetaDeg);
+    const rampOrigin = { x: 70, y: p.height - 50 };
+    const rampLength = p.width - 160;
     const rampEnd = {
-      x: rampOrigin.x + rampLen * Math.cos(rad),
-      y: rampOrigin.y - rampLen * Math.sin(rad)
+      x: rampOrigin.x + rampLength * Math.cos(rad),
+      y: rampOrigin.y - rampLength * Math.sin(rad)
     };
 
-    p.fill(36, 30, 48);
-    p.stroke(140, 103, 168);
-    p.strokeWeight(2);
-    p.triangle(rampOrigin.x, rampOrigin.y, rampEnd.x, rampOrigin.y, rampEnd.x, rampEnd.y);
+    // Solo
     p.stroke(80, 70, 95);
+    p.strokeWeight(1.5);
     p.line(0, rampOrigin.y, p.width, rampOrigin.y);
 
-    p.push();
-    p.translate(rampEnd.x, rampEnd.y);
-    p.rotate(rad);
+    // Corpo da Rampa
+    p.fill(32, 28, 44);
+    p.stroke(140, 103, 168);
+    p.strokeWeight(2.5);
+    p.triangle(rampOrigin.x, rampOrigin.y, rampEnd.x, rampOrigin.y, rampEnd.x, rampEnd.y);
 
-    if (isSliding) {
-      const g = 10;
+    // Arco do Ângulo θ
+    p.noFill();
+    p.stroke(201, 174, 222);
+    p.strokeWeight(1.5);
+    p.arc(rampEnd.x, rampOrigin.y, 60, 60, p.PI, p.PI + rad);
+    p.noStroke();
+    p.fill(201, 174, 222);
+    p.textSize(11);
+    p.text(`${thetaDeg}°`, rampEnd.x - 45, rampOrigin.y - 10);
+
+    // Animação de Movimento do Bloco
+    const maxSlideDist = rampLength - 80;
+    if (isSliding && blockDist < maxSlideDist) {
       const Px = mass * g * Math.sin(rad);
-      const FatMax = mu * mass * g * Math.cos(rad);
-      if (Px > FatMax) blockX += (Px - FatMax) * 0.15;
+      const Fat = mu * mass * g * Math.cos(rad);
+      const accel = (Px - Fat) / mass;
+      blockSpeed += accel * 0.08;
+      blockDist += blockSpeed;
+      if (blockDist >= maxSlideDist) {
+        blockDist = maxSlideDist;
+        isSliding = false;
+      }
     }
 
+    // Posição do Bloco sobre a Rampa
+    // O bloco desce do topo (rampEnd) em direção à base (rampOrigin)
+    const currentDist = 60 + blockDist;
+    const bx = rampEnd.x - currentDist * Math.cos(rad);
+    const by = rampEnd.y + currentDist * Math.sin(rad);
+
+    p.push();
+    p.translate(bx, by);
+    p.rotate(-rad);
+
+    // Bloco
     p.fill(201, 174, 222);
     p.stroke(255);
-    p.strokeWeight(1.5);
-    p.rect(blockX - rampLen, -30, 40, 30, 3);
+    p.strokeWeight(2);
+    p.rect(-25, -40, 50, 40, 4);
+
+    p.noStroke();
+    p.fill(20, 15, 30);
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text(`${mass.toFixed(1)}kg`, 0, -20);
+
+    // Vetores de Força no Bloco
+    drawForceVectors(rad);
     p.pop();
   };
+
+  function drawForceVectors(rad) {
+    const P = mass * g;
+    const Px = P * Math.sin(rad);
+    const Py = P * Math.cos(rad);
+    const N = Py;
+    const Fat = Math.min(Px, mu * N);
+
+    // Normal N (perpendicular para cima)
+    p.stroke(100, 200, 255);
+    p.strokeWeight(2.5);
+    p.line(0, -20, 0, -20 - N * 2.5);
+    p.fill(100, 200, 255);
+    p.noStroke();
+    p.triangle(0, -20 - N * 2.5 - 6, -4, -20 - N * 2.5, 4, -20 - N * 2.5);
+    p.textSize(9);
+    p.text("N", 10, -20 - N * 2.5);
+
+    // Componente Px (paralela para baixo da rampa)
+    p.stroke(255, 220, 80);
+    p.strokeWeight(2.5);
+    p.line(0, -20, -Px * 2.8, -20);
+    p.fill(255, 220, 80);
+    p.noStroke();
+    p.triangle(-Px * 2.8 - 6, -20, -Px * 2.8, -24, -Px * 2.8, -16);
+    p.text("Px", -Px * 2.8 - 12, -20);
+
+    // Força de Atrito Fat (paralela para cima da rampa)
+    p.stroke(46, 139, 87);
+    p.strokeWeight(2.5);
+    p.line(0, -20, Fat * 2.8, -20);
+    p.fill(46, 139, 87);
+    p.noStroke();
+    p.triangle(Fat * 2.8 + 6, -20, Fat * 2.8, -24, Fat * 2.8, -16);
+    p.text("Fat", Fat * 2.8 + 14, -20);
+  }
 
   p.windowResized = () => {
     const wrap = document.getElementById("canvas-mec-plano");
     if (wrap) {
       const w = Math.min(wrap.clientWidth || 550, 650);
       p.resizeCanvas(w, 360);
+      resetBlock();
     }
   };
 };
 
-/* --- 3. Hidrostática & Empuxo --- */
+/* ==========================================================================
+   3. HIDROSTÁTICA & EMPUXO DE ARQUIMEDES
+   ========================================================================== */
 const simMecHidrostatica = (p) => {
-  let fluidDensity = 1.0;
-  let blockVolume = 500;
-  let blockDensity = 2.7;
+  let fluidDensity = 1.0; // g/cm^3
+  let blockVolume = 500;  // cm^3
+  let blockDensity = 2.7; // Alumínio = 2.7 g/cm^3
   let immersionDepth = 0.5;
 
   p.setup = () => {
@@ -358,11 +470,13 @@ const simMecHidrostatica = (p) => {
     const beakerX = p.width * 0.45;
     const beakerY = 140, beakerW = 160, beakerH = 180;
 
+    // Béquer
     p.fill(24, 20, 36);
     p.stroke(140, 103, 168);
     p.strokeWeight(3);
     p.rect(beakerX, beakerY, beakerW, beakerH, 0, 0, 8, 8);
 
+    // Líquido
     p.noStroke();
     p.fill(59, 108, 181, 100);
     p.rect(beakerX + 3, beakerY + 30, beakerW - 6, beakerH - 33, 0, 0, 6, 6);
@@ -371,9 +485,12 @@ const simMecHidrostatica = (p) => {
     const blockY = beakerY + 10 + (1 - immersionDepth) * 35;
     const blockX = beakerX + beakerW / 2 - blockW / 2;
 
+    // Haste do Dinamômetro
     p.stroke(201, 174, 222);
-    p.line(beakerX + beakerW / 2, 85, beakerX + beakerW / 2, blockY);
+    p.strokeWeight(2);
+    p.line(beakerX + beakerW / 2, 70, beakerX + beakerW / 2, blockY);
 
+    // Bloco
     p.fill(160, 140, 180);
     p.stroke(255);
     p.strokeWeight(1.5);
@@ -389,11 +506,13 @@ const simMecHidrostatica = (p) => {
   };
 };
 
-/* --- 4. Colisões Mecânicas --- */
+/* ==========================================================================
+   4. COLISÕES 1D & CONSERVAÇÃO DO MOMENTO LINEAR
+   ========================================================================== */
 const simMecColisoes = (p) => {
   let m1 = 2.0, m2 = 2.0; // kg
   let v1 = 4.0, v2 = -2.0; // m/s
-  let eRestitution = 1.0; // 1.0 (elástica), 0.0 (inelástica)
+  let eRestitution = 1.0;
   let c1 = { x: 120, y: 180, r: 24, vx: 4.0 };
   let c2 = { x: 380, y: 180, r: 24, vx: -2.0 };
   let isRunning = false;
@@ -441,9 +560,7 @@ const simMecColisoes = (p) => {
       c1.x += c1.vx * 0.8;
       c2.x += c2.vx * 0.8;
 
-      // Detecção de colisão
       if (c1.x + c1.r >= c2.x - c2.r) {
-        // Fórmulas 1D de colisão com restituição
         let v1_after = ((m1 - eRestitution * m2) * c1.vx + (1 + eRestitution) * m2 * c2.vx) / (m1 + m2);
         let v2_after = ((1 + eRestitution) * m1 * c1.vx + (m2 - eRestitution * m1) * c2.vx) / (m1 + m2);
         c1.vx = v1_after;
@@ -451,7 +568,7 @@ const simMecColisoes = (p) => {
       }
     }
 
-    // Desenho Carrinho 1
+    // Carrinho 1
     p.fill(200, 67, 93);
     p.stroke(255);
     p.strokeWeight(1.5);
@@ -460,16 +577,16 @@ const simMecColisoes = (p) => {
     p.fill(255);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
-    p.text(`m₁ = ${m1} kg`, c1.x, c1.y);
+    p.text(`m₁=${m1}kg`, c1.x, c1.y);
 
-    // Desenho Carrinho 2
+    // Carrinho 2
     p.fill(59, 108, 181);
     p.stroke(255);
     p.strokeWeight(1.5);
     p.rect(c2.x - c2.r, c2.y - 20, c2.r * 2, 40, 4);
     p.noStroke();
     p.fill(255);
-    p.text(`m₂ = ${m2} kg`, c2.x, c2.y);
+    p.text(`m₂=${m2}kg`, c2.x, c2.y);
   };
 
   p.windowResized = () => {

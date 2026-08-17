@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Ondas, Efeito Doppler & Acústica</h1>
           </div>
           <p class="subpage-desc">
-            Frentes de onda em movimento, interferência de Young, acústica fisiológica e banco completo de exercícios comentados.
+            Frentes de onda circulares em movimento, interferência de fenda dupla de Young e banco de questões de acústica e ondas com 5 alternativas.
           </p>
         </div>
       </div>
@@ -63,25 +63,28 @@
             <span class="station-number">01</span><span>Efeito Doppler Acústico (ENEM / FUVEST)</span>
           </button>
           <button class="station-tab" data-station="st-ond-2">
-            <span class="station-number">02</span><span>Fenda Dupla & Interferência (UNICAMP / ITA)</span>
+            <span class="station-number">02</span><span>Fenda Dupla & Interferência de Young (UNICAMP / ITA)</span>
           </button>
         </div>
 
-        <!-- Bancada W1 -->
+        <!-- Bancada W1: Doppler -->
         <div class="station-panel is-active" id="st-ond-1">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM</span>
-                <span class="topic-tag">Acústica · Efeito Doppler</span>
+                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
+                <span class="topic-tag">Acústica · Efeito Doppler Sonoro</span>
               </div>
-              <h2 class="question-title">Desafio: O Som da Ambulância</h2>
+              <h2 class="question-title">Desafio: O Som da Sirene</h2>
               <div class="question-context">
                 "Quando uma viatura com sirene ligada aproxima-se rapidamente de um pedestre parado na calçada, a frequência percebida por ele:"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>É maior que a frequência original (som mais agudo).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>É menor que a original (som mais grave).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Permanece rigorosamente igual, pois a velocidade do som no ar é constante.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Cai a zero no momento do cruzamento.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Depende da temperatura do motor da viatura.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -89,7 +92,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Na aproximação, as frentes de onda são comprimidas espacialmente ($\lambda' < \lambda$). Pela equação fundamental $v = \lambda' f'$, a frequência aparente percebida aumenta: $f' = f_0 \left(\frac{v}{v - v_{\text{fonte}}}\right) > f_0$.
+                  Na aproximação, as frentes de onda emitidas são comprimidas espacialmente ($\lambda' < \lambda$). Pela relação $v = \lambda' f'$, a frequência aparente percebida pelo observador é maior: $f' = f_0 \left(\frac{v}{v - v_{\text{fonte}}}\right) > f_0$.
                 </div>
               </div>
             </div>
@@ -103,7 +106,7 @@
                     <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Frequência Emitida ($f_0$)</span><span class="dial-value" id="w1-freq-val">440 Hz</span></div>
+                    <div class="dial-header"><span class="dial-label">Frequência ($f_0$)</span><span class="dial-value" id="w1-freq-val">440 Hz</span></div>
                     <input type="range" class="lab-slider" id="w1-freq-slider" min="200" max="800" step="20" value="440">
                   </div>
                 </div>
@@ -116,12 +119,12 @@
           </div>
         </div>
 
-        <!-- Bancada W2 -->
+        <!-- Bancada W2: Young -->
         <div class="station-panel" id="st-ond-2">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP</span>
+                <span class="vestibular-badge badge-unicamp">UNICAMP / ITA</span>
                 <span class="topic-tag">Ondas · Interferência de Young</span>
               </div>
               <h2 class="question-title">Desafio: Natureza Ondulatória</h2>
@@ -131,6 +134,9 @@
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A superposição coerente e a natureza ondulatória da luz.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A atração gravitacional entre os fótons.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A perda de energia da luz ao colidir com o ar.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A emissão de raios gama pelo obstáculo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>A refração exclusiva por lentes delgadas.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -138,7 +144,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  A diferença de caminho $\Delta d = d \sin\theta$ produz interferência construtiva quando $\Delta d = m \lambda$ (franjas brilhantes) e destrutiva quando $\Delta d = (m + \frac{1}{2})\lambda$ (franjas escuras).
+                  A diferença de caminho óptico $\Delta d = d \sin\theta$ produz interferência construtiva quando $\Delta d = m \lambda$ (franjas brilhantes) e destrutiva quando $\Delta d = (m + \frac{1}{2})\lambda$ (franjas escuras).
                 </div>
               </div>
             </div>
@@ -160,12 +166,12 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS -->
+    <!-- SEÇÃO 2: BANCO DE QUESTÕES DE VESTIBULAR MULTIBANCAS (5 ALTERNATIVAS A-E) -->
     <section class="question-bank-section" id="banco-questoes">
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Ondulatória & Acústica</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFMT, IFMT</span>
+          <span class="section-head-tag">ENEM, FUVEST, UNICAMP, UNESP, ITA, IME, UFMG, UFMT, IFMT</span>
         </div>
 
         <div class="bank-filters">
@@ -187,9 +193,11 @@
               Uma mesma nota musical (ex.: Lá de $440\,\text{Hz}$) tocada com a mesma intensidade por um violino e por um piano soa distintamente diferente para o ouvido humano. Essa distinção é possível graças à propriedade física do:
             </p>
             <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Timbre, associado ao formato complexo da onda e à composição de harmônicos.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Altura, que mede a velocidade do som no ar.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Intensidade, que altera a frequência fundamental da nota.</span></button>
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Timbre, associado ao formato complexo da onda sonora e à sua composição de harmônicos.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Altura, que mede exclusivamente a velocidade do som no ar.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Intensidade, que altera a frequência fundamental da nota emitida.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Comprimento de onda constante em todos os instrumentos.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Batimento sonoro gerado pela ressonância mecânica das cordas.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -206,14 +214,17 @@
           <div class="bank-question-card" data-board="paulistas fuvest" data-topic="ondas">
             <div class="bank-card-header">
               <span class="vestibular-badge badge-fuvest">FUVEST 2021</span>
-              <span class="topic-tag">Ondulatória · Equação Fundamental da Onda</span>
+              <span class="topic-tag">Ondulatória · Equação Fundamental & Refração de Ondas</span>
             </div>
             <p class="bank-question-text">
               Uma onda luminosa monocromática de frequência $f = 6{,}0 \times 10^{14}\,\text{Hz}$ propaga-se no vácuo ($c = 3{,}0 \times 10^8\,\text{m/s}$) e penetra em um bloco de vidro de índice de refração $n = 1{,}50$. A frequência $f'$ e o comprimento de onda $\lambda'$ da luz dentro do vidro valem:
             </p>
             <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ (constante) e $\lambda' = 333\,\text{nm}$.</span></button>
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ (inalterada) e $\lambda' = 333\,\text{nm}$.</span></button>
               <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 4{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 500\,\text{nm}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f' = 9{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 200\,\text{nm}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 500\,\text{nm}$.</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f' = 3{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 666\,\text{nm}$.</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
@@ -221,9 +232,37 @@
             <div class="resolution-box">
               <h4>📐 Resolução Comentada</h4>
               <div class="resolution-text">
-                A frequência da onda depende apenas da fonte emissora e <strong>nunca se altera na refração</strong> ($f' = f = 6{,}0 \times 10^{14}\,\text{Hz}$).<br>
+                A frequência da onda depende unicamente da fonte emissora e <strong>nunca se altera na refração</strong> ($f' = f = 6{,}0 \times 10^{14}\,\text{Hz}$).<br>
                 A velocidade no vidro é $v = c/n = \frac{3 \times 10^8}{1{,}5} = 2{,}0 \times 10^8\,\text{m/s}$.<br>
                 Logo, $\lambda' = \frac{v}{f} = \frac{2{,}0 \times 10^8}{6{,}0 \times 10^{14}} = 3{,}33 \times 10^{-7}\,\text{m} = 333\,\text{nm}$.
+              </div>
+            </div>
+          </div>
+
+          <!-- Questão 3: UNICAMP -->
+          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="acustica">
+            <div class="bank-card-header">
+              <span class="vestibular-badge badge-unicamp">UNICAMP 2022</span>
+              <span class="topic-tag">Acústica · Tubos Sonoros Abertos</span>
+            </div>
+            <p class="bank-question-text">
+              Um tubo sonoro aberto em ambas as extremidades possui comprimento $L = 0{,}85\,\text{m}$. Sendo a velocidade do som no ar $v = 340\,\text{m/s}$, a frequência do modo fundamental ($n=1$) emitido por esse tubo é:
+            </p>
+            <div class="options-group">
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f_1 = 200\,\text{Hz}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f_1 = 100\,\text{Hz}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f_1 = 400\,\text{Hz}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f_1 = 340\,\text{Hz}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f_1 = 85\,\text{Hz}$</span></button>
+            </div>
+            <div class="notebook-actions">
+              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
+            </div>
+            <div class="resolution-box">
+              <h4>📐 Resolução Comentada</h4>
+              <div class="resolution-text">
+                Para tubos sonoros abertos: $f_n = n \frac{v}{2L}$.<br>
+                Para o harmônico fundamental ($n=1$): $f_1 = \frac{340}{2 \cdot 0{,}85} = \frac{340}{1{,}70} = 200\,\text{Hz}$.
               </div>
             </div>
           </div>
