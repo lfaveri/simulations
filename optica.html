@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 04 · óptica geométrica</span>
-            <h1 class="subpage-title">Laboratório de Lentes, Espelhos & Refração</h1>
+            <h1 class="subpage-title">Laboratório de Lentes, Miragens & Arco-Íris</h1>
           </div>
           <p class="subpage-desc">
-            Banco óptico interativo com lentes convergentes e divergentes, espelhos esféricos, traçado de raios notáveis e Lei de Snell-Descartes.
+            Miragens no asfalto quente, formação de arco-íris em gotas de chuva, banco de lentes convergentes e divergentes, e exercícios com 5 alternativas.
           </p>
         </div>
       </div>
@@ -59,28 +59,121 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-opt-2">
-            <span class="station-number">01</span><span>Banco Óptico: Lentes Convergentes & Divergentes (FUVEST / UNESP)</span>
+          <button class="station-tab is-active" data-station="st-opt-miragem">
+            <span class="station-number">01</span><span>🛣️ Miragem no Asfalto Quente (ENEM / UNICAMP)</span>
           </button>
-          <button class="station-tab" data-station="st-opt-1">
-            <span class="station-number">02</span><span>Refração Laser & Reflexão Total (ENEM / UNICAMP)</span>
+          <button class="station-tab" data-station="st-opt-arcoiris">
+            <span class="station-number">02</span><span>🌈 Arco-Íris & Gota de Chuva (FUVEST / UNESP)</span>
+          </button>
+          <button class="station-tab" data-station="st-opt-2">
+            <span class="station-number">03</span><span>👓 Banco Óptico: Lentes & Espelhos (ITA / IME)</span>
           </button>
         </div>
 
-        <!-- Bancada O2: Banco Óptico de Lentes e Espelhos -->
-        <div class="station-panel is-active" id="st-opt-2">
+        <!-- Bancada O_MIRAGEM: Miragem no Asfalto -->
+        <div class="station-panel is-active" id="st-opt-miragem">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="topic-tag">Refração & Reflexão Total · Miragem Inferior</span>
+              </div>
+              <h2 class="question-title">Desafio: A Ilusão de 'Poça d'Água' no Asfalto</h2>
+              <div class="question-context">
+                "Em dias ensolarados, o asfalto aquecido cria a ilusão visual de poças d'água refletindo o céu ao longe. Isso ocorre porque o ar rente ao solo:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Fica mais quente e menos denso, diminuindo seu índice de refração e provocando reflexão total dos raios de luz do céu.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Condensa a umidade ambiente formando água líquida de verdade.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Torna-se mais denso e aumenta o índice de refração.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Absorve todos os fótons azuis da atmosfera.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Polariza a luz solar verticalmente por difração.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O asfalto a mais de $50^\circ\text{C}$ aquece as camadas de ar inferiores. Como ar quente é menos denso ($n_{\text{quente}} < n_{\text{frio}}$), a luz do céu passa do meio mais refringente para o menos refringente com grande ângulo de incidência, sofrendo <strong>reflexão total interna curvilínea</strong> e subindo até os olhos do observador.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Formação de Miragem Inferior no Asfalto</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-optica-miragem"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Temperatura Asfalto</span><span class="dial-value" id="o-mir-temp-val">60 °C</span></div>
+                    <input type="range" class="lab-slider" id="o-mir-temp-slider" min="30" max="70" step="5" value="60">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Gradiente de Refração</div><div class="readout-num" id="o-mir-grad-num">Δn ≈ -0,00020</div></div>
+                  <div class="readout-item"><div class="readout-name">Fenômeno Visual</div><div class="readout-num" id="o-mir-status-text" style="font-size:0.85rem;">Miragem Nítida</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada O_ARCOIRIS: Arco-Íris na Gota -->
+        <div class="station-panel" id="st-opt-arcoiris">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
                 <span class="vestibular-badge badge-fuvest">FUVEST / UNESP</span>
+                <span class="topic-tag">Dispersão Cromática · Formação do Arco-Íris</span>
+              </div>
+              <h2 class="question-title">Desafio: A Sequência de Fenômenos no Arco-Íris</h2>
+              <div class="question-context">
+                "O arco-íris primário é formado pela luz solar ao interagir com gotas esféricas de chuva através da sequência correta de fenômenos:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>1ª Refração com dispersão cromática → 1 Reflexão total interna → 2ª Refração para o ar.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas reflexão externa na superfície da gota.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Difração de Fraunhofer e fusão nuclear dos fótons.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Duas reflexões totais sem qualquer refração.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Absorção completa de todas as frequências com emissão de laser.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  1. Ao penetrar na gota, a luz sofre <strong>refração e dispersão cromática</strong> (o violeta desvia mais que o vermelho devido ao índice $n_{\text{violeta}} > n_{\text{vermelho}}$).<br>
+                  2. Atinge a parede posterior sofrendo <strong>reflexão total interna</strong>.<br>
+                  3. Emerge da gota por uma <strong>2ª refração</strong>, formando ângulos de $42^\circ$ (vermelho) e $40^\circ$ (violeta) com a direção dos raios solares incidentes.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Dispersão Cromática na Gota de Chuva</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-optica-arcoiris"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada O2: Banco Óptico de Lentes e Espelhos -->
+        <div class="station-panel" id="st-opt-2">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
                 <span class="topic-tag">Óptica Geométrica · Lentes Esféricas & Equação de Gauss</span>
               </div>
               <h2 class="question-title">Desafio: Formação de Imagem em Lente Convergente</h2>
               <div class="question-context">
-                "Um objeto real de altura $h = 4\,\text{cm}$ está posicionado a $p = 100\,\text{cm}$ de uma lente convergente de distância focal $f = 50\,\text{cm}$ ($p = 2f$). A imagem conjugada será:"
+                "Um objeto real está posicionado no dobro da distância focal ($p = 2f$) de uma lente delgada convergente ($f = 50\,\text{cm}$). A imagem conjugada será:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho que o objeto ($p' = 100\,\text{cm}$, $A = -1$).</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho que o objeto ($p' = 2f = 100\,\text{cm}$, $A = -1$).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Virtual, direita e maior que o objeto.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Real, direita e menor que o objeto.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Virtual, invertida e com o dobro do tamanho.</span></button>
@@ -93,7 +186,7 @@
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
                   Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{50} - \frac{1}{100} = \frac{1}{100} \implies p' = 100\,\text{cm}$.<br>
-                  Aumento linear: $A = -\frac{p'}{p} = -\frac{100}{100} = -1$ (Sinal negativo indica imagem <strong>invertida</strong>, e magnitude 1 indica tamanho <strong>idêntico</strong>).
+                  Aumento linear: $A = -\frac{p'}{p} = -\frac{100}{100} = -1$ (Imagem real, invertida e com tamanho idêntico).
                 </div>
               </div>
             </div>
@@ -126,63 +219,6 @@
                   <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">85,7 cm</div></div>
                   <div class="readout-item"><div class="readout-name">Aumento & Vergência</div><div class="readout-num" id="o2-a-num">-0,71× (+2,0 di)</div></div>
                   <div class="readout-item"><div class="readout-name">Classificação</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real, Invertida e Menor</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada O1: Refração & Snell -->
-        <div class="station-panel" id="st-opt-1">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
-                <span class="topic-tag">Óptica · Refração Luminosa & Fibra Óptica</span>
-              </div>
-              <h2 class="question-title">Desafio: Condições para Reflexão Total</h2>
-              <div class="question-context">
-                "Nas fibras ópticas de telecomunicações, os pulsos de luz propagam-se por reflexão total sucessiva. Para que isso ocorra, o núcleo da fibra deve ter:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Índice de refração maior que o da casca ($n_{\text{núcleo}} > n_{\text{casca}}$) e ângulo $\theta > \theta_L$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Índice de refração menor que o da casca.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Mesmo índice de refração que o ar externo.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Superfície fosca para absorver o feixe.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ângulo de incidência rigorosamente igual a $0^\circ$.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  A reflexão interna total só é fisicamente possível quando a luz se propaga do meio <strong>mais refringente para o menos refringente</strong> com ângulo de incidência superior ao ângulo limite $\theta_L = \arcsin(n_2/n_1)$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Banco de Refração Laser & Interface</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-optica-snell"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Ângulo Incidência</span><span class="dial-value" id="o1-theta-val">45°</span></div>
-                    <input type="range" class="lab-slider" id="o1-theta-slider" min="0" max="85" step="5" value="45">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Índice $n_1$</span><span class="dial-value" id="o1-n1-val">1.00</span></div>
-                    <input type="range" class="lab-slider" id="o1-n1-slider" min="1.0" max="2.0" step="0.1" value="1.0">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Índice $n_2$</span><span class="dial-value" id="o1-n2-val">1.50</span></div>
-                    <input type="range" class="lab-slider" id="o1-n2-slider" min="1.0" max="2.0" step="0.1" value="1.5">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Ângulo Refratado</div><div class="readout-num" id="o1-theta2-num">28,1°</div></div>
-                  <div class="readout-item"><div class="readout-name">Ângulo Limite ($\theta_L$)</div><div class="readout-num" id="o1-crit-num">N/A</div></div>
-                  <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="o1-mode-text" style="font-size:0.85rem;">Refração</div></div>
                 </div>
               </div>
             </div>

@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 06 · física moderna</span>
-            <h1 class="subpage-title">Laboratório Quântico, Relativístico & Nuclear</h1>
+            <h1 class="subpage-title">Laboratório de GPS Relativístico, Quântica & Nuclear</h1>
           </div>
           <p class="subpage-desc">
-            Efeito fotoelétrico de Einstein, dilatação e contração na Relatividade Restrita, modelo atômico de Bohr e exercícios com 5 alternativas.
+            Navegação por GPS e correções relativísticas de Einstein, efeito fotoelétrico em células solares, modelo atômico de Bohr e exercícios com 5 alternativas.
           </p>
         </div>
       </div>
@@ -59,19 +59,78 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-mod-1">
-            <span class="station-number">01</span><span>Efeito Fotoelétrico de Einstein (ENEM / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-mod-gps">
+            <span class="station-number">01</span><span>🛰️ Navegação GPS & Relatividade (FUVEST / ITA)</span>
           </button>
-          <button class="station-tab" data-station="st-mod-2">
-            <span class="station-number">02</span><span>Relatividade & Dilatação do Tempo (FUVEST / ITA)</span>
+          <button class="station-tab" data-station="st-mod-1">
+            <span class="station-number">02</span><span>☀️ Célula Solar & Fotoelétrico (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-mod-3">
-            <span class="station-number">03</span><span>Modelo de Bohr & Níveis de Energia (UNESP / IME)</span>
+            <span class="station-number">03</span><span>⚛️ Átomo de Bohr & Fótons (UNESP / IME)</span>
           </button>
         </div>
 
+        <!-- Bancada Q_GPS: Satélites e Relatividade -->
+        <div class="station-panel is-active" id="st-mod-gps">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
+                <span class="topic-tag">Relatividade de Einstein · Dilatação Temporal no GPS</span>
+              </div>
+              <h2 class="question-title">Desafio: Por que o GPS Precisa de Einstein?</h2>
+              <div class="question-context">
+                "Os relógios atômicos a bordo dos satélites GPS orbitam a $20.000\,\text{km}$ de altitude. Em relação aos relógios na Terra, eles sofrem dois efeitos relativísticos combinados:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Atrasam $-7{,}2\,\mu\text{s/dia}$ (Relatividade Restrita por velocidade) e adiantam $+45{,}9\,\mu\text{s/dia}$ (Relatividade Geral por menor gravidade), resultando em um avanço líquido de $+38{,}7\,\mu\text{s/dia}$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Permanecem rigorosamente sincronizados sem qualquer desvio temporal.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Atrasam 2 horas diárias por causa da escuridão do espaço.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Param de funcionar no vácuo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Adiantam apenas devido ao vento solar na antena.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  1. <em>Relatividade Restrita:</em> $v \approx 14.000\,\text{km/h} \implies$ dilatação temporal faz o relógio do satélite atrasar cerca de $7{,}2\,\mu\text{s/dia}$.<br>
+                  2. <em>Relatividade Geral:</em> no espaço, o potencial gravitacional é menor ($\Phi_{\text{espaço}} > \Phi_{\text{terra}}$), fazendo o relógio bater mais rápido ($+45{,}9\,\mu\text{s/dia}$).<br>
+                  Efeito Líquido: $+38{,}7\,\mu\text{s/dia}$. Como a luz viaja a $c = 300.000\,\text{km/s}$, sem a correção de Einstein o erro acumulado seria de $38{,}7 \times 10^{-6} \times 3 \times 10^5 \approx 11{,}6\,\text{km}$ por dia!
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Constelação GPS & Correção de Einstein</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-gps"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Correção de Einstein</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="mod-gps-corr-toggle" checked> Aplicar Relatividade
+                    </label>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Tempo Decorrido</span><span class="dial-value" id="mod-gps-days-val">1.0 dias</span></div>
+                    <input type="range" class="lab-slider" id="mod-gps-days-slider" min="0.5" max="5.0" step="0.5" value="1.0">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Deriva Relativística</div><div class="readout-num" id="mod-gps-drift-num">+38,7 µs</div></div>
+                  <div class="readout-item"><div class="readout-name">Precisão GPS</div><div class="readout-num" id="mod-gps-err-num">± 2 a 5 metros</div></div>
+                  <div class="readout-item"><div class="readout-name">Status</div><div class="readout-num" id="mod-gps-status-text" style="font-size:0.85rem;">Localização Exata</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Bancada Q1: Fotoelétrico -->
-        <div class="station-panel is-active" id="st-mod-1">
+        <div class="station-panel" id="st-mod-1">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
@@ -91,12 +150,6 @@
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Einstein propôs que a luz é quantizada em pacotes de energia (fótons) de energia $E = hf$. Cada fotoelétron absorve um único fóton; logo, se $hf < W$ (função trabalho do metal), nenhum elétron é ejetado. A equação de Einstein é: $E_{\text{cin}} = hf - W$.
-                </div>
               </div>
             </div>
             <div class="apparatus-card">
@@ -121,56 +174,6 @@
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Energia Fóton</div><div class="readout-num" id="mod1-ephot-num">3,54 eV</div></div>
                   <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,40 eV</div></div>
-                  <div class="readout-item"><div class="readout-name">Regime</div><div class="readout-num" id="mod1-status-text" style="font-size:0.85rem;">Emissão Ativa</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada Q2: Relatividade Restrita -->
-        <div class="station-panel" id="st-mod-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
-                <span class="topic-tag">Relatividade Restrita · Fator $\gamma$ & Lorentz</span>
-              </div>
-              <h2 class="question-title">Desafio: Dilatação Temporal</h2>
-              <div class="question-context">
-                "Para um observador na Terra, o tempo medido no interior de uma nave que viaja a $v = 0{,}6\,c$ parecerá:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Mais lento (dilatado pelo fator de Lorentz $\gamma = 1{,}25$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Mais rápido.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Inalterado, pois o tempo é absoluto segundo Einstein.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Fluindo para trás em direção ao passado.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Congelado a zero para qualquer velocidade.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pelo postulado da invariância da velocidade da luz ($c$), o tempo no referencial em movimento dilata-se por $\Delta t = \gamma \Delta t_0$, onde $\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \frac{1}{\sqrt{1 - 0{,}36}} = \frac{1}{0{,}8} = 1{,}25$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Relógio de Luz Relativístico</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-moderna-relatividade"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade ($v/c$)</span><span class="dial-value" id="mod2-beta-val">0.60 c</span></div>
-                    <input type="range" class="lab-slider" id="mod2-beta-slider" min="0.1" max="0.95" step="0.05" value="0.6">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Fator Lorentz ($\gamma$)</div><div class="readout-num" id="mod2-gamma-num">1,25</div></div>
-                  <div class="readout-item"><div class="readout-name">Tempo Dilatado</div><div class="readout-num" id="mod2-dt-num">1,25 s</div></div>
-                  <div class="readout-item"><div class="readout-name">Comprimento</div><div class="readout-num" id="mod2-len-num">80,0 m</div></div>
                 </div>
               </div>
             </div>

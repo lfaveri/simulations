@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 01 · eletromagnetismo</span>
-            <h1 class="subpage-title">Laboratório de Eletrostática, Circuitos & Indução</h1>
+            <h1 class="subpage-title">Laboratório de Indução, Consumo & Circuitos</h1>
           </div>
           <p class="subpage-desc">
-            Simulações interativas de Coulomb, leis de circuitos elétricos, capacitores e leis de Faraday-Lenz com banco de questões de 5 alternativas.
+            Fogão por indução eletromagnética (correntes de Foucault), cálculo de consumo e conta de luz (kWh), circuitos elétricos e exercícios com 5 alternativas.
           </p>
         </div>
       </div>
@@ -59,70 +59,137 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-eletro-1">
-            <span class="station-number">01</span><span>Lei de Coulomb & Distância (FUVEST / ITA)</span>
+          <button class="station-tab is-active" data-station="st-eletro-fogao">
+            <span class="station-number">01</span><span>🍳 Fogão por Indução & Foucault (FUVEST / UNICAMP)</span>
+          </button>
+          <button class="station-tab" data-station="st-eletro-contaluz">
+            <span class="station-number">02</span><span>💡 Conta de Luz & Consumo (kWh) (ENEM / UNESP)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-2">
-            <span class="station-number">02</span><span>Circuito & Lei de Ohm (ENEM / UNICAMP)</span>
-          </button>
-          <button class="station-tab" data-station="st-eletro-3">
-            <span class="station-number">03</span><span>Indução de Faraday-Lenz (FUVEST / UNESP)</span>
-          </button>
-          <button class="station-tab" data-station="st-eletro-4">
-            <span class="station-number">04</span><span>Capacitores & Campo Elétrico (IME / FEI)</span>
+            <span class="station-number">03</span><span>⚡ Circuito & Lei de Ohm (ITA / IME)</span>
           </button>
         </div>
 
-        <!-- Bancada E1 -->
-        <div class="station-panel is-active" id="st-eletro-1">
+        <!-- Bancada E_FOGAO: Fogão por Indução -->
+        <div class="station-panel is-active" id="st-eletro-fogao">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
-                <span class="topic-tag">Lei de Coulomb · Força Eletrostática</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / UNICAMP</span>
+                <span class="topic-tag">Indução Eletromagnética · Correntes de Foucault</span>
               </div>
-              <h2 class="question-title">Desafio: A Razão da Distância</h2>
+              <h2 class="question-title">Desafio: Por que a Mesa de Vidro Não Esquenta?</h2>
               <div class="question-context">
-                "Duas cargas pontuais $+Q$ e $-Q$ separadas por $d$ sentem força de atração $F_0$. Ao reduzir a distância para $d/3$, qual será a nova força?"
+                "No fogão por indução, uma bobina gera um campo magnético alternado de alta frequência. O aquecimento ocorre porque:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>$F = F_0 / 9$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 3 F_0$</span></button>
-                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>$F = 9 F_0$ (Multiplica por 9)</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$F = F_0 / 3$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$F = F_0$ (Inalterada)</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>O fluxo magnético variável induz correntes parasitas de Foucault no fundo metálico da panela, gerando calor por Efeito Joule.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A mesa de vidro emite micro-ondas que aquecem a água diretamente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O vidro conduz eletricidade estática para a mão do cozinheiro.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A chama de gás fica escondida dentro da vitrocerâmica.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ocorre fusão a frio entre os elétrons do vidro e os da panela.</span></button>
               </div>
               <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-demo-fuvest">⚡ Demonstrar $d/3$ na Simulação</button>
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
               </div>
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Como $F \propto 1/d^2$, ao substituir $d' = d/3$: $F' = \frac{k Q^2}{(d/3)^2} = 9 \left(\frac{k Q^2}{d^2}\right) = 9 F_0$.
+                  Pela Lei de Faraday-Neumann-Lenz ($\mathcal{E} = -\frac{d\Phi_B}{dt}$), a rápida oscilação do campo magnético induz tensões elétricas em circuitos fechados microscópicos no metal da panela, gerando **Correntes Parasitas de Foucault (Eddy Currents)**. Pelo Efeito Joule ($P = R I^2$), o metal dissipa grande quantidade de calor, enquanto a mesa de vidro (isolante) não sofre indução e permanece fria!
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Aparato: Trilho de Coulomb</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-coulomb"></div>
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Fogão por Indução & Correntes Parasitas de Foucault</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-fogao"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Distância ($d$)</span><span class="dial-value" id="s1-d-val">3,00 m</span></div>
-                    <input type="range" class="lab-slider" id="s1-d-slider" min="0.6" max="3.0" step="0.1" value="3.0">
+                    <div class="dial-header"><span class="dial-label">Potência Indutora</span><span class="dial-value" id="e-fog-power-val">1800 W</span></div>
+                    <input type="range" class="lab-slider" id="e-fog-power-slider" min="500" max="2200" step="100" value="1800">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Chave Liga/Desliga</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="e-fog-on-toggle" checked> Fogão Ligado
+                    </label>
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Razão Força</div><div class="readout-num" id="s1-ratio-num">1,00 × F₀</div></div>
-                  <div class="readout-item"><div class="readout-name">Força ($F$)</div><div class="readout-num" id="s1-force-num">0,004 N</div></div>
+                  <div class="readout-item"><div class="readout-name">Calor Gerado</div><div class="readout-num" id="e-fog-heat-num">0,4 kcal/s</div></div>
+                  <div class="readout-item"><div class="readout-name">Temp. Panela</div><div class="readout-num" id="e-fog-temp-num">156 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Mecanismo</div><div class="readout-num" id="e-fog-status-text" style="font-size:0.85rem;">Correntes de Foucault</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bancada E2 -->
+        <!-- Bancada E_CONTALUZ: Consumo kWh -->
+        <div class="station-panel" id="st-eletro-contaluz">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / UNESP</span>
+                <span class="topic-tag">Eletrodinâmica · Energia Elétrica & Custo Mensal</span>
+              </div>
+              <h2 class="question-title">Desafio: O Vilão da Conta de Luz</h2>
+              <div class="question-context">
+                "Um chuveiro elétrico de potência $6500\,\text{W}$ é utilizado por 40 minutos diários em uma residência durante um mês (30 dias). Sendo a tarifa de $\text{R\$}\,0{,}85/\text{kWh}$, o custo mensal desse chuveiro é:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 130\,\text{kWh} \implies \text{R\$}\,110{,}50$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 260\,\text{kWh} \implies \text{R\$}\,221{,}00$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$E = 65\,\text{kWh} \implies \text{R\$}\,55{,}25$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$E = 13\,\text{kWh} \implies \text{R\$}\,11{,}05$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$E = 500\,\text{kWh} \implies \text{R\$}\,425{,}00$</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Tempo total no mês: $\Delta t = \frac{40}{60}\,\text{h} \times 30\,\text{dias} = 20\,\text{horas}$.<br>
+                  Energia consumida: $E = \frac{P \cdot \Delta t}{1000} = \frac{6500 \cdot 20}{1000} = 130\,\text{kWh}$.<br>
+                  Custo: $130 \times 0{,}85 = \text{R\$}\,110{,}50$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Simulador de Consumo Elétrico Residencial</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-contaluz"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Aparelho Elétrico</span></div>
+                    <select id="e-con-app-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
+                      <option value="6500">Chuveiro Elétrico (6500 W)</option>
+                      <option value="1400">Ar-Condicionado Inverter (1400 W)</option>
+                      <option value="1500">Ferro de Passar Roupas (1500 W)</option>
+                      <option value="250">Geladeira Duplex Frost Free (250 W)</option>
+                      <option value="120">Smart TV 55" (120 W)</option>
+                    </select>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Uso Diário</span><span class="dial-value" id="e-con-hours-val">0.5 h/dia</span></div>
+                    <input type="range" class="lab-slider" id="e-con-hours-slider" min="0.2" max="8.0" step="0.2" value="0.5">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Consumo Mensal</div><div class="readout-num" id="e-con-kwh-num">97,5 kWh/mês</div></div>
+                  <div class="readout-item"><div class="readout-name">Custo Estimado</div><div class="readout-num" id="e-con-cost-num" style="color:var(--lilac-dark);">R$ 82,88/mês</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada E2: Circuito & Ohm -->
         <div class="station-panel" id="st-eletro-2">
           <div class="workbench-grid">
             <div class="notebook-card">
@@ -141,15 +208,6 @@
                 <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$I = 2\,\text{A}$ e Potência $P = 12\,\text{W}$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$I = 6\,\text{A}$ e Potência $P = 72\,\text{W}$</span></button>
               </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  $I = U/R = 12/6 = 2\,\text{A}$. Potência $P = U \cdot I = 12 \cdot 2 = 24\,\text{W}$.
-                </div>
-              </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar"><span class="apparatus-title">🔬 Bancada de Circuitos & Reostato</span></div>
@@ -157,102 +215,17 @@
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Tensão ($U$)</span><span class="dial-value" id="e1-u-val">12 V</span></div>
+                    <div class="dial-header"><span class="dial-label">Tensão ($U$)</span><span class="dial-value">12 V</span></div>
                     <input type="range" class="lab-slider" id="e1-u-slider" min="2" max="24" step="1" value="12">
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Resistência ($R$)</span><span class="dial-value" id="e1-r-val">6 Ω</span></div>
+                    <div class="dial-header"><span class="dial-label">Resistência ($R$)</span><span class="dial-value">6 Ω</span></div>
                     <input type="range" class="lab-slider" id="e1-r-slider" min="1" max="15" step="1" value="6">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Corrente ($I$)</div><div class="readout-num" id="e1-i-num">2,00 A</div></div>
                   <div class="readout-item"><div class="readout-name">Potência ($P$)</div><div class="readout-num" id="e1-p-num">24,0 W</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada E3 -->
-        <div class="station-panel" id="st-eletro-3">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / UNESP</span>
-                <span class="topic-tag">Eletromagnetismo · Lei de Faraday-Lenz</span>
-              </div>
-              <h2 class="question-title">Desafio: Indução Eletromagnética</h2>
-              <div class="question-context">
-                "Ao aproximar o polo norte de um ímã em uma bobina condutora, surge uma corrente induzida que:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Cria um polo norte na face da bobina, opondo-se à aproximação (Lei de Lenz).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Atrai o ímã acelerando seu movimento indefinidamente.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Anula o campo magnético em todo o universo.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Cria apenas calor sem gerar qualquer força magnética.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Depende da massa do ímã, mas não de sua velocidade.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-magnet-in">⚡ Injetar Ímã na Bobina</button>
-                <button class="btn-lab btn-lab-secondary" id="btn-magnet-out">⚡ Afastar Ímã</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Solenoide & Galvanômetro</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletro-inducao"></div>
-              <div class="apparatus-controls">
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">FEM Induzida ($\mathcal{E}$)</div><div class="readout-num" id="e2-emf-num">0,00 V</div></div>
-                  <div class="readout-item"><div class="readout-name">Efeito Lenz</div><div class="readout-num" id="e2-lenz-text" style="font-size: 0.85rem;">Ímã parado</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada E4 -->
-        <div class="station-panel" id="st-eletro-4">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-ime">IME / FEI</span>
-                <span class="topic-tag">Eletrostática · Capacitores Planos</span>
-              </div>
-              <h2 class="question-title">Desafio: Capacitância e Distância</h2>
-              <div class="question-context">
-                "Um capacitor de placas paralelas no vácuo possui capacitância $C_0$. Se a distância $d$ entre as placas for reduzida pela metade ($d/2$), a nova capacitância será:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$C = 2 C_0$ (A capacitância dobra).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$C = C_0 / 2$ (A capacitância cai pela metade).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$C = 4 C_0$ (Quadruplica).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$C = C_0 / 4$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$C = C_0$ (Inalterada).</span></button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Placas Paralelas & Dielétrico</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletro-capacitor"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Área ($A$)</span><span class="dial-value">200 cm²</span></div>
-                    <input type="range" class="lab-slider" id="e3-a-slider" min="100" max="400" step="50" value="200">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Distância ($d$)</span><span class="dial-value">4 mm</span></div>
-                    <input type="range" class="lab-slider" id="e3-d-slider" min="2" max="10" step="1" value="4">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Tensão ($V$)</span><span class="dial-value">100 V</span></div>
-                    <input type="range" class="lab-slider" id="e3-v-slider" min="50" max="300" step="25" value="100">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Capacitância</div><div class="readout-num" id="e3-cap-num">44,3 pF</div></div>
-                  <div class="readout-item"><div class="readout-name">Carga ($Q$)</div><div class="readout-num" id="e3-q-num">4,43 nC</div></div>
-                  <div class="readout-item"><div class="readout-name">Campo ($\vec{E}$)</div><div class="readout-num" id="e3-field-num">25,0 kV/m</div></div>
                 </div>
               </div>
             </div>
@@ -297,9 +270,6 @@
               <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ambas as configurações dissipam rigorosamente a mesma potência de $1440\,\text{W}$.</span></button>
             </div>
             <div class="notebook-actions">
-              <button class="btn-lab btn-lab-primary sync-sim-btn" data-station-target="st-eletro-2" data-params='{"e1-u-slider": 24, "e1-r-slider": 5}'>
-                ⚡ Simular no Circuito
-              </button>
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
             <div class="resolution-box">
@@ -383,7 +353,6 @@
     </div>
   </footer>
 
-  <script src="js/sim_estacoes.js"></script>
   <script src="js/mod_eletromagnetismo.js"></script>
   <script src="js/main.js"></script>
 </body>

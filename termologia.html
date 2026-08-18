@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 03 · termologia & termodinâmica</span>
-            <h1 class="subpage-title">Laboratório Térmico, Calorimetria & Gases</h1>
+            <h1 class="subpage-title">Laboratório Térmico, Calorimetria & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Propagação de calor (condução, convecção e radiação), calorimetria e mudanças de fase, transformações gasosas e Ciclo de Carnot.
+            Panela de pressão, efeito estufa em veículos, propagação de calor (condução, convecção e radiação) e mega banco de exercícios multibancas.
           </p>
         </div>
       </div>
@@ -59,38 +59,38 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-termo-0">
-            <span class="station-number">01</span><span>Propagação de Calor (Condução / Convecção / Radiação)</span>
+          <button class="station-tab is-active" data-station="st-termo-panela">
+            <span class="station-number">01</span><span>🍲 Panela de Pressão & Ebulição (ENEM / FUVEST)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-estufa">
+            <span class="station-number">02</span><span>🚗 Efeito Estufa no Carro ao Sol (UNICAMP / UNESP)</span>
+          </button>
+          <button class="station-tab" data-station="st-termo-0">
+            <span class="station-number">03</span><span>🔥 Propagação de Calor (Condução / Convecção / Radiação)</span>
           </button>
           <button class="station-tab" data-station="st-termo-cal">
-            <span class="station-number">02</span><span>Calorimetria & Mudança de Fase (ENEM / FUVEST)</span>
-          </button>
-          <button class="station-tab" data-station="st-termo-1">
-            <span class="station-number">03</span><span>Gases Ideais & Diagrama PxV (UNICAMP / UNESP)</span>
-          </button>
-          <button class="station-tab" data-station="st-termo-2">
-            <span class="station-number">04</span><span>Ciclo de Carnot & Rendimento (ITA / IME)</span>
+            <span class="station-number">04</span><span>🧊 Calorimetria & Mudança de Fase (ITA / IME)</span>
           </button>
         </div>
 
-        <!-- Bancada T0: Propagação de Calor -->
-        <div class="station-panel is-active" id="st-termo-0">
+        <!-- Bancada T_PANELA: Panela de Pressão -->
+        <div class="station-panel is-active" id="st-termo-panela">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
                 <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
-                <span class="topic-tag">Termofísica · Processos de Transmissão de Calor</span>
+                <span class="topic-tag">Termodinâmica · Pressão de Vapor & Ebulição</span>
               </div>
-              <h2 class="question-title">Desafio: Formas de Propagação do Calor</h2>
+              <h2 class="question-title">Desafio: Por que a Panela de Pressão Cozinha Mais Rápido?</h2>
               <div class="question-context">
-                "No vácuo espacial entre o Sol e a Terra, o calor propaga-se exclusivamente por qual mecanismo físico?"
+                "O princípio de funcionamento da panela de pressão baseia-se no fato de que o aumento da pressão interna:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>Condução térmica através do éter luminoso.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Convecção de partículas de ar cósmico.</span></button>
-                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>Radiação (ou irradiação) por ondas eletromagnéticas (infravermelho/luz).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional entre planetas.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Advecção térmica de fluidos interestelares.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Eleva a temperatura de ebulição da água para $\approx 120^\circ\text{C}$, cozinhando os alimentos em maior temperatura.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Diminui o ponto de ebulição para $80^\circ\text{C}$, facilitando a fervura.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Aumenta a gravidade efetiva dentro do recipiente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Transforma o calor sensível diretamente em trabalho mecânico.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Impede que a água absorva calor latente de vaporização.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -98,13 +98,121 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  A <strong>condução</strong> e a <strong>convecção</strong> exigem matéria (meio material) para ocorrer. No vácuo cósmico, apenas a <strong>radiação eletromagnética</strong> (Lei de Stefan-Boltzmann) consegue propagar energia térmica.
+                  A água ferve quando sua pressão de vapor iguala-se à pressão externa. Com a tampa vedada, a pressão de vapor acumulada sobe para $\approx 2{,}0\,\text{atm}$, fazendo a água líquida atingir cerca de $120^\circ\text{C}$ antes de entrar em ebulição. Como a velocidade das reações químicas dobra a cada $10^\circ\text{C}$, o tempo de cozimento cai para cerca de um terço!
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Aparato: Transmissão Térmica</span>
+                <span class="apparatus-title">🔬 Panela de Pressão & Ponto de Ebulição</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-panela"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Pressão Interna</span><span class="dial-value" id="t-pan-p-val">1,00 atm</span></div>
+                    <input type="range" class="lab-slider" id="t-pan-p-slider" min="1.0" max="2.0" step="0.05" value="1.0">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Chama do Fogão</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="t-pan-flame-toggle" checked> Chama Ligada
+                    </label>
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Temp. Ebulição</div><div class="readout-num" id="t-pan-temp-num">100,0 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Velocidade Cozimento</div><div class="readout-num" id="t-pan-speed-num">1,0× (Padrão)</div></div>
+                  <div class="readout-item"><div class="readout-name">Válvula</div><div class="readout-num" id="t-pan-status-text" style="font-size:0.85rem;">Pressurização normal</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada T_ESTUFA: Efeito Estufa no Carro -->
+        <div class="station-panel" id="st-termo-estufa">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP / UNESP</span>
+                <span class="topic-tag">Radiação Térmica · Efeito Estufa em Veículos</span>
+              </div>
+              <h2 class="question-title">Desafio: Aquecimento em Carro Fechado ao Sol</h2>
+              <div class="question-context">
+                "O interior de um carro com vidros fechados estacionado sob o sol atinge temperaturas muito superiores à externa porque o vidro é:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Transparente à luz solar visível de alta frequência, mas opaco à radiação infravermelha reemitida pelos bancos.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Um condutor térmico perfeito que atrai calor de todo o ambiente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Opaco à luz visível, transformando toda a luz em nêutrons.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Capaz de gerar correntes de convecção reversas que resfriam o exterior.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Um gerador químico espontâneo de calor latente.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  A radiação solar de alta energia (luz visível e UV próximo) atravessa o vidro transparente e aquece o interior do carro. Os bancos e o painel reemitem calor na forma de <strong>radiação infravermelha de grande comprimento de onda</strong>, à qual o vidro é opaco, aprisionando o calor no interior (Efeito Estufa).
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Radiação Solar & Aprisionamento Infravermelho</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-estufa"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Tempo ao Sol</span><span class="dial-value" id="t-est-hours-val">2.0 h</span></div>
+                    <input type="range" class="lab-slider" id="t-est-hours-slider" min="0.5" max="4.0" step="0.5" value="2.0">
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Abertura dos Vidros</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="t-est-window-toggle"> Vidros Frestados (Ventilação)
+                    </label>
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Temp. Interna</div><div class="readout-num" id="t-est-temp-num">62,0 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Elevação Térmica</div><div class="readout-num" id="t-est-delta-num">+32,0 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Alerta</div><div class="readout-num" id="t-est-warn-text" style="font-size:0.85rem;">Perigo Extremo!</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada T0: Propagação de Calor -->
+        <div class="station-panel" id="st-termo-0">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
+                <span class="topic-tag">Termofísica · Transmissão de Calor</span>
+              </div>
+              <h2 class="question-title">Desafio: Formas de Propagação do Calor</h2>
+              <div class="question-context">
+                "No vácuo espacial entre o Sol e a Terra, o calor propaga-se exclusivamente por qual mecanismo físico?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>Condução térmica através de partículas de poeira.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Convecção de ar interestelar.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>Radiação (ou irradiação) por ondas eletromagnéticas (infravermelho/luz).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional planetário.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Advecção térmica molecular.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Transmissão Térmica: Condução, Convecção & Radiação</span>
                 <div style="display:flex; gap:6px;">
                   <button class="btn-lab btn-lab-primary is-active" id="btn-prop-conducao" style="font-size:0.7rem; padding:3px 8px;">Condução</button>
                   <button class="btn-lab btn-lab-secondary" id="btn-prop-conveccao" style="font-size:0.7rem; padding:3px 8px;">Convecção</button>
@@ -113,8 +221,6 @@
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-termo-propagacao"></div>
               <div class="apparatus-controls">
-                
-                <!-- Controles para Condução -->
                 <div class="controls-grid" id="controls-conducao">
                   <div class="control-dial">
                     <div class="dial-header"><span class="dial-label">Material da Barra</span></div>
@@ -130,34 +236,24 @@
                     <input type="range" class="lab-slider" id="t-prop-thot-slider" min="40" max="200" step="10" value="100">
                   </div>
                 </div>
-
-                <!-- Controles para Convecção -->
-                <div class="controls-grid" id="controls-conveccao" style="display:none;">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Potência da Chama</span><span class="dial-value" id="t-prop-flame-val">50 %</span></div>
-                    <input type="range" class="lab-slider" id="t-prop-flame-slider" min="10" max="100" step="5" value="50">
-                  </div>
-                </div>
-
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Fluxo Térmico (Φ)</div><div class="readout-num" id="t-prop-readout-1">312,0 W</div></div>
                   <div class="readout-item"><div class="readout-name">Condutibilidade (k)</div><div class="readout-num" id="t-prop-readout-2">390 W/m·K</div></div>
-                  <div class="readout-item"><div class="readout-name">Gradiente Térmico</div><div class="readout-num" id="t-prop-readout-3">ΔT = 80 °C</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bancada T_CAL: Calorimetria & Mudança de Fase -->
+        <!-- Bancada T_CAL: Calorimetria -->
         <div class="station-panel" id="st-termo-cal">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / UNICAMP</span>
-                <span class="topic-tag">Calorimetria · Calor Latente de Fusão</span>
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
+                <span class="topic-tag">Calorimetria · Curva de Aquecimento da Água</span>
               </div>
-              <h2 class="question-title">Desafio: Fusão Completa de Gelo</h2>
+              <h2 class="question-title">Desafio: Calor Latente de Fusão</h2>
               <div class="question-context">
                 "Para fundir totalmente $100\,\text{g}$ de gelo a $0\,^\circ\text{C}$ ($L_f = 80\,\text{cal/g}$), quanto calor deve ser fornecido e o que ocorre com a temperatura durante a transição?"
               </div>
@@ -166,21 +262,12 @@
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$Q = 800\,\text{cal}$ e a temperatura sobe para $10\,^\circ\text{C}$.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$Q = 80000\,\text{cal}$ e a água vaporiza instantaneamente.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$Q = 5400\,\text{cal}$ e a temperatura cai para $-10\,^\circ\text{C}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$Q = 0\,\text{cal}$ pois o gelo funde espontaneamente sem absorver calor.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pela equação do calor latente: $Q = m \cdot L_f = 100 \cdot 80 = 8000\,\text{cal}$. Durante qualquer mudança de estado físico em substâncias puras à pressão constante, toda a energia térmica é gasta no rompimento de ligações intermoleculares, mantendo a temperatura perfeitamente constante no patamar.
-                </div>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$Q = 0\,\text{cal}$ pois o gelo funde sem absorver energia.</span></button>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Curva de Aquecimento da Água (Gelo → Água → Vapor)</span>
+                <span class="apparatus-title">🔬 Curva de Aquecimento: Gelo → Água → Vapor</span>
                 <div style="display:flex; gap:6px;">
                   <button class="btn-lab btn-lab-primary" id="btn-calor-toggle" style="font-size:0.7rem; padding:3px 8px;">🔥 Iniciar Aquecimento</button>
                   <button class="btn-lab btn-lab-secondary" id="btn-calor-reset" style="font-size:0.7rem; padding:3px 8px;">↺ Reiniciar</button>
@@ -192,116 +279,6 @@
                   <div class="readout-item"><div class="readout-name">Temperatura ($T$)</div><div class="readout-num" id="t-cal-temp-num">-20,0 °C</div></div>
                   <div class="readout-item"><div class="readout-name">Calor Fornecido ($Q$)</div><div class="readout-num" id="t-cal-q-num">0 cal</div></div>
                   <div class="readout-item"><div class="readout-name">Fase Atual</div><div class="readout-num" id="t-cal-phase-text" style="font-size:0.85rem;">Gelo Sólido</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada T1: Gases Ideais -->
-        <div class="station-panel" id="st-termo-1">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP / UNESP</span>
-                <span class="topic-tag">Gases Ideais · Equação de Clapeyron</span>
-              </div>
-              <h2 class="question-title">Desafio: Transformação Isotérmica</h2>
-              <div class="question-context">
-                "Mantendo a temperatura constante ($T = \text{cte}$), se o volume de um gás for reduzido pela metade, o que acontece com a pressão?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A pressão dobra de valor ($P_1 V_1 = P_2 V_2$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A pressão cai pela metade.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A pressão permanece inalterada.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A pressão quadruplica ($4\times$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>O gás condensa instantaneamente em líquido.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pela Lei de Boyle-Mariotte: $P \cdot V = n R T = \text{constante}$. Ao diminuir o volume $V \to V/2$, a pressão obrigatoriamente dobra ($P \to 2P$).
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Êmbolo de Gás & Traçador P x V</span>
-                <div style="display:flex; gap:6px;">
-                  <button class="btn-lab btn-lab-secondary" id="btn-gas-iso-t" style="font-size:0.7rem; padding:3px 6px;">Isotérmica</button>
-                  <button class="btn-lab btn-lab-secondary" id="btn-gas-iso-p" style="font-size:0.7rem; padding:3px 6px;">Isobárica</button>
-                </div>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-termo-gases"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Temperatura ($T$)</span><span class="dial-value" id="t1-temp-val">300 K</span></div>
-                    <input type="range" class="lab-slider" id="t1-temp-slider" min="150" max="600" step="25" value="300">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Volume ($V$)</span><span class="dial-value" id="t1-vol-val">10,0 L</span></div>
-                    <input type="range" class="lab-slider" id="t1-vol-slider" min="3" max="20" step="1" value="10">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Pressão Calculada</div><div class="readout-num" id="t1-press-num">2,46 atm</div></div>
-                  <div class="readout-item"><div class="readout-name">Volume ($V$)</div><div class="readout-num" id="t1-vol-num">10,0 L</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada T2: Ciclo de Carnot -->
-        <div class="station-panel" id="st-termo-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-ita">ITA / IME</span>
-                <span class="topic-tag">Termodinâmica · Rendimento de Carnot</span>
-              </div>
-              <h2 class="question-title">Desafio: Eficiência Máxima</h2>
-              <div class="question-context">
-                "Uma máquina térmica de Carnot opera entre uma fonte quente a $T_q = 600\,\text{K}$ e uma fonte fria a $T_f = 300\,\text{K}$. Qual o rendimento teórico máximo dessa máquina?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$\eta = 1 - \frac{300}{600} = 50\%$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$\eta = 100\%$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$\eta = 25\%$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$\eta = 75\%$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$\eta = 0\%$ pois é proibido transformar calor em trabalho.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  O rendimento de Carnot é o limite máximo permitido pela 2ª Lei da Termodinâmica: $\eta = 1 - \frac{T_f}{T_q} = 1 - \frac{300}{600} = 0{,}50 = 50\%$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Fluxo Térmico de Carnot</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-termo-carnot"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Fonte Quente ($T_q$)</span><span class="dial-value" id="t2-tq-val">600 K</span></div>
-                    <input type="range" class="lab-slider" id="t2-tq-slider" min="400" max="900" step="50" value="600">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Fonte Fria ($T_f$)</span><span class="dial-value" id="t2-tf-val">300 K</span></div>
-                    <input type="range" class="lab-slider" id="t2-tf-slider" min="200" max="400" step="25" value="300">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Rendimento ($\eta$)</div><div class="readout-num" id="t2-eta-num">50,0%</div></div>
-                  <div class="readout-item"><div class="readout-name">Trabalho Útil ($W$)</div><div class="readout-num" id="t2-work-num">500 J</div></div>
                 </div>
               </div>
             </div>

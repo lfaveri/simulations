@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 05 · ondulatória & acústica</span>
-            <h1 class="subpage-title">Laboratório de Ondas, Efeito Doppler & Acústica</h1>
+            <h1 class="subpage-title">Laboratório de Fones ANC, Radar & Ondas</h1>
           </div>
           <p class="subpage-desc">
-            Frentes de onda circulares em movimento, interferência de fenda dupla de Young e banco de questões de acústica e ondas com 5 alternativas.
+            Cancelamento ativo de ruído em fones de ouvido (ANC), radar de trânsito Doppler, frentes de onda e mega banco de exercícios multibancas.
           </p>
         </div>
       </div>
@@ -59,16 +59,122 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-ond-1">
-            <span class="station-number">01</span><span>Efeito Doppler Acústico (ENEM / FUVEST)</span>
+          <button class="station-tab is-active" data-station="st-ond-anc">
+            <span class="station-number">01</span><span>🎧 Fone com Cancelamento Ativo (ANC / ENEM)</span>
           </button>
-          <button class="station-tab" data-station="st-ond-2">
-            <span class="station-number">02</span><span>Fenda Dupla & Interferência de Young (UNICAMP / ITA)</span>
+          <button class="station-tab" data-station="st-ond-radar">
+            <span class="station-number">02</span><span>🚓 Radar de Trânsito por Doppler (UNICAMP / ITA)</span>
+          </button>
+          <button class="station-tab" data-station="st-ond-1">
+            <span class="station-number">03</span><span>🚑 Efeito Doppler Sonoro (FUVEST / UNESP)</span>
           </button>
         </div>
 
-        <!-- Bancada W1: Doppler -->
-        <div class="station-panel is-active" id="st-ond-1">
+        <!-- Bancada W_ANC: Cancelamento de Ruído -->
+        <div class="station-panel is-active" id="st-ond-anc">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="topic-tag">Interferência de Ondas · Fones de Ouvido ANC</span>
+              </div>
+              <h2 class="question-title">Desafio: A Física do Cancelamento Ativo de Ruído</h2>
+              <div class="question-context">
+                "Os fones de ouvido com tecnologia ANC (Active Noise Cancelling) captam o som ambiente através de um microfone externo e produzem silêncio emitindo:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Uma onda sonora idêntica com defasagem de $180^\circ$ ($\pi\,\text{rad}$), provocando interferência destrutiva total.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Uma onda em fase para amplificar o som por ressonância.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Um campo eletromagnético que desvia as moléculas de ar do ouvido.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Ultrassons que anestesiam o nervo auditivo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Uma barreira gravitacional no pavilhão auditivo.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O princípio fundamental é o da <strong>superposição de ondas com interferência destrutiva</strong>: quando a onda de ruído $y_1(t) = A \sin(\omega t)$ e a onda gerada pelo fone $y_2(t) = A \sin(\omega t + \pi) = -A \sin(\omega t)$ se encontram, a resultante é nula ($y_R = y_1 + y_2 = 0$), cancelando a pressão acústica no tímpano.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Fone ANC & Superposição Antifásica</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-ondas-anc"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Tecnologia ANC</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="w-anc-toggle" checked> Ativar Cancelamento de Ruído
+                    </label>
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Defasagem ($\Delta\phi$)</div><div class="readout-num">180° (π rad)</div></div>
+                  <div class="readout-item"><div class="readout-name">Estado do Fone</div><div class="readout-num" id="w-anc-status-text" style="font-size:0.85rem;">Silêncio por ANC</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada W_RADAR: Radar Doppler -->
+        <div class="station-panel" id="st-ond-radar">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP / ITA</span>
+                <span class="topic-tag">Efeito Doppler Eletromagnético · Radar de Trânsito</span>
+              </div>
+              <h2 class="question-title">Desafio: Medição de Velocidade por Micro-ondas</h2>
+              <div class="question-context">
+                "Uma pistola de radar emite micro-ondas de frequência $f_0 = 24{,}15\,\text{GHz}$. Ao refletir em um veículo em aproximação, a frequência do sinal que retorna ao radar é:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Maior que $f_0$, proporcional à velocidade do veículo pelo efeito Doppler duplo ($\Delta f \approx 2 \frac{v}{c} f_0$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Menor que $f_0$, pois o veículo absorve a energia da onda.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Rigorosamente igual, pois a velocidade da luz é invariável.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Nula devido à blindagem metálica do carro.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Invertida de sinal para frequências negativas.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O carro atua sucessivamente como observador em movimento (aproximando-se do radar) e como fonte refletora em movimento. Pela fórmula do efeito Doppler duplo para ondas eletromagnéticas ($v \ll c$): $\Delta f = f' - f_0 = 2 \frac{v}{c} f_0$. O circuito eletrônico do radar mede $\Delta f$ instantaneamente e calcula $v = \frac{c \cdot \Delta f}{2 f_0}$.
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Radar de Trânsito & Desvio Doppler</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-ondas-radar"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Velocidade do Carro</span><span class="dial-value" id="w-rad-speed-val">90 km/h</span></div>
+                    <input type="range" class="lab-slider" id="w-rad-speed-slider" min="40" max="140" step="5" value="90">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Desvio Doppler (Δf)</div><div class="readout-num" id="w-rad-deltaf-num">Δf = +4025 Hz</div></div>
+                  <div class="readout-item"><div class="readout-name">Velocidade Medida</div><div class="readout-num" id="w-rad-speedcalc-num">90 km/h</div></div>
+                  <div class="readout-item"><div class="readout-name">Status</div><div class="readout-num" id="w-rad-status-text" style="font-size:0.85rem;">Infração</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada W1: Doppler Sonoro -->
+        <div class="station-panel" id="st-ond-1">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
@@ -77,23 +183,14 @@
               </div>
               <h2 class="question-title">Desafio: O Som da Sirene</h2>
               <div class="question-context">
-                "Quando uma viatura com sirene ligada aproxima-se rapidamente de um pedestre parado na calçada, a frequência percebida por ele:"
+                "Quando uma ambulância aproxima-se com sirene de $440\,\text{Hz}$ a metade da velocidade do som ($0{,}50\,\text{Mach}$), qual a frequência aparente percebida pelo pedestre à frente?"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>É maior que a frequência original (som mais agudo).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>É menor que a original (som mais grave).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Permanece rigorosamente igual, pois a velocidade do som no ar é constante.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Cai a zero no momento do cruzamento.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Depende da temperatura do motor da viatura.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Na aproximação, as frentes de onda emitidas são comprimidas espacialmente ($\lambda' < \lambda$). Pela relação $v = \lambda' f'$, a frequência aparente percebida pelo observador é maior: $f' = f_0 \left(\frac{v}{v - v_{\text{fonte}}}\right) > f_0$.
-                </div>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 880\,\text{Hz}$ (O dobro da frequência, som muito mais agudo).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 440\,\text{Hz}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f' = 220\,\text{Hz}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f' = 0\,\text{Hz}$</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f' = 1320\,\text{Hz}$</span></button>
               </div>
             </div>
             <div class="apparatus-card">
@@ -102,61 +199,17 @@
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade da Fonte</span><span class="dial-value" id="w1-speed-val">170 m/s (0.50 Mach)</span></div>
+                    <div class="dial-header"><span class="dial-label">Velocidade da Fonte</span><span class="dial-value">0.50 Mach</span></div>
                     <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Frequência ($f_0$)</span><span class="dial-value" id="w1-freq-val">440 Hz</span></div>
+                    <div class="dial-header"><span class="dial-label">Frequência ($f_0$)</span><span class="dial-value">440 Hz</span></div>
                     <input type="range" class="lab-slider" id="w1-freq-slider" min="200" max="800" step="20" value="440">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Frequência à Frente</div><div class="readout-num" id="w1-fahead-num">880 Hz</div></div>
                   <div class="readout-item"><div class="readout-name">Frequência Atrás</div><div class="readout-num" id="w1-fbehind-num">293 Hz</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada W2: Young -->
-        <div class="station-panel" id="st-ond-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP / ITA</span>
-                <span class="topic-tag">Ondas · Interferência de Young</span>
-              </div>
-              <h2 class="question-title">Desafio: Natureza Ondulatória</h2>
-              <div class="question-context">
-                "O surgimento de franjas claras (máximos) e escuras (mínimos) na tela do experimento de fenda dupla comprova:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A superposição coerente e a natureza ondulatória da luz.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A atração gravitacional entre os fótons.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A perda de energia da luz ao colidir com o ar.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A emissão de raios gama pelo obstáculo.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>A refração exclusiva por lentes delgadas.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  A diferença de caminho óptico $\Delta d = d \sin\theta$ produz interferência construtiva quando $\Delta d = m \lambda$ (franjas brilhantes) e destrutiva quando $\Delta d = (m + \frac{1}{2})\lambda$ (franjas escuras).
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Cuba de Fenda Dupla</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-ondas-young"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="w2-wave-val">550 nm</span></div>
-                    <input type="range" class="lab-slider" id="w2-wave-slider" min="400" max="700" step="25" value="550">
-                  </div>
                 </div>
               </div>
             </div>
@@ -171,7 +224,7 @@
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Ondulatória & Acústica</h2>
-          <span class="section-head-tag">ENEM, FUVEST, UNICAMP, UNESP, ITA, IME, UFMG, UFMT, IFMT</span>
+          <span class="section-head-tag">ENEM, FUVEST, UNICAMP, UNESP, ITA, IME, UFMG, UFRGS</span>
         </div>
 
         <div class="bank-filters">

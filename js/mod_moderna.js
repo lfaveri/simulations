@@ -1,17 +1,135 @@
 /**
- * MÓDULO: FÍSICA MODERNA — LABORATÓRIO VIRTUAL COMPLETO
- * 1. Efeito Fotoelétrico de Einstein & Metais Fotossensíveis (ENEM / UNICAMP)
- * 2. Relatividade Restrita & Dilatação Temporal de Lorentz (FUVEST / ITA)
- * 3. Modelo Atômico de Bohr & Transições Espectrais (UNESP / IME)
- * 4. Decaimento Radioativo & Meia-Vida Nuclear (ENEM / UFG)
+ * MÓDULO: FÍSICA MODERNA — LABORATÓRIO VIRTUAL EXPANDIDO & FÍSICA DO COTIDIANO
+ * 1. Navegação por GPS & Correção Relativística de Einstein (Cotidiano / Relatividade)
+ * 2. Célula Solar & Efeito Fotoelétrico de Einstein
+ * 3. Modelo Atômico de Bohr & Transições Espectrais
  */
 
 /* ==========================================================================
-   1. EFEITO FOTOELÉTRICO DE EINSTEIN
+   1. NAVEGAÇÃO POR GPS & CORREÇÕES RELATIVÍSTICAS (COTIDIANO)
+   ========================================================================== */
+const simModernaGPS = (p) => {
+  let applyEinsteinCorrection = true;
+  let elapsedDays = 1.0; // 0.1 a 5.0 dias
+
+  p.setup = () => {
+    const wrap = document.getElementById("canvas-moderna-gps");
+    if (!wrap) return;
+    const w = Math.min(wrap.clientWidth || 550, 650);
+    const canvas = p.createCanvas(w, 360);
+    canvas.parent("canvas-moderna-gps");
+
+    initControls();
+    calculatePhysics();
+  };
+
+  function initControls() {
+    const corrToggle = document.getElementById("mod-gps-corr-toggle");
+    const dSlider = document.getElementById("mod-gps-days-slider");
+
+    if (corrToggle) {
+      corrToggle.addEventListener("change", (e) => {
+        applyEinsteinCorrection = e.target.checked;
+        calculatePhysics();
+      });
+    }
+
+    if (dSlider) {
+      dSlider.addEventListener("input", (e) => {
+        elapsedDays = parseFloat(e.target.value);
+        document.getElementById("mod-gps-days-val").textContent = `${elapsedDays.toFixed(1)} dias`;
+        calculatePhysics();
+      });
+    }
+  }
+
+  function calculatePhysics() {
+    // Efeito Relatividade Restrita (Velocidade orbital v = 3.9 km/s): -7.2 us/dia
+    // Efeito Relatividade Geral (Menor gravidade a 20.000 km): +45.9 us/dia
+    // Diferença líquida diária: +38.7 us/dia
+    const netDriftMicroSec = 38.7 * elapsedDays;
+    const posErrorKm = applyEinsteinCorrection ? 0.005 : (netDriftMicroSec * 1e-6 * 300000); // c * dt
+
+    const driftElem = document.getElementById("mod-gps-drift-num");
+    const errElem = document.getElementById("mod-gps-err-num");
+    const statusElem = document.getElementById("mod-gps-status-text");
+
+    if (driftElem) driftElem.textContent = `+${netDriftMicroSec.toFixed(1).replace(".", ",")} µs`;
+    if (errElem) errElem.textContent = applyEinsteinCorrection ? "± 2 a 5 metros" : `Erro de ${posErrorKm.toFixed(1).replace(".", ",")} km!`;
+    if (statusElem) {
+      if (applyEinsteinCorrection) {
+        statusElem.textContent = "✓ Relatividade Aplicada: Localização Exata";
+        statusElem.style.color = "#2e8b57";
+      } else {
+        statusElem.textContent = "🚨 Sem Einstein: GPS inutilizável na cidade!";
+        statusElem.style.color = "#c8435d";
+      }
+    }
+  }
+
+  p.draw = () => {
+    p.background(18, 16, 28);
+    const cx = p.width * 0.5, cy = 180;
+
+    // Terra no centro
+    p.fill(40, 90, 180);
+    p.stroke(100, 180, 255);
+    p.strokeWeight(2);
+    p.ellipse(cx, cy, 70, 70);
+    p.noStroke();
+    p.fill(255);
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("Terra", cx, cy);
+
+    // Órbita dos Satélites GPS a 20.000 km
+    const orbitR = 120;
+    p.noFill();
+    p.stroke(140, 103, 168, 120);
+    p.strokeWeight(1.5);
+    p.ellipse(cx, cy, orbitR * 2, orbitR * 2);
+
+    // 4 Satélites da Constelação GPS
+    for (let i = 0; i < 4; i++) {
+      let ang = (p.frameCount * 0.015 + i * (p.TWO_PI / 4)) % p.TWO_PI;
+      let sx = cx + orbitR * Math.cos(ang);
+      let sy = cy + orbitR * Math.sin(ang);
+
+      // Satélite
+      p.fill(201, 174, 222);
+      p.stroke(255);
+      p.strokeWeight(1.5);
+      p.rect(sx - 7, sy - 5, 14, 10, 2);
+      // Painéis solares
+      p.fill(60, 140, 240);
+      p.rect(sx - 18, sy - 3, 9, 6);
+      p.rect(sx + 9, sy - 3, 9, 6);
+
+      // Sinais de rádio sincronizados para a Terra
+      p.stroke(255, 220, 80, 120);
+      p.strokeWeight(1);
+      p.line(sx, sy, cx, cy);
+    }
+
+    p.noStroke();
+    p.fill(255);
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Sem a compensação relativística de Einstein (+38,7 µs/dia), o GPS erraria a localização em ~11 km por dia!", cx, 20);
+  };
+
+  p.windowResized = () => {
+    const wrap = document.getElementById("canvas-moderna-gps");
+    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
+  };
+};
+
+/* ==========================================================================
+   2. EFEITO FOTOELÉTRICO DE EINSTEIN
    ========================================================================== */
 const simModernaFotoeletrico = (p) => {
   let wavelengthNm = 350;
-  let workFunctionEV = 2.14; // Césio = 2.14, Potássio = 2.30, Alumínio = 4.10, Platina = 6.35
+  let workFunctionEV = 2.14; // Césio
   let metalName = "Césio";
   let emittedElectrons = [];
   const hc = 1240;
@@ -52,7 +170,6 @@ const simModernaFotoeletrico = (p) => {
     const photonEnergyEV = hc / Math.max(wavelengthNm, 100);
     const eKineticEV = Math.max(0, photonEnergyEV - workFunctionEV);
     const isEmitting = photonEnergyEV >= workFunctionEV;
-    const cutoffLambda = hc / workFunctionEV;
 
     const ePhotElem = document.getElementById("mod1-ephot-num");
     const eKinElem = document.getElementById("mod1-ekin-num");
@@ -61,13 +178,8 @@ const simModernaFotoeletrico = (p) => {
     if (ePhotElem) ePhotElem.textContent = `${photonEnergyEV.toFixed(2).replace(".", ",")} eV`;
     if (eKinElem) eKinElem.textContent = `${eKineticEV.toFixed(2).replace(".", ",")} eV`;
     if (statusElem) {
-      if (isEmitting) {
-        statusElem.textContent = `Emissão Ativa (E_cin = ${eKineticEV.toFixed(2)} eV)`;
-        statusElem.style.color = "#2e8b57";
-      } else {
-        statusElem.textContent = `Sem emissão (hf < W = ${workFunctionEV.toFixed(2)} eV, λ_corte = ${cutoffLambda.toFixed(0)} nm)`;
-        statusElem.style.color = "#c8435d";
-      }
+      statusElem.textContent = isEmitting ? `Emissão Ativa (E_cin = ${eKineticEV.toFixed(2)} eV)` : `Sem emissão (hf < W = ${workFunctionEV} eV)`;
+      statusElem.style.color = isEmitting ? "#2e8b57" : "#c8435d";
     }
   }
 
@@ -77,7 +189,7 @@ const simModernaFotoeletrico = (p) => {
     const photonEnergyEV = hc / wavelengthNm;
     const isEmitting = photonEnergyEV >= workFunctionEV;
 
-    // Placa Fotossensível (Catodo)
+    // Placa Fotossensível
     p.fill(80, 70, 95);
     p.stroke(140, 103, 168);
     p.strokeWeight(3);
@@ -88,16 +200,14 @@ const simModernaFotoeletrico = (p) => {
     p.textAlign(p.CENTER, p.CENTER);
     p.text(`${metalName}\nW=${workFunctionEV}eV`, plateX + 10, plateY - 18);
 
-    // Placa Coletora (Anodo)
     const anodeX = p.width - 120;
     p.fill(60, 52, 75);
     p.stroke(140, 103, 168);
     p.rect(anodeX, plateY, 20, plateH, 3);
 
-    // Feixe de Fótons Incidentes
-    const beamColor = getSpectrumColor(wavelengthNm);
-    p.stroke(beamColor[0], beamColor[1], beamColor[2], 180);
-    p.strokeWeight(3);
+    // Feixe de Fótons
+    p.stroke(255, 220, 80, 180);
+    p.strokeWeight(2.5);
     for (let i = 0; i < 4; i++) {
       let sy = plateY + 30 + i * 40;
       let waveT = p.frameCount * 0.12;
@@ -110,136 +220,32 @@ const simModernaFotoeletrico = (p) => {
       p.endShape();
     }
 
-    // Ejeção Quântica de Fotoelétrons
     if (isEmitting && p.frameCount % 8 === 0) {
       const eKinetic = photonEnergyEV - workFunctionEV;
-      const speed = Math.sqrt(eKinetic) * 3.5;
-      emittedElectrons.push({
-        x: plateX + 22,
-        y: plateY + p.random(20, plateH - 20),
-        vx: speed
-      });
+      emittedElectrons.push({ x: plateX + 22, y: plateY + p.random(20, plateH - 20), vx: Math.sqrt(eKinetic) * 3.5 });
     }
 
-    // Movimento dos Fotoelétrons
     p.noStroke();
     p.fill(59, 108, 181);
     for (let i = emittedElectrons.length - 1; i >= 0; i--) {
       let el = emittedElectrons[i];
       el.x += el.vx;
       p.ellipse(el.x, el.y, 8, 8);
-      p.fill(255);
-      p.ellipse(el.x, el.y, 2.5, 2.5);
-      p.fill(59, 108, 181);
       if (el.x > anodeX) emittedElectrons.splice(i, 1);
     }
   };
 
-  function getSpectrumColor(nm) {
-    if (nm < 380) return [180, 100, 255]; // UV
-    if (nm < 450) return [100, 100, 255]; // Azul
-    if (nm < 520) return [80, 220, 120];  // Verde
-    if (nm < 590) return [255, 220, 60];  // Amarelo
-    if (nm < 700) return [255, 80, 80];   // Vermelho
-    return [160, 40, 40]; // Infravermelho
-  }
-
   p.windowResized = () => {
     const wrap = document.getElementById("canvas-moderna-foto");
-    if (wrap) {
-      const w = Math.min(wrap.clientWidth || 550, 650);
-      p.resizeCanvas(w, 360);
-    }
+    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
   };
 };
 
 /* ==========================================================================
-   2. RELATIVIDADE RESTRITA & LORENTZ
-   ========================================================================== */
-const simModernaRelatividade = (p) => {
-  let beta = 0.60;
-  let photonY = 160;
-  let photonDir = 1;
-
-  p.setup = () => {
-    const wrap = document.getElementById("canvas-moderna-relatividade");
-    if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
-    const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-moderna-relatividade");
-
-    initControls();
-    calculatePhysics();
-  };
-
-  function initControls() {
-    const betaSlider = document.getElementById("mod2-beta-slider");
-    if (betaSlider) {
-      betaSlider.addEventListener("input", (e) => {
-        beta = parseFloat(e.target.value);
-        document.getElementById("mod2-beta-val").textContent = `${beta.toFixed(2)} c (${(beta * 300000).toFixed(0)} km/s)`;
-        calculatePhysics();
-      });
-    }
-  }
-
-  function calculatePhysics() {
-    const gamma = 1 / Math.sqrt(Math.max(0.001, 1 - beta * beta));
-    const dtDilated = gamma * 1.0;
-    const lengthContracted = 100.0 / gamma;
-
-    const gammaElem = document.getElementById("mod2-gamma-num");
-    const dtElem = document.getElementById("mod2-dt-num");
-    const lenElem = document.getElementById("mod2-len-num");
-
-    if (gammaElem) gammaElem.textContent = `${gamma.toFixed(2).replace(".", ",")}`;
-    if (dtElem) dtElem.textContent = `${dtDilated.toFixed(2).replace(".", ",")} s`;
-    if (lenElem) lenElem.textContent = `${lengthContracted.toFixed(1).replace(".", ",")} m`;
-  }
-
-  p.draw = () => {
-    p.background(18, 16, 28);
-    const gamma = 1 / Math.sqrt(Math.max(0.001, 1 - beta * beta));
-    const wagonW = 200 / gamma;
-    const wagonH = 160;
-    const wagonX = p.width * 0.5 - wagonW / 2;
-    const wagonY = 100;
-
-    // Vagão em Movimento Relativístico
-    p.fill(32, 28, 44);
-    p.stroke(140, 103, 168);
-    p.strokeWeight(3);
-    p.rect(wagonX, wagonY, wagonW, wagonH, 8);
-
-    // Espelhos Superior e Inferior
-    p.fill(201, 174, 222);
-    p.rect(wagonX + 10, wagonY + 6, wagonW - 20, 8);
-    p.rect(wagonX + 10, wagonY + wagonH - 14, wagonW - 20, 8);
-
-    // Fóton do Relógio de Luz
-    photonY += photonDir * 4;
-    if (photonY > wagonY + wagonH - 20) photonDir = -1;
-    if (photonY < wagonY + 20) photonDir = 1;
-
-    p.noStroke();
-    p.fill(255, 220, 100);
-    p.ellipse(wagonX + wagonW / 2, photonY, 12, 12);
-  };
-
-  p.windowResized = () => {
-    const wrap = document.getElementById("canvas-moderna-relatividade");
-    if (wrap) {
-      const w = Math.min(wrap.clientWidth || 550, 650);
-      p.resizeCanvas(w, 360);
-    }
-  };
-};
-
-/* ==========================================================================
-   3. MODELO ATÔMICO DE BOHR
+   3. MODELO DE BOHR
    ========================================================================== */
 const simModernaBohr = (p) => {
-  let currentLevel = 2; // n = 1, 2, 3, 4
+  let currentLevel = 2;
   let photonPulse = null;
 
   p.setup = () => {
@@ -253,30 +259,13 @@ const simModernaBohr = (p) => {
   };
 
   function initControls() {
-    const btnJumpUp = document.getElementById("btn-bohr-absorb");
-    const btnJumpDown = document.getElementById("btn-bohr-emit");
-
-    if (btnJumpUp) {
-      btnJumpUp.addEventListener("click", () => {
-        if (currentLevel < 4) {
-          currentLevel++;
-          updateBohrEnergy();
-        }
-      });
-    }
-
-    if (btnJumpDown) {
-      btnJumpDown.addEventListener("click", () => {
-        if (currentLevel > 1) {
-          currentLevel--;
-          updateBohrEnergy();
-          photonPulse = { x: p.width * 0.5, y: p.height * 0.5, r: 0 };
-        }
-      });
-    }
+    const btnUp = document.getElementById("btn-bohr-absorb");
+    const btnDown = document.getElementById("btn-bohr-emit");
+    if (btnUp) btnUp.addEventListener("click", () => { if (currentLevel < 4) { currentLevel++; updateBohr(); } });
+    if (btnDown) btnDown.addEventListener("click", () => { if (currentLevel > 1) { currentLevel--; updateBohr(); photonPulse = { r: 0 }; } });
   }
 
-  function updateBohrEnergy() {
+  function updateBohr() {
     const eLevel = -13.6 / (currentLevel * currentLevel);
     const eElem = document.getElementById("mod3-energy-num");
     const nElem = document.getElementById("mod3-n-num");
@@ -286,21 +275,13 @@ const simModernaBohr = (p) => {
 
   p.draw = () => {
     p.background(18, 16, 28);
-    const cx = p.width * 0.5;
-    const cy = p.height * 0.5;
+    const cx = p.width * 0.5, cy = p.height * 0.5;
 
-    // Núcleo
     p.fill(200, 67, 93);
     p.stroke(255);
     p.strokeWeight(1.5);
     p.ellipse(cx, cy, 18, 18);
-    p.noStroke();
-    p.fill(255);
-    p.textSize(8);
-    p.textAlign(p.CENTER, p.CENTER);
-    p.text("+Ze", cx, cy);
 
-    // Órbitas de Bohr
     p.noFill();
     p.stroke(140, 103, 168, 80);
     p.strokeWeight(1.5);
@@ -309,7 +290,6 @@ const simModernaBohr = (p) => {
       p.ellipse(cx, cy, r * 2, r * 2);
     }
 
-    // Elétron
     const orbitR = currentLevel * 35;
     const ang = p.frameCount * 0.04;
     const ex = cx + Math.cos(ang) * orbitR;
@@ -320,11 +300,9 @@ const simModernaBohr = (p) => {
     p.strokeWeight(1.5);
     p.ellipse(ex, ey, 10, 10);
 
-    // Fóton emitido
     if (photonPulse) {
       photonPulse.r += 3;
       p.stroke(255, 220, 80, p.map(photonPulse.r, 0, 150, 255, 0));
-      p.strokeWeight(2);
       p.noFill();
       p.ellipse(cx, cy, photonPulse.r * 2);
       if (photonPulse.r > 150) photonPulse = null;
@@ -333,15 +311,12 @@ const simModernaBohr = (p) => {
 
   p.windowResized = () => {
     const wrap = document.getElementById("canvas-moderna-bohr");
-    if (wrap) {
-      const w = Math.min(wrap.clientWidth || 550, 650);
-      p.resizeCanvas(w, 360);
-    }
+    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
   };
 };
 
 window.addEventListener("load", () => {
+  if (document.getElementById("canvas-moderna-gps")) new p5(simModernaGPS);
   if (document.getElementById("canvas-moderna-foto")) new p5(simModernaFotoeletrico);
-  if (document.getElementById("canvas-moderna-relatividade")) new p5(simModernaRelatividade);
   if (document.getElementById("canvas-moderna-bohr")) new p5(simModernaBohr);
 });

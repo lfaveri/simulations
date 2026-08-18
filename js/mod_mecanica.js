@@ -1,197 +1,382 @@
 /**
- * MÓDULO: MECÂNICA CLÁSSICA — LABORATÓRIO VIRTUAL COMPLETO
- * 1. Lançamento de Projéteis & Balística (FUVEST / ITA)
- * 2. Plano Inclinado com Decomposição Vetorial Completa & Atrito (UNICAMP / UNESP)
- * 3. Hidrostática & Empuxo de Arquimedes (ENEM / UFMT)
- * 4. Colisões 1D & Conservação de Energia (IME / FEI)
+ * MÓDULO: MECÂNICA CLÁSSICA — LABORATÓRIO VIRTUAL EXPANDIDO & FÍSICA DO COTIDIANO
+ * 1. Frenagem de Carro no Trânsito & ABS (Segurança Viária)
+ * 2. Montanha-Russa, Looping & Conservação de Energia
+ * 3. Plano Inclinado com Decomposição Vetorial Completa & Atrito
+ * 4. Lançamento de Projéteis & Balística
+ * 5. Hidrostática & Empuxo de Arquimedes
  */
 
 /* ==========================================================================
-   1. LANÇAMENTO DE PROJÉTEIS & BALÍSTICA
+   1. FRENAGEM DE CARRO NO TRÂNSITO & ABS (COTIDIANO / CINEMÁTICA E DINÂMICA)
    ========================================================================== */
-const simMecLancamento = (p) => {
-  let angleDeg = 45;
-  let v0 = 20; // m/s
-  let g = 10;  // m/s^2
-  let cannonPos = { x: 60, y: 0 };
-  let projectile = null;
-  let trajectoryPath = [];
+const simMecFrenagem = (p) => {
+  let speedKmH = 80;
+  let reactionTimeSec = 0.75;
+  let roadType = "seca"; // "seca" (mu=0.8), "molhada" (mu=0.3)
+  let hasABS = true;
+
+  let carX = 40;
+  let isBraking = false;
+  let hasStopped = false;
+  let currentSpeed = 0;
+  let phase = "idle"; // "idle", "reaction", "braking", "stopped"
+  let phaseTimer = 0;
 
   p.setup = () => {
-    const wrap = document.getElementById("canvas-mec-lancamento");
+    const wrap = document.getElementById("canvas-mec-frenagem");
     if (!wrap) return;
     const w = Math.min(wrap.clientWidth || 550, 650);
     const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-mec-lancamento");
+    canvas.parent("canvas-mec-frenagem");
 
-    cannonPos.y = p.height - 45;
     initControls();
     calculatePhysics();
   };
 
   function initControls() {
-    const angleSlider = document.getElementById("m1-angle-slider");
-    const v0Slider = document.getElementById("m1-v0-slider");
-    const gSlider = document.getElementById("m1-g-slider");
-    const btnFire = document.getElementById("btn-fire-cannon");
-    const btn45 = document.getElementById("btn-demo-maxrange");
+    const speedSlider = document.getElementById("m-car-speed-slider");
+    const roadSelect = document.getElementById("m-car-road-select");
+    const absToggle = document.getElementById("m-car-abs-toggle");
+    const btnTest = document.getElementById("btn-test-braking");
+    const btnReset = document.getElementById("btn-reset-braking");
 
-    if (angleSlider) {
-      angleSlider.addEventListener("input", (e) => {
-        angleDeg = parseFloat(e.target.value);
-        document.getElementById("m1-angle-val").textContent = `${angleDeg}°`;
-        calculatePhysics();
+    if (speedSlider) {
+      speedSlider.addEventListener("input", (e) => {
+        speedKmH = parseFloat(e.target.value);
+        document.getElementById("m-car-speed-val").textContent = `${speedKmH} km/h (${(speedKmH / 3.6).toFixed(1)} m/s)`;
+        resetCar();
       });
     }
 
-    if (v0Slider) {
-      v0Slider.addEventListener("input", (e) => {
-        v0 = parseFloat(e.target.value);
-        document.getElementById("m1-v0-val").textContent = `${v0} m/s`;
-        calculatePhysics();
+    if (roadSelect) {
+      roadSelect.addEventListener("change", (e) => {
+        roadType = e.target.value;
+        resetCar();
       });
     }
 
-    if (gSlider) {
-      gSlider.addEventListener("input", (e) => {
-        g = parseFloat(e.target.value);
-        document.getElementById("m1-g-val").textContent = `${g.toFixed(1)} m/s²`;
-        calculatePhysics();
+    if (absToggle) {
+      absToggle.addEventListener("change", (e) => {
+        hasABS = e.target.checked;
+        resetCar();
       });
     }
 
-    if (btnFire) btnFire.addEventListener("click", fireCannon);
-    if (btn45) {
-      btn45.addEventListener("click", () => {
-        angleDeg = 45;
-        if (angleSlider) angleSlider.value = 45;
-        document.getElementById("m1-angle-val").textContent = "45° (Alcance Máximo)";
-        calculatePhysics();
-        fireCannon();
-      });
-    }
+    if (btnTest) btnTest.addEventListener("click", startBrakingTest);
+    if (btnReset) btnReset.addEventListener("click", resetCar);
   }
 
-  function fireCannon() {
-    trajectoryPath = [];
-    const rad = p.radians(angleDeg);
-    projectile = {
-      x: cannonPos.x,
-      y: cannonPos.y,
-      vx: v0 * Math.cos(rad) * 0.55,
-      vy: -v0 * Math.sin(rad) * 0.55
-    };
+  function startBrakingTest() {
+    resetCar();
+    isBraking = true;
+    phase = "reaction";
+    currentSpeed = speedKmH / 3.6; // m/s
+    phaseTimer = 0;
+  }
+
+  function resetCar() {
+    isBraking = false;
+    hasStopped = false;
+    carX = 40;
+    phase = "idle";
+    calculatePhysics();
   }
 
   function calculatePhysics() {
-    const rad = p.radians(angleDeg);
-    const range = (v0 * v0 * Math.sin(2 * rad)) / g;
-    const hMax = (v0 * v0 * Math.sin(rad) * Math.sin(rad)) / (2 * g);
-    const tFlight = (2 * v0 * Math.sin(rad)) / g;
+    const vMS = speedKmH / 3.6;
+    let mu = roadType === "seca" ? 0.80 : 0.30;
+    if (!hasABS) mu *= 0.75; // sem ABS o pneu trava e derrapa
 
-    const rangeElem = document.getElementById("m1-range-num");
-    const hmaxElem = document.getElementById("m1-hmax-num");
-    const timeElem = document.getElementById("m1-time-num");
+    const dReaction = vMS * reactionTimeSec;
+    const dBraking = (vMS * vMS) / (2 * mu * 10);
+    const dTotal = dReaction + dBraking;
 
-    if (rangeElem) rangeElem.textContent = `${range.toFixed(1).replace(".", ",")} m`;
-    if (hmaxElem) hmaxElem.textContent = `${hMax.toFixed(1).replace(".", ",")} m`;
-    if (timeElem) timeElem.textContent = `${tFlight.toFixed(2).replace(".", ",")} s`;
+    const dReacElem = document.getElementById("m-car-dreac-num");
+    const dBrakeElem = document.getElementById("m-car-dbrake-num");
+    const dTotalElem = document.getElementById("m-car-dtotal-num");
+
+    if (dReacElem) dReacElem.textContent = `${dReaction.toFixed(1).replace(".", ",")} m`;
+    if (dBrakeElem) dBrakeElem.textContent = `${dBraking.toFixed(1).replace(".", ",")} m`;
+    if (dTotalElem) dTotalElem.textContent = `${dTotal.toFixed(1).replace(".", ",")} m`;
   }
 
   p.draw = () => {
     p.background(18, 16, 28);
+    const roadY = 220;
 
-    // Solo do Laboratório
-    p.noStroke();
-    p.fill(32, 28, 44);
-    p.rect(0, p.height - 40, p.width, 40);
-    p.stroke(80, 70, 95);
-    p.line(0, p.height - 40, p.width, p.height - 40);
-
-    drawTheoreticalTrajectory();
-
-    // Rastro da trajetória
-    p.stroke(201, 174, 222, 180);
+    // Asfalto da Rodovia
+    p.fill(roadType === "seca" ? 40 : 25, roadType === "seca" ? 38 : 30, roadType === "seca" ? 50 : 45);
+    p.stroke(140, 103, 168);
     p.strokeWeight(2);
-    p.noFill();
-    p.beginShape();
-    trajectoryPath.forEach(pt => p.vertex(pt.x, pt.y));
-    p.endShape();
+    p.rect(0, roadY, p.width, 90);
 
-    // Projétil
-    if (projectile) {
-      projectile.x += projectile.vx;
-      projectile.y += projectile.vy;
-      projectile.vy += (g * 0.015);
+    // Faixas da Rodovia
+    p.stroke(roadType === "seca" ? 255 : 180, roadType === "seca" ? 220 : 200, 100);
+    p.strokeWeight(3);
+    p.drawingContext.setLineDash([16, 16]);
+    p.line(0, roadY + 45, p.width, roadY + 45);
+    p.drawingContext.setLineDash([]);
 
-      trajectoryPath.push({ x: projectile.x, y: projectile.y });
+    // Obstáculo à frente (Pedestre / Faixa de Pare)
+    const obstacleX = p.width - 70;
+    p.fill(200, 67, 93);
+    p.stroke(255);
+    p.strokeWeight(1.5);
+    p.rect(obstacleX, roadY - 40, 12, 40, 2);
+    p.noStroke();
+    p.fill(255);
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("PARE", obstacleX + 6, roadY - 45);
 
-      p.noStroke();
-      p.fill(200, 67, 93);
-      p.ellipse(projectile.x, projectile.y, 10, 10);
-      p.fill(255);
-      p.ellipse(projectile.x, projectile.y, 4, 4);
+    // Dinâmica de Frenagem
+    if (isBraking && !hasStopped) {
+      let mu = roadType === "seca" ? 0.80 : 0.30;
+      if (!hasABS) mu *= 0.75;
+      const decel = mu * 10; // m/s^2
 
-      if (projectile.y >= cannonPos.y) projectile = null;
+      phaseTimer += 1 / 60;
+
+      if (phase === "reaction") {
+        carX += currentSpeed * 0.45;
+        if (phaseTimer >= reactionTimeSec) {
+          phase = "braking";
+        }
+      } else if (phase === "braking") {
+        currentSpeed = Math.max(0, currentSpeed - decel * (1 / 60));
+        carX += currentSpeed * 0.45;
+        if (currentSpeed <= 0) {
+          hasStopped = true;
+          phase = "stopped";
+        }
+      }
     }
 
-    drawCannon();
+    // Desenho do Carro
+    drawCar(carX, roadY);
+
+    // Indicador de Fase
+    p.fill(255);
+    p.textSize(12);
+    p.textAlign(p.LEFT, p.TOP);
+    if (phase === "reaction") {
+      p.fill(255, 220, 100);
+      p.text("⚠️ Percepção & Tempo de Reação do Motorista (0,75s)...", 30, 30);
+    } else if (phase === "braking") {
+      p.fill(200, 67, 93);
+      p.text(hasABS ? "🛑 Frenagem Ativa com Sistema ABS (Atrito Máximo)" : "🛑 Pneus Travados (Derrapagem sem ABS)!", 30, 30);
+    } else if (phase === "stopped") {
+      p.fill(46, 139, 87);
+      p.text(`✓ Veículo Imobilizado com Sucesso a ${(carX * 0.25).toFixed(1)} m`, 30, 30);
+    } else {
+      p.fill(201, 174, 222);
+      p.text("Clique em 'Iniciar Teste de Frenagem' para simular a parada", 30, 30);
+    }
   };
 
-  function drawTheoreticalTrajectory() {
-    const rad = p.radians(angleDeg);
-    const range = (v0 * v0 * Math.sin(2 * rad)) / g;
-    const pxScale = (p.width - 120) / 45;
-
-    p.stroke(46, 139, 87, 120);
-    p.strokeWeight(1.5);
-    p.drawingContext.setLineDash([4, 4]);
-    p.noFill();
-    p.beginShape();
-    for (let x = 0; x <= range; x += 0.5) {
-      let y = x * Math.tan(rad) - (g / (2 * v0 * v0 * Math.cos(rad) * Math.cos(rad))) * x * x;
-      if (y < 0) break;
-      p.vertex(cannonPos.x + x * pxScale, cannonPos.y - y * pxScale);
-    }
-    p.endShape();
-    p.drawingContext.setLineDash([]);
-  }
-
-  function drawCannon() {
+  function drawCar(x, y) {
     p.push();
-    p.translate(cannonPos.x, cannonPos.y);
-    p.fill(60, 52, 75);
-    p.stroke(140, 103, 168);
-    p.strokeWeight(1.5);
-    p.arc(0, 0, 36, 36, p.PI, p.TWO_PI);
+    p.translate(x, y);
 
-    p.rotate(-p.radians(angleDeg));
-    p.fill(90, 78, 110);
-    p.rect(0, -7, 34, 14, 2);
+    // Sombra
+    p.noStroke();
+    p.fill(10, 10, 15, 150);
+    p.ellipse(0, -2, 70, 14);
+
+    // Chassi
+    p.fill(59, 108, 181);
+    p.stroke(255);
+    p.strokeWeight(1.5);
+    p.rect(-30, -24, 60, 20, 4);
+
+    // Cabine
+    p.fill(100, 160, 240);
+    p.rect(-15, -36, 34, 14, 3);
+
+    // Rodas
+    p.fill(20);
+    p.stroke(140);
+    p.strokeWeight(2);
+    p.ellipse(-18, -4, 14, 14);
+    p.ellipse(18, -4, 14, 14);
+
+    // Luz de freio acesa durante frenagem
+    if (phase === "braking") {
+      p.noStroke();
+      p.fill(255, 40, 40, 220);
+      p.ellipse(-30, -18, 10, 10);
+    }
     p.pop();
   }
 
   p.windowResized = () => {
-    const wrap = document.getElementById("canvas-mec-lancamento");
+    const wrap = document.getElementById("canvas-mec-frenagem");
     if (wrap) {
       const w = Math.min(wrap.clientWidth || 550, 650);
       p.resizeCanvas(w, 360);
-      cannonPos.y = p.height - 45;
+      resetCar();
     }
   };
 };
 
 /* ==========================================================================
-   2. PLANO INCLINADO COM DECOMPOSIÇÃO VETORIAL & ATRITO
+   2. MONTANHA-RUSSA & LOOPING CIRCULAR (ENERGIA MECÂNICA & FORÇA CENTRÍPETA)
+   ========================================================================== */
+const simMecMontanhaRussa = (p) => {
+  let initialHeightH = 40; // metros
+  let loopRadiusR = 12;   // metros
+  const g = 10;
+
+  let cartPos = 0; // 0 (topo da rampa) a 1 (fim)
+  let isRunning = false;
+
+  p.setup = () => {
+    const wrap = document.getElementById("canvas-mec-looping");
+    if (!wrap) return;
+    const w = Math.min(wrap.clientWidth || 550, 650);
+    const canvas = p.createCanvas(w, 360);
+    canvas.parent("canvas-mec-looping");
+
+    initControls();
+    calculatePhysics();
+  };
+
+  function initControls() {
+    const hSlider = document.getElementById("m-loop-h-slider");
+    const rSlider = document.getElementById("m-loop-r-slider");
+    const btnLaunch = document.getElementById("btn-launch-coaster");
+    const btnReset = document.getElementById("btn-reset-coaster");
+
+    if (hSlider) {
+      hSlider.addEventListener("input", (e) => {
+        initialHeightH = parseFloat(e.target.value);
+        document.getElementById("m-loop-h-val").textContent = `${initialHeightH} m`;
+        resetCoaster();
+      });
+    }
+
+    if (rSlider) {
+      rSlider.addEventListener("input", (e) => {
+        loopRadiusR = parseFloat(e.target.value);
+        document.getElementById("m-loop-r-val").textContent = `${loopRadiusR} m`;
+        resetCoaster();
+      });
+    }
+
+    if (btnLaunch) btnLaunch.addEventListener("click", () => { isRunning = true; });
+    if (btnReset) btnReset.addEventListener("click", resetCoaster);
+  }
+
+  function resetCoaster() {
+    isRunning = false;
+    cartPos = 0;
+    calculatePhysics();
+  }
+
+  function calculatePhysics() {
+    const hMin = 2.5 * loopRadiusR; // Altura mínima para não cair no topo
+    const vBottom = Math.sqrt(2 * g * initialHeightH);
+    const vTopSquare = 2 * g * (initialHeightH - 2 * loopRadiusR);
+    const vTop = vTopSquare > 0 ? Math.sqrt(vTopSquare) : 0;
+    const canComplete = initialHeightH >= hMin;
+
+    const vBotElem = document.getElementById("m-loop-vbot-num");
+    const vTopElem = document.getElementById("m-loop-vtop-num");
+    const statusElem = document.getElementById("m-loop-status-text");
+
+    if (vBotElem) vBotElem.textContent = `${vBottom.toFixed(1).replace(".", ",")} m/s (${(vBottom * 3.6).toFixed(0)} km/h)`;
+    if (vTopElem) vTopElem.textContent = vTop > 0 ? `${vTop.toFixed(1).replace(".", ",")} m/s` : "0 m/s (Cai antes)";
+    if (statusElem) {
+      if (canComplete) {
+        statusElem.textContent = `Looping Seguro (H ≥ 2,5R = ${hMin.toFixed(1)} m)`;
+        statusElem.style.color = "#2e8b57";
+      } else {
+        statusElem.textContent = `Perigo: Não completa o topo (H < 2,5R = ${hMin.toFixed(1)} m)`;
+        statusElem.style.color = "#c8435d";
+      }
+    }
+  }
+
+  p.draw = () => {
+    p.background(18, 16, 28);
+    const groundY = p.height - 40;
+    const loopCenterX = p.width * 0.55;
+    const loopCenterY = groundY - loopRadiusR * 5;
+    const loopRadPx = loopRadiusR * 5;
+
+    // Solo
+    p.stroke(80, 70, 95);
+    p.strokeWeight(1.5);
+    p.line(0, groundY, p.width, groundY);
+
+    // Trilho da Montanha-Russa
+    p.stroke(140, 103, 168);
+    p.strokeWeight(3);
+    p.noFill();
+
+    // Rampa inicial
+    const rampTopX = 50, rampTopY = groundY - initialHeightH * 4.5;
+    p.beginShape();
+    p.vertex(rampTopX, rampTopY);
+    p.bezierVertex(rampTopX + 80, groundY, loopCenterX - loopRadPx - 40, groundY, loopCenterX - loopRadPx, groundY);
+    p.endShape();
+
+    // Círculo do Looping
+    p.ellipse(loopCenterX, loopCenterY, loopRadPx * 2, loopRadPx * 2);
+
+    // Trilho de saída
+    p.line(loopCenterX + loopRadPx, groundY, p.width - 30, groundY);
+
+    // Carrinho animado
+    if (isRunning && cartPos < 1.0) {
+      cartPos += 0.008;
+    }
+
+    let cx = rampTopX, cy = rampTopY;
+    if (cartPos < 0.35) {
+      let t = cartPos / 0.35;
+      cx = p.lerp(rampTopX, loopCenterX - loopRadPx, t);
+      cy = p.lerp(rampTopY, groundY, t);
+    } else if (cartPos < 0.85) {
+      let t = (cartPos - 0.35) / 0.50;
+      let ang = p.PI / 2 + t * p.TWO_PI;
+      cx = loopCenterX + loopRadPx * Math.cos(ang);
+      cy = loopCenterY + loopRadPx * Math.sin(ang);
+    } else {
+      let t = (cartPos - 0.85) / 0.15;
+      cx = p.lerp(loopCenterX + loopRadPx, p.width - 40, t);
+      cy = groundY;
+    }
+
+    // Desenho do Carrinho
+    p.fill(200, 67, 93);
+    p.stroke(255);
+    p.strokeWeight(1.5);
+    p.rect(cx - 10, cy - 14, 20, 12, 3);
+  };
+
+  p.windowResized = () => {
+    const wrap = document.getElementById("canvas-mec-looping");
+    if (wrap) {
+      const w = Math.min(wrap.clientWidth || 550, 650);
+      p.resizeCanvas(w, 360);
+      resetCoaster();
+    }
+  };
+};
+
+/* ==========================================================================
+   3. PLANO INCLINADO COM DECOMPOSIÇÃO VETORIAL COMPLETA & ATRITO
    ========================================================================== */
 const simMecPlanoInclinado = (p) => {
   let thetaDeg = 30;
   let mu = 0.40;
-  let mass = 2.0; // kg
-  const g = 10;   // m/s^2
+  let mass = 2.0;
+  const g = 10;
 
   let isSliding = false;
-  let blockDist = 0; // distância percorrida ao longo da rampa (pixels)
+  let blockDist = 0;
   let blockSpeed = 0;
 
   p.setup = () => {
@@ -241,9 +426,7 @@ const simMecPlanoInclinado = (p) => {
         const rad = p.radians(thetaDeg);
         const Px = mass * g * Math.sin(rad);
         const FatMax = mu * mass * g * Math.cos(rad);
-        if (Px > FatMax) {
-          isSliding = true;
-        }
+        if (Px > FatMax) isSliding = true;
       });
     }
 
@@ -288,8 +471,6 @@ const simMecPlanoInclinado = (p) => {
 
   p.draw = () => {
     p.background(18, 16, 28);
-
-    // Geometria da Rampa
     const rad = p.radians(thetaDeg);
     const rampOrigin = { x: 70, y: p.height - 50 };
     const rampLength = p.width - 160;
@@ -298,18 +479,15 @@ const simMecPlanoInclinado = (p) => {
       y: rampOrigin.y - rampLength * Math.sin(rad)
     };
 
-    // Solo
     p.stroke(80, 70, 95);
     p.strokeWeight(1.5);
     p.line(0, rampOrigin.y, p.width, rampOrigin.y);
 
-    // Corpo da Rampa
     p.fill(32, 28, 44);
     p.stroke(140, 103, 168);
     p.strokeWeight(2.5);
     p.triangle(rampOrigin.x, rampOrigin.y, rampEnd.x, rampOrigin.y, rampEnd.x, rampEnd.y);
 
-    // Arco do Ângulo θ
     p.noFill();
     p.stroke(201, 174, 222);
     p.strokeWeight(1.5);
@@ -319,7 +497,6 @@ const simMecPlanoInclinado = (p) => {
     p.textSize(11);
     p.text(`${thetaDeg}°`, rampEnd.x - 45, rampOrigin.y - 10);
 
-    // Animação de Movimento do Bloco
     const maxSlideDist = rampLength - 80;
     if (isSliding && blockDist < maxSlideDist) {
       const Px = mass * g * Math.sin(rad);
@@ -333,8 +510,6 @@ const simMecPlanoInclinado = (p) => {
       }
     }
 
-    // Posição do Bloco sobre a Rampa
-    // O bloco desce do topo (rampEnd) em direção à base (rampOrigin)
     const currentDist = 60 + blockDist;
     const bx = rampEnd.x - currentDist * Math.cos(rad);
     const by = rampEnd.y + currentDist * Math.sin(rad);
@@ -343,7 +518,6 @@ const simMecPlanoInclinado = (p) => {
     p.translate(bx, by);
     p.rotate(-rad);
 
-    // Bloco
     p.fill(201, 174, 222);
     p.stroke(255);
     p.strokeWeight(2);
@@ -355,19 +529,13 @@ const simMecPlanoInclinado = (p) => {
     p.textAlign(p.CENTER, p.CENTER);
     p.text(`${mass.toFixed(1)}kg`, 0, -20);
 
-    // Vetores de Força no Bloco
-    drawForceVectors(rad);
-    p.pop();
-  };
-
-  function drawForceVectors(rad) {
+    // Vetores de Força
     const P = mass * g;
     const Px = P * Math.sin(rad);
     const Py = P * Math.cos(rad);
     const N = Py;
     const Fat = Math.min(Px, mu * N);
 
-    // Normal N (perpendicular para cima)
     p.stroke(100, 200, 255);
     p.strokeWeight(2.5);
     p.line(0, -20, 0, -20 - N * 2.5);
@@ -377,7 +545,6 @@ const simMecPlanoInclinado = (p) => {
     p.textSize(9);
     p.text("N", 10, -20 - N * 2.5);
 
-    // Componente Px (paralela para baixo da rampa)
     p.stroke(255, 220, 80);
     p.strokeWeight(2.5);
     p.line(0, -20, -Px * 2.8, -20);
@@ -386,7 +553,6 @@ const simMecPlanoInclinado = (p) => {
     p.triangle(-Px * 2.8 - 6, -20, -Px * 2.8, -24, -Px * 2.8, -16);
     p.text("Px", -Px * 2.8 - 12, -20);
 
-    // Força de Atrito Fat (paralela para cima da rampa)
     p.stroke(46, 139, 87);
     p.strokeWeight(2.5);
     p.line(0, -20, Fat * 2.8, -20);
@@ -394,7 +560,9 @@ const simMecPlanoInclinado = (p) => {
     p.noStroke();
     p.triangle(Fat * 2.8 + 6, -20, Fat * 2.8, -24, Fat * 2.8, -16);
     p.text("Fat", Fat * 2.8 + 14, -20);
-  }
+
+    p.pop();
+  };
 
   p.windowResized = () => {
     const wrap = document.getElementById("canvas-mec-plano");
@@ -407,201 +575,96 @@ const simMecPlanoInclinado = (p) => {
 };
 
 /* ==========================================================================
-   3. HIDROSTÁTICA & EMPUXO DE ARQUIMEDES
+   4. LANÇAMENTO BALÍSTICO
    ========================================================================== */
-const simMecHidrostatica = (p) => {
-  let fluidDensity = 1.0; // g/cm^3
-  let blockVolume = 500;  // cm^3
-  let blockDensity = 2.7; // Alumínio = 2.7 g/cm^3
-  let immersionDepth = 0.5;
+const simMecLancamento = (p) => {
+  let angleDeg = 45;
+  let v0 = 20;
+  let g = 10;
+  let cannonPos = { x: 60, y: 0 };
+  let projectile = null;
+  let trajectoryPath = [];
 
   p.setup = () => {
-    const wrap = document.getElementById("canvas-mec-hidrostatica");
+    const wrap = document.getElementById("canvas-mec-lancamento");
     if (!wrap) return;
     const w = Math.min(wrap.clientWidth || 550, 650);
     const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-mec-hidrostatica");
-
+    canvas.parent("canvas-mec-lancamento");
+    cannonPos.y = p.height - 45;
     initControls();
     calculatePhysics();
   };
 
   function initControls() {
-    const fluidSlider = document.getElementById("m3-fluid-slider");
-    const depthSlider = document.getElementById("m3-depth-slider");
+    const angleSlider = document.getElementById("m1-angle-slider");
+    const v0Slider = document.getElementById("m1-v0-slider");
+    const btnFire = document.getElementById("btn-fire-cannon");
+    if (angleSlider) angleSlider.addEventListener("input", (e) => { angleDeg = parseFloat(e.target.value); calculatePhysics(); });
+    if (v0Slider) v0Slider.addEventListener("input", (e) => { v0 = parseFloat(e.target.value); calculatePhysics(); });
+    if (btnFire) btnFire.addEventListener("click", fireCannon);
+  }
 
-    if (fluidSlider) {
-      fluidSlider.addEventListener("input", (e) => {
-        fluidDensity = parseFloat(e.target.value);
-        document.getElementById("m3-fluid-val").textContent = `${fluidDensity.toFixed(2)} g/cm³`;
-        calculatePhysics();
-      });
-    }
-
-    if (depthSlider) {
-      depthSlider.addEventListener("input", (e) => {
-        immersionDepth = parseFloat(e.target.value);
-        document.getElementById("m3-depth-val").textContent = `${Math.round(immersionDepth * 100)}%`;
-        calculatePhysics();
-      });
-    }
+  function fireCannon() {
+    trajectoryPath = [];
+    const rad = p.radians(angleDeg);
+    projectile = { x: cannonPos.x, y: cannonPos.y, vx: v0 * Math.cos(rad) * 0.55, vy: -v0 * Math.sin(rad) * 0.55 };
   }
 
   function calculatePhysics() {
-    const massKg = (blockDensity * blockVolume) / 1000;
-    const P = massKg * 10;
-    const vSubCm3 = blockVolume * immersionDepth;
-    const vSubM3 = vSubCm3 * 1e-6;
-    const rhoLiqKgM3 = fluidDensity * 1000;
-    const E = rhoLiqKgM3 * vSubM3 * 10;
-    const Pap = Math.max(0, P - E);
-
-    const pRealElem = document.getElementById("m3-preal-num");
-    const empuxoElem = document.getElementById("m3-empuxo-num");
-    const papElem = document.getElementById("m3-pap-num");
-
-    if (pRealElem) pRealElem.textContent = `${P.toFixed(2).replace(".", ",")} N`;
-    if (empuxoElem) empuxoElem.textContent = `${E.toFixed(2).replace(".", ",")} N`;
-    if (papElem) papElem.textContent = `${Pap.toFixed(2).replace(".", ",")} N`;
+    const rad = p.radians(angleDeg);
+    const range = (v0 * v0 * Math.sin(2 * rad)) / g;
+    const hMax = (v0 * v0 * Math.sin(rad) * Math.sin(rad)) / (2 * g);
+    const rangeElem = document.getElementById("m1-range-num");
+    const hmaxElem = document.getElementById("m1-hmax-num");
+    if (rangeElem) rangeElem.textContent = `${range.toFixed(1).replace(".", ",")} m`;
+    if (hmaxElem) hmaxElem.textContent = `${hMax.toFixed(1).replace(".", ",")} m`;
   }
 
   p.draw = () => {
     p.background(18, 16, 28);
-    const beakerX = p.width * 0.45;
-    const beakerY = 140, beakerW = 160, beakerH = 180;
+    p.stroke(80, 70, 95);
+    p.line(0, p.height - 40, p.width, p.height - 40);
 
-    // Béquer
-    p.fill(24, 20, 36);
-    p.stroke(140, 103, 168);
-    p.strokeWeight(3);
-    p.rect(beakerX, beakerY, beakerW, beakerH, 0, 0, 8, 8);
-
-    // Líquido
-    p.noStroke();
-    p.fill(59, 108, 181, 100);
-    p.rect(beakerX + 3, beakerY + 30, beakerW - 6, beakerH - 33, 0, 0, 6, 6);
-
-    const blockH = 50, blockW = 50;
-    const blockY = beakerY + 10 + (1 - immersionDepth) * 35;
-    const blockX = beakerX + beakerW / 2 - blockW / 2;
-
-    // Haste do Dinamômetro
-    p.stroke(201, 174, 222);
+    p.stroke(201, 174, 222, 180);
     p.strokeWeight(2);
-    p.line(beakerX + beakerW / 2, 70, beakerX + beakerW / 2, blockY);
+    p.noFill();
+    p.beginShape();
+    trajectoryPath.forEach(pt => p.vertex(pt.x, pt.y));
+    p.endShape();
 
-    // Bloco
-    p.fill(160, 140, 180);
-    p.stroke(255);
-    p.strokeWeight(1.5);
-    p.rect(blockX, blockY, blockW, blockH, 3);
+    if (projectile) {
+      projectile.x += projectile.vx;
+      projectile.y += projectile.vy;
+      projectile.vy += (g * 0.015);
+      trajectoryPath.push({ x: projectile.x, y: projectile.y });
+      p.noStroke();
+      p.fill(200, 67, 93);
+      p.ellipse(projectile.x, projectile.y, 10, 10);
+      if (projectile.y >= cannonPos.y) projectile = null;
+    }
+
+    // Canhão
+    p.push();
+    p.translate(cannonPos.x, cannonPos.y);
+    p.rotate(-p.radians(angleDeg));
+    p.fill(90, 78, 110);
+    p.rect(0, -7, 34, 14, 2);
+    p.pop();
   };
 
   p.windowResized = () => {
-    const wrap = document.getElementById("canvas-mec-hidrostatica");
+    const wrap = document.getElementById("canvas-mec-lancamento");
     if (wrap) {
-      const w = Math.min(wrap.clientWidth || 550, 650);
-      p.resizeCanvas(w, 360);
-    }
-  };
-};
-
-/* ==========================================================================
-   4. COLISÕES 1D & CONSERVAÇÃO DO MOMENTO LINEAR
-   ========================================================================== */
-const simMecColisoes = (p) => {
-  let m1 = 2.0, m2 = 2.0; // kg
-  let v1 = 4.0, v2 = -2.0; // m/s
-  let eRestitution = 1.0;
-  let c1 = { x: 120, y: 180, r: 24, vx: 4.0 };
-  let c2 = { x: 380, y: 180, r: 24, vx: -2.0 };
-  let isRunning = false;
-
-  p.setup = () => {
-    const wrap = document.getElementById("canvas-mec-colisoes");
-    if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
-    const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-mec-colisoes");
-
-    initControls();
-  };
-
-  function initControls() {
-    const m1Slider = document.getElementById("m4-m1-slider");
-    const m2Slider = document.getElementById("m4-m2-slider");
-    const eSlider = document.getElementById("m4-e-slider");
-    const btnStart = document.getElementById("btn-start-collision");
-    const btnReset = document.getElementById("btn-reset-collision");
-
-    if (m1Slider) m1Slider.addEventListener("input", (e) => { m1 = parseFloat(e.target.value); resetCars(); });
-    if (m2Slider) m2Slider.addEventListener("input", (e) => { m2 = parseFloat(e.target.value); resetCars(); });
-    if (eSlider) eSlider.addEventListener("input", (e) => { eRestitution = parseFloat(e.target.value); resetCars(); });
-
-    if (btnStart) btnStart.addEventListener("click", () => { isRunning = true; });
-    if (btnReset) btnReset.addEventListener("click", resetCars);
-  }
-
-  function resetCars() {
-    isRunning = false;
-    c1.x = 120; c1.vx = v1;
-    c2.x = p.width - 120; c2.vx = v2;
-  }
-
-  p.draw = () => {
-    p.background(18, 16, 28);
-
-    // Trilho de ar
-    p.stroke(140, 103, 168);
-    p.strokeWeight(3);
-    p.line(40, 204, p.width - 40, 204);
-
-    if (isRunning) {
-      c1.x += c1.vx * 0.8;
-      c2.x += c2.vx * 0.8;
-
-      if (c1.x + c1.r >= c2.x - c2.r) {
-        let v1_after = ((m1 - eRestitution * m2) * c1.vx + (1 + eRestitution) * m2 * c2.vx) / (m1 + m2);
-        let v2_after = ((1 + eRestitution) * m1 * c1.vx + (m2 - eRestitution * m1) * c2.vx) / (m1 + m2);
-        c1.vx = v1_after;
-        c2.vx = v2_after;
-      }
-    }
-
-    // Carrinho 1
-    p.fill(200, 67, 93);
-    p.stroke(255);
-    p.strokeWeight(1.5);
-    p.rect(c1.x - c1.r, c1.y - 20, c1.r * 2, 40, 4);
-    p.noStroke();
-    p.fill(255);
-    p.textSize(10);
-    p.textAlign(p.CENTER, p.CENTER);
-    p.text(`m₁=${m1}kg`, c1.x, c1.y);
-
-    // Carrinho 2
-    p.fill(59, 108, 181);
-    p.stroke(255);
-    p.strokeWeight(1.5);
-    p.rect(c2.x - c2.r, c2.y - 20, c2.r * 2, 40, 4);
-    p.noStroke();
-    p.fill(255);
-    p.text(`m₂=${m2}kg`, c2.x, c2.y);
-  };
-
-  p.windowResized = () => {
-    const wrap = document.getElementById("canvas-mec-colisoes");
-    if (wrap) {
-      const w = Math.min(wrap.clientWidth || 550, 650);
-      p.resizeCanvas(w, 360);
-      resetCars();
+      p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
+      cannonPos.y = p.height - 45;
     }
   };
 };
 
 window.addEventListener("load", () => {
-  if (document.getElementById("canvas-mec-lancamento")) new p5(simMecLancamento);
+  if (document.getElementById("canvas-mec-frenagem")) new p5(simMecFrenagem);
+  if (document.getElementById("canvas-mec-looping")) new p5(simMecMontanhaRussa);
   if (document.getElementById("canvas-mec-plano")) new p5(simMecPlanoInclinado);
-  if (document.getElementById("canvas-mec-hidrostatica")) new p5(simMecHidrostatica);
-  if (document.getElementById("canvas-mec-colisoes")) new p5(simMecColisoes);
+  if (document.getElementById("canvas-mec-lancamento")) new p5(simMecLancamento);
 });
