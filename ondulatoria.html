@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Fones ANC, Radar & Ondas</h1>
           </div>
           <p class="subpage-desc">
-            Cancelamento ativo de ruído em fones de ouvido (ANC), radar de trânsito Doppler, frentes de onda e mega banco de exercícios multibancas.
+            Simulações visuais realistas: fones over-ear com cancelamento ativo por onda antifásica de 180°, radar de trânsito Doppler policial e ambulância.
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-ond-anc">
-            <span class="station-number">01</span><span>🎧 Fone com Cancelamento Ativo (ANC / ENEM)</span>
+            <span class="station-number">01</span><span>🎧 Fone Over-Ear com Cancelamento ANC (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-ond-radar">
-            <span class="station-number">02</span><span>🚓 Radar de Trânsito por Doppler (UNICAMP / ITA)</span>
+            <span class="station-number">02</span><span>🚓 Viatura Policial & Radar Doppler (FUVEST / ITA)</span>
           </button>
           <button class="station-tab" data-station="st-ond-1">
-            <span class="station-number">03</span><span>🚑 Efeito Doppler Sonoro (FUVEST / UNESP)</span>
+            <span class="station-number">03</span><span>🚑 Ambulância & Efeito Doppler Acústico (UNESP / IME)</span>
           </button>
         </div>
 
@@ -83,7 +83,7 @@
                 "Os fones de ouvido com tecnologia ANC (Active Noise Cancelling) captam o som ambiente através de um microfone externo e produzem silêncio emitindo:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Uma onda sonora idêntica com defasagem de $180^\circ$ ($\pi\,\text{rad}$), provocando interferência destrutiva total.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Uma onda sonora idêntica com defasagem de $180^\circ$ ($\pi\,\text{rad}$), provocando interferência destrutiva total no tímpano.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Uma onda em fase para amplificar o som por ressonância.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Um campo eletromagnético que desvia as moléculas de ar do ouvido.</span></button>
                 <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Ultrassons que anestesiam o nervo auditivo.</span></button>
@@ -101,7 +101,7 @@
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Fone ANC & Superposição Antifásica</span>
+                <span class="apparatus-title">🔬 Fone Over-Ear, Microfone, DSP & Tímpano</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-ondas-anc"></div>
               <div class="apparatus-controls">
@@ -127,7 +127,7 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP / ITA</span>
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
                 <span class="topic-tag">Efeito Doppler Eletromagnético · Radar de Trânsito</span>
               </div>
               <h2 class="question-title">Desafio: Medição de Velocidade por Micro-ondas</h2>
@@ -144,28 +144,22 @@
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
               </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  O carro atua sucessivamente como observador em movimento (aproximando-se do radar) e como fonte refletora em movimento. Pela fórmula do efeito Doppler duplo para ondas eletromagnéticas ($v \ll c$): $\Delta f = f' - f_0 = 2 \frac{v}{c} f_0$. O circuito eletrônico do radar mede $\Delta f$ instantaneamente e calcula $v = \frac{c \cdot \Delta f}{2 f_0}$.
-                </div>
-              </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Radar de Trânsito & Desvio Doppler</span>
+                <span class="apparatus-title">🔬 Viatura Policial, Radar Micro-ondas & Câmera</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-ondas-radar"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade do Carro</span><span class="dial-value" id="w-rad-speed-val">90 km/h</span></div>
-                    <input type="range" class="lab-slider" id="w-rad-speed-slider" min="40" max="140" step="5" value="90">
+                    <div class="dial-header"><span class="dial-label">Velocidade do Carro</span><span class="dial-value" id="w-rad-speed-val">95 km/h</span></div>
+                    <input type="range" class="lab-slider" id="w-rad-speed-slider" min="40" max="140" step="5" value="95">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Desvio Doppler (Δf)</div><div class="readout-num" id="w-rad-deltaf-num">Δf = +4025 Hz</div></div>
-                  <div class="readout-item"><div class="readout-name">Velocidade Medida</div><div class="readout-num" id="w-rad-speedcalc-num">90 km/h</div></div>
+                  <div class="readout-item"><div class="readout-name">Desvio Doppler (Δf)</div><div class="readout-num" id="w-rad-deltaf-num">Δf = +4248 Hz</div></div>
+                  <div class="readout-item"><div class="readout-name">Velocidade Medida</div><div class="readout-num" id="w-rad-speedcalc-num">95 km/h</div></div>
                   <div class="readout-item"><div class="readout-name">Status</div><div class="readout-num" id="w-rad-status-text" style="font-size:0.85rem;">Infração</div></div>
                 </div>
               </div>
@@ -178,7 +172,7 @@
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
+                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
                 <span class="topic-tag">Acústica · Efeito Doppler Sonoro</span>
               </div>
               <h2 class="question-title">Desafio: O Som da Sirene</h2>
@@ -186,7 +180,7 @@
                 "Quando uma ambulância aproxima-se com sirene de $440\,\text{Hz}$ a metade da velocidade do som ($0{,}50\,\text{Mach}$), qual a frequência aparente percebida pelo pedestre à frente?"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 880\,\text{Hz}$ (O dobro da frequência, som muito mais agudo).</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 880\,\text{Hz}$ (O dobro da frequência, som agudo).</span></button>
                 <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 440\,\text{Hz}$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f' = 220\,\text{Hz}$</span></button>
                 <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f' = 0\,\text{Hz}$</span></button>
@@ -194,12 +188,12 @@
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Frentes de Onda em Movimento</span></div>
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Ambulância & Frentes de Onda Compressas</span></div>
               <div class="apparatus-canvas-wrap" id="canvas-ondas-doppler"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade da Fonte</span><span class="dial-value">0.50 Mach</span></div>
+                    <div class="dial-header"><span class="dial-label">Velocidade da Ambulância</span><span class="dial-value">0.50 Mach</span></div>
                     <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
                   </div>
                   <div class="control-dial">
@@ -282,14 +276,6 @@
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                A frequência da onda depende unicamente da fonte emissora e <strong>nunca se altera na refração</strong> ($f' = f = 6{,}0 \times 10^{14}\,\text{Hz}$).<br>
-                A velocidade no vidro é $v = c/n = \frac{3 \times 10^8}{1{,}5} = 2{,}0 \times 10^8\,\text{m/s}$.<br>
-                Logo, $\lambda' = \frac{v}{f} = \frac{2{,}0 \times 10^8}{6{,}0 \times 10^{14}} = 3{,}33 \times 10^{-7}\,\text{m} = 333\,\text{nm}$.
-              </div>
-            </div>
           </div>
 
           <!-- Questão 3: UNICAMP -->
@@ -310,13 +296,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Para tubos sonoros abertos: $f_n = n \frac{v}{2L}$.<br>
-                Para o harmônico fundamental ($n=1$): $f_1 = \frac{340}{2 \cdot 0{,}85} = \frac{340}{1{,}70} = 200\,\text{Hz}$.
-              </div>
             </div>
           </div>
 

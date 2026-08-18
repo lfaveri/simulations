@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório Térmico, Calorimetria & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Panela de pressão, efeito estufa em veículos, propagação de calor (condução, convecção e radiação) e mega banco de exercícios multibancas.
+            Simulações realistas da panela de pressão fervente, efeito estufa no carro com ondas infravermelhas e garrafa térmica a vácuo (Dewar).
           </p>
         </div>
       </div>
@@ -60,16 +60,13 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-termo-panela">
-            <span class="station-number">01</span><span>🍲 Panela de Pressão & Ebulição (ENEM / FUVEST)</span>
+            <span class="station-number">01</span><span>🍲 Panela de Pressão com Sopa em Ebulição (ENEM / FUVEST)</span>
           </button>
           <button class="station-tab" data-station="st-termo-estufa">
             <span class="station-number">02</span><span>🚗 Efeito Estufa no Carro ao Sol (UNICAMP / UNESP)</span>
           </button>
-          <button class="station-tab" data-station="st-termo-0">
-            <span class="station-number">03</span><span>🔥 Propagação de Calor (Condução / Convecção / Radiação)</span>
-          </button>
-          <button class="station-tab" data-station="st-termo-cal">
-            <span class="station-number">04</span><span>🧊 Calorimetria & Mudança de Fase (ITA / IME)</span>
+          <button class="station-tab" data-station="st-termo-garrafa">
+            <span class="station-number">03</span><span>☕ Café Quente: Xícara vs Garrafa Térmica (ITA / IME)</span>
           </button>
         </div>
 
@@ -98,13 +95,13 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  A água ferve quando sua pressão de vapor iguala-se à pressão externa. Com a tampa vedada, a pressão de vapor acumulada sobe para $\approx 2{,}0\,\text{atm}$, fazendo a água líquida atingir cerca de $120^\circ\text{C}$ antes de entrar em ebulição. Como a velocidade das reações químicas dobra a cada $10^\circ\text{C}$, o tempo de cozimento cai para cerca de um terço!
+                  A água ferve quando sua pressão de vapor iguala-se à pressão externa. Com a tampa hermeticamente vedada, a pressão acumulada sobe para $\approx 2{,}0\,\text{atm}$, fazendo a água líquida atingir cerca de $120^\circ\text{C}$ antes de entrar em ebulição. Como a velocidade das reações químicas dobra a cada $10^\circ\text{C}$, o tempo de cozimento cai para cerca de um terço!
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Panela de Pressão & Ponto de Ebulição</span>
+                <span class="apparatus-title">🔬 Panela de Pressão com Sopa em Ebulição & Válvula</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-termo-panela"></div>
               <div class="apparatus-controls">
@@ -155,13 +152,13 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  A radiação solar de alta energia (luz visível e UV próximo) atravessa o vidro transparente e aquece o interior do carro. Os bancos e o painel reemitem calor na forma de <strong>radiação infravermelha de grande comprimento de onda</strong>, à qual o vidro é opaco, aprisionando o calor no interior (Efeito Estufa).
+                  A radiação solar de alta frequência atravessa o vidro transparente e aquece o interior do carro. Os bancos e o painel reemitem calor na forma de <strong>radiação infravermelha de grande comprimento de onda</strong>, à qual o vidro é opaco, aprisionando o calor no interior (Efeito Estufa).
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Radiação Solar & Aprisionamento Infravermelho</span>
+                <span class="apparatus-title">🔬 Radiação Solar, Aprisionamento Infravermelho & Termômetro</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-termo-estufa"></div>
               <div class="apparatus-controls">
@@ -173,7 +170,7 @@
                   <div class="control-dial">
                     <div class="dial-header"><span class="dial-label">Abertura dos Vidros</span></div>
                     <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
-                      <input type="checkbox" id="t-est-window-toggle"> Vidros Frestados (Ventilação)
+                      <input type="checkbox" id="t-est-window-toggle"> Vidros Abertos (Ventilação)
                     </label>
                   </div>
                 </div>
@@ -187,24 +184,24 @@
           </div>
         </div>
 
-        <!-- Bancada T0: Propagação de Calor -->
-        <div class="station-panel" id="st-termo-0">
+        <!-- Bancada T_GARRAFA: Garrafa Térmica vs Xícara -->
+        <div class="station-panel" id="st-termo-garrafa">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
-                <span class="topic-tag">Termofísica · Transmissão de Calor</span>
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
+                <span class="topic-tag">Transmissão de Calor · Garrafa Térmica de Dewar</span>
               </div>
-              <h2 class="question-title">Desafio: Formas de Propagação do Calor</h2>
+              <h2 class="question-title">Desafio: Os Três Mecanismos Bloqueados na Garrafa Térmica</h2>
               <div class="question-context">
-                "No vácuo espacial entre o Sol e a Terra, o calor propaga-se exclusivamente por qual mecanismo físico?"
+                "Em uma garrafa térmica (vaso de Dewar), as paredes duplas de vidro espelhadas com vácuo intermediário e tampa hermética evitam, respectivamente:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="false" data-opt="A"><span class="opt-letter">A</span><span>Condução térmica através de partículas de poeira.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Convecção de ar interestelar.</span></button>
-                <button class="option-choice" data-correct="true" data-opt="C"><span class="opt-letter">C</span><span>Radiação (ou irradiação) por ondas eletromagnéticas (infravermelho/luz).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional planetário.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Advecção térmica molecular.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Radiação (por reflexão interna no espelho) e Condução/Convecção (pela ausência de matéria no vácuo).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Condução e Radiação.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Convecção e Condensação.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Evaporação e Ebulição.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Fusão nuclear e Advecção.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -212,73 +209,19 @@
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Transmissão Térmica: Condução, Convecção & Radiação</span>
-                <div style="display:flex; gap:6px;">
-                  <button class="btn-lab btn-lab-primary is-active" id="btn-prop-conducao" style="font-size:0.7rem; padding:3px 8px;">Condução</button>
-                  <button class="btn-lab btn-lab-secondary" id="btn-prop-conveccao" style="font-size:0.7rem; padding:3px 8px;">Convecção</button>
-                  <button class="btn-lab btn-lab-secondary" id="btn-prop-radiacao" style="font-size:0.7rem; padding:3px 8px;">Radiação</button>
-                </div>
+                <span class="apparatus-title">🔬 Xícara Aberta vs Garrafa Térmica a Vácuo</span>
               </div>
-              <div class="apparatus-canvas-wrap" id="canvas-termo-propagacao"></div>
+              <div class="apparatus-canvas-wrap" id="canvas-termo-garrafa"></div>
               <div class="apparatus-controls">
-                <div class="controls-grid" id="controls-conducao">
+                <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Material da Barra</span></div>
-                    <select id="t-prop-mat-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
-                      <option value="390">Cobre (k = 390 W/m·K)</option>
-                      <option value="205">Alumínio (k = 205 W/m·K)</option>
-                      <option value="80">Ferro (k = 80 W/m·K)</option>
-                      <option value="0.8">Vidro (k = 0,8 W/m·K)</option>
-                    </select>
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Temp. Fonte Quente</span><span class="dial-value" id="t-prop-thot-val">100 °C</span></div>
-                    <input type="range" class="lab-slider" id="t-prop-thot-slider" min="40" max="200" step="10" value="100">
+                    <div class="dial-header"><span class="dial-label">Tempo Decorrido</span><span class="dial-value" id="t-gar-time-val">30 min</span></div>
+                    <input type="range" class="lab-slider" id="t-gar-time-slider" min="5" max="120" step="5" value="30">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Fluxo Térmico (Φ)</div><div class="readout-num" id="t-prop-readout-1">312,0 W</div></div>
-                  <div class="readout-item"><div class="readout-name">Condutibilidade (k)</div><div class="readout-num" id="t-prop-readout-2">390 W/m·K</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada T_CAL: Calorimetria -->
-        <div class="station-panel" id="st-termo-cal">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-ita">ITA / IME</span>
-                <span class="topic-tag">Calorimetria · Curva de Aquecimento da Água</span>
-              </div>
-              <h2 class="question-title">Desafio: Calor Latente de Fusão</h2>
-              <div class="question-context">
-                "Para fundir totalmente $100\,\text{g}$ de gelo a $0\,^\circ\text{C}$ ($L_f = 80\,\text{cal/g}$), quanto calor deve ser fornecido e o que ocorre com a temperatura durante a transição?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$Q = 8000\,\text{cal}$ e a temperatura permanece constante em $0\,^\circ\text{C}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$Q = 800\,\text{cal}$ e a temperatura sobe para $10\,^\circ\text{C}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$Q = 80000\,\text{cal}$ e a água vaporiza instantaneamente.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$Q = 5400\,\text{cal}$ e a temperatura cai para $-10\,^\circ\text{C}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$Q = 0\,\text{cal}$ pois o gelo funde sem absorver energia.</span></button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Curva de Aquecimento: Gelo → Água → Vapor</span>
-                <div style="display:flex; gap:6px;">
-                  <button class="btn-lab btn-lab-primary" id="btn-calor-toggle" style="font-size:0.7rem; padding:3px 8px;">🔥 Iniciar Aquecimento</button>
-                  <button class="btn-lab btn-lab-secondary" id="btn-calor-reset" style="font-size:0.7rem; padding:3px 8px;">↺ Reiniciar</button>
-                </div>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-termo-calorimetria"></div>
-              <div class="apparatus-controls">
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Temperatura ($T$)</div><div class="readout-num" id="t-cal-temp-num">-20,0 °C</div></div>
-                  <div class="readout-item"><div class="readout-name">Calor Fornecido ($Q$)</div><div class="readout-num" id="t-cal-q-num">0 cal</div></div>
-                  <div class="readout-item"><div class="readout-name">Fase Atual</div><div class="readout-num" id="t-cal-phase-text" style="font-size:0.85rem;">Gelo Sólido</div></div>
+                  <div class="readout-item"><div class="readout-name">Temp. Xícara</div><div class="readout-num" id="t-gar-cup-num">45,9 °C (Morno)</div></div>
+                  <div class="readout-item"><div class="readout-name">Temp. Garrafa Térmica</div><div class="readout-num" id="t-gar-flask-num" style="color:var(--lilac-dark);">81,5 °C (Quente!)</div></div>
                 </div>
               </div>
             </div>
@@ -381,13 +324,6 @@
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                - As <strong>paredes espelhadas</strong> refletem as ondas de radiação infravermelha de volta para o interior (evitando perdas por <em>radiação</em>).<br>
-                - O <strong>vácuo</strong> entre as paredes impede que haja moléculas para transmitir calor por contato direto (<em>condução</em>) ou por fluxo de matéria (<em>convecção</em>).
-              </div>
-            </div>
           </div>
 
           <!-- Questão 4: UNESP -->
@@ -408,14 +344,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                O volume que transborda corresponde à dilatação aparente: $\Delta V_{\text{ap}} = V_0 \cdot \gamma_{\text{aparente}} \cdot \Delta T$<br>
-                $\gamma_{\text{ap}} = \gamma_{\text{gasolina}} - \gamma_{\text{aço}} = 96 \times 10^{-5} - 3{,}6 \times 10^{-5} = 92{,}4 \times 10^{-5}\,^\circ\text{C}^{-1}$<br>
-                $\Delta V_{\text{ap}} = 50 \cdot (92{,}4 \times 10^{-5}) \cdot 20 = 1000 \cdot 92{,}4 \times 10^{-5} = 0{,}924\,\text{L} = 924\,\text{mL}$.
-              </div>
             </div>
           </div>
 

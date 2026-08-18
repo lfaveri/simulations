@@ -1,17 +1,18 @@
 /**
- * MÓDULO: ELETROMAGNETISMO — LABORATÓRIO VIRTUAL EXPANDIDO & FÍSICA DO COTIDIANO
- * 1. Fogão por Indução Eletromagnética & Correntes de Foucault (Cotidiano / Indução de Faraday)
- * 2. Consumo Residencial em kWh & Conta de Luz (Cotidiano / Eletrodinâmica)
- * 3. Bancada de Circuitos & Lei de Ohm
- * 4. Trilho de Coulomb & Lei do Inverso do Quadrado
+ * MÓDULO: ELETROMAGNETISMO — LABORATÓRIO VIRTUAL COM VISUAL REALISTA & FÍSICA DO COTIDIANO
+ * 1. Fogão por Indução com Teste do Cubo de Gelo & Correntes de Foucault
+ * 2. Carregador sem Fio Qi & Indução Magnética no Smartphone
+ * 3. Consumo Elétrico Residencial (Chuveiro, Ar-Condicionado, Geladeira)
+ * 4. Circuito Elétrico & Lei de Ohm
  */
 
 /* ==========================================================================
-   1. FOGÃO POR INDUÇÃO ELETROMAGNÉTICA & CORRENTES DE FOUCAULT
+   1. FOGÃO POR INDUÇÃO COM TESTE DO GELO (COTIDIANO)
    ========================================================================== */
 const simEletroInducaoFogao = (p) => {
   let isCooktopOn = true;
-  let powerWatts = 1800; // 500W a 2200W
+  let powerWatts = 1800;
+  let waterBubbles = [];
 
   p.setup = () => {
     const wrap = document.getElementById("canvas-eletro-fogao");
@@ -19,6 +20,10 @@ const simEletroInducaoFogao = (p) => {
     const w = Math.min(wrap.clientWidth || 550, 650);
     const canvas = p.createCanvas(w, 360);
     canvas.parent("canvas-eletro-fogao");
+
+    for (let i = 0; i < 20; i++) {
+      waterBubbles.push({ x: p.random(-45, 45), y: p.random(10, 45), r: p.random(3, 7), speed: p.random(1, 2) });
+    }
 
     initControls();
     calculatePhysics();
@@ -45,7 +50,7 @@ const simEletroInducaoFogao = (p) => {
   }
 
   function calculatePhysics() {
-    const heatGenRate = isCooktopOn ? (powerWatts / 1000) * 0.24 : 0; // cal/s aproximado
+    const heatGenRate = isCooktopOn ? (powerWatts / 1000) * 0.24 : 0;
     const panBottomTemp = isCooktopOn ? 25 + (powerWatts / 2200) * 160 : 25;
 
     const heatElem = document.getElementById("e-fog-heat-num");
@@ -53,83 +58,98 @@ const simEletroInducaoFogao = (p) => {
     const statusElem = document.getElementById("e-fog-status-text");
 
     if (heatElem) heatElem.textContent = `${heatGenRate.toFixed(1).replace(".", ",")} kcal/s`;
-    if (tempElem) tempElem.textContent = `${panBottomTemp.toFixed(0)} °C (Mesa de vidro fria)`;
+    if (tempElem) tempElem.textContent = `${panBottomTemp.toFixed(0)} °C (Vidro ao lado: 25 °C)`;
     if (statusElem) {
-      statusElem.textContent = isCooktopOn ? "Correntes Parasitas de Foucault ativas no ferro" : "Desligado";
+      statusElem.textContent = isCooktopOn ? "Correntes de Foucault ativas no ferro da panela" : "Desligado";
       statusElem.style.color = isCooktopOn ? "#2e8b57" : "#8c7e99";
     }
   }
 
   p.draw = () => {
     p.background(18, 16, 28);
-    const cx = p.width * 0.5;
-    const glassY = 200;
+    const cooktopX = p.width * 0.45, cooktopY = 220;
 
-    // 1. Placa de Vitrocerâmica (Vidro frio que não esquenta diretamente)
-    p.fill(40, 45, 60, 200);
+    // 1. Mesa de Vitrocerâmica Preta Espelhada
+    p.fill(25, 28, 38);
     p.stroke(100, 180, 255);
     p.strokeWeight(2.5);
-    p.rect(cx - 150, glassY, 300, 12, 3);
-    p.noStroke();
-    p.fill(200, 220, 255);
-    p.textSize(9);
-    p.textAlign(p.LEFT, p.CENTER);
-    p.text("Mesa de Vitrocerâmica (Isolante Elétrico e Térmico)", cx - 140, glassY + 6);
+    p.rect(cooktopX - 180, cooktopY, 360, 16, 4);
 
-    // 2. Bobina Indutora de Cobre abaixo do vidro (Gera campo magnético alternado)
-    const coilY = glassY + 30;
-    p.stroke(200, 120, 50);
-    p.strokeWeight(4);
+    // 2. Bobina de Cobre Sob a Mesa (Visível com Brilho Avermelhado)
+    const coilX = cooktopX - 50, coilY = cooktopY + 30;
+    p.stroke(isCooktopOn ? p.color(255, 100, 30, 200) : p.color(140, 70, 30, 100));
+    p.strokeWeight(3.5);
     p.noFill();
-    for (let i = -4; i <= 4; i++) {
-      p.ellipse(cx + i * 25, coilY, 18, 28);
+    for (let i = -3; i <= 3; i++) {
+      p.ellipse(coilX + i * 20, coilY, 16, 26);
     }
 
-    // Linhas de Campo Magnético Oscilante (Linhas Roxas/Lilases verticais)
+    // Linhas de Campo Magnético Alternado Oscilante
     if (isCooktopOn) {
-      p.stroke(201, 174, 222, 160);
+      p.stroke(201, 174, 222, 140);
       p.strokeWeight(1.5);
       p.drawingContext.setLineDash([4, 4]);
-      for (let i = -5; i <= 5; i++) {
-        let x = cx + i * 22;
-        let tOffset = (p.frameCount * 4 + i * 15) % 80;
-        p.line(x, coilY + 20, x, glassY - 50);
+      for (let i = -4; i <= 4; i++) {
+        let x = coilX + i * 18;
+        p.line(x, coilY + 15, x, cooktopY - 45);
       }
       p.drawingContext.setLineDash([]);
     }
 
-    // 3. Panela Ferromagnética sobre o vidro
-    const panW = 180, panH = 90;
-    const panX = cx - panW / 2, panY = glassY - panH;
+    // 3. Panela Ferromagnética de Inox/Ferro (Sobre a bobina indutora)
+    const panW = 140, panH = 80;
+    const panX = coilX - panW / 2, panY = cooktopY - panH;
 
-    // Fundo da Panela (Onde ocorrem as correntes de Foucault e aquecimento Joule)
-    p.fill(isCooktopOn ? 220 : 70, isCooktopOn ? 70 : 65, isCooktopOn ? 60 : 80);
-    p.stroke(isCooktopOn ? 255 : 140, isCooktopOn ? 120 : 103, isCooktopOn ? 100 : 168);
-    p.strokeWeight(2);
-    p.rect(panX, glassY - 14, panW, 14, 2);
+    // Fundo Magnético (Onde ocorrem as correntes de Foucault)
+    p.fill(isCooktopOn ? 230 : 80, isCooktopOn ? 60 : 75, isCooktopOn ? 50 : 90);
+    p.stroke(255);
+    p.strokeWeight(1.5);
+    p.rect(panX, cooktopY - 12, panW, 12, 2);
 
-    // Corpo da Panela
-    p.fill(60, 55, 75);
-    p.rect(panX, panY, panW, panH - 14, 4, 4, 0, 0);
+    // Corpo da Panela com Alças
+    p.fill(70, 75, 90);
+    p.rect(panX, panY, panW, panH - 12, 4, 4, 0, 0);
 
-    // Redemoinhos de Correntes de Foucault no fundo da panela
+    // Água Fervendo no Interior da Panela
+    p.noStroke();
+    p.fill(59, 108, 181, 150);
+    p.rect(panX + 4, panY + 20, panW - 8, panH - 32);
+
+    // Bolhas e Vapor
     if (isCooktopOn) {
+      p.fill(255, 255, 255, 180);
+      waterBubbles.forEach(b => {
+        p.ellipse(coilX + b.x, cooktopY - 20 - b.y, b.r, b.r);
+        b.y += b.speed;
+        if (b.y > panH - 35) { b.y = 5; b.x = p.random(-panW / 2 + 10, panW / 2 - 10); }
+      });
+
+      // Redemoinhos de Correntes de Foucault no fundo da panela
       p.noFill();
       p.stroke(255, 220, 80, 220);
       p.strokeWeight(2);
-      for (let i = -3; i <= 3; i++) {
-        let ex = cx + i * 24;
-        let ey = glassY - 7;
-        let ang = (p.frameCount * 0.15) % p.TWO_PI;
-        p.arc(ex, ey, 14, 8, ang, ang + p.PI * 1.4);
+      for (let i = -2; i <= 2; i++) {
+        let ex = coilX + i * 26;
+        let ey = cooktopY - 6;
+        let ang = (p.frameCount * 0.18) % p.TWO_PI;
+        p.arc(ex, ey, 16, 8, ang, ang + p.PI * 1.3);
       }
     }
 
+    // 4. TESTE DO CUBO DE GELO DIRETO NO VIDRO AO LADO (Não esquenta!)
+    const iceX = cooktopX + 100, iceY = cooktopY - 14;
+    p.fill(180, 230, 255, 200);
+    p.stroke(255);
+    p.strokeWeight(1.5);
+    p.rect(iceX - 16, iceY - 20, 32, 32, 4);
     p.noStroke();
-    p.fill(255);
+    p.fill(255, 255, 255, 160);
+    p.ellipse(iceX - 6, iceY - 12, 10, 8); // Brilho do gelo
+
+    p.fill(201, 174, 222);
     p.textSize(10);
-    p.textAlign(p.CENTER, p.TOP);
-    p.text("O campo magnético alternado induz Correntes de Foucault no metal ferromagnético, aquecendo apenas a panela!", cx, 20);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("Cubo de Gelo\n(Vidro frio = Gelo intacto)", iceX, iceY - 26);
   };
 
   p.windowResized = () => {
@@ -139,12 +159,98 @@ const simEletroInducaoFogao = (p) => {
 };
 
 /* ==========================================================================
-   2. CONSUMO RESIDENCIAL & CONTA DE LUZ (kWh)
+   2. CARREGADOR SEM FIO QI & INDUÇÃO NO SMARTPHONE (COTIDIANO)
+   ========================================================================== */
+const simEletroCarregadorSemFio = (p) => {
+  let batteryLevel = 65;
+
+  p.setup = () => {
+    const wrap = document.getElementById("canvas-eletro-qi");
+    if (!wrap) return;
+    const w = Math.min(wrap.clientWidth || 550, 650);
+    const canvas = p.createCanvas(w, 360);
+    canvas.parent("canvas-eletro-qi");
+  };
+
+  p.draw = () => {
+    p.background(18, 16, 28);
+    const cx = p.width * 0.5, cy = 180;
+
+    // 1. Base Carregadora Circular Qi
+    p.fill(35, 40, 55);
+    p.stroke(140, 103, 168);
+    p.strokeWeight(3);
+    p.ellipse(cx, cy + 30, 180, 45);
+
+    // Bobina Primária Transmissora na Base
+    p.noFill();
+    p.stroke(220, 120, 40, 180);
+    p.strokeWeight(3);
+    p.ellipse(cx, cy + 30, 120, 30);
+    p.ellipse(cx, cy + 30, 80, 20);
+
+    // 2. Smartphone Apoiado sobre a Base
+    const phoneW = 95, phoneH = 155;
+    const phoneY = cy - 20;
+
+    p.fill(20, 20, 28);
+    p.stroke(100, 180, 255);
+    p.strokeWeight(2.5);
+    p.rect(cx - phoneW / 2, phoneY - phoneH / 2, phoneW, phoneH, 14);
+
+    // Tela do Smartphone com Ícone de Bateria Carregando
+    p.fill(10, 15, 25);
+    p.rect(cx - phoneW / 2 + 5, phoneY - phoneH / 2 + 8, phoneW - 10, phoneH - 16, 8);
+
+    // Ícone de Bateria
+    p.stroke(46, 139, 87);
+    p.strokeWeight(2);
+    p.noFill();
+    p.rect(cx - 20, phoneY - 25, 40, 22, 3);
+    p.fill(46, 139, 87);
+    p.noStroke();
+    p.rect(cx + 20, phoneY - 19, 4, 10, 1);
+    p.rect(cx - 18, phoneY - 23, 36 * (batteryLevel / 100), 18, 2);
+
+    // Raio de Carregamento Rápido no Centro da Tela
+    p.fill(255, 220, 80);
+    p.beginShape();
+    p.vertex(cx + 2, phoneY + 5);
+    p.vertex(cx - 6, phoneY + 18);
+    p.vertex(cx - 1, phoneY + 18);
+    p.vertex(cx - 4, phoneY + 30);
+    p.vertex(cx + 6, phoneY + 15);
+    p.vertex(cx + 1, phoneY + 15);
+    p.endShape(p.CLOSE);
+
+    p.fill(255);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text(`${batteryLevel}% Carregando por Indução`, cx, phoneY + 36);
+
+    // Linhas de Fluxo Magnético Indutor Oscilando entre a Base e o Celular
+    p.stroke(100, 220, 255, 160);
+    p.strokeWeight(1.5);
+    p.noFill();
+    for (let i = 0; i < 3; i++) {
+      let r = 50 + i * 25 + ((p.frameCount * 2) % 25);
+      p.ellipse(cx, cy + 15, r * 1.6, r * 0.45);
+    }
+  };
+
+  p.windowResized = () => {
+    const wrap = document.getElementById("canvas-eletro-qi");
+    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
+  };
+};
+
+/* ==========================================================================
+   3. CONSUMO RESIDENCIAL & CONTA DE LUZ (kWh)
    ========================================================================== */
 const simEletroContaLuz = (p) => {
-  let appPowerWatts = 6500; // Chuveiro = 6500, Ar = 1400, Geladeira = 250, Ferro = 1500, TV = 120
-  let hoursPerDay = 0.5; // horas por dia
-  const tariffKWh = 0.85; // R$/kWh
+  let appPowerWatts = 6500;
+  let hoursPerDay = 0.5;
+  const tariffKWh = 0.85;
 
   p.setup = () => {
     const wrap = document.getElementById("canvas-eletro-contaluz");
@@ -194,6 +300,7 @@ const simEletroContaLuz = (p) => {
     const maxKWh = 300;
     const barW = p.map(monthlyKWh, 0, maxKWh, 0, p.width - 160);
 
+    // Barra de Consumo
     p.fill(32, 28, 44);
     p.stroke(140, 103, 168);
     p.strokeWeight(2);
@@ -215,92 +322,8 @@ const simEletroContaLuz = (p) => {
   };
 };
 
-/* ==========================================================================
-   3. CIRCUITO & LEI DE OHM
-   ========================================================================== */
-const simEletroCircuito = (p) => {
-  let voltageU = 12;
-  let resistanceR = 6;
-
-  p.setup = () => {
-    const wrap = document.getElementById("canvas-eletro-circuito");
-    if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
-    const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-eletro-circuito");
-
-    initControls();
-    calculatePhysics();
-  };
-
-  function initControls() {
-    const uSlider = document.getElementById("e1-u-slider");
-    const rSlider = document.getElementById("e1-r-slider");
-    if (uSlider) uSlider.addEventListener("input", (e) => { voltageU = parseFloat(e.target.value); calculatePhysics(); });
-    if (rSlider) rSlider.addEventListener("input", (e) => { resistanceR = parseFloat(e.target.value); calculatePhysics(); });
-  }
-
-  function calculatePhysics() {
-    const currentI = voltageU / resistanceR;
-    const powerP = voltageU * currentI;
-    const iElem = document.getElementById("e1-i-num");
-    const pElem = document.getElementById("e1-p-num");
-    if (iElem) iElem.textContent = `${currentI.toFixed(2).replace(".", ",")} A`;
-    if (pElem) pElem.textContent = `${powerP.toFixed(1).replace(".", ",")} W`;
-  }
-
-  p.draw = () => {
-    p.background(18, 16, 28);
-    const cx = p.width * 0.5, cy = p.height * 0.5;
-
-    p.stroke(140, 103, 168);
-    p.strokeWeight(3);
-    p.noFill();
-    p.rect(cx - 130, cy - 80, 260, 160, 8);
-
-    // Bateria
-    p.fill(200, 67, 93);
-    p.stroke(255);
-    p.strokeWeight(1.5);
-    p.rect(cx - 140, cy - 25, 20, 50, 3);
-    p.noStroke();
-    p.fill(255);
-    p.textSize(10);
-    p.textAlign(p.CENTER, p.CENTER);
-    p.text(`${voltageU}V`, cx - 130, cy);
-
-    // Resistor
-    p.fill(80, 70, 95);
-    p.stroke(201, 174, 222);
-    p.strokeWeight(1.5);
-    p.rect(cx + 120, cy - 30, 20, 60, 3);
-    p.noStroke();
-    p.fill(255);
-    p.text(`${resistanceR}Ω`, cx + 130, cy);
-
-    // Elétrons em circulação
-    const currentI = voltageU / resistanceR;
-    const speed = currentI * 1.5;
-    p.fill(100, 200, 255);
-    for (let i = 0; i < 12; i++) {
-      let t = ((p.frameCount * speed * 2 + i * 60) % 720) / 720;
-      let ex = cx - 130, ey = cy - 80;
-      if (t < 0.25) { ex = p.lerp(cx - 130, cx + 130, t / 0.25); ey = cy - 80; }
-      else if (t < 0.50) { ex = cx + 130; ey = p.lerp(cy - 80, cy + 80, (t - 0.25) / 0.25); }
-      else if (t < 0.75) { ex = p.lerp(cx + 130, cx - 130, (t - 0.50) / 0.25); ey = cy + 80; }
-      else { ex = cx - 130; ey = p.lerp(cy + 80, cy - 80, (t - 0.75) / 0.25); }
-      p.ellipse(ex, ey, 6, 6);
-    }
-  };
-
-  p.windowResized = () => {
-    const wrap = document.getElementById("canvas-eletro-circuito");
-    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
-  };
-};
-
 window.addEventListener("load", () => {
   if (document.getElementById("canvas-eletro-fogao")) new p5(simEletroInducaoFogao);
+  if (document.getElementById("canvas-eletro-qi")) new p5(simEletroCarregadorSemFio);
   if (document.getElementById("canvas-eletro-contaluz")) new p5(simEletroContaLuz);
-  if (document.getElementById("canvas-eletro-circuito")) new p5(simEletroCircuito);
 });

@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de GPS Relativístico, Quântica & Nuclear</h1>
           </div>
           <p class="subpage-desc">
-            Navegação por GPS e correções relativísticas de Einstein, efeito fotoelétrico em células solares, modelo atômico de Bohr e exercícios com 5 alternativas.
+            Simulações visuais realistas: satélites GPS orbitando o globo terrestre com relatividade de Einstein, painéis solares fotovoltaicos no telhado e modelo de Bohr.
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-mod-gps">
-            <span class="station-number">01</span><span>🛰️ Navegação GPS & Relatividade (FUVEST / ITA)</span>
+            <span class="station-number">01</span><span>🛰️ Satélites GPS & Relatividade de Einstein (FUVEST / ITA)</span>
           </button>
-          <button class="station-tab" data-station="st-mod-1">
-            <span class="station-number">02</span><span>☀️ Célula Solar & Fotoelétrico (ENEM / UNICAMP)</span>
+          <button class="station-tab" data-station="st-mod-solar">
+            <span class="station-number">02</span><span>☀️ Painel Solar Fotovoltaico no Telhado (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-mod-3">
-            <span class="station-number">03</span><span>⚛️ Átomo de Bohr & Fótons (UNESP / IME)</span>
+            <span class="station-number">03</span><span>⚛️ Átomo de Bohr & Emissão de Cores (UNESP / IME)</span>
           </button>
         </div>
 
@@ -103,7 +103,7 @@
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Constelação GPS & Correção de Einstein</span>
+                <span class="apparatus-title">🔬 Globo Terrestre, Constelação GPS & Deriva Temporal</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-moderna-gps"></div>
               <div class="apparatus-controls">
@@ -129,53 +129,34 @@
           </div>
         </div>
 
-        <!-- Bancada Q1: Fotoelétrico -->
-        <div class="station-panel" id="st-mod-1">
+        <!-- Bancada Q_SOLAR: Telhado Solar -->
+        <div class="station-panel" id="st-mod-solar">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
                 <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
-                <span class="topic-tag">Física Quântica · Efeito Fotoelétrico</span>
+                <span class="topic-tag">Física Quântica · Efeito Fotoelétrico & Energia Solar</span>
               </div>
-              <h2 class="question-title">Desafio: A Frequência de Corte</h2>
+              <h2 class="question-title">Desafio: Como a Luz Gera Eletricidade no Telhado?</h2>
               <div class="question-context">
-                "Para ejetar fotoelétrons de uma placa metálica com função trabalho $W$, é estritamente necessário que a luz incidente possua:"
+                "Os painéis solares fotovoltaicos residenciais convertem a energia solar diretamente em corrente elétrica através do:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Frequência superior à frequência de corte ($hf \ge W$), independentemente da intensidade luminosa.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas intensidade muito alta de luz vermelha de qualquer frequência.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Comprimento de onda infinito.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Polarização circular exclusiva.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Tempo de exposição de pelo menos várias horas sob a luz.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Efeito fotoelétrico quântico: fótons de luz com energia suficiente ($E = hf$) arrancam elétrons da junção semicondutora de silício, gerando corrente contínua.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aquecimento térmico que ferve água dentro das placas.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Atrito mecânico do vento contra os vidros.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Fissão nuclear espontânea do silício.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Reflexão acústica de ondas sonoras solares.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Tubo Fotoelétrico & Feixe Quântico</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-moderna-foto"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Metal Fotossensível</span></div>
-                    <select id="mod1-metal-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
-                      <option value="2.14">Césio (W = 2,14 eV)</option>
-                      <option value="2.30">Potássio (W = 2,30 eV)</option>
-                      <option value="4.10">Alumínio (W = 4,10 eV)</option>
-                      <option value="6.35">Platina (W = 6,35 eV)</option>
-                    </select>
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Comprimento de Onda ($\lambda$)</span><span class="dial-value" id="mod1-lambda-val">350 nm</span></div>
-                    <input type="range" class="lab-slider" id="mod1-lambda-slider" min="200" max="750" step="25" value="350">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Energia Fóton</div><div class="readout-num" id="mod1-ephot-num">3,54 eV</div></div>
-                  <div class="readout-item"><div class="readout-name">Energia Cinética $e^-$</div><div class="readout-num" id="mod1-ekin-num">1,40 eV</div></div>
-                </div>
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Telhado Solar Residencial & Fotoelétrons</span>
               </div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-solar"></div>
             </div>
           </div>
         </div>
@@ -205,7 +186,7 @@
               </div>
             </div>
             <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Órbitas Quantizadas de Bohr</span></div>
+              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Órbitas Quantizadas de Bohr & Fótons</span></div>
               <div class="apparatus-canvas-wrap" id="canvas-moderna-bohr"></div>
               <div class="apparatus-controls">
                 <div class="digital-readout-bar">
@@ -284,13 +265,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                O número de meias-vidas transcorridas é $n = \frac{t}{T_{1/2}} = \frac{24}{8} = 3$.<br>
-                A massa restante é dada por: $m = \frac{m_0}{2^n} = \frac{80}{2^3} = \frac{80}{8} = 10\,\text{mg}$.
-              </div>
             </div>
           </div>
 

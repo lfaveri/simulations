@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Indução, Consumo & Circuitos</h1>
           </div>
           <p class="subpage-desc">
-            Fogão por indução eletromagnética (correntes de Foucault), cálculo de consumo e conta de luz (kWh), circuitos elétricos e exercícios com 5 alternativas.
+            Simulações visuais realistas: fogão por indução (com teste do gelo e correntes de Foucault), carregador sem fio Qi e consumo em kWh.
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-eletro-fogao">
-            <span class="station-number">01</span><span>🍳 Fogão por Indução & Foucault (FUVEST / UNICAMP)</span>
+            <span class="station-number">01</span><span>🍳 Fogão de Indução & Teste do Gelo (FUVEST / UNICAMP)</span>
+          </button>
+          <button class="station-tab" data-station="st-eletro-qi">
+            <span class="station-number">02</span><span>📱 Carregador sem Fio Qi & Smartphone (ITA / IME)</span>
           </button>
           <button class="station-tab" data-station="st-eletro-contaluz">
-            <span class="station-number">02</span><span>💡 Conta de Luz & Consumo (kWh) (ENEM / UNESP)</span>
-          </button>
-          <button class="station-tab" data-station="st-eletro-2">
-            <span class="station-number">03</span><span>⚡ Circuito & Lei de Ohm (ITA / IME)</span>
+            <span class="station-number">03</span><span>💡 Conta de Luz Residencial em kWh (ENEM / UNESP)</span>
           </button>
         </div>
 
@@ -78,16 +78,16 @@
                 <span class="vestibular-badge badge-fuvest">FUVEST / UNICAMP</span>
                 <span class="topic-tag">Indução Eletromagnética · Correntes de Foucault</span>
               </div>
-              <h2 class="question-title">Desafio: Por que a Mesa de Vidro Não Esquenta?</h2>
+              <h2 class="question-title">Desafio: Por que a Mesa de Vidro Não Derrete o Gelo?</h2>
               <div class="question-context">
-                "No fogão por indução, uma bobina gera um campo magnético alternado de alta frequência. O aquecimento ocorre porque:"
+                "No fogão por indução, uma bobina gera um campo magnético alternado de alta frequência. A panela ferve a água rapidamente, mas um cubo de gelo colocado sobre o vidro ao lado permanece intacto porque:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>O fluxo magnético variável induz correntes parasitas de Foucault no fundo metálico da panela, gerando calor por Efeito Joule.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A mesa de vidro emite micro-ondas que aquecem a água diretamente.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O vidro conduz eletricidade estática para a mão do cozinheiro.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A chama de gás fica escondida dentro da vitrocerâmica.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ocorre fusão a frio entre os elétrons do vidro e os da panela.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>As correntes parasitas de Foucault são induzidas apenas em materiais condutores ferromagnéticos, enquanto o vidro e o gelo são isolantes e não se aquecem.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>O vidro emite nitrogênio líquido constante.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O campo magnético congela ativamente o gelo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A panela absorve toda a gravidade do fogão.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ocorre interferência destrutiva nos fótons do vidro.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -101,7 +101,7 @@
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Fogão por Indução & Correntes Parasitas de Foucault</span>
+                <span class="apparatus-title">🔬 Fogão por Indução, Panela com Água & Cubo de Gelo</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-eletro-fogao"></div>
               <div class="apparatus-controls">
@@ -123,6 +123,38 @@
                   <div class="readout-item"><div class="readout-name">Mecanismo</div><div class="readout-num" id="e-fog-status-text" style="font-size:0.85rem;">Correntes de Foucault</div></div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada E_QI: Carregador sem Fio -->
+        <div class="station-panel" id="st-eletro-qi">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-ita">ITA / IME</span>
+                <span class="topic-tag">Indução Mútua · Carregamento sem Fio (Padrão Qi)</span>
+              </div>
+              <h2 class="question-title">Desafio: Como a Energia Atravessa o Ar sem Fios?</h2>
+              <div class="question-context">
+                "Um carregador Qi sem fio alimenta um smartphone posicionado sobre ele através de qual princípio do eletromagnetismo?"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Indução eletromagnética mútua: uma bobina primária na base gera um campo magnético oscilante que induz corrente alternada na bobina secundária do celular.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Emissão contínua de raios gama em direção à bateria.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Condução de elétrons através do ar por faíscas de alta voltagem.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional entre os íons de lítio.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Reflexão acústica de ondas sonoras ultrassônicas.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Base Qi, Bobina Indutora & Smartphone</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-qi"></div>
             </div>
           </div>
         </div>
@@ -183,49 +215,6 @@
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Consumo Mensal</div><div class="readout-num" id="e-con-kwh-num">97,5 kWh/mês</div></div>
                   <div class="readout-item"><div class="readout-name">Custo Estimado</div><div class="readout-num" id="e-con-cost-num" style="color:var(--lilac-dark);">R$ 82,88/mês</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada E2: Circuito & Ohm -->
-        <div class="station-panel" id="st-eletro-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
-                <span class="topic-tag">Eletrodinâmica · Primeira Lei de Ohm</span>
-              </div>
-              <h2 class="question-title">Desafio: Corrente & Efeito Joule</h2>
-              <div class="question-context">
-                "Um circuito simples contém uma fonte de $12\,\text{V}$ conectada a um resistor de $6\,\Omega$. Qual a corrente e a potência dissipada?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$I = 2\,\text{A}$ e Potência $P = 24\,\text{W}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$I = 0{,}5\,\text{A}$ e Potência $P = 6\,\text{W}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$I = 72\,\text{A}$ e Potência $P = 144\,\text{W}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$I = 2\,\text{A}$ e Potência $P = 12\,\text{W}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$I = 6\,\text{A}$ e Potência $P = 72\,\text{W}$</span></button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Bancada de Circuitos & Reostato</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletro-circuito"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Tensão ($U$)</span><span class="dial-value">12 V</span></div>
-                    <input type="range" class="lab-slider" id="e1-u-slider" min="2" max="24" step="1" value="12">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Resistência ($R$)</span><span class="dial-value">6 Ω</span></div>
-                    <input type="range" class="lab-slider" id="e1-r-slider" min="1" max="15" step="1" value="6">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Corrente ($I$)</div><div class="readout-num" id="e1-i-num">2,00 A</div></div>
-                  <div class="readout-item"><div class="readout-name">Potência ($P$)</div><div class="readout-num" id="e1-p-num">24,0 W</div></div>
                 </div>
               </div>
             </div>
@@ -302,12 +291,6 @@
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
             </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                $F = |q| \cdot v \cdot B \cdot \sin 90^\circ = (2 \times 10^{-6}) \cdot (10^5) \cdot 0{,}5 \cdot 1 = 0{,}10\,\text{N}$.
-              </div>
-            </div>
           </div>
 
           <!-- Questão 3: ENEM -->
@@ -328,12 +311,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Como a tensão $U$ da rede elétrica residencial é constante (ex.: $220\,\text{V}$), pela relação $P = \frac{U^2}{R}$, para aumentar a potência dissipada $P$ (aquecer mais a água no inverno), é obrigatório <strong>reduzir o comprimento / valor da resistência $R$</strong>.
-              </div>
             </div>
           </div>
 

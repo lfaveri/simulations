@@ -44,7 +44,7 @@
             <h1 class="subpage-title">Laboratório de Lentes, Miragens & Arco-Íris</h1>
           </div>
           <p class="subpage-desc">
-            Miragens no asfalto quente, formação de arco-íris em gotas de chuva, banco de lentes convergentes e divergentes, e exercícios com 5 alternativas.
+            Simulações visuais realistas: miragens na rodovia com reflexo de árvores, arco-íris em gotas de chuva, defeitos da visão (miopia) e óculos de grau.
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@
 
         <div class="station-nav" role="tablist">
           <button class="station-tab is-active" data-station="st-opt-miragem">
-            <span class="station-number">01</span><span>🛣️ Miragem no Asfalto Quente (ENEM / UNICAMP)</span>
+            <span class="station-number">01</span><span>🛣️ Miragem no Asfalto Quente da Estrada (ENEM / UNICAMP)</span>
           </button>
           <button class="station-tab" data-station="st-opt-arcoiris">
-            <span class="station-number">02</span><span>🌈 Arco-Íris & Gota de Chuva (FUVEST / UNESP)</span>
+            <span class="station-number">02</span><span>🌈 Gota de Chuva & Arco-Íris Completo (FUVEST / UNESP)</span>
           </button>
-          <button class="station-tab" data-station="st-opt-2">
-            <span class="station-number">03</span><span>👓 Banco Óptico: Lentes & Espelhos (ITA / IME)</span>
+          <button class="station-tab" data-station="st-opt-olho">
+            <span class="station-number">03</span><span>👁️ Olho Humano, Miopia & Óculos de Grau (UNIFESP / ITA)</span>
           </button>
         </div>
 
@@ -80,7 +80,7 @@
               </div>
               <h2 class="question-title">Desafio: A Ilusão de 'Poça d'Água' no Asfalto</h2>
               <div class="question-context">
-                "Em dias ensolarados, o asfalto aquecido cria a ilusão visual de poças d'água refletindo o céu ao longe. Isso ocorre porque o ar rente ao solo:"
+                "Em dias ensolarados, o asfalto aquecido cria a ilusão visual de poças d'água refletindo o céu e árvores ao longe. Isso ocorre porque o ar rente ao solo:"
               </div>
               <div class="options-group">
                 <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Fica mais quente e menos denso, diminuindo seu índice de refração e provocando reflexão total dos raios de luz do céu.</span></button>
@@ -95,19 +95,19 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  O asfalto a mais de $50^\circ\text{C}$ aquece as camadas de ar inferiores. Como ar quente é menos denso ($n_{\text{quente}} < n_{\text{frio}}$), a luz do céu passa do meio mais refringente para o menos refringente com grande ângulo de incidência, sofrendo <strong>reflexão total interna curvilínea</strong> e subindo até os olhos do observador.
+                  O asfalto a mais de $50^\circ\text{C}$ aquece as camadas de ar inferiores. Como ar quente é menos denso ($n_{\text{quente}} < n_{\text{frio}}$), a luz do céu e dos objetos passa do meio mais refringente para o menos refringente com grande ângulo de incidência, sofrendo <strong>reflexão total interna curvilínea</strong> e subindo até os olhos do observador.
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Formação de Miragem Inferior no Asfalto</span>
+                <span class="apparatus-title">🔬 Rodovia com Coqueiro, Asfalto Quente & Reflexo Trêmulo</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-optica-miragem"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Temperatura Asfalto</span><span class="dial-value" id="o-mir-temp-val">60 °C</span></div>
+                    <div class="dial-header"><span class="dial-label">Temperatura do Asfalto</span><span class="dial-value" id="o-mir-temp-val">60 °C</span></div>
                     <input type="range" class="lab-slider" id="o-mir-temp-slider" min="30" max="70" step="5" value="60">
                   </div>
                 </div>
@@ -142,83 +142,55 @@
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
               </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  1. Ao penetrar na gota, a luz sofre <strong>refração e dispersão cromática</strong> (o violeta desvia mais que o vermelho devido ao índice $n_{\text{violeta}} > n_{\text{vermelho}}$).<br>
-                  2. Atinge a parede posterior sofrendo <strong>reflexão total interna</strong>.<br>
-                  3. Emerge da gota por uma <strong>2ª refração</strong>, formando ângulos de $42^\circ$ (vermelho) e $40^\circ$ (violeta) com a direção dos raios solares incidentes.
-                </div>
-              </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Dispersão Cromática na Gota de Chuva</span>
+                <span class="apparatus-title">🔬 Gota de Chuva Esférica & Decomposição Espectral</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-optica-arcoiris"></div>
             </div>
           </div>
         </div>
 
-        <!-- Bancada O2: Banco Óptico de Lentes e Espelhos -->
-        <div class="station-panel" id="st-opt-2">
+        <!-- Bancada O_OLHO: Olho Humano e Óculos -->
+        <div class="station-panel" id="st-opt-olho">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-ita">ITA / IME</span>
-                <span class="topic-tag">Óptica Geométrica · Lentes Esféricas & Equação de Gauss</span>
+                <span class="vestibular-badge badge-unifesp">UNIFESP / ITA</span>
+                <span class="topic-tag">Óptica da Visão · Miopia & Lentes Divergentes</span>
               </div>
-              <h2 class="question-title">Desafio: Formação de Imagem em Lente Convergente</h2>
+              <h2 class="question-title">Desafio: Correção da Miopia com Lentes</h2>
               <div class="question-context">
-                "Um objeto real está posicionado no dobro da distância focal ($p = 2f$) de uma lente delgada convergente ($f = 50\,\text{cm}$). A imagem conjugada será:"
+                "No olho míope, a imagem de objetos distantes se forma antes da retina. Para corrigir essa anomalia e deslocar o foco exatamente para a retina, utiliza-se:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Real, invertida e de mesmo tamanho que o objeto ($p' = 2f = 100\,\text{cm}$, $A = -1$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Virtual, direita e maior que o objeto.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Real, direita e menor que o objeto.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Virtual, invertida e com o dobro do tamanho.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Imprópria, localizada no infinito.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Lente divergente (vergência negativa), divergindo levemente os raios antes de entrarem no olho.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Lente convergente de alto grau positivo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Espelho plano frontal.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Filtro polarizador linear.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Prisma de reflexão total.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
               </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pela Equação de Gauss: $\frac{1}{f} = \frac{1}{p} + \frac{1}{p'} \implies \frac{1}{p'} = \frac{1}{50} - \frac{1}{100} = \frac{1}{100} \implies p' = 100\,\text{cm}$.<br>
-                  Aumento linear: $A = -\frac{p'}{p} = -\frac{100}{100} = -1$ (Imagem real, invertida e com tamanho idêntico).
-                </div>
-              </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Banco Óptico & Traçado de Raios Notáveis</span>
+                <span class="apparatus-title">🔬 Anatomia do Olho, Cristalino & Lente de Óculos</span>
               </div>
-              <div class="apparatus-canvas-wrap" id="canvas-optica-lente"></div>
+              <div class="apparatus-canvas-wrap" id="canvas-optica-olho"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Elemento Óptico</span></div>
-                    <select id="o2-type-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
-                      <option value="lente_conv">Lente Convergente (Biconvexa)</option>
-                      <option value="lente_div">Lente Divergente (Bicôncava)</option>
-                      <option value="espelho_conc">Espelho Esférico Côncavo</option>
-                      <option value="espelho_conv">Espelho Esférico Convexo</option>
-                    </select>
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Posição do Objeto ($p$)</span><span class="dial-value" id="o2-p-val">120 cm</span></div>
-                    <input type="range" class="lab-slider" id="o2-p-slider" min="30" max="220" step="5" value="120">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Distância Focal ($f$)</span><span class="dial-value" id="o2-f-val">50 cm</span></div>
-                    <input type="range" class="lab-slider" id="o2-f-slider" min="30" max="100" step="5" value="50">
+                    <div class="dial-header"><span class="dial-label">Correção Óptica</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="o-eye-glasses-toggle"> Colocar Óculos de Grau (Lente Divergente)
+                    </label>
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Posição Imagem ($p'$)</div><div class="readout-num" id="o2-pprime-num">85,7 cm</div></div>
-                  <div class="readout-item"><div class="readout-name">Aumento & Vergência</div><div class="readout-num" id="o2-a-num">-0,71× (+2,0 di)</div></div>
-                  <div class="readout-item"><div class="readout-name">Classificação</div><div class="readout-num" id="o2-type-text" style="font-size:0.85rem;">Real, Invertida e Menor</div></div>
+                  <div class="readout-item"><div class="readout-name">Posição Focal</div><div class="readout-num" id="o-eye-status-text" style="font-size:0.85rem;">Miopia Sem Correção</div></div>
                 </div>
               </div>
             </div>
@@ -317,12 +289,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela equação do dioptro plano para pequenos ângulos: $\frac{h'}{h} = \frac{n_{\text{observador}}}{n_{\text{objeto}}} \implies \frac{h'}{2{,}0} = \frac{1{,}0}{4/3} = \frac{3}{4} \implies h' = 2{,}0 \cdot \frac{3}{4} = 1{,}5\,\text{m}$.
-              </div>
             </div>
           </div>
 
