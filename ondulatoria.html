@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 05 · ondulatória & acústica</span>
-            <h1 class="subpage-title">Laboratório de Fones ANC, Radar & Ondas</h1>
+            <h1 class="subpage-title">Laboratório de Ondas, Micro-ondas & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Simulações visuais realistas: fones over-ear com cancelamento ativo por onda antifásica de 180°, radar de trânsito Doppler policial e ambulância.
+            Simulações visuais realistas: forno micro-ondas e rotação dipolar da água, e fones over-ear com cancelamento ativo por interferência destrutiva de 180°.
           </p>
         </div>
       </div>
@@ -59,23 +59,78 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-ond-anc">
-            <span class="station-number">01</span><span>🎧 Fone Over-Ear com Cancelamento ANC (ENEM / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-ond-mic">
+            <span class="station-number">01</span><span>🍕 Forno Micro-ondas & Aquecimento Dielétrico (ENEM / FUVEST)</span>
           </button>
-          <button class="station-tab" data-station="st-ond-radar">
-            <span class="station-number">02</span><span>🚓 Viatura Policial & Radar Doppler (FUVEST / ITA)</span>
-          </button>
-          <button class="station-tab" data-station="st-ond-1">
-            <span class="station-number">03</span><span>🚑 Ambulância & Efeito Doppler Acústico (UNESP / IME)</span>
+          <button class="station-tab" data-station="st-ond-anc">
+            <span class="station-number">02</span><span>🎧 Fone Over-Ear com Cancelamento ANC (UNICAMP / ITA)</span>
           </button>
         </div>
 
-        <!-- Bancada W_ANC: Cancelamento de Ruído -->
-        <div class="station-panel is-active" id="st-ond-anc">
+        <!-- Bancada W_MIC: Forno Micro-ondas -->
+        <div class="station-panel is-active" id="st-ond-mic">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="vestibular-badge badge-enem">ENEM / FUVEST</span>
+                <span class="topic-tag">Ondas Eletromagnéticas · Ressonância & Aquecimento Dielétrico</span>
+              </div>
+              <h2 class="question-title">Desafio: Por que a Comida Esquenta no Micro-ondas?</h2>
+              <div class="question-context">
+                "No forno micro-ondas, o magnetron emite ondas de $2{,}45\,\text{GHz}$. O alimento é aquecido de maneira eficiente porque:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>O campo elétrico alternado de alta frequência força a rápida oscilação e rotação dos dipolos elétricos das moléculas de água contidas nos alimentos, gerando calor por atrito molecular.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Ocorre combustão química do ar dentro do forno.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>As ondas quebram os núcleos dos átomos por fissão nuclear.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>O prato de vidro esquenta primeiro e passa calor por condução.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>As micro-ondas atraem a gravidade para o centro do prato.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  A molécula de água ($\text{H}_2\text{O}$) é um dipolo elétrico permanente (com polo negativo no oxigênio e polos positivos nos hidrogênios). Sob a ação da onda de $2{,}45\,\text{GHz}$ ($\lambda = c/f = \frac{3 \times 10^8}{2{,}45 \times 10^9} \approx 12{,}2\,\text{cm}$), o campo elétrico inverte o sentido $2{,}45$ bilhões de vezes por segundo, forçando a rotação frenética das moléculas de água. Esse **atrito dielétrico molecular** converte energia eletromagnética diretamente em energia térmica!
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Cavidade com Ondas Estacionárias & Dipolo de H₂O</span>
+                <button class="btn-lab btn-lab-secondary" id="btn-reset-microondas" style="font-size:0.7rem; padding:3px 8px;">↺ Esfriar Comida</button>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-ondas-microondas"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Magnetron Emissor</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="w-mic-on-toggle" checked> Forno Ligado
+                    </label>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Potência</span><span class="dial-value" id="w-mic-power-val">800 W</span></div>
+                    <input type="range" class="lab-slider" id="w-mic-power-slider" min="400" max="1200" step="100" value="800">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Comprimento de Onda</div><div class="readout-num" id="w-mic-lambda-num">λ = 12,2 cm</div></div>
+                  <div class="readout-item"><div class="readout-name">Temp. Alimento</div><div class="readout-num" id="w-mic-temp-num">25 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Fenômeno</div><div class="readout-num" id="w-mic-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Ressonância Dielétrica</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada W_ANC: Cancelamento de Ruído -->
+        <div class="station-panel" id="st-ond-anc">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-unicamp">UNICAMP / ITA</span>
                 <span class="topic-tag">Interferência de Ondas · Fones de Ouvido ANC</span>
               </div>
               <h2 class="question-title">Desafio: A Física do Cancelamento Ativo de Ruído</h2>
@@ -95,7 +150,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  O princípio fundamental é o da <strong>superposição de ondas com interferência destrutiva</strong>: quando a onda de ruído $y_1(t) = A \sin(\omega t)$ e a onda gerada pelo fone $y_2(t) = A \sin(\omega t + \pi) = -A \sin(\omega t)$ se encontram, a resultante é nula ($y_R = y_1 + y_2 = 0$), cancelando a pressão acústica no tímpano.
+                  O princípio fundamental é a **superposição com interferência destrutiva**: $y_R(t) = y_{\text{ruído}}(t) + y_{\text{fone}}(t) = A\sin(\omega t) + A\sin(\omega t + \pi) = A\sin(\omega t) - A\sin(\omega t) = 0$. O tímpano recebe pressão acústica nula ($0\,\text{dB}$), gerando silêncio total.
                 </div>
               </div>
             </div>
@@ -112,98 +167,14 @@
                       <input type="checkbox" id="w-anc-toggle" checked> Ativar Cancelamento de Ruído
                     </label>
                   </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Defasagem ($\Delta\phi$)</div><div class="readout-num">180° (π rad)</div></div>
-                  <div class="readout-item"><div class="readout-name">Estado do Fone</div><div class="readout-num" id="w-anc-status-text" style="font-size:0.85rem;">Silêncio por ANC</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada W_RADAR: Radar Doppler -->
-        <div class="station-panel" id="st-ond-radar">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
-                <span class="topic-tag">Efeito Doppler Eletromagnético · Radar de Trânsito</span>
-              </div>
-              <h2 class="question-title">Desafio: Medição de Velocidade por Micro-ondas</h2>
-              <div class="question-context">
-                "Uma pistola de radar emite micro-ondas de frequência $f_0 = 24{,}15\,\text{GHz}$. Ao refletir em um veículo em aproximação, a frequência do sinal que retorna ao radar é:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Maior que $f_0$, proporcional à velocidade do veículo pelo efeito Doppler duplo ($\Delta f \approx 2 \frac{v}{c} f_0$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Menor que $f_0$, pois o veículo absorve a energia da onda.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Rigorosamente igual, pois a velocidade da luz é invariável.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Nula devido à blindagem metálica do carro.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Invertida de sinal para frequências negativas.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Viatura Policial, Radar Micro-ondas & Câmera</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-ondas-radar"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade do Carro</span><span class="dial-value" id="w-rad-speed-val">95 km/h</span></div>
-                    <input type="range" class="lab-slider" id="w-rad-speed-slider" min="40" max="140" step="5" value="95">
+                    <div class="dial-header"><span class="dial-label">Frequência Ruído</span><span class="dial-value" id="w-anc-freq-val">3.0 kHz</span></div>
+                    <input type="range" class="lab-slider" id="w-anc-freq-slider" min="1.0" max="6.0" step="0.5" value="3.0">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Desvio Doppler (Δf)</div><div class="readout-num" id="w-rad-deltaf-num">Δf = +4248 Hz</div></div>
-                  <div class="readout-item"><div class="readout-name">Velocidade Medida</div><div class="readout-num" id="w-rad-speedcalc-num">95 km/h</div></div>
-                  <div class="readout-item"><div class="readout-name">Status</div><div class="readout-num" id="w-rad-status-text" style="font-size:0.85rem;">Infração</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada W1: Doppler Sonoro -->
-        <div class="station-panel" id="st-ond-1">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
-                <span class="topic-tag">Acústica · Efeito Doppler Sonoro</span>
-              </div>
-              <h2 class="question-title">Desafio: O Som da Sirene</h2>
-              <div class="question-context">
-                "Quando uma ambulância aproxima-se com sirene de $440\,\text{Hz}$ a metade da velocidade do som ($0{,}50\,\text{Mach}$), qual a frequência aparente percebida pelo pedestre à frente?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 880\,\text{Hz}$ (O dobro da frequência, som agudo).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 440\,\text{Hz}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f' = 220\,\text{Hz}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f' = 0\,\text{Hz}$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f' = 1320\,\text{Hz}$</span></button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Ambulância & Frentes de Onda Compressas</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-ondas-doppler"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Velocidade da Ambulância</span><span class="dial-value">0.50 Mach</span></div>
-                    <input type="range" class="lab-slider" id="w1-speed-slider" min="0" max="0.9" step="0.05" value="0.5">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Frequência ($f_0$)</span><span class="dial-value">440 Hz</span></div>
-                    <input type="range" class="lab-slider" id="w1-freq-slider" min="200" max="800" step="20" value="440">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Frequência à Frente</div><div class="readout-num" id="w1-fahead-num">880 Hz</div></div>
-                  <div class="readout-item"><div class="readout-name">Frequência Atrás</div><div class="readout-num" id="w1-fbehind-num">293 Hz</div></div>
+                  <div class="readout-item"><div class="readout-name">Defasagem</div><div class="readout-num">180° (π rad)</div></div>
+                  <div class="readout-item"><div class="readout-name">Status Tímpano</div><div class="readout-num" id="w-anc-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Silêncio Total (0 dB)</div></div>
                 </div>
               </div>
             </div>
@@ -225,7 +196,6 @@
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
-          <button class="bank-filter-btn" data-filter="acustica">Acústica & Timbre</button>
         </div>
 
         <div class="questions-grid">
@@ -245,54 +215,6 @@
               <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Intensidade, que altera a frequência fundamental da nota emitida.</span></button>
               <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Comprimento de onda constante em todos os instrumentos.</span></button>
               <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Batimento sonoro gerado pela ressonância mecânica das cordas.</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                O <strong>timbre</strong> é a qualidade fisiológica que nos permite diferenciar dois sons de mesma frequência fundamental (mesma altura) e mesma intensidade emitidos por instrumentos distintos, pois cada instrumento possui uma assinatura única de ondas e harmônicos superiores.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 2: FUVEST -->
-          <div class="bank-question-card" data-board="paulistas fuvest" data-topic="ondas">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-fuvest">FUVEST 2021</span>
-              <span class="topic-tag">Ondulatória · Equação Fundamental & Refração de Ondas</span>
-            </div>
-            <p class="bank-question-text">
-              Uma onda luminosa monocromática de frequência $f = 6{,}0 \times 10^{14}\,\text{Hz}$ propaga-se no vácuo ($c = 3{,}0 \times 10^8\,\text{m/s}$) e penetra em um bloco de vidro de índice de refração $n = 1{,}50$. A frequência $f'$ e o comprimento de onda $\lambda'$ da luz dentro do vidro valem:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ (inalterada) e $\lambda' = 333\,\text{nm}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f' = 4{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 500\,\text{nm}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f' = 9{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 200\,\text{nm}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f' = 6{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 500\,\text{nm}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f' = 3{,}0 \times 10^{14}\,\text{Hz}$ e $\lambda' = 666\,\text{nm}$.</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-          </div>
-
-          <!-- Questão 3: UNICAMP -->
-          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="acustica">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-unicamp">UNICAMP 2022</span>
-              <span class="topic-tag">Acústica · Tubos Sonoros Abertos</span>
-            </div>
-            <p class="bank-question-text">
-              Um tubo sonoro aberto em ambas as extremidades possui comprimento $L = 0{,}85\,\text{m}$. Sendo a velocidade do som no ar $v = 340\,\text{m/s}$, a frequência do modo fundamental ($n=1$) emitido por esse tubo é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$f_1 = 200\,\text{Hz}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$f_1 = 100\,\text{Hz}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$f_1 = 400\,\text{Hz}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$f_1 = 340\,\text{Hz}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$f_1 = 85\,\text{Hz}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>

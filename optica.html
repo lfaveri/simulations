@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 04 · óptica geométrica</span>
-            <h1 class="subpage-title">Laboratório de Lentes, Miragens & Arco-Íris</h1>
+            <h1 class="subpage-title">Laboratório de Lentes, Fibra Óptica & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Simulações visuais realistas: miragens na rodovia com reflexo de árvores, arco-íris em gotas de chuva, defeitos da visão (miopia) e óculos de grau.
+            Simulações visuais realistas: fibra óptica com reflexão total para internet de alta velocidade e miragens no asfalto quente da rodovia.
           </p>
         </div>
       </div>
@@ -59,19 +59,67 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-opt-miragem">
-            <span class="station-number">01</span><span>🛣️ Miragem no Asfalto Quente da Estrada (ENEM / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-opt-fibra">
+            <span class="station-number">01</span><span>🌐 Fibra Óptica & Internet de Alta Velocidade (FUVEST / ITA)</span>
           </button>
-          <button class="station-tab" data-station="st-opt-arcoiris">
-            <span class="station-number">02</span><span>🌈 Gota de Chuva & Arco-Íris Completo (FUVEST / UNESP)</span>
-          </button>
-          <button class="station-tab" data-station="st-opt-olho">
-            <span class="station-number">03</span><span>👁️ Olho Humano, Miopia & Óculos de Grau (UNIFESP / ITA)</span>
+          <button class="station-tab" data-station="st-opt-miragem">
+            <span class="station-number">02</span><span>🛣️ Miragem no Asfalto Quente da Estrada (ENEM / UNICAMP)</span>
           </button>
         </div>
 
+        <!-- Bancada O_FIBRA: Fibra Óptica -->
+        <div class="station-panel is-active" id="st-opt-fibra">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
+                <span class="topic-tag">Reflexão Total Interna · Fibra Óptica de Telecomunicações</span>
+              </div>
+              <h2 class="question-title">Desafio: Como a Luz Fica Presa na Fibra Óptica?</h2>
+              <div class="question-context">
+                "Nos cabos de fibra óptica de internet rápida, a luz propaga-se no interior do núcleo de vidro ($n_{\text{núcleo}} = 1{,}50$) cercado por uma casca ($n_{\text{casca}} = 1{,}46$) sem escapar para fora devido a:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Sucessivas reflexões totais internas na interface núcleo-casca, pois $n_{\text{núcleo}} > n_{\text{casca}}$ e o ângulo de incidência supera o ângulo limite ($\theta > \theta_c \approx 76{,}7^\circ$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Espelhos metálicos polidos de prata dentro do vidro.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Atração magnética que puxa os fótons para o centro.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Vácuo absoluto que impede a luz de se mover transversalmente.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Polarização circular forçada por laser gama.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Para haver reflexão total interna: 1) A luz deve passar do meio mais refringente para o menos refringente ($n_{\text{núcleo}} = 1{,}50 > n_{\text{casca}} = 1{,}46$); 2) O ângulo de incidência deve superar o ângulo crítico: $\sin\theta_c = \frac{n_{\text{menor}}}{n_{\text{maior}}} = \frac{1{,}46}{1{,}50} \approx 0{,}9733 \implies \theta_c \approx 76{,}7^\circ$. Assim, a luz viaja a $v = c / 1{,}50 \approx 200.000\,\text{km/s}$ levando terabytes de dados com perda de sinal quase nula!
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Núcleo de Vidro, Casca & Pulsos Laser de Dados</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-optica-fibra"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Curvatura da Fibra</span><span class="dial-value" id="o-fib-bend-val">15°</span></div>
+                    <input type="range" class="lab-slider" id="o-fib-bend-slider" min="0" max="30" step="2" value="15">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Ângulo Crítico</div><div class="readout-num" id="o-fib-crit-num">θ_c = 76,7°</div></div>
+                  <div class="readout-item"><div class="readout-name">Velocidade da Luz</div><div class="readout-num" id="o-fib-speed-num">200.000 km/s</div></div>
+                  <div class="readout-item"><div class="readout-name">Status do Sinal</div><div class="readout-num" id="o-fib-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Reflexão Total</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Bancada O_MIRAGEM: Miragem no Asfalto -->
-        <div class="station-panel is-active" id="st-opt-miragem">
+        <div class="station-panel" id="st-opt-miragem">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
@@ -95,7 +143,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  O asfalto a mais de $50^\circ\text{C}$ aquece as camadas de ar inferiores. Como ar quente é menos denso ($n_{\text{quente}} < n_{\text{frio}}$), a luz do céu e dos objetos passa do meio mais refringente para o menos refringente com grande ângulo de incidência, sofrendo <strong>reflexão total interna curvilínea</strong> e subindo até os olhos do observador.
+                  O asfalto a mais de $50^\circ\text{C}$ aquece o ar adjacente. Como $n_{\text{quente}} < n_{\text{frio}}$, a luz do céu passa do meio mais refringente para o menos refringente em ângulo rasante sofrendo **reflexão total curvilínea**, formando o reflexo azul do céu no chão!
                 </div>
               </div>
             </div>
@@ -113,84 +161,7 @@
                 </div>
                 <div class="digital-readout-bar">
                   <div class="readout-item"><div class="readout-name">Gradiente de Refração</div><div class="readout-num" id="o-mir-grad-num">Δn ≈ -0,00020</div></div>
-                  <div class="readout-item"><div class="readout-name">Fenômeno Visual</div><div class="readout-num" id="o-mir-status-text" style="font-size:0.85rem;">Miragem Nítida</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada O_ARCOIRIS: Arco-Íris na Gota -->
-        <div class="station-panel" id="st-opt-arcoiris">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / UNESP</span>
-                <span class="topic-tag">Dispersão Cromática · Formação do Arco-Íris</span>
-              </div>
-              <h2 class="question-title">Desafio: A Sequência de Fenômenos no Arco-Íris</h2>
-              <div class="question-context">
-                "O arco-íris primário é formado pela luz solar ao interagir com gotas esféricas de chuva através da sequência correta de fenômenos:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>1ª Refração com dispersão cromática → 1 Reflexão total interna → 2ª Refração para o ar.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Apenas reflexão externa na superfície da gota.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Difração de Fraunhofer e fusão nuclear dos fótons.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Duas reflexões totais sem qualquer refração.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Absorção completa de todas as frequências com emissão de laser.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Gota de Chuva Esférica & Decomposição Espectral</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-optica-arcoiris"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada O_OLHO: Olho Humano e Óculos -->
-        <div class="station-panel" id="st-opt-olho">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unifesp">UNIFESP / ITA</span>
-                <span class="topic-tag">Óptica da Visão · Miopia & Lentes Divergentes</span>
-              </div>
-              <h2 class="question-title">Desafio: Correção da Miopia com Lentes</h2>
-              <div class="question-context">
-                "No olho míope, a imagem de objetos distantes se forma antes da retina. Para corrigir essa anomalia e deslocar o foco exatamente para a retina, utiliza-se:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Lente divergente (vergência negativa), divergindo levemente os raios antes de entrarem no olho.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Lente convergente de alto grau positivo.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Espelho plano frontal.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Filtro polarizador linear.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Prisma de reflexão total.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Anatomia do Olho, Cristalino & Lente de Óculos</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-optica-olho"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Correção Óptica</span></div>
-                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
-                      <input type="checkbox" id="o-eye-glasses-toggle"> Colocar Óculos de Grau (Lente Divergente)
-                    </label>
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Posição Focal</div><div class="readout-num" id="o-eye-status-text" style="font-size:0.85rem;">Miopia Sem Correção</div></div>
+                  <div class="readout-item"><div class="readout-name">Fenômeno Visual</div><div class="readout-num" id="o-mir-status-text" style="font-size:0.85rem; color:var(--lilac-dark);">Miragem Nítida</div></div>
                 </div>
               </div>
             </div>
@@ -212,7 +183,6 @@
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
-          <button class="bank-filter-btn" data-filter="visao">Defeitos da Visão</button>
         </div>
 
         <div class="questions-grid">
@@ -232,60 +202,6 @@
               <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Lente cilíndrica de vergência nula.</span></button>
               <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Lente prismática plana.</span></button>
               <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Espelho esférico côncavo.</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Na miopia, o olho é excessivamente convergente ou alongado anteroposteriormente, formando o foco antes da retina. Para compensar o excesso de convergência, receita-se uma <strong>lente divergente</strong> (distância focal negativa $f < 0 \implies C = 1/f < 0$).
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 2: UNESP -->
-          <div class="bank-question-card" data-board="paulistas unesp" data-topic="espelhos">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-unesp">UNESP 2021</span>
-              <span class="topic-tag">Espelhos Esféricos · Espelho Convexo de Segurança</span>
-            </div>
-            <p class="bank-question-text">
-              Os espelhos retrovisores externos convexos utilizados em garagens e ônibus formam de qualquer objeto real colocado à sua frente uma imagem:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Sempre virtual, direita e menor que o objeto, ampliando o campo visual.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre real, invertida e maior que o objeto.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Sempre real, direita e de mesmo tamanho.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Virtual, invertida e ampliada.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Real ou virtual, dependendo da distância do objeto ao vértice.</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                O espelho esférico convexo ($f < 0$) possui a propriedade fundamental de formar, para qualquer posição de objeto real, uma imagem <strong>virtual, direita e reduzida</strong>, permitindo abarcar um campo de visão muito mais amplo.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 3: FUVEST -->
-          <div class="bank-question-card" data-board="paulistas fuvest" data-topic="refraçao">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-fuvest">FUVEST 2020</span>
-              <span class="topic-tag">Refração · Dioptro Plano & Profundidade Aparente</span>
-            </div>
-            <p class="bank-question-text">
-              Um observador na borda de uma piscina cheia de água ($n_{\text{água}} = 4/3$) olha quase perpendicularmente para uma moeda depositada no fundo a uma profundidade real de $h = 2{,}0\,\text{m}$. A profundidade aparente $h'$ em que a moeda aparenta estar para o observador no ar ($n_{\text{ar}} = 1{,}0$) é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$h' = 1{,}5\,\text{m}$ (A moeda parece estar mais próxima da superfície).</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$h' = 2{,}67\,\text{m}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$h' = 2{,}0\,\text{m}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$h' = 0{,}75\,\text{m}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$h' = 3{,}0\,\text{m}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>

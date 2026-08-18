@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 06 · física moderna</span>
-            <h1 class="subpage-title">Laboratório de GPS Relativístico, Quântica & Nuclear</h1>
+            <h1 class="subpage-title">Laboratório Nuclear, GPS & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Simulações visuais realistas: satélites GPS orbitando o globo terrestre com relatividade de Einstein, painéis solares fotovoltaicos no telhado e modelo de Bohr.
+            Simulações visuais realistas: detector de fumaça nuclear iônico com Amerício-241 e satélites GPS com relatividade de Einstein.
           </p>
         </div>
       </div>
@@ -59,19 +59,67 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-mod-gps">
-            <span class="station-number">01</span><span>🛰️ Satélites GPS & Relatividade de Einstein (FUVEST / ITA)</span>
+          <button class="station-tab is-active" data-station="st-mod-det">
+            <span class="station-number">01</span><span>🚨 Detector de Fumaça com Amerício-241 (ENEM / UNICAMP)</span>
           </button>
-          <button class="station-tab" data-station="st-mod-solar">
-            <span class="station-number">02</span><span>☀️ Painel Solar Fotovoltaico no Telhado (ENEM / UNICAMP)</span>
-          </button>
-          <button class="station-tab" data-station="st-mod-3">
-            <span class="station-number">03</span><span>⚛️ Átomo de Bohr & Emissão de Cores (UNESP / IME)</span>
+          <button class="station-tab" data-station="st-mod-gps">
+            <span class="station-number">02</span><span>🛰️ Satélites GPS & Relatividade de Einstein (FUVEST / ITA)</span>
           </button>
         </div>
 
+        <!-- Bancada Q_DET: Detector de Fumaça Nuclear -->
+        <div class="station-panel is-active" id="st-mod-det">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="topic-tag">Física Nuclear · Emissão Alfa (α) & Detectores de Incêndio</span>
+              </div>
+              <h2 class="question-title">Desafio: A Física Nuclear Salvando Vidas na Sua Casa</h2>
+              <div class="question-context">
+                "Os detectores de fumaça iônicos residenciais utilizam uma pequena fonte de Amerício-241 ($^{241}\text{Am}$). O alarme de incêndio é acionado quando:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A fuligem da fumaça entra na câmara e neutraliza a ionização das partículas alfa ($\alpha$), fazendo a corrente elétrica cair e acionando a buzina.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A temperatura da fumaça funde o átomo de amerício.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O amerício atrai o monóxido de carbono por gravidade quântica.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A luz visível do fogo reflete em espelhos côncavos.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>As partículas gama explodem os elétrons do ar.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  O $^{241}\text{Am}$ decai emitindo partículas alfa ($^4_2\alpha^{2+}$). Por terem alta massa e carga dupla positiva, as partículas alfa colidem com moléculas de oxigênio e nitrogênio do ar, arrancando elétrons e mantendo uma microcorrente constante de $\approx 10\,\mu\text{A}$ entre dois eletrodos polarizados. Quando partículas de fumaça penetram na câmara, elas absorvem os íons e as partículas alfa, provocando uma **queda brusca na corrente elétrica**, o que faz o microcontrolador disparar a sirene de alarme!
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Câmara de Ionização com Amerício-241 & Sirene</span>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-moderna-detector"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Nível de Fumaça</span><span class="dial-value" id="mod-det-smoke-val">0%</span></div>
+                    <input type="range" class="lab-slider" id="mod-det-smoke-slider" min="0" max="100" step="5" value="0">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Corrente Iônica</div><div class="readout-num" id="mod-det-cur-num">10,0 µA</div></div>
+                  <div class="readout-item"><div class="readout-name">Radiação</div><div class="readout-num" id="mod-det-rad-num">Am-241 (Alfa α)</div></div>
+                  <div class="readout-item"><div class="readout-name">Alarme</div><div class="readout-num" id="mod-det-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Ambiente Seguro</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Bancada Q_GPS: Satélites e Relatividade -->
-        <div class="station-panel is-active" id="st-mod-gps">
+        <div class="station-panel" id="st-mod-gps">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
@@ -95,9 +143,7 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  1. <em>Relatividade Restrita:</em> $v \approx 14.000\,\text{km/h} \implies$ dilatação temporal faz o relógio do satélite atrasar cerca de $7{,}2\,\mu\text{s/dia}$.<br>
-                  2. <em>Relatividade Geral:</em> no espaço, o potencial gravitacional é menor ($\Phi_{\text{espaço}} > \Phi_{\text{terra}}$), fazendo o relógio bater mais rápido ($+45{,}9\,\mu\text{s/dia}$).<br>
-                  Efeito Líquido: $+38{,}7\,\mu\text{s/dia}$. Como a luz viaja a $c = 300.000\,\text{km/s}$, sem a correção de Einstein o erro acumulado seria de $38{,}7 \times 10^{-6} \times 3 \times 10^5 \approx 11{,}6\,\text{km}$ por dia!
+                  Sem a correção das equações de Einstein ($\Delta t = \Delta t_0 / \sqrt{1 - v^2/c^2}$ e $\Delta t = \Delta t_0 \sqrt{1 - 2GM/rc^2}$), o desvio acumulado de $38{,}7\,\mu\text{s/dia}$ geraria um erro de posicionamento de $\Delta s = c \cdot \Delta t \approx 3 \times 10^8 \times 38{,}7 \times 10^{-6} \approx 11{,}6\,\text{km}$ a cada 24 horas!
                 </div>
               </div>
             </div>
@@ -115,83 +161,14 @@
                     </label>
                   </div>
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Tempo Decorrido</span><span class="dial-value" id="mod-gps-days-val">1.0 dias</span></div>
-                    <input type="range" class="lab-slider" id="mod-gps-days-slider" min="0.5" max="5.0" step="0.5" value="1.0">
+                    <div class="dial-header"><span class="dial-label">Tempo Sem Correção</span><span class="dial-value" id="mod-gps-days-val">1.0 dias</span></div>
+                    <input type="range" class="lab-slider" id="mod-gps-days-slider" min="0.5" max="7.0" step="0.5" value="1.0">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Deriva Relativística</div><div class="readout-num" id="mod-gps-drift-num">+38,7 µs</div></div>
-                  <div class="readout-item"><div class="readout-name">Precisão GPS</div><div class="readout-num" id="mod-gps-err-num">± 2 a 5 metros</div></div>
-                  <div class="readout-item"><div class="readout-name">Status</div><div class="readout-num" id="mod-gps-status-text" style="font-size:0.85rem;">Localização Exata</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada Q_SOLAR: Telhado Solar -->
-        <div class="station-panel" id="st-mod-solar">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
-                <span class="topic-tag">Física Quântica · Efeito Fotoelétrico & Energia Solar</span>
-              </div>
-              <h2 class="question-title">Desafio: Como a Luz Gera Eletricidade no Telhado?</h2>
-              <div class="question-context">
-                "Os painéis solares fotovoltaicos residenciais convertem a energia solar diretamente em corrente elétrica através do:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Efeito fotoelétrico quântico: fótons de luz com energia suficiente ($E = hf$) arrancam elétrons da junção semicondutora de silício, gerando corrente contínua.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aquecimento térmico que ferve água dentro das placas.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Atrito mecânico do vento contra os vidros.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Fissão nuclear espontânea do silício.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Reflexão acústica de ondas sonoras solares.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Telhado Solar Residencial & Fotoelétrons</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-moderna-solar"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada Q3: Bohr -->
-        <div class="station-panel" id="st-mod-3">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unesp">UNESP / IME</span>
-                <span class="topic-tag">Física Atômica · Modelo de Bohr</span>
-              </div>
-              <h2 class="question-title">Desafio: Emissão Quântica de Fótons</h2>
-              <div class="question-context">
-                "Quando um elétron no átomo de hidrogênio realiza uma transição de um nível de maior energia para um nível de menor energia, ocorre:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A emissão de um único fóton de energia $hf = E_{\text{inicial}} - E_{\text{final}}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A absorção contínua de ondas de rádio.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A destruição da carga elétrica do elétron.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A fissão nuclear do próton central.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>A conversão do elétron em um nêutron térmico.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-bohr-absorb">⚡ Absorver Fóton (Subir)</button>
-                <button class="btn-lab btn-lab-secondary" id="btn-bohr-emit">⚡ Emitir Fóton (Descer)</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Órbitas Quantizadas de Bohr & Fótons</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-moderna-bohr"></div>
-              <div class="apparatus-controls">
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Nível Quântico</div><div class="readout-num" id="mod3-n-num">n = 2</div></div>
-                  <div class="readout-item"><div class="readout-name">Energia do Nível</div><div class="readout-num" id="mod3-energy-num">-3,40 eV</div></div>
+                  <div class="readout-item"><div class="readout-name">Deriva Temporal</div><div class="readout-num" id="mod-gps-drift-num">0,0 µs (Corrigido)</div></div>
+                  <div class="readout-item"><div class="readout-name">Erro Posição</div><div class="readout-num" id="mod-gps-err-num">± 3 metros</div></div>
+                  <div class="readout-item"><div class="readout-name">Status GPS</div><div class="readout-num" id="mod-gps-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Localização Precisa</div></div>
                 </div>
               </div>
             </div>
@@ -206,15 +183,13 @@
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Física Moderna</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, UFG, UFMT, PUC</span>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, UFMG, PUC</span>
         </div>
 
         <div class="bank-filters">
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
-          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
-          <button class="bank-filter-btn" data-filter="nuclear">Nuclear & Decaimento</button>
         </div>
 
         <div class="questions-grid">
@@ -234,34 +209,6 @@
               <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$E = 9{,}0 \times 10^4\,\text{J}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$E = 3{,}0 \times 10^8\,\text{J}$</span></button>
               <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$E = 1{,}0 \times 10^{-6}\,\text{J}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela famosa equação de equivalência de Einstein:<br>
-                $E = \Delta m \cdot c^2 = (1{,}0 \times 10^{-6}) \cdot (3{,}0 \times 10^8)^2 = 10^{-6} \cdot (9 \times 10^{16}) = 9{,}0 \times 10^{10}\,\text{J}$ ($90\,\text{GigaJoules}$).
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 2: ENEM -->
-          <div class="bank-question-card" data-board="enem" data-topic="nuclear">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-enem">ENEM 2021</span>
-              <span class="topic-tag">Física Nuclear · Meia-Vida & Decaimento Radioativo</span>
-            </div>
-            <p class="bank-question-text">
-              O iodo-131, utilizado no tratamento médico da glândula tireoide, possui meia-vida de $T_{1/2} = 8\,\text{dias}$. Partindo de uma amostra inicial de $80\,\text{mg}$, qual será a massa restante desse isótopo após transcorridos $24\,\text{dias}$?
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$m = 10\,\text{mg}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$m = 20\,\text{mg}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$m = 40\,\text{mg}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$m = 5\,\text{mg}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$m = 0\,\text{mg}$ (desintegração total)</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>

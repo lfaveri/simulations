@@ -41,10 +41,10 @@
         <div class="subpage-hero-row">
           <div>
             <span class="eyebrow">módulo 02 · mecânica clássica</span>
-            <h1 class="subpage-title">Laboratório de Dinâmica, Energia & Física do Cotidiano</h1>
+            <h1 class="subpage-title">Laboratório de Dinâmica, Aerodinâmica & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Simulações visuais hiper-realistas: frenagem veicular com ABS na chuva, montanha-russa com looping, elevador panorâmico e planos inclinados.
+            Simulações visuais interativas: salto de paraquedas com arrasto e velocidade terminal, e frenagem veicular com sistema ABS na chuva.
           </p>
         </div>
       </div>
@@ -59,22 +59,74 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-mec-car">
-            <span class="station-number">01</span><span>🚗 Frenagem no Trânsito & ABS Realista (ENEM / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-mec-chute">
+            <span class="station-number">01</span><span>🪂 Salto de Paraquedas & Velocidade Terminal (ENEM / ITA)</span>
           </button>
-          <button class="station-tab" data-station="st-mec-loop">
-            <span class="station-number">02</span><span>🎢 Montanha-Russa do Parque (FUVEST / ITA)</span>
-          </button>
-          <button class="station-tab" data-station="st-mec-elev">
-            <span class="station-number">03</span><span>⚖️ Elevador Panorâmico & Balança (UFMG / UNESP)</span>
-          </button>
-          <button class="station-tab" data-station="st-mec-2">
-            <span class="station-number">04</span><span>📐 Plano Inclinado & Vetores de Força (IME / FEI)</span>
+          <button class="station-tab" data-station="st-mec-car">
+            <span class="station-number">02</span><span>🚗 Frenagem no Trânsito & ABS na Chuva (UNICAMP / FUVEST)</span>
           </button>
         </div>
 
+        <!-- Bancada M_CHUTE: Salto de Paraquedas -->
+        <div class="station-panel is-active" id="st-mec-chute">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-ita">ITA / ENEM</span>
+                <span class="topic-tag">Dinâmica de Fluidos · Força de Arrasto & Velocidade Terminal</span>
+              </div>
+              <h2 class="question-title">Desafio: A Queda com Resistência do Ar</h2>
+              <div class="question-context">
+                "Um paraquedista de $80\,\text{kg}$ salta de um avião. À medida que sua velocidade aumenta, a força de resistência do ar ($F_{\text{arr}} = \frac{1}{2}\rho C_d A v^2$) cresce até igualar o peso. Quando $F_{\text{arr}} = P$:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>A força resultante torna-se nula ($F_R = 0$) e a velocidade atinge um valor limite constante ($v_{\text{terminal}} \approx 200\,\text{km/h}$).</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>A velocidade cai instantaneamente a zero e ele flutua no ar.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>A aceleração do paraquedista dobra para $20\,\text{m/s}^2$.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A gravidade da Terra é anulada pelo vácuo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>O paraquedista passa a subir em direção ao espaço.</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+              <div class="resolution-box">
+                <h4>📐 Resolução</h4>
+                <div class="resolution-text">
+                  Pela 2ª Lei de Newton: $F_R = P - F_{\text{arr}} = m \cdot a$. Conforme a velocidade $v$ sobe, $F_{\text{arr}}$ aumenta até equilibrar o peso ($F_{\text{arr}} = m g$). Nesse instante, $a = 0$ e a velocidade atinge seu valor máximo constante: $v_{\text{term}} = \sqrt{\frac{2mg}{\rho C_d A}} \approx 54\,\text{m/s} \approx 194\,\text{km/h}$. Ao abrir o velame, a área $A$ cresce $60\times$, reduzindo a velocidade terminal para seguros $\approx 5\,\text{m/s}$ ($18\,\text{km/h}$).
+                </div>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Salto de Paraquedas, Copa & Altímetro</span>
+                <button class="btn-lab btn-lab-secondary" id="btn-reset-skydive" style="font-size:0.7rem; padding:3px 8px;">↺ Saltar Novamente</button>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-mec-paraquedas"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Comando de Voo</span></div>
+                    <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
+                      <input type="checkbox" id="m-chute-open-toggle"> Abrir Paraquedas
+                    </label>
+                  </div>
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Massa do Saltador</span><span class="dial-value" id="m-chute-mass-val">80 kg</span></div>
+                    <input type="range" class="lab-slider" id="m-chute-mass-slider" min="50" max="120" step="5" value="80">
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Veloc. Terminal</div><div class="readout-num" id="m-chute-vterm-num">54,0 m/s (194 km/h)</div></div>
+                  <div class="readout-item"><div class="readout-name">Veloc. Atual</div><div class="readout-num" id="m-chute-vcur-num">0,0 m/s</div></div>
+                  <div class="readout-item"><div class="readout-name">Status do Salto</div><div class="readout-num" id="m-chute-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Queda Livre</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Bancada M_CAR: Frenagem no Trânsito -->
-        <div class="station-panel is-active" id="st-mec-car">
+        <div class="station-panel" id="st-mec-car">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
@@ -137,172 +189,6 @@
                   <div class="readout-item"><div class="readout-name">Dist. Reação</div><div class="readout-num" id="m-car-dreac-num">16,7 m</div></div>
                   <div class="readout-item"><div class="readout-name">Dist. Frenagem</div><div class="readout-num" id="m-car-dbrake-num">30,9 m</div></div>
                   <div class="readout-item"><div class="readout-name">Distância Total</div><div class="readout-num" id="m-car-dtotal-num" style="color:var(--lilac-dark);">47,6 m</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada M_LOOP: Montanha-Russa -->
-        <div class="station-panel" id="st-mec-loop">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
-                <span class="topic-tag">Energia Mecânica · Altura Mínima no Looping</span>
-              </div>
-              <h2 class="question-title">Desafio: Condição de Não Queda no Vértice</h2>
-              <div class="question-context">
-                "Para que um carrinho de montanha-russa complete um looping circular de raio $R$ sem se desprender do trilho no ponto mais alto, a altura mínima $H$ de lançamento deve ser:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$H_{\text{mín}} = 2{,}5\,R$ (Pois a velocidade no topo deve ser $v \ge \sqrt{g R}$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$H_{\text{mín}} = 2{,}0\,R$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$H_{\text{mín}} = 1{,}5\,R$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$H_{\text{mín}} = 3{,}0\,R$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$H_{\text{mín}} = 5{,}0\,R$.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Trilho de Looping & Conservação de Energia</span>
-                <div style="display:flex; gap:6px;">
-                  <button class="btn-lab btn-lab-primary" id="btn-launch-coaster" style="font-size:0.7rem; padding:3px 8px;">🎢 Soltar Carrinho</button>
-                  <button class="btn-lab btn-lab-secondary" id="btn-reset-coaster" style="font-size:0.7rem; padding:3px 8px;">↺ Reiniciar</button>
-                </div>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-mec-looping"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Altura Inicial ($H$)</span><span class="dial-value" id="m-loop-h-val">40 m</span></div>
-                    <input type="range" class="lab-slider" id="m-loop-h-slider" min="20" max="60" step="2" value="40">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Raio do Looping ($R$)</span><span class="dial-value" id="m-loop-r-val">12 m</span></div>
-                    <input type="range" class="lab-slider" id="m-loop-r-slider" min="8" max="20" step="1" value="12">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Velocidade na Base</div><div class="readout-num" id="m-loop-vbot-num">28,3 m/s</div></div>
-                  <div class="readout-item"><div class="readout-name">Velocidade no Topo</div><div class="readout-num" id="m-loop-vtop-num">17,9 m/s</div></div>
-                  <div class="readout-item"><div class="readout-name">Segurança</div><div class="readout-num" id="m-loop-status-text" style="font-size:0.85rem;">Looping Seguro</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada M_ELEV: Elevador Panorâmico & Balança -->
-        <div class="station-panel" id="st-mec-elev">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-ufmg">UFMG / UNESP</span>
-                <span class="topic-tag">Dinâmica · Força Normal & Peso Aparente no Elevador</span>
-              </div>
-              <h2 class="question-title">Desafio: A Indicação da Balança no Elevador</h2>
-              <div class="question-context">
-                "Uma pessoa de massa $m = 60\,\text{kg}$ está sobre uma balança digital dentro de um elevador que acelera para cima com $a = 2{,}0\,\text{m/s}^2$ ($g = 10\,\text{m/s}^2$). Qual a força normal e o valor medido pela balança?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$N = 720\,\text{N}$ ($72\,\text{kgf}$, sensação de corpo mais pesado).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$N = 600\,\text{N}$ ($60\,\text{kgf}$, peso real inalterado).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$N = 480\,\text{N}$ ($48\,\text{kgf}$).</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$N = 120\,\text{N}$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$N = 0\,\text{N}$ (queda livre).</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Pela 2ª Lei de Newton: $F_R = m \cdot a \implies N - P = m \cdot a \implies N = m(g + a) = 60(10 + 2) = 720\,\text{N}$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Elevador Panorâmico & Balança de Banheiro</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-mec-elevador"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Movimento do Elevador</span></div>
-                    <select id="m-elev-state-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
-                      <option value="acelera_cima">Subindo Acelerado (+2 m/s²)</option>
-                      <option value="repouso">Parado / Velocidade Constante (a = 0)</option>
-                      <option value="acelera_baixo">Descendo Acelerado (-2 m/s²)</option>
-                      <option value="queda_livre">Cabo Rompido / Queda Livre (a = -g)</option>
-                    </select>
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Massa da Pessoa</span><span class="dial-value" id="m-elev-mass-val">60 kg</span></div>
-                    <input type="range" class="lab-slider" id="m-elev-mass-slider" min="40" max="100" step="5" value="60">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Peso Real ($P$)</div><div class="readout-num" id="m-elev-preal-num">600 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Peso Aparente ($N$)</div><div class="readout-num" id="m-elev-norm-num" style="color:var(--lilac-dark);">720 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Sensação</div><div class="readout-num" id="m-elev-feel-text" style="font-size:0.8rem;">Mais pesado</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada M2: Plano Inclinado -->
-        <div class="station-panel" id="st-mec-2">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-unicamp">UNICAMP / UNESP</span>
-                <span class="topic-tag">Dinâmica · Plano Inclinado & Atrito</span>
-              </div>
-              <h2 class="question-title">Desafio: Condição de Deslizamento</h2>
-              <div class="question-context">
-                "Um bloco repousa sobre uma rampa com atrito $\mu = 0{,}40$. A partir de qual ângulo $\theta$ de inclinação o bloco começa a deslizar?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Quando $\tan\theta > \mu \implies \theta \approx 21{,}8^\circ$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Sempre em $\theta = 45^\circ$, independente do atrito.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Quando $\sin\theta = 0{,}40 \implies \theta \approx 23{,}6^\circ$.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Quando $\theta = 90^\circ$ apenas.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>O bloco nunca desliza se a massa for maior que $5\,\text{kg}$.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-primary" id="btn-release-block">▶ Soltar Bloco</button>
-                <button class="btn-lab btn-lab-secondary" id="btn-reset-block">↺ Reiniciar Bloco</button>
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar"><span class="apparatus-title">🔬 Rampa de Atrito & Vetores ($\vec{N}, \vec{P}_x, \vec{f}_{at}$)</span></div>
-              <div class="apparatus-canvas-wrap" id="canvas-mec-plano"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Ângulo ($\theta$)</span><span class="dial-value" id="m2-theta-val">30°</span></div>
-                    <input type="range" class="lab-slider" id="m2-theta-slider" min="10" max="60" step="2" value="30">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Coef. Atrito ($\mu$)</span><span class="dial-value" id="m2-mu-val">0,40</span></div>
-                    <input type="range" class="lab-slider" id="m2-mu-slider" min="0.1" max="0.9" step="0.05" value="0.4">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Massa ($m$)</span><span class="dial-value" id="m2-mass-val">2,0 kg</span></div>
-                    <input type="range" class="lab-slider" id="m2-mass-slider" min="1" max="5" step="0.5" value="2">
-                  </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Força Tangencial ($P_x$)</div><div class="readout-num" id="m2-px-num">10,0 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Atrito Máx ($f_{at}$)</div><div class="readout-num" id="m2-fat-num">6,9 N</div></div>
-                  <div class="readout-item"><div class="readout-name">Aceleração ($a$)</div><div class="readout-num" id="m2-accel-num">1,54 m/s²</div></div>
                 </div>
               </div>
             </div>
@@ -377,121 +263,6 @@
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                A força centrípeta é fornecida exclusivamente pelo atrito estático:<br>
-                $F_{\text{cp}} = F_{\text{at,máx}} \implies \frac{m v^2}{R} \le \mu_e m g \implies v \le \sqrt{\mu_e g R} = \sqrt{0{,}4 \cdot 10 \cdot 100} = \sqrt{400} = 20\,\text{m/s} = 72\,\text{km/h}$.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 3: ENEM -->
-          <div class="bank-question-card" data-board="enem" data-topic="energia">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-enem">ENEM 2020</span>
-              <span class="topic-tag">Energia Mecânica · Conservação em Montanha-Russa</span>
-            </div>
-            <p class="bank-question-text">
-              Em um parque de diversões, um carrinho de montanha-russa de massa $m = 400\,\text{kg}$ parte do repouso do topo de uma colina a $H = 45\,\text{m}$ de altura. Desprezando o atrito e adotando $g = 10\,\text{m/s}^2$, a velocidade do carrinho ao passar pelo ponto mais baixo da pista ($y = 0$) é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$v = 30\,\text{m/s} = 108\,\text{km/h}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$v = 15\,\text{m/s} = 54\,\text{km/h}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$v = 45\,\text{m/s} = 162\,\text{km/h}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$v = 20\,\text{m/s} = 72\,\text{km/h}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$v = 90\,\text{m/s} = 324\,\text{km/h}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela conservação da Energia Mecânica: $E_{\text{mec,inicial}} = E_{\text{mec,final}} \implies m g H = \frac{1}{2} m v^2 \implies v = \sqrt{2 g H} = \sqrt{2 \cdot 10 \cdot 45} = \sqrt{900} = 30\,\text{m/s} = 108\,\text{km/h}$.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 4: UFMG -->
-          <div class="bank-question-card" data-board="federais ufmg" data-topic="estatica">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-ufmg">UFMG 2021</span>
-              <span class="topic-tag">Estática do Ponto · Elevador & Balança</span>
-            </div>
-            <p class="bank-question-text">
-              Uma pessoa de massa $m = 60\,\text{kg}$ está sobre uma balança graduada em Newtons dentro de um elevador que sobe acelerando para cima com $a = 2{,}0\,\text{m/s}^2$ ($g = 10\,\text{m/s}^2$). A indicação da balança é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$N = 720\,\text{N}$ (A pessoa sente-se mais pesada).</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$N = 600\,\text{N}$ (Peso real).</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$N = 480\,\text{N}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$N = 120\,\text{N}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$N = 0\,\text{N}$ (Sensação de imponderabilidade).</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela 2ª Lei de Newton com aceleração para cima: $N - P = m a \implies N = m(g + a) = 60(10 + 2) = 60 \cdot 12 = 720\,\text{N}$.
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 5: UFMT / IFMT -->
-          <div class="bank-question-card" data-board="federais ufmt ifmt" data-topic="hidrostatica">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-ufmt">UFMT / IFMT</span>
-              <span class="topic-tag">Hidrostática · Teorema de Stevin</span>
-            </div>
-            <p class="bank-question-text">
-              Em um lago de águas calmas ($\rho = 1000\,\text{kg/m}^3$), um mergulhador atinge a profundidade de $h = 20\,\text{m}$. Sendo a pressão atmosférica $P_{\text{atm}} = 1{,}0 \times 10^5\,\text{Pa}$ e $g = 10\,\text{m/s}^2$, a pressão total (absoluta) sentida pelo mergulhador é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$P_{\text{total}} = 3{,}0 \times 10^5\,\text{Pa} = 3\,\text{atm}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$P_{\text{total}} = 2{,}0 \times 10^5\,\text{Pa}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$P_{\text{total}} = 1{,}0 \times 10^5\,\text{Pa}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$P_{\text{total}} = 4{,}0 \times 10^5\,\text{Pa}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$P_{\text{total}} = 20 \times 10^5\,\text{Pa}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pelo Teorema de Stevin: $P = P_{\text{atm}} + \rho g h = 10^5 + (1000 \cdot 10 \cdot 20) = 10^5 + 2 \times 10^5 = 3{,}0 \times 10^5\,\text{Pa}$ (3 atmosferas).
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 6: FEI / PUC -->
-          <div class="bank-question-card" data-board="paulistas fei puc" data-topic="colisoes">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-fei">FEI / PUC</span>
-              <span class="topic-tag">Quantidade de Movimento · Colisão Perfeitamente Inelástica</span>
-            </div>
-            <p class="bank-question-text">
-              Um bloco A de massa $m_A = 3\,\text{kg}$ move-se a $v_A = 6\,\text{m/s}$ e colide com um bloco B de massa $m_B = 3\,\text{kg}$ inicialmente em repouso. Se os dois blocos permanecem grudados após a colisão, a velocidade final do conjunto é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$V_{\text{final}} = 3{,}0\,\text{m/s}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$V_{\text{final}} = 6{,}0\,\text{m/s}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$V_{\text{final}} = 1{,}5\,\text{m/s}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$V_{\text{final}} = 0{,}0\,\text{m/s}$ (param)</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$V_{\text{final}} = 12{,}0\,\text{m/s}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela Conservação da Quantidade de Movimento: $m_A v_A + m_B v_B = (m_A + m_B) V_f \implies 3 \cdot 6 + 0 = 6 \cdot V_f \implies V_f = 18/6 = 3{,}0\,\text{m/s}$.
-              </div>
             </div>
           </div>
 

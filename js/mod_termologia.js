@@ -1,13 +1,303 @@
 /**
- * MÓDULO: TERMOLOGIA & TERMOFÍSICA — LABORATÓRIO VIRTUAL COM VISUAL REALISTA & FÍSICA DO COTIDIANO
- * 1. Panela de Pressão Realista com Sopa em Ebulição & Jato de Vapor
- * 2. Efeito Estufa no Carro com Ondas Infravermelhas & Termômetro de Mercúrio
- * 3. Café Quente: Xícara Aberta vs Garrafa Térmica (Dewar com Vácuo)
- * 4. Transmissão Térmica: Condução, Convecção & Radiação
+ * MÓDULO: TERMOLOGIA & TERMOFÍSICA — LABORATÓRIO VIRTUAL ROBUSTO & SEM BUGS
+ * 1. Cozimento do Ovo por Condução Térmica Radial (Desnaturação de Proteínas)
+ * 2. Formação de Nuvens, Expansão Adiabática & Ciclo da Chuva
+ * 3. Panela de Pressão com Sopa em Ebulição & Válvula de Vapor
  */
 
 /* ==========================================================================
-   1. PANELA DE PRESSÃO COM SOPA EM EBULIÇÃO & VAPOR (COTIDIANO)
+   1. COZIMENTO DO OVO POR CONDUÇÃO TÉRMICA (COTIDIANO)
+   ========================================================================== */
+const simTermoCozimentoOvo = (p) => {
+  let cookingTimeMin = 6.0;
+  let isCooking = true;
+  let potBubbles = [];
+
+  p.setup = () => {
+    const wrap = document.getElementById("canvas-termo-ovo");
+    if (!wrap) return;
+    const w = wrap.clientWidth > 100 ? Math.min(wrap.clientWidth, 650) : 560;
+    const canvas = p.createCanvas(w, 360);
+    canvas.parent("canvas-termo-ovo");
+
+    for (let i = 0; i < 25; i++) {
+      potBubbles.push({ x: p.random(-70, 70), y: p.random(20, 100), r: p.random(3, 8), speed: p.random(1.2, 2.8) });
+    }
+
+    initControls();
+    calculatePhysics();
+  };
+
+  function initControls() {
+    const tSlider = document.getElementById("t-ovo-time-slider");
+    const cookToggle = document.getElementById("t-ovo-cook-toggle");
+
+    if (tSlider) {
+      tSlider.addEventListener("input", (e) => {
+        cookingTimeMin = parseFloat(e.target.value);
+        const valElem = document.getElementById("t-ovo-time-val");
+        if (valElem) valElem.textContent = `${cookingTimeMin.toFixed(1)} min`;
+        calculatePhysics();
+      });
+    }
+
+    if (cookToggle) {
+      cookToggle.addEventListener("change", (e) => {
+        isCooking = e.target.checked;
+        calculatePhysics();
+      });
+    }
+  }
+
+  function calculatePhysics() {
+    const outerWhiteTempC = Math.min(100, 20 + 80 * (1 - Math.exp(-0.45 * cookingTimeMin)));
+    const yolkCoreTempC = Math.min(100, 20 + 80 * (1 - Math.exp(-0.16 * cookingTimeMin)));
+
+    let eggState = "Ovo Cru (Líquido)";
+    if (cookingTimeMin >= 4.0 && cookingTimeMin < 6.5) {
+      eggState = "Ovo Mollet / Coque (Clara firme, Gema mole cremosa)";
+    } else if (cookingTimeMin >= 6.5 && cookingTimeMin < 9.5) {
+      eggState = "Ovo Cozido Perfeito (Clara sólida, Gema macia)";
+    } else if (cookingTimeMin >= 9.5) {
+      eggState = "Ovo Duro (Totalmente cozido e firme)";
+    }
+
+    const tWhiteElem = document.getElementById("t-ovo-twhite-num");
+    const tYolkElem = document.getElementById("t-ovo-tyolk-num");
+    const statusElem = document.getElementById("t-ovo-status-text");
+
+    if (tWhiteElem) tWhiteElem.textContent = `${outerWhiteTempC.toFixed(0)} °C (Clara)`;
+    if (tYolkElem) tYolkElem.textContent = `${yolkCoreTempC.toFixed(0)} °C (Gema)`;
+    if (statusElem) {
+      statusElem.textContent = eggState;
+      statusElem.style.color = cookingTimeMin >= 4 ? "#2e8b57" : "#cba36b";
+    }
+  }
+
+  p.draw = () => {
+    p.background(18, 16, 28);
+    const potX = p.width * 0.5, potY = 175, potW = 200, potH = 150;
+
+    // 1. Água Fervendo na Panela
+    p.fill(60, 55, 75);
+    p.stroke(140, 103, 168);
+    p.strokeWeight(2.5);
+    p.rect(potX - potW / 2, potY - potH / 2, potW, potH, 0, 0, 14, 14);
+
+    p.fill(50, 95, 170, 160);
+    p.noStroke();
+    p.rect(potX - potW / 2 + 4, potY - potH / 2 + 20, potW - 8, potH - 24, 0, 0, 10, 10);
+
+    // Bolhas de Ebulição
+    if (isCooking) {
+      p.fill(255, 255, 255, 180);
+      potBubbles.forEach(b => {
+        p.ellipse(potX + b.x, potY + b.y, b.r, b.r);
+        b.y -= b.speed;
+        if (b.y < -potH / 2 + 25) {
+          b.y = potH / 2 - 10;
+          b.x = p.random(-potW / 2 + 15, potW / 2 - 15);
+        }
+      });
+    }
+
+    // 2. CORTE TRANSVERSAL DO OVO MOSTRANDO O GRADIENTE TÉRMICO
+    const eggX = potX, eggY = potY + 15, eggW = 100, eggH = 130;
+
+    // Casca do Ovo (100°C na água)
+    p.fill(235, 215, 185);
+    p.stroke(190, 160, 120);
+    p.strokeWeight(3);
+    p.ellipse(eggX, eggY, eggW, eggH);
+
+    // Clara de Ovo (Albumen)
+    let whiteProgress = p.constrain(p.map(cookingTimeMin, 1, 6, 0, 1), 0, 1);
+    let whiteColor = p.lerpColor(p.color(240, 230, 190, 120), p.color(255, 255, 255, 245), whiteProgress);
+    p.fill(whiteColor);
+    p.noStroke();
+    p.ellipse(eggX, eggY, eggW - 8, eggH - 8);
+
+    // Gema de Ovo (Centro)
+    const yolkR = 48;
+    let yolkProgress = p.constrain(p.map(cookingTimeMin, 3, 10, 0, 1), 0, 1);
+    let yolkColor = p.lerpColor(p.color(255, 170, 0), p.color(255, 215, 60), yolkProgress);
+    p.fill(yolkColor);
+    p.stroke(220, 140, 0);
+    p.strokeWeight(1.5);
+    p.ellipse(eggX, eggY + 5, yolkR, yolkR);
+
+    // 3. Setas de Condução Radial de Calor
+    if (isCooking && cookingTimeMin < 10) {
+      p.stroke(255, 80, 80, 200);
+      p.strokeWeight(2);
+      for (let ang = 0; ang < p.TWO_PI; ang += p.PI / 4) {
+        let r1 = eggW * 0.45;
+        let r2 = eggW * 0.25;
+        let x1 = eggX + Math.cos(ang) * r1;
+        let y1 = eggY + Math.sin(ang) * (r1 * 1.25);
+        let x2 = eggX + Math.cos(ang) * r2;
+        let y2 = eggY + Math.sin(ang) * (r2 * 1.25);
+        p.line(x1, y1, x2, y2);
+      }
+    }
+
+    // Chama do Fogão
+    if (isCooking) {
+      p.noStroke();
+      p.fill(255, 140, 30, 220);
+      p.ellipse(potX, potY + potH / 2 + 15, 70, 22);
+      p.fill(80, 170, 255, 230);
+      p.ellipse(potX, potY + potH / 2 + 15, 40, 14);
+    }
+  };
+
+  p.windowResized = () => {
+    const wrap = document.getElementById("canvas-termo-ovo");
+    if (wrap && wrap.clientWidth > 100) {
+      p.resizeCanvas(Math.min(wrap.clientWidth, 650), 360);
+    }
+  };
+};
+
+/* ==========================================================================
+   2. FORMAÇÃO DE NUVENS, EXPANSÃO ADIABÁTICA & CHUVA (COTIDIANO)
+   ========================================================================== */
+const simTermoFormacaoNuvens = (p) => {
+  let sunPower = 80;
+  let isRaining = true;
+  let vaporParticles = [];
+  let rainDrops = [];
+
+  p.setup = () => {
+    const wrap = document.getElementById("canvas-termo-nuvens");
+    if (!wrap) return;
+    const w = wrap.clientWidth > 100 ? Math.min(wrap.clientWidth, 650) : 560;
+    const canvas = p.createCanvas(w, 360);
+    canvas.parent("canvas-termo-nuvens");
+
+    for (let i = 0; i < 30; i++) {
+      vaporParticles.push({
+        x: p.random(80, 220),
+        y: p.random(260, 310),
+        vy: p.random(0.8, 1.8),
+        size: p.random(6, 14)
+      });
+    }
+
+    for (let i = 0; i < 40; i++) {
+      rainDrops.push({ x: p.random(w * 0.55, w * 0.85), y: p.random(140, 300), speed: p.random(6, 11) });
+    }
+
+    initControls();
+  };
+
+  function initControls() {
+    const sunSlider = document.getElementById("t-nuv-sun-slider");
+    const rainToggle = document.getElementById("t-nuv-rain-toggle");
+
+    if (sunSlider) {
+      sunSlider.addEventListener("input", (e) => {
+        sunPower = parseFloat(e.target.value);
+        const valElem = document.getElementById("t-nuv-sun-val");
+        if (valElem) valElem.textContent = `${sunPower}%`;
+      });
+    }
+
+    if (rainToggle) {
+      rainToggle.addEventListener("change", (e) => {
+        isRaining = e.target.checked;
+        const statusElem = document.getElementById("t-nuv-status-text");
+        if (statusElem) {
+          statusElem.textContent = isRaining ? "Precipitação Ativa: Gotículas atingem massa crítica" : "Apenas Condensação (Sem chuva)";
+        }
+      });
+    }
+  }
+
+  p.draw = () => {
+    p.background(18, 16, 28);
+    const w = p.width;
+
+    // 1. Céu com Gradiente de Altitude e Temperatura
+    for (let y = 0; y < 270; y += 4) {
+      let t = y / 270;
+      p.stroke(p.lerp(20, 70, t), p.lerp(30, 130, t), p.lerp(80, 200, t));
+      p.strokeWeight(4);
+      p.line(0, y, w, y);
+    }
+
+    // Régua de Temperatura
+    p.fill(255);
+    p.textSize(9);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Altitude 3.000m (0 °C - Ponto de Orvalho / Condensação)", 20, 80);
+    p.text("Altitude 1.500m (15 °C - Expansão Adiabática ΔU < 0)", 20, 170);
+    p.text("Superfície (30 °C - Evaporação e Convecção)", 20, 255);
+
+    // 2. Solo e Lago
+    p.fill(34, 100, 50);
+    p.noStroke();
+    p.rect(0, 270, 100, 90);
+    p.fill(30, 80, 160);
+    p.rect(100, 270, w - 100, 90);
+
+    // 3. Sol Radiante
+    let sunR = p.map(sunPower, 30, 100, 30, 50);
+    p.fill(255, 220, 80);
+    p.ellipse(70, 45, sunR, sunR);
+
+    // 4. Vapor de Água Subindo
+    p.fill(220, 240, 255, 140);
+    vaporParticles.forEach(vp => {
+      p.ellipse(vp.x, vp.y, vp.size, vp.size);
+      vp.y -= vp.vy * (sunPower / 80);
+      vp.size += 0.08;
+      if (vp.y < 95) {
+        vp.y = p.random(270, 310);
+        vp.x = p.random(100, 260);
+        vp.size = p.random(6, 12);
+      }
+    });
+
+    // 5. Nuvem Cumulonimbus
+    const cloudX = w * 0.70, cloudY = 95;
+    drawRealisticCloud(cloudX, cloudY);
+
+    // 6. Chuva Precipitando
+    if (isRaining) {
+      p.stroke(140, 190, 255, 180);
+      p.strokeWeight(1.8);
+      rainDrops.forEach(rd => {
+        p.line(rd.x, rd.y, rd.x - 1, rd.y + 12);
+        rd.y += rd.speed;
+        if (rd.y > 270) {
+          rd.y = cloudY + 30;
+          rd.x = p.random(cloudX - 60, cloudX + 60);
+        }
+      });
+    }
+  };
+
+  function drawRealisticCloud(cx, cy) {
+    p.noStroke();
+    p.fill(235, 240, 250, 230);
+    p.ellipse(cx, cy, 100, 50);
+    p.ellipse(cx - 35, cy + 5, 65, 45);
+    p.ellipse(cx + 35, cy + 5, 70, 45);
+    p.ellipse(cx - 15, cy - 20, 75, 55);
+    p.ellipse(cx + 20, cy - 15, 65, 50);
+  }
+
+  p.windowResized = () => {
+    const wrap = document.getElementById("canvas-termo-nuvens");
+    if (wrap && wrap.clientWidth > 100) {
+      p.resizeCanvas(Math.min(wrap.clientWidth, 650), 360);
+    }
+  };
+};
+
+/* ==========================================================================
+   3. PANELA DE PRESSÃO COM SOPA EM EBULIÇÃO & VAPOR (COTIDIANO)
    ========================================================================== */
 const simTermoPanelaPressao = (p) => {
   let internalPressureAtm = 1.0;
@@ -18,17 +308,12 @@ const simTermoPanelaPressao = (p) => {
   p.setup = () => {
     const wrap = document.getElementById("canvas-termo-panela");
     if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
+    const w = wrap.clientWidth > 100 ? Math.min(wrap.clientWidth, 650) : 560;
     const canvas = p.createCanvas(w, 360);
     canvas.parent("canvas-termo-panela");
 
     for (let i = 0; i < 25; i++) {
-      soupBubbles.push({
-        x: p.random(-60, 60),
-        y: p.random(10, 60),
-        r: p.random(4, 9),
-        speed: p.random(1, 2.5)
-      });
+      soupBubbles.push({ x: p.random(-60, 60), y: p.random(10, 60), r: p.random(4, 9), speed: p.random(1, 2.5) });
     }
 
     initControls();
@@ -42,7 +327,8 @@ const simTermoPanelaPressao = (p) => {
     if (pSlider) {
       pSlider.addEventListener("input", (e) => {
         internalPressureAtm = parseFloat(e.target.value);
-        document.getElementById("t-pan-p-val").textContent = `${internalPressureAtm.toFixed(2)} atm`;
+        const valElem = document.getElementById("t-pan-p-val");
+        if (valElem) valElem.textContent = `${internalPressureAtm.toFixed(2)} atm`;
         calculatePhysics();
       });
     }
@@ -50,6 +336,7 @@ const simTermoPanelaPressao = (p) => {
     if (flameToggle) {
       flameToggle.addEventListener("change", (e) => {
         flameOn = e.target.checked;
+        calculatePhysics();
       });
     }
   }
@@ -74,47 +361,40 @@ const simTermoPanelaPressao = (p) => {
     p.background(18, 16, 28);
     const potX = p.width * 0.5, potY = 175, potW = 170, potH = 135;
 
-    // Chama do Fogão com Núcleo Azul e Chamas Alaranjadas Dançantes
+    // Chama do Fogão
     if (flameOn) {
       drawRealisticBurnerFlame(potX, potY + potH / 2 + 18);
     }
 
-    // Suporte da Grade do Fogão
-    p.stroke(60, 55, 75);
-    p.strokeWeight(3);
-    p.line(potX - 110, potY + potH / 2 + 6, potX + 110, potY + potH / 2 + 6);
-
-    // Panela de Alumínio Polido com Brilho Metálico
+    // Panela de Alumínio Polido
     p.fill(85, 90, 105);
     p.stroke(160, 170, 190);
     p.strokeWeight(2);
     p.rect(potX - potW / 2, potY - potH / 2, potW, potH, 8, 8, 18, 18);
 
-    // Cabo de Baquelite Escuro da Panela
+    // Cabos
     p.fill(20, 20, 25);
     p.stroke(50);
     p.rect(potX + potW / 2, potY - 15, 60, 18, 4);
     p.rect(potX - potW / 2 - 25, potY - 15, 25, 18, 4);
 
-    // Corte Transversal: Caldo / Sopa Fervendo com Legumes
+    // Sopa Fervendo com Legumes
     p.noStroke();
-    p.fill(180, 110, 40, 200); // Caldo de legumes
+    p.fill(180, 110, 40, 200);
     p.rect(potX - potW / 2 + 6, potY, potW - 12, potH / 2 - 6, 0, 0, 12, 12);
 
-    // Legumes Flutuando (Cenoura e Batata)
     p.fill(240, 100, 30); // Cenoura
     p.ellipse(potX - 35, potY + 25, 14, 10);
     p.ellipse(potX + 40, potY + 35, 12, 9);
     p.fill(220, 200, 120); // Batata
     p.ellipse(potX + 10, potY + 28, 16, 12);
-    p.ellipse(potX - 20, potY + 45, 15, 11);
 
-    // Bolhas Hidrodinâmicas de Ebulição
+    // Bolhas
     if (flameOn) {
       p.fill(255, 255, 255, 180);
       soupBubbles.forEach(b => {
         p.ellipse(potX + b.x, potY + b.y, b.r, b.r);
-        b.y -= b.speed * (internalPressureAtm > 1.4 ? 1.5 : 1.0);
+        b.y -= b.speed;
         if (b.y < 4) {
           b.y = potH / 2 - 10;
           b.x = p.random(-potW / 2 + 15, potW / 2 - 15);
@@ -122,21 +402,18 @@ const simTermoPanelaPressao = (p) => {
       });
     }
 
-    // Tampa Hermética com Anel de Vedação de Silicone
+    // Tampa Hermética & Válvula
     p.fill(110, 115, 130);
     p.stroke(200, 210, 230);
     p.strokeWeight(2);
     p.rect(potX - potW / 2 - 6, potY - potH / 2 - 12, potW + 12, 16, 4);
 
-    // Válvula de Controle de Pressão (Pino de Peso)
     p.fill(200, 67, 93);
     p.stroke(255);
     p.strokeWeight(1.5);
     p.rect(potX - 8, potY - potH / 2 - 32, 16, 20, 3);
-    p.fill(50);
-    p.ellipse(potX, potY - potH / 2 - 32, 10, 6);
 
-    // Jatos Realistas de Vapor Quente Escapando com Pressão
+    // Jatos de Vapor
     if (flameOn && internalPressureAtm > 1.1) {
       if (p.frameCount % 2 === 0) {
         steamParticles.push({
@@ -158,7 +435,6 @@ const simTermoPanelaPressao = (p) => {
       }
     }
 
-    // Desenho das partículas de vapor
     for (let i = steamParticles.length - 1; i >= 0; i--) {
       let st = steamParticles[i];
       p.noStroke();
@@ -174,13 +450,11 @@ const simTermoPanelaPressao = (p) => {
 
   function drawRealisticBurnerFlame(bx, by) {
     p.noStroke();
-    // Chamas Alaranjadas
     for (let i = -4; i <= 4; i++) {
       let fx = bx + i * 16;
       let fh = p.random(20, 32);
       p.fill(255, 140, 20, 200);
       p.ellipse(fx, by - 4, 18, fh);
-      // Núcleo Azul Intenso de Alta Temperatura
       p.fill(70, 160, 255, 230);
       p.ellipse(fx, by - 2, 10, fh * 0.55);
     }
@@ -188,272 +462,20 @@ const simTermoPanelaPressao = (p) => {
 
   p.windowResized = () => {
     const wrap = document.getElementById("canvas-termo-panela");
-    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
+    if (wrap && wrap.clientWidth > 100) {
+      p.resizeCanvas(Math.min(wrap.clientWidth, 650), 360);
+    }
   };
 };
 
-/* ==========================================================================
-   2. EFEITO ESTUFA NO CARRO COM VIDROS FECHADOS (COTIDIANO)
-   ========================================================================== */
-const simTermoEstufaCarro = (p) => {
-  let solarHours = 2.0;
-  let windowOpen = false;
-
-  p.setup = () => {
-    const wrap = document.getElementById("canvas-termo-estufa");
-    if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
-    const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-termo-estufa");
-
-    initControls();
-    calculatePhysics();
-  };
-
-  function initControls() {
-    const hSlider = document.getElementById("t-est-hours-slider");
-    const winToggle = document.getElementById("t-est-window-toggle");
-
-    if (hSlider) {
-      hSlider.addEventListener("input", (e) => {
-        solarHours = parseFloat(e.target.value);
-        document.getElementById("t-est-hours-val").textContent = `${solarHours.toFixed(1)} h`;
-        calculatePhysics();
-      });
-    }
-
-    if (winToggle) {
-      winToggle.addEventListener("change", (e) => {
-        windowOpen = e.target.checked;
-        calculatePhysics();
-      });
-    }
-  }
-
-  function calculatePhysics() {
-    let internalTempC = 30;
-    if (windowOpen) {
-      internalTempC += solarHours * 4.5;
-    } else {
-      internalTempC += solarHours * 16.0;
-    }
-    internalTempC = Math.min(68, internalTempC);
-
-    const tempElem = document.getElementById("t-est-temp-num");
-    const deltaElem = document.getElementById("t-est-delta-num");
-    const warnElem = document.getElementById("t-est-warn-text");
-
-    if (tempElem) tempElem.textContent = `${internalTempC.toFixed(1).replace(".", ",")} °C`;
-    if (deltaElem) deltaElem.textContent = `+${(internalTempC - 30).toFixed(1).replace(".", ",")} °C`;
-    if (warnElem) {
-      warnElem.textContent = internalTempC >= 50 ? "🚨 Perigo Extremo de Hipertermia!" : "Ambiente com ventilação";
-      warnElem.style.color = internalTempC >= 50 ? "#c8435d" : "#2e8b57";
-    }
-  }
-
-  p.draw = () => {
-    p.background(18, 16, 28);
-    const carX = p.width * 0.5, carY = 225;
-
-    // Sol Radiante com Raios Luminosos
-    p.noStroke();
-    p.fill(255, 220, 80);
-    p.ellipse(75, 65, 48, 48);
-    p.fill(255, 220, 80, 50);
-    p.ellipse(75, 65, 75, 75);
-
-    // Feixes de Luz Solar Visível (Amarelos penetrando os vidros)
-    p.stroke(255, 240, 120, 160);
-    p.strokeWeight(3);
-    p.line(100, 80, carX - 35, carY - 45);
-    p.line(115, 90, carX + 25, carY - 45);
-
-    // Carrocería do Carro com Detalhes
-    p.fill(40, 45, 65);
-    p.stroke(140, 103, 168);
-    p.strokeWeight(2);
-    p.rect(carX - 85, carY - 25, 170, 45, 6);
-
-    // Vidros Transparentes / Fumê (Efeito Estufa)
-    p.fill(windowOpen ? 20 : 60, windowOpen ? 20 : 90, windowOpen ? 35 : 130, 170);
-    p.stroke(100, 180, 255);
-    p.rect(carX - 55, carY - 65, 110, 40, 4);
-
-    // Bancos de Couro no Interior
-    p.fill(160, 50, 70);
-    p.rect(carX - 42, carY - 44, 32, 18, 2);
-    p.rect(carX + 10, carY - 44, 32, 18, 2);
-
-    // Ondas de Calor Infravermelhas Aprisionadas (Vermelhas ondulantes)
-    if (!windowOpen) {
-      p.stroke(255, 70, 80, 200);
-      p.strokeWeight(2);
-      p.noFill();
-      for (let i = 0; i < 3; i++) {
-        let tOff = (p.frameCount * 0.08 + i * 1.5) % p.TWO_PI;
-        p.arc(carX - 25, carY - 48, 26, 20 + Math.sin(tOff) * 4, p.PI, p.TWO_PI);
-        p.arc(carX + 25, carY - 48, 26, 20 + Math.sin(tOff) * 4, p.PI, p.TWO_PI);
-      }
-    }
-
-    // Rodas
-    p.fill(25);
-    p.stroke(120);
-    p.strokeWeight(2);
-    p.ellipse(carX - 55, carY + 20, 24, 24);
-    p.ellipse(carX + 55, carY + 20, 24, 24);
-
-    // Termômetro Digital de Painel ao Lado
-    drawDashboardThermometer(p.width - 90, 80);
-  };
-
-  function drawDashboardThermometer(tx, ty) {
-    let curTemp = windowOpen ? 30 + solarHours * 4.5 : 30 + solarHours * 16.0;
-    curTemp = Math.min(68, curTemp);
-    const mercuryH = p.map(curTemp, 20, 70, 10, 100);
-
-    // Corpo de Vidro do Termômetro
-    p.fill(30, 25, 40);
-    p.stroke(201, 174, 222);
-    p.strokeWeight(2);
-    p.rect(tx, ty, 16, 120, 8);
-    p.ellipse(tx + 8, ty + 124, 24, 24);
-
-    // Coluna de Mercúrio Vermelho
-    p.fill(240, 50, 70);
-    p.noStroke();
-    p.ellipse(tx + 8, ty + 124, 18, 18);
-    p.rect(tx + 5, ty + 120 - mercuryH, 6, mercuryH, 2);
-
-    p.fill(255);
-    p.textSize(10);
-    p.textAlign(p.CENTER, p.TOP);
-    p.text(`${curTemp.toFixed(0)}°C`, tx + 8, ty + 142);
-  }
-
-  p.windowResized = () => {
-    const wrap = document.getElementById("canvas-termo-estufa");
-    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
-  };
-};
-
-/* ==========================================================================
-   3. CAFÉ QUENTE: XÍCARA VS GARRAFA TÉRMICA (COTIDIANO)
-   ========================================================================== */
-const simTermoGarrafaTermica = (p) => {
-  let elapsedMinutes = 30; // 0 a 120 min
-
-  p.setup = () => {
-    const wrap = document.getElementById("canvas-termo-garrafa");
-    if (!wrap) return;
-    const w = Math.min(wrap.clientWidth || 550, 650);
-    const canvas = p.createCanvas(w, 360);
-    canvas.parent("canvas-termo-garrafa");
-
-    initControls();
-  };
-
-  function initControls() {
-    const mSlider = document.getElementById("t-gar-time-slider");
-    if (mSlider) {
-      mSlider.addEventListener("input", (e) => {
-        elapsedMinutes = parseFloat(e.target.value);
-        document.getElementById("t-gar-time-val").textContent = `${elapsedMinutes} min`;
-        updatePhysics();
-      });
-    }
-  }
-
-  function updatePhysics() {
-    // Xícara aberta: resfriamento exponencial rápido (k = 0.035) -> T = 25 + (85 - 25)*e^(-0.035*t)
-    // Garrafa térmica dewar: isolamento a vácuo (k = 0.002) -> T = 25 + (85 - 25)*e^(-0.002*t)
-    const tCup = 25 + 60 * Math.exp(-0.035 * elapsedMinutes);
-    const tFlask = 25 + 60 * Math.exp(-0.002 * elapsedMinutes);
-
-    const cupElem = document.getElementById("t-gar-cup-num");
-    const flaskElem = document.getElementById("t-gar-flask-num");
-
-    if (cupElem) cupElem.textContent = `${tCup.toFixed(1).replace(".", ",")} °C (${tCup < 40 ? "Café Frio" : "Morno"})`;
-    if (flaskElem) flaskElem.textContent = `${tFlask.toFixed(1).replace(".", ",")} °C (Pelando de Quente!)`;
-  }
-
-  p.draw = () => {
-    p.background(18, 16, 28);
-    const w = p.width;
-
-    // 1. Xícara de Cerâmica Aberta (Esquerda)
-    const cupX = w * 0.28, cupY = 220;
-    p.fill(240, 240, 245);
-    p.stroke(180);
-    p.strokeWeight(2);
-    p.rect(cupX - 35, cupY - 50, 70, 50, 0, 0, 16, 16);
-    // Asa da xícara
-    p.noFill();
-    p.stroke(200);
-    p.strokeWeight(5);
-    p.arc(cupX + 42, cupY - 25, 24, 28, -p.HALF_PI, p.HALF_PI);
-
-    // Café Líquido
-    p.fill(60, 30, 15);
-    p.noStroke();
-    p.ellipse(cupX, cupY - 48, 64, 14);
-
-    // Fumaça de Vapor Subindo e Dissipando Calor (Convecção & Evaporação)
-    p.stroke(220, 220, 230, 140);
-    p.strokeWeight(2);
-    p.noFill();
-    for (let i = -1; i <= 1; i++) {
-      let sx = cupX + i * 16;
-      let tOff = (p.frameCount * 0.08 + i) % p.TWO_PI;
-      p.beginShape();
-      p.vertex(sx, cupY - 55);
-      p.bezierVertex(sx + Math.sin(tOff) * 12, cupY - 80, sx - Math.sin(tOff) * 12, cupY - 110, sx, cupY - 135);
-      p.endShape();
-    }
-
-    p.fill(255);
-    p.textSize(11);
-    p.textAlign(p.CENTER, p.TOP);
-    p.text("Xícara Aberta\nPerde calor por Convecção, Condução e Evaporação", cupX, cupY + 15);
-
-    // 2. Garrafa Térmica de Dewar (Direita)
-    const flaskX = w * 0.72, flaskY = 220;
-
-    // Parede Externa de Inox
-    p.fill(160, 165, 180);
-    p.stroke(220);
-    p.strokeWeight(2);
-    p.rect(flaskX - 45, flaskY - 120, 90, 120, 8, 8, 12, 12);
-
-    // Parede Interna Espelhada com Vácuo
-    p.fill(24, 20, 35);
-    p.stroke(201, 174, 222);
-    p.rect(flaskX - 35, flaskY - 105, 70, 100, 4);
-
-    // Café Quente Aprisionado
-    p.fill(75, 35, 18);
-    p.noStroke();
-    p.rect(flaskX - 30, flaskY - 95, 60, 88, 2);
-
-    // Rolha / Tampa Isolante
-    p.fill(40, 40, 45);
-    p.stroke(140);
-    p.rect(flaskX - 25, flaskY - 140, 50, 22, 4);
-
-    p.fill(255);
-    p.textSize(11);
-    p.textAlign(p.CENTER, p.TOP);
-    p.text("Garrafa Térmica (Dewar)\nVácuo anula Condução/Convecção e Espelho reflete Radiação", flaskX, flaskY + 15);
-  };
-
-  p.windowResized = () => {
-    const wrap = document.getElementById("canvas-termo-garrafa");
-    if (wrap) p.resizeCanvas(Math.min(wrap.clientWidth || 550, 650), 360);
-  };
-};
-
-window.addEventListener("load", () => {
+function initTermologiaSims() {
+  if (document.getElementById("canvas-termo-ovo")) new p5(simTermoCozimentoOvo);
+  if (document.getElementById("canvas-termo-nuvens")) new p5(simTermoFormacaoNuvens);
   if (document.getElementById("canvas-termo-panela")) new p5(simTermoPanelaPressao);
-  if (document.getElementById("canvas-termo-estufa")) new p5(simTermoEstufaCarro);
-  if (document.getElementById("canvas-termo-garrafa")) new p5(simTermoGarrafaTermica);
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initTermologiaSims);
+} else {
+  initTermologiaSims();
+}

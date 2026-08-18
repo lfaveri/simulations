@@ -40,11 +40,11 @@
       <div class="container">
         <div class="subpage-hero-row">
           <div>
-            <span class="eyebrow">módulo 01 · eletromagnetismo</span>
-            <h1 class="subpage-title">Laboratório de Indução, Consumo & Circuitos</h1>
+            <span class="eyebrow">módulo 01 · eletromagnetismo & circuitos</span>
+            <h1 class="subpage-title">Laboratório Eletromagnético & Cotidiano</h1>
           </div>
           <p class="subpage-desc">
-            Simulações visuais realistas: fogão por indução (com teste do gelo e correntes de Foucault), carregador sem fio Qi e consumo em kWh.
+            Simulações visuais realistas: disjuntor termomagnético contra curto-circuito e fogão por indução eletromagnética com teste do cubo de gelo.
           </p>
         </div>
       </div>
@@ -59,35 +59,32 @@
         </div>
 
         <div class="station-nav" role="tablist">
-          <button class="station-tab is-active" data-station="st-eletro-fogao">
-            <span class="station-number">01</span><span>🍳 Fogão de Indução & Teste do Gelo (FUVEST / UNICAMP)</span>
+          <button class="station-tab is-active" data-station="st-eletro-dis">
+            <span class="station-number">01</span><span>🔌 Disjuntor Termomagnético Residencial (ENEM / UNICAMP)</span>
           </button>
-          <button class="station-tab" data-station="st-eletro-qi">
-            <span class="station-number">02</span><span>📱 Carregador sem Fio Qi & Smartphone (ITA / IME)</span>
-          </button>
-          <button class="station-tab" data-station="st-eletro-contaluz">
-            <span class="station-number">03</span><span>💡 Conta de Luz Residencial em kWh (ENEM / UNESP)</span>
+          <button class="station-tab" data-station="st-eletro-fogao">
+            <span class="station-number">02</span><span>🍳 Fogão de Indução com Teste do Gelo (FUVEST / ITA)</span>
           </button>
         </div>
 
-        <!-- Bancada E_FOGAO: Fogão por Indução -->
-        <div class="station-panel is-active" id="st-eletro-fogao">
+        <!-- Bancada E_DISJUNTOR: Disjuntor Termomagnético -->
+        <div class="station-panel is-active" id="st-eletro-dis">
           <div class="workbench-grid">
             <div class="notebook-card">
               <div class="notebook-header">
-                <span class="vestibular-badge badge-fuvest">FUVEST / UNICAMP</span>
-                <span class="topic-tag">Indução Eletromagnética · Correntes de Foucault</span>
+                <span class="vestibular-badge badge-enem">ENEM / UNICAMP</span>
+                <span class="topic-tag">Circuitos Elétricos · Disjuntores Térmico vs Magnético</span>
               </div>
-              <h2 class="question-title">Desafio: Por que a Mesa de Vidro Não Derrete o Gelo?</h2>
+              <h2 class="question-title">Desafio: Como o Disjuntor Salva sua Casa de Incêndios?</h2>
               <div class="question-context">
-                "No fogão por indução, uma bobina gera um campo magnético alternado de alta frequência. A panela ferve a água rapidamente, mas um cubo de gelo colocado sobre o vidro ao lado permanece intacto porque:"
+                "Um disjuntor termomagnético residencial de $16\,\text{A}$ opera sob dois mecanismos distintos de desarme para proteger os cabos da instalação:"
               </div>
               <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>As correntes parasitas de Foucault são induzidas apenas em materiais condutores ferromagnéticos, enquanto o vidro e o gelo são isolantes e não se aquecem.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>O vidro emite nitrogênio líquido constante.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O campo magnético congela ativamente o gelo.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A panela absorve toda a gravidade do fogão.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ocorre interferência destrutiva nos fótons do vidro.</span></button>
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Efeito térmico (lâmina bimetálica por efeito Joule) para sobrecargas moderadas e efeito magnético (solenoide) para desarmar instantaneamente sob curto-circuito.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Fusão total dos fios de cobre por laser.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Resfriamento térmico absoluto em menos de 1 segundo.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Apenas resistência ohmica infinita estática.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ionização por radiação alfa.</span></button>
               </div>
               <div class="notebook-actions">
                 <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
@@ -95,126 +92,83 @@
               <div class="resolution-box">
                 <h4>📐 Resolução</h4>
                 <div class="resolution-text">
-                  Pela Lei de Faraday-Neumann-Lenz ($\mathcal{E} = -\frac{d\Phi_B}{dt}$), a rápida oscilação do campo magnético induz tensões elétricas em circuitos fechados microscópicos no metal da panela, gerando **Correntes Parasitas de Foucault (Eddy Currents)**. Pelo Efeito Joule ($P = R I^2$), o metal dissipa grande quantidade de calor, enquanto a mesa de vidro (isolante) não sofre indução e permanece fria!
+                  1) **Disparo Térmico:** Na sobrecarga ($I = 25\,\text{A}$), a potência dissipada $P = R I^2$ aquece uma lâmina de dois metais com coeficientes de dilatação diferentes ($\alpha_1 \neq \alpha_2$), curvando-a e destravando o contato após alguns segundos.<br>
+                  2) **Disparo Magnético:** No curto-circuito ($I = 120\,\text{A}$), o campo magnético na bobina ($B = \mu_0 \frac{N}{L} I$) cresce brutalmente, puxando o êmbolo de ferro em menos de $10\,\text{ms}$, cortando a corrente antes que os condutores peguem fogo!
                 </div>
               </div>
             </div>
             <div class="apparatus-card">
               <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Fogão por Indução, Panela com Água & Cubo de Gelo</span>
+                <span class="apparatus-title">🔬 Disjuntor DIN, Bobina Eletromagnética & Bimetal</span>
+                <button class="btn-lab btn-lab-secondary" id="btn-arm-breaker" style="font-size:0.7rem; padding:3px 8px;">↺ Rearmar Disjuntor</button>
+              </div>
+              <div class="apparatus-canvas-wrap" id="canvas-eletro-disjuntor"></div>
+              <div class="apparatus-controls">
+                <div class="controls-grid">
+                  <div class="control-dial">
+                    <div class="dial-header"><span class="dial-label">Carga do Circuito</span></div>
+                    <select id="e-dis-current-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
+                      <option value="12">Normal: 12 A (Iluminação / Tomadas)</option>
+                      <option value="25">Sobrecarga: 25 A (Chuveiro + Airfryer)</option>
+                      <option value="120">Curto-Circuito: 120 A (Fios em Contato!)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="digital-readout-bar">
+                  <div class="readout-item"><div class="readout-name">Corrente Total</div><div class="readout-num" id="e-dis-current-num">12 A (Nominal: 16 A)</div></div>
+                  <div class="readout-item"><div class="readout-name">Disparo</div><div class="readout-num" id="e-dis-trip-num">Circuito Seguro</div></div>
+                  <div class="readout-item"><div class="readout-name">Estado</div><div class="readout-num" id="e-dis-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Circuito Fechado</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancada E_FOGAO: Fogão por Indução -->
+        <div class="station-panel" id="st-eletro-fogao">
+          <div class="workbench-grid">
+            <div class="notebook-card">
+              <div class="notebook-header">
+                <span class="vestibular-badge badge-fuvest">FUVEST / ITA</span>
+                <span class="topic-tag">Indução Eletromagnética · Lei de Faraday & Correntes de Foucault</span>
+              </div>
+              <h2 class="question-title">Desafio: Por que a Panela Ferve e o Gelo não Derrete?</h2>
+              <div class="question-context">
+                "Em um cooktop por indução magnética, a água ferve rapidamente dentro de uma panela de ferro fundido, mas um cubo de gelo colocado diretamente sobre o vidro adjacente permanece congelado. Isso ocorre porque:"
+              </div>
+              <div class="options-group">
+                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>O campo magnético oscilante induz correntes parasitas (Foucault) apenas no material ferromagnético condutor da panela, mantendo o vidro frio.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>O gelo absorve todo o campo magnético sem aquecer.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>O vidro emite raios ultravioleta frios.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>A bobina esquenta apenas objetos esféricos.</span></button>
+                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>A resistência elétrica da panela é nula (supercondutividade).</span></button>
+              </div>
+              <div class="notebook-actions">
+                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
+              </div>
+            </div>
+            <div class="apparatus-card">
+              <div class="apparatus-topbar">
+                <span class="apparatus-title">🔬 Mesa Vitrocerâmica, Bobina de Cobre & Cubo de Gelo</span>
               </div>
               <div class="apparatus-canvas-wrap" id="canvas-eletro-fogao"></div>
               <div class="apparatus-controls">
                 <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Potência Indutora</span><span class="dial-value" id="e-fog-power-val">1800 W</span></div>
-                    <input type="range" class="lab-slider" id="e-fog-power-slider" min="500" max="2200" step="100" value="1800">
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Chave Liga/Desliga</span></div>
+                    <div class="dial-header"><span class="dial-label">Indução Eletromagnética</span></div>
                     <label style="font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; gap:6px; margin-top:6px;">
-                      <input type="checkbox" id="e-fog-on-toggle" checked> Fogão Ligado
+                      <input type="checkbox" id="e-fog-on-toggle" checked> Indução Ativa
                     </label>
                   </div>
-                </div>
-                <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Calor Gerado</div><div class="readout-num" id="e-fog-heat-num">0,4 kcal/s</div></div>
-                  <div class="readout-item"><div class="readout-name">Temp. Panela</div><div class="readout-num" id="e-fog-temp-num">156 °C</div></div>
-                  <div class="readout-item"><div class="readout-name">Mecanismo</div><div class="readout-num" id="e-fog-status-text" style="font-size:0.85rem;">Correntes de Foucault</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada E_QI: Carregador sem Fio -->
-        <div class="station-panel" id="st-eletro-qi">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-ita">ITA / IME</span>
-                <span class="topic-tag">Indução Mútua · Carregamento sem Fio (Padrão Qi)</span>
-              </div>
-              <h2 class="question-title">Desafio: Como a Energia Atravessa o Ar sem Fios?</h2>
-              <div class="question-context">
-                "Um carregador Qi sem fio alimenta um smartphone posicionado sobre ele através de qual princípio do eletromagnetismo?"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Indução eletromagnética mútua: uma bobina primária na base gera um campo magnético oscilante que induz corrente alternada na bobina secundária do celular.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Emissão contínua de raios gama em direção à bateria.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Condução de elétrons através do ar por faíscas de alta voltagem.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Atrito gravitacional entre os íons de lítio.</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Reflexão acústica de ondas sonoras ultrassônicas.</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Base Qi, Bobina Indutora & Smartphone</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletro-qi"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bancada E_CONTALUZ: Consumo kWh -->
-        <div class="station-panel" id="st-eletro-contaluz">
-          <div class="workbench-grid">
-            <div class="notebook-card">
-              <div class="notebook-header">
-                <span class="vestibular-badge badge-enem">ENEM / UNESP</span>
-                <span class="topic-tag">Eletrodinâmica · Energia Elétrica & Custo Mensal</span>
-              </div>
-              <h2 class="question-title">Desafio: O Vilão da Conta de Luz</h2>
-              <div class="question-context">
-                "Um chuveiro elétrico de potência $6500\,\text{W}$ é utilizado por 40 minutos diários em uma residência durante um mês (30 dias). Sendo a tarifa de $\text{R\$}\,0{,}85/\text{kWh}$, o custo mensal desse chuveiro é:"
-              </div>
-              <div class="options-group">
-                <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$E = 130\,\text{kWh} \implies \text{R\$}\,110{,}50$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$E = 260\,\text{kWh} \implies \text{R\$}\,221{,}00$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$E = 65\,\text{kWh} \implies \text{R\$}\,55{,}25$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$E = 13\,\text{kWh} \implies \text{R\$}\,11{,}05$</span></button>
-                <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$E = 500\,\text{kWh} \implies \text{R\$}\,425{,}00$</span></button>
-              </div>
-              <div class="notebook-actions">
-                <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Dedução</button>
-              </div>
-              <div class="resolution-box">
-                <h4>📐 Resolução</h4>
-                <div class="resolution-text">
-                  Tempo total no mês: $\Delta t = \frac{40}{60}\,\text{h} \times 30\,\text{dias} = 20\,\text{horas}$.<br>
-                  Energia consumida: $E = \frac{P \cdot \Delta t}{1000} = \frac{6500 \cdot 20}{1000} = 130\,\text{kWh}$.<br>
-                  Custo: $130 \times 0{,}85 = \text{R\$}\,110{,}50$.
-                </div>
-              </div>
-            </div>
-            <div class="apparatus-card">
-              <div class="apparatus-topbar">
-                <span class="apparatus-title">🔬 Simulador de Consumo Elétrico Residencial</span>
-              </div>
-              <div class="apparatus-canvas-wrap" id="canvas-eletro-contaluz"></div>
-              <div class="apparatus-controls">
-                <div class="controls-grid">
                   <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Aparelho Elétrico</span></div>
-                    <select id="e-con-app-select" style="padding:6px; font-family:var(--font-mono); font-size:0.8rem; border-radius:4px; border:1px solid var(--line); background:#fff;">
-                      <option value="6500">Chuveiro Elétrico (6500 W)</option>
-                      <option value="1400">Ar-Condicionado Inverter (1400 W)</option>
-                      <option value="1500">Ferro de Passar Roupas (1500 W)</option>
-                      <option value="250">Geladeira Duplex Frost Free (250 W)</option>
-                      <option value="120">Smart TV 55" (120 W)</option>
-                    </select>
-                  </div>
-                  <div class="control-dial">
-                    <div class="dial-header"><span class="dial-label">Uso Diário</span><span class="dial-value" id="e-con-hours-val">0.5 h/dia</span></div>
-                    <input type="range" class="lab-slider" id="e-con-hours-slider" min="0.2" max="8.0" step="0.2" value="0.5">
+                    <div class="dial-header"><span class="dial-label">Potência</span><span class="dial-value" id="e-fog-power-val">1800 W</span></div>
+                    <input type="range" class="lab-slider" id="e-fog-power-slider" min="600" max="2200" step="200" value="1800">
                   </div>
                 </div>
                 <div class="digital-readout-bar">
-                  <div class="readout-item"><div class="readout-name">Consumo Mensal</div><div class="readout-num" id="e-con-kwh-num">97,5 kWh/mês</div></div>
-                  <div class="readout-item"><div class="readout-name">Custo Estimado</div><div class="readout-num" id="e-con-cost-num" style="color:var(--lilac-dark);">R$ 82,88/mês</div></div>
+                  <div class="readout-item"><div class="readout-name">Calor Foucault</div><div class="readout-num" id="e-fog-heat-num">0,4 kcal/s</div></div>
+                  <div class="readout-item"><div class="readout-name">Temp. Panela</div><div class="readout-num" id="e-fog-temp-num">155 °C</div></div>
+                  <div class="readout-item"><div class="readout-name">Vidro ao Lado</div><div class="readout-num" id="e-fog-status-text" style="font-size:0.8rem; color:var(--lilac-dark);">Frio (25 °C)</div></div>
                 </div>
               </div>
             </div>
@@ -229,85 +183,32 @@
       <div class="container">
         <div class="section-head">
           <h2 class="section-head-title">📚 Banco de Questões de Vestibular — Eletromagnetismo</h2>
-          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, UNIFESP, ITA, IME, ENEM, UFMG, UFG, FEI, PUC</span>
+          <span class="section-head-tag">FUVEST, UNICAMP, UNESP, ITA, IME, ENEM, FEI, PUC</span>
         </div>
 
         <div class="bank-filters">
           <button class="bank-filter-btn is-active" data-filter="all">Todas as Bancas</button>
           <button class="bank-filter-btn" data-filter="paulistas">Paulistas (FUVEST/UNICAMP/UNESP)</button>
-          <button class="bank-filter-btn" data-filter="militares">Militares (ITA/IME)</button>
-          <button class="bank-filter-btn" data-filter="federais">Federais & Estaduais (UFMG/UFG)</button>
           <button class="bank-filter-btn" data-filter="enem">ENEM</button>
         </div>
 
         <div class="questions-grid">
 
           <!-- Questão 1: UNICAMP -->
-          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="circuitos">
+          <div class="bank-question-card" data-board="paulistas unicamp" data-topic="inducao">
             <div class="bank-card-header">
               <span class="vestibular-badge badge-unicamp">UNICAMP 2021</span>
-              <span class="topic-tag">Eletrodinâmica · Associação de Resistores & Potência</span>
+              <span class="topic-tag">Eletromagnetismo · Força Magnética de Lorentz</span>
             </div>
             <p class="bank-question-text">
-              Dois resistores ôhmicos idênticos de resistência $R = 10\,\Omega$ são ligados a uma tomada de $120\,\text{V}$. Em qual configuração (série ou paralelo) a potência total dissipada é maior e qual o seu valor?
+              Uma partícula com carga $q = 2{,}0\,\mu\text{C}$ entra perpendicularmente com velocidade $v = 5{,}0 \times 10^4\,\text{m/s}$ em uma região com campo magnético uniforme $B = 0{,}40\,\text{T}$. A intensidade da força magnética que atua sobre ela é:
             </p>
             <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Em paralelo ($R_{\text{eq}} = 5\,\Omega$), dissipando $P = 2880\,\text{W}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Em série ($R_{\text{eq}} = 20\,\Omega$), dissipando $P = 720\,\text{W}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Em paralelo, dissipando $P = 720\,\text{W}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Em série, dissipando $P = 2880\,\text{W}$.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Ambas as configurações dissipam rigorosamente a mesma potência de $1440\,\text{W}$.</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-            <div class="resolution-box">
-              <h4>📐 Resolução Comentada</h4>
-              <div class="resolution-text">
-                Pela fórmula $P = U^2 / R_{\text{eq}}$:<br>
-                - Em paralelo: $R_{\text{eq}} = 10/2 = 5\,\Omega \implies P = \frac{120^2}{5} = \frac{14400}{5} = 2880\,\text{W}$.<br>
-                - Em série: $R_{\text{eq}} = 20\,\Omega \implies P = \frac{120^2}{20} = 720\,\text{W}$.<br>
-                Portanto, a potência é 4 vezes maior em paralelo!
-              </div>
-            </div>
-          </div>
-
-          <!-- Questão 2: ITA -->
-          <div class="bank-question-card" data-board="militares ita" data-topic="magnetismo">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-ita">ITA 2022</span>
-              <span class="topic-tag">Magnetismo · Força Magnética de Lorentz</span>
-            </div>
-            <p class="bank-question-text">
-              Uma partícula de carga $q = +2\,\mu\text{C}$ entra perpendicularmente com velocidade $v = 10^5\,\text{m/s}$ em uma região de campo magnético uniforme $B = 0{,}5\,\text{T}$. A intensidade da força magnética que atua sobre ela é:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$F = 0{,}10\,\text{N}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F = 1{,}00\,\text{N}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$F = 0{,}01\,\text{N}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$F = 5{,}00\,\text{N}$</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$F = 0\,\text{N}$</span></button>
-            </div>
-            <div class="notebook-actions">
-              <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
-            </div>
-          </div>
-
-          <!-- Questão 3: ENEM -->
-          <div class="bank-question-card" data-board="enem" data-topic="circuitos">
-            <div class="bank-card-header">
-              <span class="vestibular-badge badge-enem">ENEM 2020</span>
-              <span class="topic-tag">Eletrodinâmica · Chuveiro Elétrico & Chave Inverno/Verão</span>
-            </div>
-            <p class="bank-question-text">
-              Para transformar um chuveiro elétrico da posição "Verão" (água morna) para a posição "Inverno" (água mais quente), a resistência elétrica do resistor interno deve ser:
-            </p>
-            <div class="options-group">
-              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>Diminuída, para aumentar a corrente e a potência dissipada ($P = U^2/R$).</span></button>
-              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>Aumentada, para resistir mais à passagem de corrente.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>Mantida inalterada, variando apenas a vazão de elétrons na tomada.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>Invertida de polaridade magnética.</span></button>
-              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>Desconectada para operar por indução capacitiva.</span></button>
+              <button class="option-choice" data-correct="true" data-opt="A"><span class="opt-letter">A</span><span>$F_m = 0{,}040\,\text{N} = 40\,\text{mN}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="B"><span class="opt-letter">B</span><span>$F_m = 0{,}40\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="C"><span class="opt-letter">C</span><span>$F_m = 4{,}0\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="D"><span class="opt-letter">D</span><span>$F_m = 0\,\text{N}$</span></button>
+              <button class="option-choice" data-correct="false" data-opt="E"><span class="opt-letter">E</span><span>$F_m = 200\,\text{N}$</span></button>
             </div>
             <div class="notebook-actions">
               <button class="btn-lab btn-lab-secondary toggle-res-btn">📖 Ver Resolução</button>
